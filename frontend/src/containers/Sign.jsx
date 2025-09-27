@@ -8,20 +8,36 @@ const Sign = () => {
     const [password,setPassword] = useState('')
     const [email,setEmail] = useState('')
     const [phoneNumber,setPhoneNumber] = useState('')
+    const [birthDate, setBirthDate] = useState('')
     const [gender,setGender] = useState('')
     const [resumeFile,setResumeFile] = useState('')
+
+    const [nameErr, setNameErr] = useState('')
+    const [surnameErr, setSurnameErr] = useState('')
+    const [passwordErr, setPasswordErr] = useState('')
+    const [emailErr, setEmailErr] = useState('')
+    const [phoneErr, setPhoneErr] = useState('')
+    const [birthDateErr,setBirthDateErr] = useState('')
+    const [genderErr, setGenderErr] = useState('')
+    const [resumeErr, setResumeErr] = useState('')
 
     const nameRef = useRef(null)
     const surnameRef = useRef(null)
     const passwordRef = useRef(null)
     const emailRef = useRef(null)
     const phoneNumberRef = useRef(null)
+    const birthDateRef = useRef(null)
     const genderRef = useRef(null)
     const resumeRef = useRef(null)
 
     const SubmitSign = (e) => {
 
         e.preventDefault()
+
+        let isValid 
+
+        if(name.trim() == '' || name.trim() == null || name.trim() == undefined){isValid = false}//set error messages and 
+        if(name){isValid = false}
 
     }
 
@@ -66,6 +82,13 @@ const Sign = () => {
                     
                 </div>
 
+                <div className="form-floating ">
+                    
+                    <input type="date"  className="form-control" onChange={(e) => setBirthDate(e.target.value)} value={birthDate} ref={birthDateRef} placeholder="Your Phone Nubmer..."/>
+                    <label htmlFor="phoneID">Your Birth Date...</label>
+                    
+                </div>
+
                 <div className="form d-flex">
 
                     <label htmlFor="GenderID">I Am : </label>
@@ -95,7 +118,7 @@ const Sign = () => {
                 
                 <div className="row row-cols-sm-2">
                     <div className="col"><input type="submit" className="btn btn-success" value='Create New Account'/></div>
-                    <div className="col"><input type="reset" className="btn btn-danger" value='reset'/></div>
+                    <div className="col"><input type="reset" className="btn btn-danger" value='reset form'/></div>{/* add reset function */}
                 </div>
 
             </form>
