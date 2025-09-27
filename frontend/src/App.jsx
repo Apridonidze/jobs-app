@@ -1,7 +1,16 @@
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
 const App = () => {
+
+
+  const router = createBrowserRouter([
+    {path: _, element : _}
+  ])
+
+
   return (
     <div className="app-container">
-      App.jsx
+      <RouterProvider router={router}></RouterProvider>
     </div>
   )
 }
