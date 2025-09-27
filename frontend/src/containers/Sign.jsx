@@ -1,12 +1,14 @@
-import { useRef } from "react"
-import { useState } from "react"
+import { useRef,useState  } from "react"
 
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 const Sign = () => {
 
     const [name,setName] = useState('')
     const [surname,setSurname] = useState('')
     const [password,setPassword] = useState('')
     const [email,setEmail] = useState('')
+    const [countryCode,setCountryCode] = useState('')
     const [phoneNumber,setPhoneNumber] = useState('')
     const [birthDate, setBirthDate] = useState('')
     const [gender,setGender] = useState('')
@@ -37,15 +39,39 @@ const Sign = () => {
         let data = {} //data to send to server 
 
         let isValid
+        
+        const NumberRegex = /\d/
+        const regexContainsSpecial = /[^\w\s]/
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if(name.trim() == '' || name.trim() == null || name.trim() == undefined){isValid = false ; setNameErr(`This Filed Can't Be Empty`); nameRef.current.classList.add('is-invalid');nameRef.current.classList.remove('is-valid')}
+
+        if(name.trim() == '' || name.trim() == null || name.trim() == undefined){isValid = false ; setNameErr(`This Field Can't Be Empty`); nameRef.current.classList.add('is-invalid');nameRef.current.classList.remove('is-valid')}
         else if(name.trim().length <= 1){isValid = false; setNameErr('Your Name Length Should Be Atleast 2 Letters Long'); nameRef.current.classList.add('is-invalid');nameRef.current.classList.remove('is-valid')}
         else {isValid = true; setNameErr('') ;nameRef.current.classList.add('is-valid') ;nameRef.current.classList.remove('is-invalid'); data = {...data,name:name}}
+
+        if(surname.trim() == '' || surname.trim() == null || surname.trim() == undefined){isValid = false ; setSurnameErr(`This Field Can't Be Empty`); surnameRef.current.classList.add('is-invalid'); surnameRef.current.classList.remove('is-valid')}
+        else if (surname.trim().length <= 2) {isValid = false ; setSurnameErr('Your Surname Length Should Be Atleast 3 Letters Long'); surnameRef.current.classList.add('is-invalid');surnameRef.current.classList.remove('is-valid') }
+        else {isValid = true ; setSurnameErr(''); surnameRef.current.classList.add('is-valid'); surnameRef.current.classList.remove('is-invalid'); data = {...data, surname: surname}}
+
+        if(password.trim() == '' || password.trim() == null || password.trim() == undefined){isValid = false; setPasswordErr(`This Field Can't Be Empty`) ; passwordRef.current.classList.add('is-invalid'); passwordRef.current.classList.remove('is-valid')}
+        else if (password.trim().length <= 8 ){isValid == false ; setPasswordErr('Your Password Should Be 8 Letters Long'); passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
+        else if (NumberRegex.test(password) === false ) {isValid = false ; setPasswordErr('Your Password Should Contain Numbers');passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
+        else if (regexContainsSpecial.test(password) === false ){isValid = false; setPasswordErr('Your Password Should Contain Special Characters');passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
+        else {isValid = true; setPasswordErr('') ; passwordRef.current.classList.remove('is-invalid'); passwordRef.current.classList.add('is-valid'); data = {...data, password : password}}
+
+        if(email.trim() == '' || password.trim() == email || password.trim() == email){isValid = false; setEmailErr(`This Field Can't Be Empty`) ; emailRef.current.classList.add('is-invalid'); emailRef.current.classList.remove('is-valid')}
+        else if(emailRegex.test(email) === false){isValid = false ; emailRef.current.classList.add('is-invalid') ; emailRef.current.classList.remove('is-valid'); setEmailErr('Insert Valid Email!')}
+        else {emailRef.current.classList.add('is-valid') ; emailRef.current.classList.remove('is-invalid'); setEmailErr(''); data = {...data, email : email}}
+
+
     }
+
 
     return(
         <div className="sign-container container">
             Sign.jsx
+
+             
 
             <form onSubmit={SubmitSign}>
 
@@ -61,6 +87,7 @@ const Sign = () => {
                     
                     <input type="text" className="form-control" id="surnameID" onChange={(e) => setSurname(e.target.value)} value={surname} ref={surnameRef} placeholder="Your Surname..."/>
                     <label htmlFor="surnameID">Your Surname...</label>
+                    <span>{surnameErr}</span>
                     
                 </div>
 
@@ -68,6 +95,7 @@ const Sign = () => {
                     
                     <input type="password" className="form-control" onChange={(e) => setPassword(e.target.value)} value={password} ref={passwordRef} placeholder="Your Password..."/>
                     <label htmlFor="passwordID">Your Password...</label>
+                    <span>{passwordErr}</span>
 
                 </div>
 
@@ -78,11 +106,16 @@ const Sign = () => {
                     
                 </div>
 
-                <div className="form-floating ">
+                <div className="form">
+                    <label htmlFor="phoneID" >Your Phone Number...</label>
                     
-                    <input type="text"  className="form-control" onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} ref={phoneNumberRef} placeholder="Your Phone Nubmer..."/>
-                    <label htmlFor="phoneID">Your Phone Number...</label>
+                        <div className="input-group">
+                            
+                            <PhoneInput country="us" value={countryCode} onChange={setCountryCode} enableSearch inputStyle={{width: '100px'}} />
+                            <input type="text" className="form-control"  onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} ref={phoneNumberRef} placeholder="Your Phone Nubmer..."/>
                     
+                        </div>
+
                 </div>
 
                 <div className="form-floating ">
