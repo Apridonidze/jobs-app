@@ -1,13 +1,21 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
+
+import Authentication from './containers/Authentication';
+import Login from './containers/Login';
+import Sign from './containers/Sign';
+import Main from './containers/Main';
+
 const App = () => {
 
   const isAuthorized = false ; //temporary (replace it with cookie)
 
   const router = createBrowserRouter([
   
-    {path: '/', element : isAuthorized ? <div>Main</div> : <div>Login</div>},//replace divs with components
-    {path: '/login', element : !isAuthorized && <div>Login</div>}//replace divs with components
+    {path: '/', element : isAuthorized ? <Main /> : <Authentication />},
+    {path: '/authentication', element : !isAuthorized && <Authentication />},
+    {path : '/authentication/login', element : <Login />},
+    {path : '/authentication/sign', element : <Sign/>}
   
   ])
 
