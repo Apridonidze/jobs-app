@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 
 import Authentication from './containers/Authentication';
@@ -13,12 +13,11 @@ const App = () => {
 
   const router = createBrowserRouter([
   
-    {path: '/', element : isAuthorized ? <Main /> : <Authentication />},//directs user to authentication page when not loggined
-    {path: '/authentication', element : !isAuthorized && <Authentication />}, //directs user to authentication page when not loggined
-    {path : '/authentication/login', element : <Login />},
-    {path : '/authentication/sign', element : <Sign/>},
-    {path : '*', element : <NotFound/>} 
-  
+    {path: '/', element : isAuthorized ? <Main /> : <Navigate to='/authentication' />},//directs user to authentication page when not loggined
+    {path: '/authentication', element : !isAuthorized && <Authentication />}, //directs user to main page when loggined
+    {path : '/sign', element : <Sign/>},
+    {path : '/login', element : <Login />},
+    {path : '*', element : <NotFound />}
   ])
 
   return (
