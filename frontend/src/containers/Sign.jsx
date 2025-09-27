@@ -34,11 +34,13 @@ const Sign = () => {
 
         e.preventDefault()
 
-        let isValid 
+        let data = {} //data to send to server 
 
-        if(name.trim() == '' || name.trim() == null || name.trim() == undefined){isValid = false}//set error messages and 
-        if(name){isValid = false}
+        let isValid
 
+        if(name.trim() == '' || name.trim() == null || name.trim() == undefined){isValid = false ; setNameErr(`This Filed Can't Be Empty`); nameRef.current.classList.add('is-invalid');nameRef.current.classList.remove('is-valid')}
+        else if(name.trim().length <= 1){isValid = false; setNameErr('Your Name Length Should Be Atleast 2 Letters Long'); nameRef.current.classList.add('is-invalid');nameRef.current.classList.remove('is-valid')}
+        else {isValid = true; setNameErr('') ;nameRef.current.classList.add('is-valid') ;nameRef.current.classList.remove('is-invalid'); data = {...data,name:name}}
     }
 
     return(
@@ -51,6 +53,7 @@ const Sign = () => {
 
                     <input type="text" className="form-control" id="nameID" onChange={(e) => setName(e.target.value)} value={name} ref={nameRef} placeholder="Your Name..."/>
                     <label htmlFor="nameID">Your Name...</label>
+                    <span>{nameErr}</span>
 
                 </div>
 
