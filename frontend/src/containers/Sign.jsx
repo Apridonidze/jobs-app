@@ -67,7 +67,7 @@ const Sign = () => {
 
         if(countryCode == 'None' || countryCode.trim() == '') {isValid = false ;setCountryCodeErr('Select Your Country Code') ; countryCodeRef.current.classList.add('is-invalid'), countryCodeRef.current.classList.remove('is-valid')}
         else if (phoneNumber.trim().length <= 8){setPhoneErr('Your Phone Number Length Should Be Atleast 8 Numbers Length');isValid = false;phoneNumberRef.current.classList.add('is-invalid'), phoneNumberRef.current.classList.remove('is-valid')}
-        else if (phoneNumber.trim().length == 0){setPhoneErr(`This Field Can't Be Empty`); isValid = false; phoneNumberRef.current.classList.add('is-invalid'), phoneNumberRef.current.classList.remove('is-valid')}
+        else if (phoneNumber.trim() == ''){setPhoneErr(`This Field Can't Be Empty`); isValid = false; phoneNumberRef.current.classList.add('is-invalid'), phoneNumberRef.current.classList.remove('is-valid')}
         else if (NumberRegex.test(phoneNumber) === false){setPhoneErr('Only Numbers Allowed'); isValid = false; phoneNumberRef.current.classList.add('is-invalid'), phoneNumberRef.current.classList.remove('is-valid')}
         else {isValid = true; setPhoneErr(''); setCountryCodeErr(''); countryCodeRef.current.classList.add('is-valid'), countryCodeRef.current.classList.remove('is-invalid'); phoneNumberRef.current.classList.add('is-valid'), phoneNumberRef.current.classList.remove('is-invalid'); data = {...data , phoneNumber : `${countryCode} ${phoneNumber}`}}
     
@@ -78,11 +78,16 @@ const Sign = () => {
         if(gender.trim() == '' || gender == null || gender.trim() == undefined){isValid = false ; genderRef.current.classList.add('border-danger') ; genderRef.current.classList.remove('border-success')}
         else if (gender !== 'male' || gender !== 'female') {isValid = false; genderRef.current.classList.add('border-danger') ; genderRef.current.classList.remove('border-success')}
         else { isValid = true ; genderRef.current.classList.add('border-success') ; genderRef.current.classList.remove('border-danger'); data = {...data, gender : gender}}
-        console.log(data);
-
+        
+        
+        if((resumeFile.type == 'application/pdf' || resumeFile.type == 'text/plain')  && resumeFile.size <= 2000000){isValid = true ; resumeRef.current.classList.add('is-valid') ; resumeRef.current.classList.remove('is-invalid'); setResumeErr('')} 
+        else if (resumeFile.size > 2000000){isValid = false ;resumeRef.current.classList.remove('is-valid') ; resumeRef.current.classList.add('is-invalid'); setResumeErr('Your Resume Length Should Be Under 2 Mb')}
+        else {isValid = true; resumeRef.current.classList.remove('is-valid') ; resumeRef.current.classList.add('is-invalid'); setResumeErr('Invalid File Type')}
         
     }
-    
+
+
+    console.log(resumeFile.type)
 
 
     return(
@@ -166,8 +171,10 @@ const Sign = () => {
 
                 <div className="form">
                     
-                    <input type="file" className="form-control" id="resumeID" onChange={(e) => setResumeFile(e.target.value)} value={resumeFile} ref={resumeRef}/>
+                    <input type="file" className="form-control" id="resumeID" onChange={(e) => setResumeFile(e.target.files[0])}  ref={resumeRef}/>
                     <label htmlFor="resumeID"></label>
+
+                    {resumeErr}
                     
                 </div>
                 
