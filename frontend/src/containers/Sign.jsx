@@ -1,7 +1,5 @@
 import { useRef,useState  } from "react"
-
-import PhoneInput from "react-phone-input-2";
-import "react-phone-input-2/lib/style.css";
+import CountryCode from "../components/CountryCode"
 const Sign = () => {
 
     const [name,setName] = useState('')
@@ -107,14 +105,15 @@ const Sign = () => {
                 </div>
 
                 <div className="form">
+
                     <label htmlFor="phoneID" >Your Phone Number...</label>
+
+                    <div className="input-group">
+                        
+                        <CountryCode />
+                        <input type="text" className="form-control"  onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} ref={phoneNumberRef} placeholder="Your Phone Nubmer..."/>
                     
-                        <div className="input-group">
-                            
-                            <PhoneInput country="us" value={countryCode} onChange={setCountryCode} enableSearch inputStyle={{width: '100px'}} />
-                            <input type="text" className="form-control"  onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} ref={phoneNumberRef} placeholder="Your Phone Nubmer..."/>
-                    
-                        </div>
+                    </div>
 
                 </div>
 
