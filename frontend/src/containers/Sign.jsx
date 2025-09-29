@@ -16,6 +16,7 @@ const Sign = () => {
     const [surnameErr, setSurnameErr] = useState('')
     const [passwordErr, setPasswordErr] = useState('')
     const [emailErr, setEmailErr] = useState('')
+    const [countryCodeErr, setCountryCodeErr] = useState('')
     const [phoneErr, setPhoneErr] = useState('')
     const [birthDateErr,setBirthDateErr] = useState('')
     const [genderErr, setGenderErr] = useState('')
@@ -25,6 +26,7 @@ const Sign = () => {
     const surnameRef = useRef(null)
     const passwordRef = useRef(null)
     const emailRef = useRef(null)
+    const countryCodeRef = useRef(null)
     const phoneNumberRef = useRef(null)
     const birthDateRef = useRef(null)
     const genderRef = useRef(null)
@@ -61,9 +63,17 @@ const Sign = () => {
         else if(emailRegex.test(email) === false){isValid = false ; emailRef.current.classList.add('is-invalid') ; emailRef.current.classList.remove('is-valid'); setEmailErr('Insert Valid Email!')}
         else {emailRef.current.classList.add('is-valid') ; emailRef.current.classList.remove('is-invalid'); setEmailErr(''); data = {...data, email : email}}
 
+        if(countryCode == 'None' || countryCode == '') {isValid = false ;setCountryCodeErr('Select Your Country Code') ; countryCodeRef.current.classList.add('is-invalid'), countryCodeRef.current.classList.remove('is-valid')}
+        else if (phoneNumber.trim().length <= 8){setPhoneErr('Your Phone Number Length Should Be Atleast 8 Numbers Length');isValid = false;phoneNumberRef.current.classList.add('is-invalid'), phoneNumberRef.current.classList.remove('is-valid')}
+        else if (phoneNumber.trim().length == 0){setPhoneErr(`This Field Can't Be Empty`); isValid = false; phoneNumberRef.current.classList.add('is-invalid'), phoneNumberRef.current.classList.remove('is-valid')}
+        else if (NumberRegex.test(phoneNumber) === false){setPhoneErr('Only Numbers Allowed'); isValid = false; phoneNumberRef.current.classList.add('is-invalid'), phoneNumberRef.current.classList.remove('is-valid')}
+        else {isValid = true; setPhoneErr(''); setCountryCodeErr(''); countryCodeRef.current.classList.add('is-valid'), countryCodeRef.current.classList.remove('is-invalid'); phoneNumberRef.current.classList.add('is-valid'), phoneNumberRef.current.classList.remove('is-invalid'); data = {...data , phoneNumber : `${countryCode} ${phoneNumber}`}}
+    
 
+        
+    console.log(data)
     }
-
+    
     console.log(countryCode)
 
 
@@ -106,14 +116,16 @@ const Sign = () => {
 
                 <div className="form">
 
-                    <label htmlFor="phoneID" >Your Phone Number...</label>
 
                     <div className="input-group">
                         
-                        <CountryCode setCountryCode={setCountryCode} />
+                        <CountryCode setCountryCode={setCountryCode} countryCodeRef={countryCodeRef}/>
                         <input type="text" className="form-control"  onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} ref={phoneNumberRef} placeholder="Your Phone Nubmer..."/>
                     
                     </div>
+
+                    <span>{phoneErr}</span>
+                    <span>{countryCodeErr}</span>
 
                 </div>
 
