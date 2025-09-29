@@ -39,6 +39,8 @@ const Sign = () => {
         let data = {} //data to send to server 
 
         let isValid
+
+        const currentDate = new Date()
         
         const NumberRegex = /\d/
         const regexContainsSpecial = /[^\w\s]/
@@ -63,18 +65,24 @@ const Sign = () => {
         else if(emailRegex.test(email) === false){isValid = false ; emailRef.current.classList.add('is-invalid') ; emailRef.current.classList.remove('is-valid'); setEmailErr('Insert Valid Email!')}
         else {emailRef.current.classList.add('is-valid') ; emailRef.current.classList.remove('is-invalid'); setEmailErr(''); data = {...data, email : email}}
 
-        if(countryCode == 'None' || countryCode == '') {isValid = false ;setCountryCodeErr('Select Your Country Code') ; countryCodeRef.current.classList.add('is-invalid'), countryCodeRef.current.classList.remove('is-valid')}
+        if(countryCode == 'None' || countryCode.trim() == '') {isValid = false ;setCountryCodeErr('Select Your Country Code') ; countryCodeRef.current.classList.add('is-invalid'), countryCodeRef.current.classList.remove('is-valid')}
         else if (phoneNumber.trim().length <= 8){setPhoneErr('Your Phone Number Length Should Be Atleast 8 Numbers Length');isValid = false;phoneNumberRef.current.classList.add('is-invalid'), phoneNumberRef.current.classList.remove('is-valid')}
         else if (phoneNumber.trim().length == 0){setPhoneErr(`This Field Can't Be Empty`); isValid = false; phoneNumberRef.current.classList.add('is-invalid'), phoneNumberRef.current.classList.remove('is-valid')}
         else if (NumberRegex.test(phoneNumber) === false){setPhoneErr('Only Numbers Allowed'); isValid = false; phoneNumberRef.current.classList.add('is-invalid'), phoneNumberRef.current.classList.remove('is-valid')}
         else {isValid = true; setPhoneErr(''); setCountryCodeErr(''); countryCodeRef.current.classList.add('is-valid'), countryCodeRef.current.classList.remove('is-invalid'); phoneNumberRef.current.classList.add('is-valid'), phoneNumberRef.current.classList.remove('is-invalid'); data = {...data , phoneNumber : `${countryCode} ${phoneNumber}`}}
     
+        if(birthDate.trim() == '' || birthDate == null ){isValid = false; birthDateRef.current.classList.add('is-invalid') ; birthDateRef.current.classList.remove('is-valid'); setBirthDateErr(`This Field Can't Be Empty`)}
+        else if (currentDate.getFullYear() -  birthDate.slice(0, 4) <= 17){isValid = false; birthDateRef.current.classList.add('is-invalid') ; birthDateRef.current.classList.remove('is-valid'); setBirthDateErr(`Your Age Should Be Over 18 To Use This App`)}
+        else {isValid = true; birthDateRef.current.classList.add('is-valid') ; birthDateRef.current.classList.remove('is-invalid'); setBirthDateErr(``); data = {...data, birthDate : birthDate}}
+
+        if(gender.trim() == '' || gender == null || gender.trim() == undefined){isValid = false ; genderRef.current.classList.add('border-danger') ; genderRef.current.classList.remove('border-success')}
+        else if (gender !== 'male' || gender !== 'female') {isValid = false; genderRef.current.classList.add('border-danger') ; genderRef.current.classList.remove('border-success')}
+        else { isValid = true ; genderRef.current.classList.add('border-success') ; genderRef.current.classList.remove('border-danger'); data = {...data, gender : gender}}
+        console.log(data)
 
         
-    console.log(data)
     }
     
-    console.log(countryCode)
 
 
     return(
@@ -136,20 +144,20 @@ const Sign = () => {
                     
                 </div>
 
-                <div className="form d-flex">
+                <div className="form d-flex border" ref={genderRef}>
 
                     <label htmlFor="GenderID">I Am : </label>
 
                     <div className="radio-forms">
                         
-                        <input type="radio" className="form-check-input" id="genderID" name="gender" onChange={(e) => setGender(e.target.value)} value='male' ref={genderRef}/>
+                        <input type="radio" className="form-check-input" id="genderID" name="gender" onChange={(e) => setGender(e.target.value)} value='male' />
                         <label htmlFor="genderID" >Male</label>
                     
                     </div>
 
                     <div className="radio-forms">
                     
-                        <input type="radio" className="form-check-input" id="genderID" name="gender" onChange={(e) => setGender(e.target.value)}  value='female' ref={genderRef}/>
+                        <input type="radio" className="form-check-input" id="genderID" name="gender" onChange={(e) => setGender(e.target.value)}  value='female' />
                         <label htmlFor="genderID">Female</label>
                     
                     </div>
