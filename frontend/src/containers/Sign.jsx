@@ -64,12 +64,12 @@ const Sign = () => {
 
     }
 
+    console.log(countryCode)
+
 
     return(
         <div className="sign-container container">
             Sign.jsx
-
-             
 
             <form onSubmit={SubmitSign}>
 
@@ -110,7 +110,7 @@ const Sign = () => {
 
                     <div className="input-group">
                         
-                        <CountryCode />
+                        <CountryCode setCountryCode={setCountryCode} />
                         <input type="text" className="form-control"  onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} ref={phoneNumberRef} placeholder="Your Phone Nubmer..."/>
                     
                     </div>
