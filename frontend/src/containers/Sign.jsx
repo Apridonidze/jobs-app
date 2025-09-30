@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useRef,useState  } from "react"
 import { Link } from 'react-router-dom'
 
@@ -81,7 +82,6 @@ const Sign = () => {
         else {isValid = true; birthDateRef.current.classList.add('is-valid') ; birthDateRef.current.classList.remove('is-invalid'); setBirthDateErr(``); data = {...data, birthDate : birthDate}}
 
         if(gender.trim() == '' || gender == null || gender.trim() == undefined){isValid = false ; genderRef.current.classList.add('border-danger') ; genderRef.current.classList.remove('border-success')}
-        else if (gender !== 'male' || gender !== 'female') {isValid = false; genderRef.current.classList.add('border-danger') ; genderRef.current.classList.remove('border-success')}
         else { isValid = true ; genderRef.current.classList.add('border-success') ; genderRef.current.classList.remove('border-danger'); data = {...data, gender : gender}}
         
         
@@ -90,6 +90,11 @@ const Sign = () => {
         else if (resumeFile.size > 2000000){isValid = false ;resumeRef.current.classList.remove('is-valid') ; resumeRef.current.classList.add('is-invalid'); setResumeErr('Your Resume Length Should Be Under 2 Mb')}
         else {isValid = true; resumeRef.current.classList.remove('is-valid') ; resumeRef.current.classList.add('is-invalid'); setResumeErr('Invalid File Type')}
         
+
+        if(isValid){
+            //send data to server with axios
+        }
+        else return
     }
     
     const handleReset = () => {
