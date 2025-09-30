@@ -8,12 +8,16 @@ app.use(cors());
 app.use(bodyParser.json());
 require('dotenv').config();
 
+const SignRouter = require('../backend/Routes/Sign')
+
 const PORT = process.env.SERVER_PORT;
 
 
 app.get('/', (req,res) => {
     res.send('/ path');
 });
+
+app.use('/sign' , SignRouter)
 
 
 app.listen(PORT, () => {
