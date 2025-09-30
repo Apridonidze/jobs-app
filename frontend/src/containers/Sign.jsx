@@ -1,5 +1,8 @@
-import { useEffect, useRef,useState  } from "react"
+import { useRef,useState  } from "react"
+import { Link } from 'react-router-dom'
+
 import CountryCode from "../components/CountryCode"
+
 
 const Sign = () => {
 
@@ -241,6 +244,10 @@ const Sign = () => {
                 </div>
 
             </form>
+
+            <div className="login container text-center my-5">
+                <Link to='/login'>Already Have An Account?</Link >
+            </div>
 
         </div>
     )
