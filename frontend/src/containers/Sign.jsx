@@ -7,6 +7,9 @@ import CountryCode from "../components/CountryCode"
 
 const Sign = () => {
 
+
+    const SIGN_PORT = 'http://localhost:8080/sign-new-user'
+
     const [name,setName] = useState('')
     const [surname,setSurname] = useState('')
     const [password,setPassword] = useState('')
@@ -69,7 +72,7 @@ const Sign = () => {
 
         if(email.trim() == '' || password.trim() == email || password.trim() == email){isValid = false; setEmailErr(`This Field Can't Be Empty`) ; emailRef.current.classList.add('is-invalid'); emailRef.current.classList.remove('is-valid')}
         else if(emailRegex.test(email) === false){isValid = false ; emailRef.current.classList.add('is-invalid') ; emailRef.current.classList.remove('is-valid'); setEmailErr('Insert Valid Email!')}
-        else {emailRef.current.classList.add('is-valid') ; emailRef.current.classList.remove('is-invalid'); setEmailErr(''); data = {...data, email : email}}
+        else {isValid = true ;emailRef.current.classList.add('is-valid') ; emailRef.current.classList.remove('is-invalid'); setEmailErr(''); data = {...data, email : email}}
 
         if(countryCode == 'None' || countryCode.trim() == '') {isValid = false ;setCountryCodeErr('Select Your Country Code') ; countryCodeRef.current.classList.add('is-invalid'), countryCodeRef.current.classList.remove('is-valid'); phoneNumberRef.current.classList.add('is-invalid'); phoneNumberRef.current.classList.remove('is-valid')}
         else if (phoneNumber.trim().length <= 8){isValid = false ; setPhoneErr('Your Phone Number Length Should Be Atleast 8 Numbers Length');isValid = false;phoneNumberRef.current.classList.add('is-invalid'), phoneNumberRef.current.classList.remove('is-valid'); countryCodeRef.current.classList.add('is-invalid'), countryCodeRef.current.classList.remove('is-valid') }
@@ -91,11 +94,15 @@ const Sign = () => {
         else {isValid = true; resumeRef.current.classList.remove('is-valid') ; resumeRef.current.classList.add('is-invalid'); setResumeErr('Invalid File Type')}
         
 
+
+        
         if(isValid){
-            //send data to server with axios
+            axios.post(SIGN_PORT, {data})
+            .then(resp => console.log(resp.data))
+            .catch(err => console.log(err))
         }
-        else return
-    }
+
+        }
     
     const handleReset = () => {
 

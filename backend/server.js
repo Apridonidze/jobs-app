@@ -17,7 +17,7 @@ app.get('/', (req,res) => {
     res.send('/ path');
 });
 
-app.use('/sign' , SignRouter)
+app.use('/sign-new-user' , SignRouter)
 
 
 app.listen(PORT, () => {

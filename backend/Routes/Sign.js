@@ -7,7 +7,7 @@ require('dotenv').config()
 
 
 const corsOption = {
-    origin: process.env.CORS_OPTION , 
+    origin: 'http://localhost:5173', 
     methods : ["GET", 'POST'] ,
     credentials : true
 }
@@ -19,6 +19,21 @@ SignRouter.use(bodyParser.json())
 
 SignRouter.get('/' , (req,res) => {
     res.send('sign path')
+})
+
+SignRouter.post('/', (req,res) => {
+
+    const { data } = req.body
+
+    if(data){
+
+        console.log(data)
+
+        return res.status(200).json({message : 'data recieved' , data})
+    }
+
+    res.status(400).json({message: 'no data recieved'})
+
 })
 
 module.exports = SignRouter
