@@ -80,14 +80,15 @@ const Sign = () => {
         else { isValid = true ; genderRef.current.classList.add('border-success') ; genderRef.current.classList.remove('border-danger'); data = {...data, gender : gender}}
         
         
-        if((resumeFile.type == 'application/pdf' || resumeFile.type == 'text/plain')  && resumeFile.size <= 2000000){isValid = true ; resumeRef.current.classList.add('is-valid') ; resumeRef.current.classList.remove('is-invalid'); setResumeErr('')} 
+        if((resumeFile.type == 'application/pdf' || resumeFile.type == 'text/plain')  && resumeFile.size <= 2000000){isValid = true ; resumeRef.current.classList.add('is-valid') ; resumeRef.current.classList.remove('is-invalid'); setResumeErr(''); data = {...data , resumeFile : resumeFile}} 
+        else if (resumeFile == ''){isValid = true; resumeRef.current.classList.add('is-valid') ; resumeRef.current.classList.remove('is-invalid'); setResumeErr('No Resume File Choosed (valid)'); data = {...data , resumeFile : 'no resume file'}}
         else if (resumeFile.size > 2000000){isValid = false ;resumeRef.current.classList.remove('is-valid') ; resumeRef.current.classList.add('is-invalid'); setResumeErr('Your Resume Length Should Be Under 2 Mb')}
         else {isValid = true; resumeRef.current.classList.remove('is-valid') ; resumeRef.current.classList.add('is-invalid'); setResumeErr('Invalid File Type')}
         
     }
 
 
-    console.log(resumeFile.type)
+    console.log(resumeFile)
 
 
     return(
@@ -172,7 +173,7 @@ const Sign = () => {
                 <div className="form">
                     
                     <input type="file" className="form-control" id="resumeID" onChange={(e) => setResumeFile(e.target.files[0])}  ref={resumeRef}/>
-                    <label htmlFor="resumeID"></label>
+                    <label htmlFor="resumeID">Choose Your Resume File (optional):</label>
 
                     {resumeErr}
                     
