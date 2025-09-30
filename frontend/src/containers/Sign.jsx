@@ -1,5 +1,6 @@
-import { useRef,useState  } from "react"
+import { useEffect, useRef,useState  } from "react"
 import CountryCode from "../components/CountryCode"
+
 const Sign = () => {
 
     const [name,setName] = useState('')
@@ -21,6 +22,7 @@ const Sign = () => {
     const [birthDateErr,setBirthDateErr] = useState('')
     const [genderErr, setGenderErr] = useState('')
     const [resumeErr, setResumeErr] = useState('')
+    const [resumeInfo, setResumeInfo] = useState('')
 
     const nameRef = useRef(null)
     const surnameRef = useRef(null)
@@ -36,9 +38,9 @@ const Sign = () => {
 
         e.preventDefault()
 
+        let isValid
         let data = {} //data to send to server 
 
-        let isValid
 
         const currentDate = new Date()
         
@@ -81,15 +83,64 @@ const Sign = () => {
         
         
         if((resumeFile.type == 'application/pdf' || resumeFile.type == 'text/plain')  && resumeFile.size <= 2000000){isValid = true ; resumeRef.current.classList.add('is-valid') ; resumeRef.current.classList.remove('is-invalid'); setResumeErr(''); data = {...data , resumeFile : resumeFile}} 
-        else if (resumeFile == ''){isValid = true; resumeRef.current.classList.add('is-valid') ; resumeRef.current.classList.remove('is-invalid'); setResumeErr('No Resume File Choosed (valid)'); data = {...data , resumeFile : 'no resume file'}}
+        else if (resumeFile == ''){isValid = true; resumeRef.current.classList.add('is-valid') ; resumeRef.current.classList.remove('is-invalid'); setResumeErr('');setResumeInfo('No Resume File Choosed (Valid)'); data = {...data , resumeFile : 'no resume file'}}
         else if (resumeFile.size > 2000000){isValid = false ;resumeRef.current.classList.remove('is-valid') ; resumeRef.current.classList.add('is-invalid'); setResumeErr('Your Resume Length Should Be Under 2 Mb')}
         else {isValid = true; resumeRef.current.classList.remove('is-valid') ; resumeRef.current.classList.add('is-invalid'); setResumeErr('Invalid File Type')}
         
     }
+    
+    const handleReset = () => {
 
+    setName('')
+    setSurname('')
+    setPassword('')
+    setEmail('')
+    setCountryCode('')
+    setPhoneNumber('')
+    setBirthDate('')
+    setGender('')
+    setResumeFile('')
 
-    console.log(resumeFile)
+    setNameErr('')
+    setSurnameErr('')
+    setPasswordErr('')
+    setEmailErr('')
+    setCountryCodeErr('')
+    setPhoneErr('')
+    setBirthDateErr('')
+    setGenderErr('')
+    setResumeErr('')
+    setResumeInfo('')
 
+    nameRef.current.classList.remove('is-invalid')
+    nameRef.current.classList.remove('is-valid')
+    
+    surnameRef.current.classList.remove('is-invalid')
+    surnameRef.current.classList.remove('is-valid')
+    
+    passwordRef.current.classList.remove('is-invalid')
+    passwordRef.current.classList.remove('is-valid')
+    
+    emailRef.current.classList.remove('is-invalid')
+    emailRef.current.classList.remove('is-valid')
+    
+    countryCodeRef.current.classList.remove('is-invalid')
+    countryCodeRef.current.classList.remove('is-valid')
+    
+    phoneNumberRef.current.classList.remove('is-invalid')
+    phoneNumberRef.current.classList.remove('is-valid')
+    
+    birthDateRef.current.classList.remove('is-invalid')
+    birthDateRef.current.classList.remove('is-valid')
+    
+    genderRef.current.classList.remove('is-invalid')
+    genderRef.current.classList.remove('is-valid')
+    
+    resumeRef.current.classList.remove('is-invalid')
+    resumeRef.current.classList.remove('is-valid')
+    }
+
+    
 
     return(
         <div className="sign-container container">
@@ -109,7 +160,7 @@ const Sign = () => {
                     
                     <input type="text" className="form-control" id="surnameID" onChange={(e) => setSurname(e.target.value)} value={surname} ref={surnameRef} placeholder="Your Surname..."/>
                     <label htmlFor="surnameID">Your Surname...</label>
-                    <span>{surnameErr}</span>
+                    <span className="text-danger">{surnameErr}</span>
                     
                 </div>
 
@@ -117,7 +168,7 @@ const Sign = () => {
                     
                     <input type="password" className="form-control" onChange={(e) => setPassword(e.target.value)} value={password} ref={passwordRef} placeholder="Your Password..."/>
                     <label htmlFor="passwordID">Your Password...</label>
-                    <span>{passwordErr}</span>
+                    <span className="text-danger">{passwordErr}</span>
 
                 </div>
 
@@ -125,6 +176,7 @@ const Sign = () => {
                     
                     <input type="text" className="form-control" id="emailID" onChange={(e) => setEmail(e.target.value)} value={email} ref={emailRef} placeholder="Your Email..."/>
                     <label htmlFor="emailID">Your Email...</label>
+                    <span className="text-danger">{emailErr}</span>
                     
                 </div>
 
@@ -135,11 +187,11 @@ const Sign = () => {
                         
                         <CountryCode setCountryCode={setCountryCode} countryCodeRef={countryCodeRef}/>
                         <input type="text" className="form-control"  onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} ref={phoneNumberRef} placeholder="Your Phone Nubmer..."/>
-                    
+
                     </div>
 
-                    <span>{phoneErr}</span>
-                    <span>{countryCodeErr}</span>
+                    <span className="text-danger">{phoneErr}</span>
+                    <span className="text-danger">{countryCodeErr}</span>
 
                 </div>
 
@@ -147,6 +199,7 @@ const Sign = () => {
                     
                     <input type="date"  className="form-control" onChange={(e) => setBirthDate(e.target.value)} value={birthDate} ref={birthDateRef} placeholder="Your Phone Nubmer..."/>
                     <label htmlFor="phoneID">Your Birth Date...</label>
+                    <span className="text-danger">{birthDateErr}</span>
                     
                 </div>
 
@@ -168,20 +221,23 @@ const Sign = () => {
                     
                     </div>
 
+                    <span className="text-danger">{genderErr}</span>
+
                 </div>
 
                 <div className="form">
                     
-                    <input type="file" className="form-control" id="resumeID" onChange={(e) => setResumeFile(e.target.files[0])}  ref={resumeRef}/>
                     <label htmlFor="resumeID">Choose Your Resume File (optional):</label>
+                    <input type="file" className="form-control" id="resumeID" onChange={(e) => setResumeFile(e.target.files[0])}  ref={resumeRef}/>
 
-                    {resumeErr}
+                    <span className="text-danger">{resumeErr}</span>
+                    <span className="text-success">{resumeInfo}</span>
                     
                 </div>
                 
                 <div className="row row-cols-sm-2">
                     <div className="col"><input type="submit" className="btn btn-success" value='Create New Account'/></div>
-                    <div className="col"><input type="reset" className="btn btn-danger" value='reset form'/></div>{/* add reset function */}
+                    <div className="col"><button className="btn btn-danger" onClick={handleReset} >Reset Form</button></div>
                 </div>
 
             </form>
