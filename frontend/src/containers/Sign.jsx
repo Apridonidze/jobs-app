@@ -95,13 +95,14 @@ const Sign = () => {
         
 
 
-        
         if(isValid){
-            axios.post(SIGN_PORT, {data})
-            .then(resp => console.log(resp.data))
-            .catch(err => console.log(err))
+            axios
+                .post(SIGN_PORT, {data})
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
         }
 
+        
         }
     
     const handleReset = () => {
@@ -163,7 +164,7 @@ const Sign = () => {
 
             <form onSubmit={SubmitSign}>
 
-                <div className="form-floating">
+                <div className="form-floating mb-4">
 
                     <input type="text" className="form-control" id="nameID" onChange={(e) => setName(e.target.value)} value={name} ref={nameRef} placeholder="Your Name..."/>
                     <label htmlFor="nameID">Your Name...</label>
@@ -171,7 +172,7 @@ const Sign = () => {
 
                 </div>
 
-                <div className="form-floating">
+                <div className="form-floating mb-4">
                     
                     <input type="text" className="form-control" id="surnameID" onChange={(e) => setSurname(e.target.value)} value={surname} ref={surnameRef} placeholder="Your Surname..."/>
                     <label htmlFor="surnameID">Your Surname...</label>
@@ -179,7 +180,7 @@ const Sign = () => {
                     
                 </div>
 
-                <div className="form-floating">
+                <div className="form-floating mb-4">
                     
                     <input type="password" className="form-control" onChange={(e) => setPassword(e.target.value)} value={password} ref={passwordRef} placeholder="Your Password..."/>
                     <label htmlFor="passwordID">Your Password...</label>
@@ -187,7 +188,7 @@ const Sign = () => {
 
                 </div>
 
-                <div className="form-floating">
+                <div className="form-floating mb-4">
                     
                     <input type="text" className="form-control" id="emailID" onChange={(e) => setEmail(e.target.value)} value={email} ref={emailRef} placeholder="Your Email..."/>
                     <label htmlFor="emailID">Your Email...</label>
@@ -195,13 +196,13 @@ const Sign = () => {
                     
                 </div>
 
-                <div className="form">
+                <div className="form mb-4">
 
 
                     <div className="input-group">
                         
                         <CountryCode setCountryCode={setCountryCode} countryCodeRef={countryCodeRef}/>
-                        <input type="text" className="form-control"  onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} ref={phoneNumberRef} placeholder="Your Phone Nubmer..."/>
+                        <input type="text" className="form-control w-75"  onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} ref={phoneNumberRef} placeholder="Your Phone Nubmer..."/>
 
                     </div>
 
@@ -210,7 +211,7 @@ const Sign = () => {
 
                 </div>
 
-                <div className="form-floating ">
+                <div className="form-floating mb-4">
                     
                     <input type="date"  className="form-control" onChange={(e) => setBirthDate(e.target.value)} value={birthDate} ref={birthDateRef} placeholder="Your Phone Nubmer..."/>
                     <label htmlFor="phoneID">Your Birth Date...</label>
@@ -218,7 +219,7 @@ const Sign = () => {
                     
                 </div>
 
-                <div className="form d-flex border" ref={genderRef}>
+                <div className="form d-flex border mb-4" ref={genderRef}>
 
                     <label htmlFor="GenderID">I Am : </label>
 
@@ -240,7 +241,7 @@ const Sign = () => {
 
                 </div>
 
-                <div className="form">
+                <div className="form mb-4">
                     
                     <label htmlFor="resumeID">Choose Your Resume File (optional):</label>
                     <input type="file" className="form-control" id="resumeID" onChange={(e) => setResumeFile(e.target.files[0])}  ref={resumeRef}/>
@@ -250,7 +251,7 @@ const Sign = () => {
                     
                 </div>
                 
-                <div className="row row-cols-sm-2">
+                <div className="row row-cols-sm-2 mb-4">
                     <div className="col"><input type="submit" className="btn btn-success" value='Create New Account'/></div>
                     <div className="col"><button className="btn btn-danger" onClick={handleReset} >Reset Form</button></div>
                 </div>
