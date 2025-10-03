@@ -4,6 +4,7 @@ const SignRouter = expres()
 const cors = require('cors') 
 const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt');
 require('dotenv').config()
 
 const validateUser = require('../schemas/UserSchema')
@@ -33,22 +34,28 @@ SignRouter.post('/', async (req, res) => {
     }
 
 
-    // //TODO : check if validationResp.success is true ; if so check if user email and phone number is already in database if so return error message to user else execute next code block
-
-
+    
+    
     try {
         console.log("Incoming body:", req.body);
+        
+        const { role, name, surname, password, email, phoneNumber, birthDate, gender } = req.body.data; // TODO : sanitize password and send to database that way
+        
+        // //TODO : check if validationResp.success is true ; if so check if user email and phone number is already in database if so return error message to user else execute next code block
+        
 
-        const { role, name, surname, password, email, phoneNumber, birthDate, gender } = req.body; // TODO : sanitize password and send to database that way
 
-        const [result] = await db.query(
+        const hasshedPassword = await bcrypt.hash(password, 10); 
+
+
+        const [userInsertion] = await db.query(
             `INSERT INTO users 
             (user_role, user_name, user_surname, user_password, user_email, user_phoneNumber, user_birthDate, user_gender) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-            [role, name, surname, password, email, phoneNumber, birthDate, gender]
+            [role, name, surname, hasshedPassword, email, phoneNumber, birthDate, gender]
         );
 
-        const payload = {userId: result.insertId , userRole : role , userEmail : email};
+        const payload = {userId: userInsertion.insertId , userRole : role , userEmail : email};
 
         const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: "30d" })
 
