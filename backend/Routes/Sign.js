@@ -25,16 +25,21 @@ SignRouter.get('/' , (req,res) => {
 })
 
 SignRouter.post('/', async (req, res) => {
+
     const validationResp = validateUser(req.body);
 
     if (!validationResp.success) {
         return res.status(400).json({ errors: validationResp.error.errors });
     }
 
+
+    // //TODO : check if validationResp.success is true ; if so check if user email and phone number is already in database if so return error message to user else execute next code block
+
+
     try {
         console.log("Incoming body:", req.body);
 
-        const { role, name, surname, password, email, phoneNumber, birthDate, gender } = req.body;
+        const { role, name, surname, password, email, phoneNumber, birthDate, gender } = req.body; // TODO : sanitize password and send to database that way
 
         const [result] = await db.query(
             `INSERT INTO users 
@@ -50,7 +55,7 @@ SignRouter.post('/', async (req, res) => {
         return res.status(200).json({
             message: 'User created successfully',
             token : token
-        }); //send token to user
+        }); 
 
 
     } catch (err) {
