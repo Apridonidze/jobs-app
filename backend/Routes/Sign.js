@@ -23,29 +23,37 @@ SignRouter.get('/' , (req,res) => {
     res.send('sign path')
 })
 
-SignRouter.post('/', (req, res) => {
-   
-    
-    const validationResp = validateUser(req.body)
+SignRouter.post('/', async (req, res) => {
+    const validationResp = validateUser(req.body);
 
-    if(validationResp.success) {
-        console.log('success validation')
-
-
-        db.getConnection((err, conn) => {
-
-            if(err)console.log('failed to connnect db')
-            else console.log('successfull conection')
-
-        })
-
-    }else {
-        console.log('failed')
+    if (!validationResp.success) {
+        return res.status(400).json({ errors: validationResp.error.errors });
     }
 
-    //tokenize data if success
+    try {
+        console.log("Incoming body:", req.body);
 
-})
+        const { role, name, surname, password, email, phoneNumber, birthDate, gender } = req.body.data;
+        console.log("Parsed fields:", role, name, surname, password, email, phoneNumber, birthDate, gender);
+
+        const [result] = await db.query(
+            `INSERT INTO users 
+            (user_role, user_name, user_surname, user_password, user_email, user_phoneNumber, user_birthDate, user_gender) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+            [role, name, surname, password, email, phoneNumber, birthDate, gender]
+        );
+
+        return res.status(200).json({
+            message: 'User created successfully',
+            userId: result.insertId
+        });
+
+    } catch (err) {
+        console.error("DB error:", err);
+        return res.status(500).json({ error: 'Database error' });
+    }
+});
+
 
 
 

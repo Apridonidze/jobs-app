@@ -89,7 +89,7 @@ const Sign = () => {
         else if (phoneNumber.trim().length <= 8){isValid = false ; setPhoneErr('Your Phone Number Length Should Be Atleast 8 Numbers Length');isValid = false;phoneNumberRef.current.classList.add('is-invalid'), phoneNumberRef.current.classList.remove('is-valid'); countryCodeRef.current.classList.add('is-invalid'), countryCodeRef.current.classList.remove('is-valid') }
         else if (phoneNumber.trim() == ''){isValid = false ; setPhoneErr(`This Field Can't Be Empty`); isValid = false; phoneNumberRef.current.classList.add('is-invalid'), phoneNumberRef.current.classList.remove('is-valid'); countryCodeRef.current.classList.add('is-invalid'), countryCodeRef.current.classList.remove('is-valid')}
         else if (NumberRegex.test(phoneNumber) === false){isValid = false ; setPhoneErr('Only Numbers Allowed'); isValid = false; phoneNumberRef.current.classList.add('is-invalid'), phoneNumberRef.current.classList.remove('is-valid')}
-        else {isValid = true; setPhoneErr(''); setCountryCodeErr(''); countryCodeRef.current.classList.add('is-valid'), countryCodeRef.current.classList.remove('is-invalid'); phoneNumberRef.current.classList.add('is-valid'), phoneNumberRef.current.classList.remove('is-invalid'); data = {...data , phoneNumber : `${countryCode} ${phoneNumber}`}}
+        else {isValid = true; setPhoneErr(''); setCountryCodeErr(''); countryCodeRef.current.classList.add('is-valid'), countryCodeRef.current.classList.remove('is-invalid'); phoneNumberRef.current.classList.add('is-valid'), phoneNumberRef.current.classList.remove('is-invalid'); data = {...data , phoneNumber : `${countryCode.split(' ')[0]} ${phoneNumber}`}}
     
         if(birthDate.trim() == '' || birthDate == null ){isValid = false; birthDateRef.current.classList.add('is-invalid') ; birthDateRef.current.classList.remove('is-valid'); setBirthDateErr(`This Field Can't Be Empty`)}
         else if (currentDate.getFullYear() -  birthDate.slice(0, 4) <= 17){isValid = false; birthDateRef.current.classList.add('is-invalid') ; birthDateRef.current.classList.remove('is-valid'); setBirthDateErr(`Your Age Should Be Over 18 To Use This App`)}
@@ -115,6 +115,7 @@ const Sign = () => {
 
         
         }
+
     
     const handleReset = () => {
 
@@ -171,6 +172,7 @@ const Sign = () => {
     resumeRef.current.classList.remove('is-invalid')
     resumeRef.current.classList.remove('is-valid')
     }
+
 
     return(
         <div className="sign-container container">
