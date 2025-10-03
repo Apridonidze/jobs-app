@@ -42,6 +42,5 @@ const CountryCode = ( { setCountryCode, countryCodeRef } ) => {
             </select>
     )
 }
-//finish design
 
 export default CountryCode

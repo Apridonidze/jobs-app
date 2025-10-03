@@ -25,8 +25,8 @@ const userSchema = z.object({
     password : z.string().min(3),
     email : z.email(),
     phoneNumber : z.string().min(8),
-    birthDate : z.date(),
-    gender : z.enum('male','female')
+    birthDate : z.string().length(10 , {message : 'invalid birth input'}),
+    gender : z.enum(['male','female'])
 })
 
 
@@ -34,7 +34,7 @@ SignRouter.get('/' , (req,res) => {
     res.send('sign path')
 })
 
-SignRouter.post('/', validateUser ,(req, res , next) => {
+SignRouter.post('/', validateUser ,(req, res) => {
 
 
     if(data){
@@ -47,7 +47,7 @@ SignRouter.post('/', validateUser ,(req, res , next) => {
 
 })
 
-function validateUser () {
+function validateUser (req , res , next) {
 
 }
 
