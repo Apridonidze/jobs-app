@@ -19,6 +19,7 @@ SignRouter.use(bodyParser.json())
 
 
 const userSchema = z.object({
+    role: z.enum(['reqruiter','employee']),
     name : z.string().min(3),
     surname : z.string().min(3),
     password : z.string().min(3),
@@ -45,6 +46,7 @@ function validateUser (req , res , next) {
     const {data} = req.body
 
     const userData = {
+        role: data.role,
         name: data.name,
         surname: data.surname,
         password: data.password,
