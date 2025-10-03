@@ -1,12 +1,12 @@
 const expres = require('express')
 const SignRouter = expres()
 
-const z = require('zod')
 const cors = require('cors') 
 const bodyParser = require('body-parser')
 require('dotenv').config()
 
 const validateUser = require('../schemas/UserSchema')
+const db = require('../db/db')
 
 const corsOption = {
     origin: 'http://localhost:5173', 
@@ -30,6 +30,15 @@ SignRouter.post('/', (req, res) => {
 
     if(validationResp.success) {
         console.log('success validation')
+
+
+        db.getConnection((err, conn) => {
+
+            if(err)console.log('failed to connnect db')
+            else console.log('successfull conection')
+
+        })
+
     }else {
         console.log('failed')
     }
