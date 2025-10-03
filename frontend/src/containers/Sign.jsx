@@ -16,6 +16,7 @@ const Sign = () => {
 
     const SIGN_PORT = 'http://localhost:8080/sign-new-user'
 
+    const [role,setRole] = useState('')
     const [name,setName] = useState('')
     const [surname,setSurname] = useState('')
     const [password,setPassword] = useState('')
@@ -26,6 +27,7 @@ const Sign = () => {
     const [gender,setGender] = useState('')
     const [resumeFile,setResumeFile] = useState('')
 
+    const [roleErr, setRoleErr] = useState('')
     const [nameErr, setNameErr] = useState('')
     const [surnameErr, setSurnameErr] = useState('')
     const [passwordErr, setPasswordErr] = useState('')
@@ -37,6 +39,7 @@ const Sign = () => {
     const [resumeErr, setResumeErr] = useState('')
     const [resumeInfo, setResumeInfo] = useState('')
 
+    const roleRef = useRef(null)
     const nameRef = useRef(null)
     const surnameRef = useRef(null)
     const passwordRef = useRef(null)
@@ -61,6 +64,8 @@ const Sign = () => {
         const regexContainsSpecial = /[^\w\s]/
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+        if(role === 'blank' || role === ''){isValid = false; setRoleErr(`This Field Can't Be Empty`); roleRef.current.classList.add('is-invalid');roleRef.current.classList.remove('is-valid') }
+        else{isValid = true; setRoleErr(``); roleRef.current.classList.add('is-valid');roleRef.current.classList.remove('is-invalid'); data = {...data, role: role} }
 
         if(name.trim() == '' || name.trim() == null || name.trim() == undefined){isValid = false ; setNameErr(`This Field Can't Be Empty`); nameRef.current.classList.add('is-invalid');nameRef.current.classList.remove('is-valid')}
         else if(name.trim().length <= 1){isValid = false; setNameErr('Your Name Length Should Be Atleast 2 Letters Long'); nameRef.current.classList.add('is-invalid');nameRef.current.classList.remove('is-valid')}
@@ -113,6 +118,7 @@ const Sign = () => {
     
     const handleReset = () => {
 
+    setRole('')
     setName('')
     setSurname('')
     setPassword('')
@@ -123,6 +129,7 @@ const Sign = () => {
     setGender('')
     setResumeFile('')
 
+    setRoleErr('')
     setNameErr('')
     setSurnameErr('')
     setPasswordErr('')
@@ -134,6 +141,9 @@ const Sign = () => {
     setResumeErr('')
     setResumeInfo('')
 
+    roleRef.current.classList.remove('is-invalid')
+    roleRef.current.classList.remove('is-valid')
+    
     nameRef.current.classList.remove('is-invalid')
     nameRef.current.classList.remove('is-valid')
     
@@ -162,13 +172,23 @@ const Sign = () => {
     resumeRef.current.classList.remove('is-valid')
     }
 
-    
-
     return(
         <div className="sign-container container">
             Sign.jsx
 
             <form onSubmit={SubmitSign}>
+                
+                <div className="form mb-4">
+
+                    <select className='form-control' ref={roleRef} onChange={(e) => setRole(e.target.value)}>
+                        <option value="blank">I Am a...</option>
+                        <option value="reqruiter">Reqruiter</option>
+                        <option value="employee">Employee</option>
+                    </select>
+                    <span>{roleErr}</span>
+
+                </div>
+
 
                 <div className="form-floating mb-4">
 
