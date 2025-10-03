@@ -37,18 +37,15 @@ SignRouter.get('/' , (req,res) => {
 SignRouter.post('/', validateUser ,(req, res) => {
 
 
-    if(data){
-
-
-        return res.status(200).json({message : 'data recieved' , data})
-    }
-
-    res.status(400).json({message: 'no data recieved'})
+   console.log('traki')
 
 })
 
 function validateUser (req , res , next) {
+    const data = req.body
 
+    console.log(data)
+    next()
 }
 
 
