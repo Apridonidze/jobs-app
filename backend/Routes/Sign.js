@@ -3,6 +3,7 @@ const SignRouter = expres()
 
 const cors = require('cors') 
 const bodyParser = require('body-parser')
+const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
 const validateUser = require('../schemas/UserSchema')
@@ -33,8 +34,7 @@ SignRouter.post('/', async (req, res) => {
     try {
         console.log("Incoming body:", req.body);
 
-        const { role, name, surname, password, email, phoneNumber, birthDate, gender } = req.body.data;
-        console.log("Parsed fields:", role, name, surname, password, email, phoneNumber, birthDate, gender);
+        const { role, name, surname, password, email, phoneNumber, birthDate, gender } = req.body;
 
         const [result] = await db.query(
             `INSERT INTO users 
@@ -43,10 +43,15 @@ SignRouter.post('/', async (req, res) => {
             [role, name, surname, password, email, phoneNumber, birthDate, gender]
         );
 
+        const payload = {userId: result.insertId , userRole : role , userEmail : email};
+
+        const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: "30d" })
+
         return res.status(200).json({
             message: 'User created successfully',
-            userId: result.insertId
-        });
+            token : token
+        }); //send token to user
+
 
     } catch (err) {
         console.error("DB error:", err);
