@@ -37,13 +37,20 @@ SignRouter.post('/', async (req, res) => {
     
     
     try {
-        console.log("Incoming body:", req.body);
+        //console.log("Incoming body:", req.body);
         
-        const { role, name, surname, password, email, phoneNumber, birthDate, gender } = req.body.data; // TODO : sanitize password and send to database that way
+        const { role, name, surname, password, email, phoneNumber, birthDate, gender } = req.body.data;
         
         // //TODO : check if validationResp.success is true ; if so check if user email and phone number is already in database if so return error message to user else execute next code block
         
+        const [rows] = await db.query('select * from users where user_email = ?' , [email])
 
+        if(rows.length > 0){
+            return res.status(400).json({ error: 'Account Already Exists With This Email' });
+        }
+
+
+        
 
         const hasshedPassword = await bcrypt.hash(password, 10); 
 
