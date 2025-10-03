@@ -19,7 +19,6 @@ SignRouter.use(bodyParser.json())
 
 
 const userSchema = z.object({
-    role : z.string(),
     name : z.string().min(3),
     surname : z.string().min(3),
     password : z.string().min(3),
@@ -37,14 +36,26 @@ SignRouter.get('/' , (req,res) => {
 SignRouter.post('/', validateUser ,(req, res) => {
 
 
-   console.log('traki')
+   console.log('/')
 
 })
 
 function validateUser (req , res , next) {
-    const data = req.body
+    
+    const {data} = req.body
+
+    const userData = {
+        name: data.name,
+        surname: data.surname,
+        password: data.password,
+        email: data.email,
+        phoneNumber: data.phoneNumber,
+        birthDate: data.birthDate,
+        gender: data.gender,
+    }
 
     console.log(data)
+    console.log(userSchema.safeParse(userData))
     next()
 }
 
