@@ -6,6 +6,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 require('dotenv').config()
 
+const validateUser = require('../schemas/UserSchema')
 
 const corsOption = {
     origin: 'http://localhost:5173', 
@@ -18,48 +19,25 @@ SignRouter.use(cors(corsOption))
 SignRouter.use(bodyParser.json())
 
 
-const userSchema = z.object({
-    role: z.enum(['reqruiter','employee']),
-    name : z.string().min(3),
-    surname : z.string().min(3),
-    password : z.string().min(3),
-    email : z.email(),
-    phoneNumber : z.string().min(8),
-    birthDate : z.string().length(10 , {message : 'invalid birth input'}),
-    gender : z.enum(['male','female'])
-})
-
-
 SignRouter.get('/' , (req,res) => {
     res.send('sign path')
 })
 
-SignRouter.post('/', validateUser ,(req, res) => {
+SignRouter.post('/', (req, res) => {
+   
+    
+    const validationResp = validateUser(req.body)
 
+    if(validationResp.success) {
+        console.log('success validation')
+    }else {
+        console.log('failed')
+    }
 
-   console.log('/')
+    //tokenize data if success
 
 })
 
-function validateUser (req , res , next) {
-    
-    const {data} = req.body
-
-    const userData = {
-        role: data.role,
-        name: data.name,
-        surname: data.surname,
-        password: data.password,
-        email: data.email,
-        phoneNumber: data.phoneNumber,
-        birthDate: data.birthDate,
-        gender: data.gender,
-    }
-
-    console.log(data)
-    console.log(userSchema.safeParse(userData))
-    next()
-}
 
 
 module.exports = SignRouter

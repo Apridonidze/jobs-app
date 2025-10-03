@@ -182,7 +182,7 @@ const Sign = () => {
 
                     <select className='form-control' ref={roleRef} onChange={(e) => setRole(e.target.value)}>
                         <option value="blank">I Am a...</option>
-                        <option value="reqruiter">Reqruiter</option>
+                        <option value="recruiter">Recruiter</option>
                         <option value="employee">Employee</option>
                     </select>
                     <span>{roleErr}</span>
