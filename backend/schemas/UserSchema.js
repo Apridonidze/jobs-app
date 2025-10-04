@@ -14,8 +14,7 @@ const userSchema = z.object({
 function validateUser ({data}) {
 
     return userSchema.safeParse(data)
-
-    //check if user email aleady exists in database
+    
 }
 
 module.exports = validateUser

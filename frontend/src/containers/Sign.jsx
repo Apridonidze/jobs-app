@@ -3,6 +3,7 @@ import { useRef,useState  } from "react"
 import { Link } from 'react-router-dom'
 
 import CountryCode from "../components/CountryCode"
+import SignMessage from '../components/SignMessage';
 
 
 const Sign = () => {
@@ -49,6 +50,11 @@ const Sign = () => {
     const birthDateRef = useRef(null)
     const genderRef = useRef(null)
     const resumeRef = useRef(null)
+    const messageRef = useRef(null)
+
+    const [signError, setSignError] = useState('')
+    const [signSuccess, setSignSuccess] = useState('')
+
 
     const SubmitSign = (e) => {
 
@@ -109,9 +115,9 @@ const Sign = () => {
         if(isValid){
             axios
                 .post(SIGN_PORT, {data})
-                .then(res => console.log(res))
-                .catch(err => console.log(err))
-        }
+                .then(res => console.log(res)) //get res.data.token and set it to cookie and display success message on screeen (remove console.logs)
+                .catch(err => console.log('error' , err)) //else save error and display on screen (remove console.logs)
+        } 
 
         
         }
@@ -290,6 +296,7 @@ const Sign = () => {
                 <Link to='/login'>Already Have An Account?</Link >
             </div>
 
+<SignMessage />
         </div>
     )
 }
