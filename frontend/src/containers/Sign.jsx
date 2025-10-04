@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useCookies } from 'react-cookie';
 import { useRef,useState  } from "react"
 import { Link } from 'react-router-dom'
 
@@ -16,6 +17,10 @@ const Sign = () => {
 
 
     const SIGN_PORT = 'http://localhost:8080/sign-new-user'
+
+    let isSuccessful
+
+    const [cookies, setCookies , removeCookies] = useCookies(['token'])
 
     const [role,setRole] = useState('')
     const [name,setName] = useState('')
@@ -39,6 +44,7 @@ const Sign = () => {
     const [genderErr, setGenderErr] = useState('')
     const [resumeErr, setResumeErr] = useState('')
     const [resumeInfo, setResumeInfo] = useState('')
+    const [signMessage, setSignMessage] = useState('')
 
     const roleRef = useRef(null)
     const nameRef = useRef(null)
@@ -52,11 +58,9 @@ const Sign = () => {
     const resumeRef = useRef(null)
     const messageRef = useRef(null)
 
-    const [signError, setSignError] = useState('')
-    const [signSuccess, setSignSuccess] = useState('')
 
 
-    const SubmitSign = (e) => {
+    const  SubmitSign = async (e) => {
 
         e.preventDefault()
 
@@ -115,8 +119,23 @@ const Sign = () => {
         if(isValid){
             axios
                 .post(SIGN_PORT, {data})
-                .then(res => console.log(res)) //get res.data.token and set it to cookie and display success message on screeen (remove console.logs)
-                .catch(err => console.log('error' , err)) //else save error and display on screen (remove console.logs)
+                .then(res => {
+                    const respToken = res.data.token; //save in onlyHttp-cookie
+                    setCookies('token', respToken, {
+                        path: '/',
+                        maxAge : 60 * 60 * 24 * 30,
+                        secure : true,
+                        sameSite : 'strict'
+                    })
+
+                    setSignMessage([res.data.message])
+                    isSuccessful = true
+
+                }) 
+                .catch(err => {
+                    setSignMessage([err.message])
+                    isSuccessful = false
+                }) 
         } 
 
         
@@ -181,8 +200,12 @@ const Sign = () => {
 
 
     return(
-        <div className="sign-container container">
-            Sign.jsx
+        <div className="sign-container container text-center">
+            
+            <h1>Sign-Up Page</h1>
+            
+            
+            <SignMessage isSuccessful={isSuccessful} signMessage={signMessage} messageRef={messageRef} />
 
             <form onSubmit={SubmitSign}>
                 
@@ -296,7 +319,6 @@ const Sign = () => {
                 <Link to='/login'>Already Have An Account?</Link >
             </div>
 
-<SignMessage />
         </div>
     )
 }

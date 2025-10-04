@@ -1,5 +1,5 @@
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
-
+import { CookiesProvider } from "react-cookie";
 
 import Authentication from './containers/Authentication';
 import Login from './containers/Login';
@@ -23,9 +23,13 @@ const App = () => {
   return (
     
     <div className="app-container">
-    
-      <RouterProvider router={router}></RouterProvider>
-    
+
+      <CookiesProvider>
+
+        <RouterProvider router={router}></RouterProvider>
+        
+      </CookiesProvider>
+
     </div>
   
   );
