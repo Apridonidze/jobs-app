@@ -133,7 +133,7 @@ const Sign = () => {
 
                 }) 
                 .catch(err => {
-                    setSignMessage([err.message])
+                    setSignMessage(err.response.data.error)
                     isSuccessful = false
                 }) 
         } 
