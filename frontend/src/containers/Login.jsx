@@ -2,6 +2,7 @@ import axios from "axios"
 import { useRef, useState } from "react"
 import {  Link  } from "react-router-dom"
 import { useCookies } from "react-cookie"
+import LoginMessage from "../components/LoginMessage"
 
 const Login = () => {
 
@@ -53,7 +54,7 @@ const Login = () => {
             .post(LOGIN_API_URL, data)
             .then(resp => {
 
-                console.log(resp)
+                console.log(resp) //remove in future
                 setCookies('token', resp.data.token, { path: '/',maxAge : 60 * 60 * 24 * 30,secure : true,sameSite : 'strict'})
                 setLoginMessage(resp.data.message)
                 setIsSuccesfull(true)
@@ -61,7 +62,7 @@ const Login = () => {
 //add styling to inputs based on if inputs are correct or not 
             })
             .catch(err => {
-                console.log(err)
+                console.log(err) //remove in future
                 setLoginMessage(err.response.data.error)
                 setIsSuccesfull(false)
                 setToggleLoginMessage(true)
@@ -77,9 +78,9 @@ const Login = () => {
     return(
         <div className="login-container container">
             Login.jsx
-            {/* add login component message here */}
+            {toggleLoginMessage && <LoginMessage loginMessage={loginMessage} isSuccesful={isSuccesful} setToggleLoginMessage={setToggleLoginMessage} />}
+            
 
-            {loginMessage}
 
             <form onSubmit={handleLogin}>
 
