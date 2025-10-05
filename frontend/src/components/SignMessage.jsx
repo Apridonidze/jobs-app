@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
+import { Navigate, useNavigate } from "react-router-dom";
 
 const SignMessage = ( {setToggleSigMessage, isSuccessful , signMessage} ) => {
 
 
+    const navigator = useNavigate()
     const [seconds, setSeconds] = useState(3)
 
 
@@ -12,17 +14,25 @@ const SignMessage = ( {setToggleSigMessage, isSuccessful , signMessage} ) => {
             
             setSeconds(seconds => {
                 
-                if(seconds <= 0){clearInterval(handleTimer) ; setToggleSigMessage(false) ;return 0}
+                if(seconds <= 0){clearInterval(handleTimer) ;setToggleSigMessage(false) ;return 0}
                 return seconds - 1
             
             }) 
 
         }, 1000);
+        
+
+        if(seconds == 0){
+            if(isSuccessful){navigator('/', {replace: true})}
+            else return
+        }
+        
+        
 
         return () =>  {clearInterval(handleTimer)}
 
     
-},[])
+},[seconds,navigator])
 
 
     return(

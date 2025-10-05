@@ -1,5 +1,6 @@
 import { Navigate, RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { CookiesProvider } from "react-cookie";
+import { CookiesProvider,useCookies } from "react-cookie";
+
 
 import Authentication from './containers/Authentication';
 import Login from './containers/Login';
@@ -9,8 +10,10 @@ import NotFound from './containers/NotFound';
 
 const App = () => {
 
-  const isAuthorized = false ; //temporary (replace it with cookie)
 
+  let isAuthorized = false
+
+  
   const router = createBrowserRouter([
   
     {path: '/', element : isAuthorized ? <Main /> : <Navigate to='/authentication' />},//directs user to authentication page when not loggined
@@ -20,6 +23,8 @@ const App = () => {
     {path : '*', element : <NotFound />}
   ])
 
+
+  
   return (
     
     <div className="app-container">

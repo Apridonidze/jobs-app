@@ -18,10 +18,10 @@ const Sign = () => {
 
     const SIGN_PORT = 'http://localhost:8080/sign-new-user'
 
-    let isSuccessful
+    const [isSuccessful ,setIsSuccessful] = useState(false)
 
     const [toggleSigMessage,setToggleSigMessage]= useState(false)
-
+    
     const [cookies, setCookies , removeCookies] = useCookies(['token'])
 
     const [role,setRole] = useState('')
@@ -130,14 +130,14 @@ const Sign = () => {
                     })
 
                     setSignMessage([res.data.message])
-                    isSuccessful = true
+                    setIsSuccessful(true)
 
                     setToggleSigMessage(true)
 
                 }) 
                 .catch(err => {
                     setSignMessage(err.response.data.error)
-                    isSuccessful = false
+                    setIsSuccessful(false)
 
                     
                     setToggleSigMessage(true)
@@ -147,7 +147,6 @@ const Sign = () => {
         
         }
 
-    
     const handleReset = () => {
 
     setRole('')
