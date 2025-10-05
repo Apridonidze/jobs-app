@@ -1,9 +1,12 @@
+const bcrypt = require('bcrypt')
 const express = require('express')
 const LoginRouter = express.Router()
+
 
 const db = require('../db/db')
 
 const LoginSchema = require('../schemas/LoginSchema')
+const { response } = require('./Sign')
 
 
 LoginRouter.get('/', (req,res) => {
@@ -19,7 +22,9 @@ LoginRouter.post('/', async (req,res) => {
     const {email, password} = req.body
 
     if(!loginResp.success){
+
         return res.status(400).json( { erorr : loginResp.error.errors})
+
     }
 
     try{
@@ -27,12 +32,22 @@ LoginRouter.post('/', async (req,res) => {
 
         const [rows] = await db.query('select * from users where user_email = ?' ,[email])
 
-        if(rows.length > 0){
-            return res.status(200).json( { message: 'User Found' } )
+        if(rows.length === 0){
+            return res.status(404).json({error : 'user not found'})
         }
-            return res.status(400).json( { erorr: 'User Not Found' } )
-        
 
+        const user = rows[0]
+
+        const isPasswordValid = await bcrypt.compare(password, user.user_password)
+
+        if (!isPasswordValid) {
+    return res.status(401).json({ error: 'Invalid password' });
+}
+
+return res.status(200).json({response : 'Correct'})
+
+        ///generate token for loggined user  (since it will be deleted when user is not on accoutn (log outted))
+        
 
     }catch(err){
         return res.status(500).json({ error: 'Database error' });
