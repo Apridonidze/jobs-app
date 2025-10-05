@@ -7,7 +7,7 @@ const Main = () => {
     const MY_USER_API = 'http://localhost:8080/my-user' //move to .env
 
     const [cookies, setCookies , removeCookies] = useCookies(['token'])
-    
+
 
     useEffect(() => {
 
