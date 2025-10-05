@@ -6,7 +6,7 @@ import LoginMessage from "../components/LoginMessage"
 
 const Login = () => {
 
-    const LOGIN_API_URL = 'http://localhost:8080/login'
+    const LOGIN_API_URL = 'http://localhost:8080/login' //move to .env file
 
 
     const [toggleLoginMessage , setToggleLoginMessage] = useState(false)
@@ -80,8 +80,6 @@ const Login = () => {
             Login.jsx
             {toggleLoginMessage && <LoginMessage loginMessage={loginMessage} isSuccesful={isSuccesful} setToggleLoginMessage={setToggleLoginMessage} />}
             
-
-
             <form onSubmit={handleLogin}>
 
                 <div className="form-floating">
@@ -99,7 +97,6 @@ const Login = () => {
                 </div>
 
                 <input type="submit" className="btn btn-success" value="Login" />
-
 
             </form>
 

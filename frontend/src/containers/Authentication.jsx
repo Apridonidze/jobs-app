@@ -7,6 +7,7 @@ const Authentication = () => {
             
             <Link to='/sign'>Sign</Link>
             <Link to='/login'>Login</Link>
+            
         </div>
     )
 }

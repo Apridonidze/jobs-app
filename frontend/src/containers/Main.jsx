@@ -7,6 +7,7 @@ const Main = () => {
     
     console.log(jwtDecode(cookies.token)) //temporary here
 
+    //createa axios get functiuon form database to display your data (non-sensible)
     return(
         <div className="main-container">
             Main.jsx
@@ -15,4 +16,5 @@ const Main = () => {
 }
 
 
+//add titles to this page
 export default Main
