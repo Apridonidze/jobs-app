@@ -1,7 +1,10 @@
+import axios from "axios"
 import { useRef, useState } from "react"
 import { data, Link  } from "react-router-dom"
 
 const Login = () => {
+
+    const LOGIN_API_URL = ''
 
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
@@ -35,6 +38,15 @@ const Login = () => {
         else if (NumberRegex.test(password) === false ) {isValid = false ; setPasswordError('Your Password Should Contain Numbers');passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
         else if (regexContainsSpecial.test(password) === false ){isValid = false; setPasswordError('Your Password Should Contain Special Characters');passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
         else {isValid = true; setPasswordError('') ; passwordRef.current.classList.remove('is-invalid'); passwordRef.current.classList.add('is-valid'); data = {...data, password : password}}
+
+
+        if(isValid){
+            axios
+            .post('login', {data})
+            .then(resp => console.log(resp))
+            .catch(err => console.log(err))
+        }
+
 
     }
 

@@ -16,7 +16,7 @@ const Sign = () => {
     //TO FIX : resume file text : NO reSume FIle Choosed (Valid) when resume file selecterd
 
 
-    const SIGN_PORT = 'http://localhost:8080/sign-new-user'
+    const SIGN_PORT = 'http://localhost:8080/sign'
 
     const [isSuccessful ,setIsSuccessful] = useState(false)
 

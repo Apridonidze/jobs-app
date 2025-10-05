@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 require('dotenv').config();
 
 const SignRouter = require('../backend/Routes/Sign')
+const LoginRouter = require('../backend/Routes/Login')
 
 const PORT = process.env.SERVER_PORT;
 
@@ -17,8 +18,8 @@ app.get('/', (req,res) => {
     res.send('/ path');
 });
 
-app.use('/sign-new-user' , SignRouter)
-
+app.use('/sign' , SignRouter)
+app.use('/login', LoginRouter)
 
 app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
