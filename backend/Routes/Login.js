@@ -6,4 +6,10 @@ LoginRouter.get('/', (req,res) => {
 })
 
 
+
+LoginRouter.post('/', (req,res) => {
+    const {email, password} = req.body
+    console.log(email)
+})
+
 module.exports = LoginRouter

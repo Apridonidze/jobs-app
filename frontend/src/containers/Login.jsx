@@ -4,7 +4,7 @@ import { data, Link  } from "react-router-dom"
 
 const Login = () => {
 
-    const LOGIN_API_URL = ''
+    const LOGIN_API_URL = 'http://localhost:8080/login'
 
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
@@ -42,7 +42,7 @@ const Login = () => {
 
         if(isValid){
             axios
-            .post('login', {data})
+            .post(LOGIN_API_URL, data)
             .then(resp => console.log(resp))
             .catch(err => console.log(err))
         }
@@ -59,7 +59,7 @@ const Login = () => {
             <form onSubmit={handleLogin}>
 
                 <div className="form-floating">
-                    <input className="form-control" type="" name="email" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Enter Your Login Email" ref={emailRef}/>
+                    <input className="form-control" type="email" name="email" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Enter Your Login Email" ref={emailRef}/>
                     <label htmlFor="email">Enter Your Login Email</label>
                     <span>{emailError}</span>
                 </div>
