@@ -1,13 +1,8 @@
 const express = require('express')
 const MyUserRouter = express.Router()
 
-MyUserRouter.get('/', verifyToken,(req,res) => {
-
+MyUserRouter.get('/',(req,res) => {
+    res.send('/')
 })
-
-
-function verifyToken (req , res , next){
-    
-}
 
 module.exports = MyUserRouter

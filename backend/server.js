@@ -21,7 +21,7 @@ app.get('/', (req,res) => {
 
 app.use('/sign' , SignRouter)
 app.use('/login', LoginRouter)
-app.use('/my-account', MyUserRouter)
+app.use('/my-user', MyUserRouter)
 
 app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
