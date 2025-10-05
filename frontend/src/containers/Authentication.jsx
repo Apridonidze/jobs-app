@@ -12,4 +12,6 @@ const Authentication = () => {
 }
 
 
+//add titles to this page
+
 export default Authentication
