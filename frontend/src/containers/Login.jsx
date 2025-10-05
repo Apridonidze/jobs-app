@@ -1,10 +1,16 @@
 import axios from "axios"
 import { useRef, useState } from "react"
-import { data, Link  } from "react-router-dom"
+import {  Link  } from "react-router-dom"
+import { useCookies } from "react-cookie"
 
 const Login = () => {
 
     const LOGIN_API_URL = 'http://localhost:8080/login'
+
+
+    const [toggleLoginMessage , setToggleLoginMessage] = useState(false)
+    const [isSuccesful, setIsSuccesfull] = useState(null)
+    const [loginMessage, setLoginMessage] = useState('')
 
     const [email,setEmail] = useState('')
     const [password,setPassword] = useState('')
@@ -14,6 +20,8 @@ const Login = () => {
 
     const [emailError,setEmailError] = useState('')
     const [passwordError,setPasswordError] = useState('')
+
+    const [cookies, setCookies,removeCookies] = useCookies(['token'])
 
     
     const handleLogin = (e) => {
@@ -38,13 +46,27 @@ const Login = () => {
         else if (NumberRegex.test(password) === false ) {isValid = false ; setPasswordError('Your Password Should Contain Numbers');passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
         else if (regexContainsSpecial.test(password) === false ){isValid = false; setPasswordError('Your Password Should Contain Special Characters');passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
         else {isValid = true; setPasswordError('') ; passwordRef.current.classList.remove('is-invalid'); passwordRef.current.classList.add('is-valid'); data = {...data, password : password}}
-
+ //change up validatio forms 
 
         if(isValid){
             axios
             .post(LOGIN_API_URL, data)
-            .then(resp => console.log(resp))
-            .catch(err => console.log(err))
+            .then(resp => {
+
+                console.log(resp)
+                setCookies('token', resp.data.token, { path: '/',maxAge : 60 * 60 * 24 * 30,secure : true,sameSite : 'strict'})
+                setLoginMessage(resp.data.message)
+                setIsSuccesfull(true)
+                setToggleLoginMessage(true)
+//add styling to inputs based on if inputs are correct or not 
+            })
+            .catch(err => {
+                console.log(err)
+                setLoginMessage(err.response.data.error)
+                setIsSuccesfull(false)
+                setToggleLoginMessage(true)
+
+            })
         }
 
 
@@ -55,6 +77,9 @@ const Login = () => {
     return(
         <div className="login-container container">
             Login.jsx
+            {/* add login component message here */}
+
+            {loginMessage}
 
             <form onSubmit={handleLogin}>
 

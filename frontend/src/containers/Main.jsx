@@ -5,7 +5,7 @@ const Main = () => {
 
     const [cookies, setCookies , removeCookies] = useCookies(['token'])
     
-    console.log(jwtDecode(cookies.token))
+    console.log(jwtDecode(cookies.token)) //temporary here
 
     return(
         <div className="main-container">
