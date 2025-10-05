@@ -1,12 +1,13 @@
 const z = require('zod')
 
-const userSchema = z.object({
-    email: _,
-    password : _
+const loginSchema = z.object({
+    email : z.email(),
+    password : z.string().min(3),
 })
 
-function LoginSchema () {
+function LoginSchema (data) {
 
+    return loginSchema.safeParse(data)
 
 }
 

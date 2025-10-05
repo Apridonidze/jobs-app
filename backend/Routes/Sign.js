@@ -72,7 +72,6 @@ SignRouter.post('/', async (req, res) => {
 
 
     } catch (err) {
-        console.error("DB error:", err);
         return res.status(500).json({ error: 'Database error' });
     }
 });
