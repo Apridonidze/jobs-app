@@ -19,6 +19,7 @@ const Sign = () => {
     const SIGN_PORT = 'http://localhost:8080/sign-new-user'
 
     let isSuccessful
+
     const [toggleSigMessage,setToggleSigMessage]= useState(false)
 
     const [cookies, setCookies , removeCookies] = useCookies(['token'])
@@ -209,7 +210,7 @@ const Sign = () => {
             
             <h1>Sign-Up Page</h1>
             
-            {toggleSigMessage && <SignMessage isSuccessful={isSuccessful} signMessage={signMessage} /> }
+            {toggleSigMessage && <SignMessage setToggleSigMessage={setToggleSigMessage} isSuccessful={isSuccessful} signMessage={signMessage} /> }
 
             <form onSubmit={SubmitSign}>
                 

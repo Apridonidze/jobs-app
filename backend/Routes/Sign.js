@@ -61,13 +61,13 @@ SignRouter.post('/', async (req, res) => {
             [role, name, surname, hasshedPassword, email, phoneNumber, birthDate, gender]
         );
 
-        const payload = {userId: userInsertion.insertId , userRole : role , userEmail : email};
+        const payload = {userId: userInsertion.insertId , userRole : role};
 
         const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: "30d" })
 
         return res.status(200).json({
             message: 'User created successfully',
-            token : token
+            token : token,
         }); 
 
 
