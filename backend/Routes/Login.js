@@ -1,12 +1,13 @@
+const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const express = require('express')
 const LoginRouter = express.Router()
-
+require('dotenv').config()
 
 const db = require('../db/db')
 
 const LoginSchema = require('../schemas/LoginSchema')
-const { response } = require('./Sign')
+
 
 
 LoginRouter.get('/', (req,res) => {
@@ -41,12 +42,13 @@ LoginRouter.post('/', async (req,res) => {
         const isPasswordValid = await bcrypt.compare(password, user.user_password)
 
         if (!isPasswordValid) {
-    return res.status(401).json({ error: 'Invalid password' });
-}
-
-return res.status(200).json({response : 'Correct'})
-
-        ///generate token for loggined user  (since it will be deleted when user is not on accoutn (log outted))
+            return res.status(401).json({ error: 'Invalid password' });
+        }
+        
+        const payload = {userId : user.user_id, userRole : user.user_role}
+        const token = jwt.sign(payload, process.env.JWT_SECRET_KEY, { expiresIn: "30d" })
+        
+        return res.status(200).json({message : 'User Found', token : token})
         
 
     }catch(err){
