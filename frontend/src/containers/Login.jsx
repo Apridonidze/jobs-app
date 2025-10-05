@@ -1,5 +1,5 @@
 import { useRef, useState } from "react"
-import { Link  } from "react-router-dom"
+import { data, Link  } from "react-router-dom"
 
 const Login = () => {
 
@@ -11,10 +11,34 @@ const Login = () => {
 
     const [emailError,setEmailError] = useState('')
     const [passwordError,setPasswordError] = useState('')
+
     
-    const handleLogin = () => {
+    const handleLogin = (e) => {
+    
+        e.preventDefault()
+
+        let data = {}
+        let isValid
+        
+        const NumberRegex = /\d/
+        const regexContainsSpecial = /[^\w\s]/
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+        if(email.trim() == '' || password.trim() == email || password.trim() == email){isValid = false; setEmailError(`This Field Can't Be Empty`) ; emailRef.current.classList.add('is-invalid'); emailRef.current.classList.remove('is-valid')}
+        else if(emailRegex.test(email) === false){isValid = false ; emailRef.current.classList.add('is-invalid') ; emailRef.current.classList.remove('is-valid'); setEmailError('Insert Valid Email!')}
+        else {isValid = true ;emailRef.current.classList.add('is-valid') ; emailRef.current.classList.remove('is-invalid'); setEmailError(''); data = {...data, email : email}}
+
+
+         if(password.trim() == '' || password.trim() == null || password.trim() == undefined){isValid = false; setPasswordError(`This Field Can't Be Empty`) ; passwordRef.current.classList.add('is-invalid'); passwordRef.current.classList.remove('is-valid')}
+        else if (password.trim().length <= 8 ){isValid == false ; setPasswordError('Your Password Should Be 8 Letters Long'); passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
+        else if (NumberRegex.test(password) === false ) {isValid = false ; setPasswordError('Your Password Should Contain Numbers');passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
+        else if (regexContainsSpecial.test(password) === false ){isValid = false; setPasswordError('Your Password Should Contain Special Characters');passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
+        else {isValid = true; setPasswordError('') ; passwordRef.current.classList.remove('is-invalid'); passwordRef.current.classList.add('is-valid'); data = {...data, password : password}}
 
     }
+
+
 
     return(
         <div className="login-container container">
@@ -23,7 +47,7 @@ const Login = () => {
             <form onSubmit={handleLogin}>
 
                 <div className="form-floating">
-                    <input className="form-control" type="text" name="email" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Enter Your Login Email" ref={emailRef}/>
+                    <input className="form-control" type="" name="email" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Enter Your Login Email" ref={emailRef}/>
                     <label htmlFor="email">Enter Your Login Email</label>
                     <span>{emailError}</span>
                 </div>
