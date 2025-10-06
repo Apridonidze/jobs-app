@@ -6,6 +6,7 @@ import Login from './containers/Login';
 import Sign from './containers/Sign';
 import Main from './containers/Main';
 import NotFound from './containers/NotFound';
+import MyUser from './containers/MyUser';
 
 const App = () => {
   
@@ -18,6 +19,7 @@ const App = () => {
     {path: '/authentication', element : !cookies && <Authentication />}, //directs user to main page when loggined
     {path : '/sign', element : <Sign/>},
     {path : '/login', element : <Login />},
+    {path : '/my-account', element : <MyUser />},
     {path : '*', element : <NotFound />}
   ])
   

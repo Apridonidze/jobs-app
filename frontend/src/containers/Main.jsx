@@ -35,7 +35,6 @@ const Main = () => {
 
     return(
         <div className="main-container container">
-
             
             <NavBar user={user} setCreatePosts={setCreatePosts} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs}/>
 
@@ -47,7 +46,6 @@ const Main = () => {
         </div>
     )
 }
-
 
 //add titles to this page
 export default Main
