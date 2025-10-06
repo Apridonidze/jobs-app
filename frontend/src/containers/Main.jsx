@@ -2,6 +2,9 @@ import { useCookies } from "react-cookie"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import NavBar from "../navbar/NavBar"
+import CreatePosts from "../components/CreatePosts"
+import FindJobs from "../components/FindJobs"
+import CreateJobs from "../components/CreateJobs"
 
 const Main = () => {
 
@@ -36,12 +39,11 @@ const Main = () => {
             <NavBar user={user} setCreatePosts={setCreatePosts} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs}/>
 
 
-            {toggleCreatePosts && <div>create posts</div>}
-            {toggleFindJobs && <div>find jobs</div>}
-            {toggleCreateJobs && <div>create jobs</div>}
+            {toggleCreatePosts && <CreatePosts />}
+            {toggleFindJobs && <FindJobs />}
+            {toggleCreateJobs && <CreateJobs />}
 
-            {/* add what you want to do  : create statement to get recruiter || create statemen to get employeees (based on roles ) or find jobs || find employees*/}
-            {/**statements here */}
+          {/**statements here */}
             {/**footer here with contact and copyrights and etc. */}
             Main.jsx
         </div>
