@@ -5,7 +5,9 @@ import NavBar from "../components/NavBar"
 
 const Main = () => {
 
-    const [toggleComponets, setToggleComponents] = useState('')
+    const [toggleCreatePosts, setCreatePosts] = useState(false)
+    const [toggleFindJobs, setFindJobs] = useState(false)
+    const [toggleCreateJobs, setCreateJobs] = useState(false)
     
     const MY_USER_API = 'http://localhost:8080/my-user' //move to .env
 
@@ -27,13 +29,14 @@ const Main = () => {
     //if error reset cookies and navigate user to authentication page 
 
 
-
-    console.log(toggleComponets)
-
     return(
-        <div className="main-container">
+        <div className="main-container container">
 
-            <NavBar user={user} setToggleComponents={setToggleComponents}/>
+            <NavBar user={user} setCreatePosts={setCreatePosts} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs}/>
+
+            {toggleCreatePosts && <div>create posts</div>}
+            {toggleFindJobs && <div>find jobs</div>}
+            {toggleCreateJobs && <div>create jobs</div>}
 
             {/* add what you want to do  : create statement to get recruiter || create statemen to get employeees (based on roles ) or find jobs || find employees*/}
             {/**statements here */}
