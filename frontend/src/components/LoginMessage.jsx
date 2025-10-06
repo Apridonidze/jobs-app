@@ -33,6 +33,8 @@ const LoginMessage = ( { loginMessage , isSuccesful , setToggleLoginMessage } ) 
             {loginMessage}
             {seconds}
 
+            {/**add redirecting text if success  else tab will close in secodns*/}
+
         </div>
     )
 }

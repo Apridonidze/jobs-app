@@ -5,7 +5,7 @@ const NavBar = ({ user }) => {
         <div className="nav-bar-container row">
             <div className="col"><span>Logo here!!!</span></div>
             <div className="col"><span>Create new posts</span> <span>find job || employee</span></div>
-            <div className="col">your account : user.name</div>
+            <div className="col">your account : {user.name}</div> {/**create link to user page */}
         </div>
     )
 }

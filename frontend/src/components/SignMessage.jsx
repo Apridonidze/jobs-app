@@ -41,6 +41,10 @@ const SignMessage = ( {setToggleSigMessage, isSuccessful , signMessage} ) => {
             {/* add succes or fail image here based on if isSuccesful is true || false and redirec user to main page after 3 seconds */}
             <span>{signMessage}</span>
             <span>Tab Will Close In : {seconds}s</span>
+
+            
+            {/**add redirecting text if success  else tab will close in secodns*/}
+
         </div>
     )
 }
