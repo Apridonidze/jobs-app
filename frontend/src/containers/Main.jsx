@@ -5,6 +5,7 @@ import NavBar from "../navbar/NavBar"
 import CreatePosts from "../components/CreatePosts"
 import FindJobs from "../components/FindJobs"
 import CreateJobs from "../components/CreateJobs"
+import Footer from "../components/Foooter"
 
 const Main = () => {
 
@@ -38,14 +39,11 @@ const Main = () => {
             
             <NavBar user={user} setCreatePosts={setCreatePosts} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs}/>
 
-
             {toggleCreatePosts && <CreatePosts />}
             {toggleFindJobs && <FindJobs />}
             {toggleCreateJobs && <CreateJobs />}
 
-          {/**statements here */}
-            {/**footer here with contact and copyrights and etc. */}
-            Main.jsx
+            <Footer />
         </div>
     )
 }
