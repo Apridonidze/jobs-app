@@ -1,7 +1,7 @@
 import { useCookies } from "react-cookie"
 import { useEffect, useState } from "react"
 import axios from "axios"
-import NavBar from "../components/NavBar"
+import NavBar from "../navbar/NavBar"
 
 const Main = () => {
 
@@ -32,7 +32,9 @@ const Main = () => {
     return(
         <div className="main-container container">
 
+            
             <NavBar user={user} setCreatePosts={setCreatePosts} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs}/>
+
 
             {toggleCreatePosts && <div>create posts</div>}
             {toggleFindJobs && <div>find jobs</div>}

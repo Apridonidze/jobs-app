@@ -1,5 +1,5 @@
-import NavBarFooter from "./NavBarFooter"
-import NavBarHeader from "./NavBarHeader"
+import NavBarFooter from "../navbar/NavBarFooter"
+import NavBarHeader from "../navbar/NavBarHeader"
 
 const NavBar = ({ setCreatePosts , setFindJobs ,setCreateJobs, user }) => {
 
