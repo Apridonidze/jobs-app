@@ -1,6 +1,7 @@
 import { useCookies } from "react-cookie"
 import { useEffect, useState } from "react"
 import axios from "axios"
+import NavBar from "../components/NavBar"
 
 const Main = () => {
 
@@ -25,6 +26,8 @@ const Main = () => {
 
     return(
         <div className="main-container">
+
+            <NavBar />
 
             {/* add navigation here */}
             {/* add what you want to do  : create statement to get recruiter || create statemen to get employeees (based on roles ) or find jobs || find employees*/}
