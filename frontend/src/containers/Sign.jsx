@@ -10,11 +10,12 @@ import SignMessage from '../components/SignMessage';
 const Sign = () => {
 
 
+    //TODO : add profile picture input
 
     //TO FIX : resume file selection 
     //TO FIX : resume file sending to backend
     //TO FIX : resume file text : NO reSume FIle Choosed (Valid) when resume file selecterd
-
+    
 
 
     const SIGN_PORT = 'http://localhost:8080/sign' // move to .env file

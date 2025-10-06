@@ -22,19 +22,18 @@ const Main = () => {
         .catch(err => console.log(err))
 
     },[])
+    //if error reset cookies and navigate user to authentication page 
 
 
     return(
         <div className="main-container">
 
-            <NavBar />
+            <NavBar user={user} />
 
-            {/* add navigation here */}
             {/* add what you want to do  : create statement to get recruiter || create statemen to get employeees (based on roles ) or find jobs || find employees*/}
             {/**statements here */}
             {/**footer here with contact and copyrights and etc. */}
             Main.jsx
-            {user.role}
         </div>
     )
 }
