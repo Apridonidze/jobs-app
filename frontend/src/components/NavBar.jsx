@@ -5,8 +5,7 @@ const NavBar = ({ user }) => {
 
     return (
         <div className="nav-bar-container row">
-            <NavBarHeader user={user} />
-            <NavBarFooter user={user}/>
+            {user && (<><NavBarHeader user={user} />  <NavBarFooter user={user}/></>)}
         </div>
 
       

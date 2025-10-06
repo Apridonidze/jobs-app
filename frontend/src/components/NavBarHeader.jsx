@@ -1,7 +1,8 @@
 const NavBarHeader = ( { user } ) => {
     return(
         <div className="nav-bar-header row">
-            {user && (<div className="col"><span>Logo here!!!</span></div> ,<div className="col">your account : {user.role}</div>)}
+            <div className="col">Login</div>
+            <div className="col">Link to your profile : {user.name}</div>
         </div>
     )
 }
