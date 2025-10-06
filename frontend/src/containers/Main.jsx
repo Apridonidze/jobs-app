@@ -11,7 +11,7 @@ const Main = () => {
 
     const [cookies, setCookies , removeCookies] = useCookies(['token'])
 
-    const [user,setUser] = useState({})
+    const [user,setUser] = useState(null)
 
     useEffect(() => {
 
