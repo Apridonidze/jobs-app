@@ -28,11 +28,12 @@ const Main = () => {
 
 
 
+    console.log(toggleComponets)
 
     return(
         <div className="main-container">
 
-            <NavBar user={user} />
+            <NavBar user={user} setToggleComponents={setToggleComponents}/>
 
             {/* add what you want to do  : create statement to get recruiter || create statemen to get employeees (based on roles ) or find jobs || find employees*/}
             {/**statements here */}

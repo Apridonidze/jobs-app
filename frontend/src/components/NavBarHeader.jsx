@@ -1,4 +1,4 @@
-const NavBarHeader = ( { user } ) => {
+const NavBarHeader = ( {  user } ) => {
     return(
         <div className="nav-bar-header row">
             <div className="col">Login</div>
