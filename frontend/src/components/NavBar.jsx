@@ -4,8 +4,16 @@ const NavBar = ({ user }) => {
     return (
         <div className="nav-bar-container row">
             <div className="col"><span>Logo here!!!</span></div>
-            <div className="col"><span>Create new posts</span> <span>find job || employee</span></div>
-            <div className="col">your account : {user.name}</div> {/**create link to user page */}
+
+            <div className="col">
+                
+                <button>Create Posts</button>
+                {user.role === 'Recruiter' ? <button >Create Job</button> : <button>Find Job</button>}
+                
+
+            </div>
+            
+            <div className="col">your account : {user.role}</div> {/**create link to user page */}
         </div>
     )
 }

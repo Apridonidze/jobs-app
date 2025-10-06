@@ -5,6 +5,8 @@ import NavBar from "../components/NavBar"
 
 const Main = () => {
 
+    const [toggleComponets, setToggleComponents] = useState('')
+    
     const MY_USER_API = 'http://localhost:8080/my-user' //move to .env
 
     const [cookies, setCookies , removeCookies] = useCookies(['token'])
@@ -23,6 +25,8 @@ const Main = () => {
 
     },[])
     //if error reset cookies and navigate user to authentication page 
+
+
 
 
     return(
