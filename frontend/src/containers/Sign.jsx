@@ -10,12 +10,14 @@ import SignMessage from '../components/SignMessage';
 const Sign = () => {
 
     const SIGN_PORT = 'http://localhost:8080/sign' // move to .env file
-
-    const [isSuccessful ,setIsSuccessful] = useState(false)
-
-    const [toggleSigMessage,setToggleSigMessage]= useState(false)
     
     const [cookies, setCookies , removeCookies] = useCookies(['token'])
+
+    const [isSuccessful ,setIsSuccessful] = useState(false)
+    const [toggleSigMessage,setToggleSigMessage]= useState(false)
+    
+    const [showPassword, setShowPassword] = useState(false)
+    const [passwordType,setPasswordType] = useState('password')
 
     const [role,setRole] = useState('')
     const [name,setName] = useState('')
@@ -224,10 +226,16 @@ const Sign = () => {
                     
                 </div>
 
-                <div className="form-floating mb-4">
+                <div className="form mb-4">
                     
-                    <input type="password" className="form-control" onChange={(e) => setPassword(e.target.value)} value={password} ref={passwordRef} placeholder="Your Password..."/>
-                    <label htmlFor="passwordID">Your Password...</label>
+                    <div className="input-group form-floating">
+                    
+                        <input type={passwordType} className="form-control" onChange={(e) => setPassword(e.target.value)} value={password} ref={passwordRef} placeholder="Your Password..."/>
+                        <button type="button" onClick={() => {setShowPassword(!showPassword); setPasswordType(passwordType => {if(showPassword == false){return 'text'} else return 'password'})}}>{showPassword ? <i class="fa-regular fa-eye-slash"></i> : <i class="fa-regular fa-eye"></i>}</button>
+                        <label htmlFor="passwordID">Your Password...</label>
+
+                    </div>
+                    
                     <span className="text-danger">{passwordErr}</span>
 
                 </div>
