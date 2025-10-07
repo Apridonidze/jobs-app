@@ -1,4 +1,4 @@
-import CreatePosts from '../components/CreatePosts'
+import CreatePosts from './CreatePosts'
 const Posts = () => {
     return(
         <div className="posts-container">
