@@ -20,8 +20,10 @@ const LoginMessage = ( { loginMessage , isSuccesful , setToggleLoginMessage } ) 
 
        
         if(seconds == 0){
-            if(isSuccesful){navigator('/', {replace: true})}
-            else return
+            
+            if(!isSuccesful){return } //add eerror event here 
+            
+            navigator('/', {replace: true})
         }
         return () => {clearInterval(timer)}
         
