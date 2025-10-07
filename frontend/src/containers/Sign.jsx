@@ -9,15 +9,6 @@ import SignMessage from '../components/SignMessage';
 
 const Sign = () => {
 
-
-    //TODO : add profile picture input
-
-    //TO FIX : resume file selection 
-    //TO FIX : resume file sending to backend
-    //TO FIX : resume file text : NO reSume FIle Choosed (Valid) when resume file selecterd
-    
-
-
     const SIGN_PORT = 'http://localhost:8080/sign' // move to .env file
 
     const [isSuccessful ,setIsSuccessful] = useState(false)
@@ -35,7 +26,6 @@ const Sign = () => {
     const [phoneNumber,setPhoneNumber] = useState('')
     const [birthDate, setBirthDate] = useState('')
     const [gender,setGender] = useState('')
-    const [resumeFile,setResumeFile] = useState('')
 
     const [roleErr, setRoleErr] = useState('')
     const [nameErr, setNameErr] = useState('')
@@ -46,8 +36,6 @@ const Sign = () => {
     const [phoneErr, setPhoneErr] = useState('')
     const [birthDateErr,setBirthDateErr] = useState('')
     const [genderErr, setGenderErr] = useState('')
-    const [resumeErr, setResumeErr] = useState('')
-    const [resumeInfo, setResumeInfo] = useState('')
     const [signMessage, setSignMessage] = useState('')
 
     const roleRef = useRef(null)
@@ -59,8 +47,6 @@ const Sign = () => {
     const phoneNumberRef = useRef(null)
     const birthDateRef = useRef(null)
     const genderRef = useRef(null)
-    const resumeRef = useRef(null)
-
 
 
     const  SubmitSign = async (e) => {
@@ -111,11 +97,6 @@ const Sign = () => {
         if(gender.trim() == '' || gender == null || gender.trim() == undefined){isValid = false ; genderRef.current.classList.add('border-danger') ; genderRef.current.classList.remove('border-success')}
         else { isValid = true ; genderRef.current.classList.add('border-success') ; genderRef.current.classList.remove('border-danger'); data = {...data, gender : gender}}
         
-        
-        if((resumeFile.type == 'application/pdf' || resumeFile.type == 'text/plain')  && resumeFile.size <= 2000000){isValid = true ; resumeRef.current.classList.add('is-valid') ; resumeRef.current.classList.remove('is-invalid'); setResumeErr(''); data = {...data , resumeFile : resumeFile}} 
-        else if (resumeFile == ''){isValid = true; resumeRef.current.classList.add('is-valid') ; resumeRef.current.classList.remove('is-invalid'); setResumeErr('');setResumeInfo('No Resume File Choosed (Valid)'); data = {...data , resumeFile : 'no resume file'}}
-        else if (resumeFile.size > 2000000){isValid = false ;resumeRef.current.classList.remove('is-valid') ; resumeRef.current.classList.add('is-invalid'); setResumeErr('Your Resume Length Should Be Under 2 Mb')}
-        else {isValid = true; resumeRef.current.classList.remove('is-valid') ; resumeRef.current.classList.add('is-invalid'); setResumeErr('Invalid File Type')}
         
 
 
@@ -202,9 +183,7 @@ const Sign = () => {
     
     genderRef.current.classList.remove('is-invalid')
     genderRef.current.classList.remove('is-valid')
-    
-    resumeRef.current.classList.remove('is-invalid')
-    resumeRef.current.classList.remove('is-valid')
+
     }
 
 
@@ -306,16 +285,7 @@ const Sign = () => {
 
                 </div>
 
-                <div className="form mb-4">
-                    
-                    <label htmlFor="resumeID">Choose Your Resume File (optional):</label>
-                    <input type="file" className="form-control" id="resumeID" onChange={(e) => setResumeFile(e.target.files[0])}  ref={resumeRef}/>
-
-                    <span className="text-danger">{resumeErr}</span>
-                    <span className="text-success">{resumeInfo}</span>
-                    
-                </div>
-                
+               
                 <div className="row row-cols-sm-2 mb-4">
                     <div className="col"><input type="submit" className="btn btn-success" value='Create New Account'/></div>
                     <div className="col"><button className="btn btn-danger" onClick={handleReset} >Reset Form</button></div>
