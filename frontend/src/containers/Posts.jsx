@@ -1,7 +1,9 @@
+import CreatePosts from '../components/CreatePosts'
 const Posts = () => {
     return(
         <div className="posts-container">
-            Posts.jsx
+            <CreatePosts />
+            {/**add everyone elses posts here */}
         </div>
     )
 }
