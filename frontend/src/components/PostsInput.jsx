@@ -7,7 +7,9 @@ const PostsInput = () => {
     const SubmitPost = (e) => {
         e.preventDefault()
 
-
+//create fileters here 
+//if input is valid send to backend in posts route
+//then add post in posts with users username and etc
 
 
     }
