@@ -35,7 +35,8 @@ const Main = () => {
 
     return(
         <div className="main-container container">
-            
+            {/** check if user has finished their portfolio , (first step it to just sign up ,after that they need to finish their profile (add avatar, add about me , add resume file))*/}
+
             <NavBar user={user} setCreatePosts={setCreatePosts} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs}/>
 
             {toggleCreatePosts && <CreatePosts />}
