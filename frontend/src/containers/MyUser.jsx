@@ -1,6 +1,8 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
+
+
 import Footer from "../components/Foooter"
 import NavBarHeader from "../navbar/NavBarHeader"
 
@@ -32,10 +34,10 @@ const MyUser = () => {
             {/* add  user avatar here */}
             {user && (
                 <>
-                <span>Your Name : {user.name}</span>
-                <span>Your Surname : {user.surname}</span>
-                <span>Your Birth Date : {user.birthDate.slice(0, 10)}</span>
-                <span>Your Gender: {user.gender}</span>
+                <span>Your Name : {user.name}</span> {/**add edit button here */}
+                <span>Your Surname : {user.surname}</span> {/**add edit button here */}
+                <span>Your Birth Date : {user.birthDate.slice(0, 10)}</span> {/**add edit button here */}
+                <span>Your Gender: {user.gender}</span> {/**add edit button here */}
                 </>
             )}
 

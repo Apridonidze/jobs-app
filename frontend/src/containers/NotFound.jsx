@@ -6,5 +6,6 @@ const NotFound = () => {
     );
 };
 
+//add titles to this page
 
 export default NotFound
