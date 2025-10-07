@@ -38,14 +38,13 @@ const SignMessage = ( {setToggleSigMessage, isSuccessful , signMessage} ) => {
     return(
         <div className="sign-message-container position-absolute bg-bright border border-1 w-50 d-block">
             SignMessage.jsx
-            {/* add succes or fail image here based on if isSuccesful is true || false and redirec user to main page after 3 seconds */}
+
+            {isSuccessful ? <i className="fa-regular fa-circle-check"></i> : <i className="fa-regular fa-circle-xmark"></i>}
             <span>{signMessage}</span>
-            
             <span>{isSuccessful ? <span>Redirecting In...</span> : <span>Window Closes In :</span> }{seconds}</span>
             
 
             
-            {/**add redirecting text if success  else tab will close in secodns*/}
 
         </div>
     )
