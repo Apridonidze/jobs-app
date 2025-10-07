@@ -2,14 +2,15 @@ import { useCookies } from "react-cookie"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import NavBar from "../navbar/NavBar"
-import CreatePosts from "../components/CreatePosts"
+
+import Posts from "./Posts"
 import FindJobs from "../components/FindJobs"
 import CreateJobs from "../components/CreateJobs"
 import Footer from "../components/Foooter"
 
 const Main = () => {
 
-    const [toggleCreatePosts, setCreatePosts] = useState(false)
+    const [togglePosts, setTogglePosts] = useState(false)
     const [toggleFindJobs, setFindJobs] = useState(false)
     const [toggleCreateJobs, setCreateJobs] = useState(false)
     
@@ -35,11 +36,11 @@ const Main = () => {
 
     return(
         <div className="main-container container">
-            {/** check if user has finished their portfolio , (first step it to just sign up ,after that they need to finish their profile (add avatar, add about me , add resume file))*/}
+            {/** check if user has finished their page , (first step it to just sign up ,after that they need to finish their profile (add avatar, add about me , add resume file))*/}
 
-            <NavBar user={user} setCreatePosts={setCreatePosts} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs}/>
+            <NavBar user={user} setTogglePosts={setTogglePosts} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs}/>
 
-            {toggleCreatePosts && <CreatePosts />}
+            {togglePosts && <Posts />}
             {toggleFindJobs && <FindJobs />}
             {toggleCreateJobs && <CreateJobs />}
 
