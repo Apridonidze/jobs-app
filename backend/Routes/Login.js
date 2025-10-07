@@ -34,7 +34,7 @@ LoginRouter.post('/', async (req,res) => {
         const [rows] = await db.query('select * from users where user_email = ?' ,[email])
 
         if(rows.length === 0){
-            return res.status(404).json({error : 'user not found'})
+            return res.status(404).json({error : 'User Not Found'})
         }
 
         const user = rows[0]
@@ -42,7 +42,7 @@ LoginRouter.post('/', async (req,res) => {
         const isPasswordValid = await bcrypt.compare(password, user.user_password)
 
         if (!isPasswordValid) {
-            return res.status(401).json({ error: 'Invalid password' });
+            return res.status(401).json({ error: 'Invalid Password' });
         }
         
         const payload = {userId : user.user_id, userRole : user.user_role}

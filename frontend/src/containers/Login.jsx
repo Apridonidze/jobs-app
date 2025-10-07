@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import {  Link  } from "react-router-dom"
 import { useCookies } from "react-cookie"
 import LoginMessage from "../components/LoginMessage"
@@ -27,8 +27,7 @@ const Login = () => {
     const [passwordType,setPasswordType] = useState('password')
 
 
-    
-    const handleLogin = (e) => {
+      const handleLogin = (e) => {
     
         e.preventDefault()
 
@@ -40,17 +39,16 @@ const Login = () => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
-        if(email.trim() == '' || password.trim() == email || password.trim() == email){isValid = false; setEmailError(`This Field Can't Be Empty`) ; emailRef.current.classList.add('is-invalid'); emailRef.current.classList.remove('is-valid')}
+        if(email.trim() == '' || email.trim() == undefined || email.trim() == null){isValid = false; setEmailError(`This Field Can't Be Empty`) ; emailRef.current.classList.add('is-invalid'); emailRef.current.classList.remove('is-valid')}
         else if(emailRegex.test(email) === false){isValid = false ; emailRef.current.classList.add('is-invalid') ; emailRef.current.classList.remove('is-valid'); setEmailError('Insert Valid Email!')}
-        else {isValid = true ;emailRef.current.classList.add('is-valid') ; emailRef.current.classList.remove('is-invalid'); setEmailError(''); data = {...data, email : email}}
+        else {isValid = true ; setEmailError(''); data = {...data, email : email}}
 
 
-         if(password.trim() == '' || password.trim() == null || password.trim() == undefined){isValid = false; setPasswordError(`This Field Can't Be Empty`) ; passwordRef.current.classList.add('is-invalid'); passwordRef.current.classList.remove('is-valid')}
-        else if (password.trim().length <= 8 ){isValid == false ; setPasswordError('Your Password Should Be 8 Letters Long'); passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
-        else if (NumberRegex.test(password) === false ) {isValid = false ; setPasswordError('Your Password Should Contain Numbers');passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
-        else if (regexContainsSpecial.test(password) === false ){isValid = false; setPasswordError('Your Password Should Contain Special Characters');passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
-        else {isValid = true; setPasswordError('') ; passwordRef.current.classList.remove('is-invalid'); passwordRef.current.classList.add('is-valid'); data = {...data, password : password}}
- //change up validatio forms 
+        if(password.trim() == '' || password.trim() == null || password.trim() == undefined){isValid = false; setPasswordError(`This Field Can't Be Empty`) ; passwordRef.current.classList.add('is-invalid'); passwordRef.current.classList.remove('is-valid')}
+        else if (password.trim().length <= 8 ){isValid == false ; setPasswordError('Invalid Password Input'); passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
+        else if (NumberRegex.test(password) === false ) {isValid = false ; setPasswordError('Invalid Password Input');passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
+        else if (regexContainsSpecial.test(password) === false ){isValid = false; setPasswordError('Invalid Password Input');passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
+        else {isValid = true; setPasswordError('') ; data = {...data, password : password}}
 
         if(isValid){
             axios
@@ -65,17 +63,28 @@ const Login = () => {
 //add styling to inputs based on if inputs are correct or not 
             })
             .catch(err => {
-                console.log(err) //remove in future
+                console.log(err) //remove in future        
                 setLoginMessage(err.response.data.error)
                 setIsSuccesfull(false)
                 setToggleLoginMessage(true)
 
+                if(loginMessage === 'Invalid Password'){passwordRef.current.classList.remove('is-valid'); passwordRef.current.classList.add('is-invalid')}
+                if(loginMessage === 'User Not Found'){emailRef.current.classList.remove('is-valid'); emailRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid'); passwordRef.current.classList.add('is-invalid')}
+
+        
+
             })
         }
 
+  
 
     }
 
+
+    
+    useEffect(() => {handleLogin},[loginMessage])
+
+  
 
 
     return(
