@@ -30,6 +30,8 @@ const LoginMessage = ( { loginMessage , isSuccesful , setToggleLoginMessage } ) 
     return(
         <div className="login-message-container">
             
+            {isSuccesful ? <i className="fa-regular fa-circle-check"></i> : <i className="fa-regular fa-circle-xmark"></i>}
+           
             <span>{loginMessage}</span>
 
             <span>{isSuccesful ? <span>Redirecting In...</span> : <span>Window Closes In :</span> }{seconds}</span>
