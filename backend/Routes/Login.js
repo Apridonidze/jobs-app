@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+
 const express = require('express')
-const LoginRouter = express.Router()
 require('dotenv').config()
 
+const LoginRouter = express.Router()
 const db = require('../db/db')
 
 const LoginSchema = require('../schemas/LoginSchema')
@@ -29,7 +30,6 @@ LoginRouter.post('/', async (req,res) => {
     }
 
     try{
-
 
         const [rows] = await db.query('select * from users where user_email = ?' ,[email])
 

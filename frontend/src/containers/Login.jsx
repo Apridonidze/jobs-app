@@ -55,15 +55,14 @@ const Login = () => {
             .post(LOGIN_API_URL, data)
             .then(resp => {
 
-                console.log(resp) //remove in future
+                console.log(resp.data)
                 setCookies('token', resp.data.token, { path: '/',maxAge : 60 * 60 * 24 * 30,secure : true,sameSite : 'strict'})
                 setLoginMessage(resp.data.message)
                 setIsSuccesfull(true)
                 setToggleLoginMessage(true)
-//add styling to inputs based on if inputs are correct or not 
             })
             .catch(err => {
-                console.log(err) //remove in future        
+                console.log(err.response.data)
                 setLoginMessage(err.response.data.error)
                 setIsSuccesfull(false)
                 setToggleLoginMessage(true)
@@ -82,7 +81,7 @@ const Login = () => {
 
 
     
-    useEffect(() => {handleLogin},[loginMessage])
+    useEffect(() => {handleLogin},[])
 
   
 

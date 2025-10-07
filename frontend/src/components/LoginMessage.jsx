@@ -30,10 +30,11 @@ const LoginMessage = ( { loginMessage , isSuccesful , setToggleLoginMessage } ) 
     return(
         <div className="login-message-container">
             
-            {loginMessage}
-            {seconds}
+            <span>{loginMessage}</span>
 
-            {/**add redirecting text if success  else tab will close in secodns*/}
+            <span>{isSuccesful ? <span>Redirecting In...</span> : <span>Window Closes In :</span> }{seconds}</span>
+            
+
 
         </div>
     )
