@@ -35,7 +35,7 @@ const Main = () => {
 
 
     return(
-        <div className="main-container container">
+        <div className="main-container container d-flex flex-column border border-1 justify-content-between min-vh-100 py-2">
             {/** check if user has finished their page , (first step it to just sign up ,after that they need to finish their profile (add avatar, add about me , add resume file))*/}
 
             <NavBar user={user} setTogglePosts={setTogglePosts} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs}/>
