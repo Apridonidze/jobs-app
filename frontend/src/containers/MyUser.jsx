@@ -30,8 +30,13 @@ const MyUser = () => {
 
     return (
         <div className="myuser-container container d-flex flex-column">
-            <NavBarHeader user={user} /> 
-            {/* add  user avatar here */}
+            <NavBarHeader user={user} />
+
+            {/* create sidebar where is shown :  */}
+            {/* user avatar if they havenot added yet return 'default avatar picture'*/} {/* add edit button here */}
+            {/* user description ,if they havenot added yet return 'no desc yet'*/} {/* add edit button here */}
+            {/* user tags ,if they havenot added yet return 'no tags yet'*/} {/* add edit button here */}
+
             {user && (
                 <>
                 <span>Your Name : {user.name}</span> {/**add edit button here */}

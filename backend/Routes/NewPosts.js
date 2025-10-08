@@ -20,9 +20,11 @@ NewPostRouter.post('/', verifyToken, async (req,res) => {
         return res.status(400).json({error : 'invalid input'})
     }
 
+    //create table for users_posts and insert user_id and post_input (generate post_id in sql)
+    //insert data to mysql
+    //send status code to user 
 
-    //push to database if true
-
+    //create posts.js route for frontend to fetch data from that file and display on frontend
 
 })
 

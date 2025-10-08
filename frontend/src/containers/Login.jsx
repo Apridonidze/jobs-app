@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useRef, useState } from "react"
 import {  Link  } from "react-router-dom"
 import { useCookies } from "react-cookie"
+
 import LoginMessage from "../components/LoginMessage"
 
 const Login = () => {
@@ -55,14 +56,14 @@ const Login = () => {
             .post(LOGIN_API_URL, data)
             .then(resp => {
 
-                console.log(resp.data)
+                console.log(resp.data) //remove in future
                 setCookies('token', resp.data.token, { path: '/',maxAge : 60 * 60 * 24 * 30,secure : true,sameSite : 'strict'})
                 setLoginMessage(resp.data.message)
                 setIsSuccesfull(true)
                 setToggleLoginMessage(true)
             })
             .catch(err => {
-                console.log(err.response.data)
+                console.log(err.response.data) //remove in future
                 setLoginMessage(err.response.data.error)
                 setIsSuccesfull(false)
                 setToggleLoginMessage(true)
@@ -70,8 +71,7 @@ const Login = () => {
                 if(loginMessage === 'Invalid Password'){passwordRef.current.classList.remove('is-valid'); passwordRef.current.classList.add('is-invalid')}
                 if(loginMessage === 'User Not Found'){emailRef.current.classList.remove('is-valid'); emailRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid'); passwordRef.current.classList.add('is-invalid')}
 
-        
-
+    
             })
         }
 

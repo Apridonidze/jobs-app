@@ -3,9 +3,15 @@ const Posts = () => {
     return(
         <div className="posts-container">
             
-            {/**toggle createPosts background here (dark background) so when user clicks it createpost will be closed (also clear input of createposts)*/}
             <CreatePosts />
+           
+           {/**add bar here that filters posts by their tags*/}
+
+
            {/**add everyone elses posts here */}
+           {/** fethc posts from posts.js and display all of them here as a post componment*/}
+           
+           {/** create show more button (by default show 10 of them)*/} 
         </div>
     )
 }

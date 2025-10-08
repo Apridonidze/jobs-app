@@ -32,6 +32,7 @@ const PostsInput = () => {
             postInputRef.current.classList.remove('is-valid') 
         }else {
             
+            //** select tags from text (split input and check if any of the variable has #infront and add into data object as a tags : ${tagFromInput}) */
         isValid = true; 
         setPostInputErr(''); 
 
@@ -43,10 +44,13 @@ const PostsInput = () => {
         data = {...data , userToken : cookies.token , postInput : postInput }
        
         if(isValid){
+
+            //put this function in try/catch block
+
             axios
             .post(POSTS_API_URL, data , {headers : {Authorization : `Bearer ${cookies.token}`}})
-            .then(resp => console.log(resp))
-            .catch(err => console.log(err))
+            .then(resp => console.log(resp)) //fetch message from resp and display it in PostMessages.jsx , close input window when message will be dissapeard (in 3 seconds)
+            .catch(err => console.log(err)) //fetch message from resp and display it in PostMessages.jsx , close PostMessage window(in 3 seconds) ; add styling to input filed
         }
 
 
