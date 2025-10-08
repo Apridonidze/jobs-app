@@ -5,7 +5,7 @@ const Posts = () => {
             
             {/**toggle createPosts background here (dark background) so when user clicks it createpost will be closed (also clear input of createposts)*/}
             <CreatePosts />
-            {/**add everyone elses posts here */}
+           {/**add everyone elses posts here */}
         </div>
     )
 }
