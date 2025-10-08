@@ -5,23 +5,26 @@ const NewPostRouter = express.Router()
 require('dotenv').config()
 
 const PostSchema = require('../schemas/PostSchema')
+const verifyToken = require('../config/verifyToken')
 
 NewPostRouter.get('/', (req, res) => {
     res.send('/new-posts path')
 })
 
 
-NewPostRouter.post('/', PostSchema, async (req,res) => {
-    PostSchema(req.body)
+NewPostRouter.post('/', verifyToken, async (req,res) => {
 
-    if(!PostSchema.success){
-        //return err
+    const validatePost = PostSchema(req.body)
+
+    if(!validatePost.success){
+        return res.status(400).json({error : 'invalid input'})
     }
 
-    //add else function
-})
 
-//add posts method here
+    //push to database if true
+
+
+})
 
 
 

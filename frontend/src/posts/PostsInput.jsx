@@ -11,7 +11,10 @@ const PostsInput = () => {
 
     const postInputRef = useRef(null)
 
+    const POSTS_API_URL = 'http://localhost:8080/new-posts'
+
     const SubmitPost = async (e) => {
+
         e.preventDefault()
 
 //if input is valid send to backend in posts route with token headers and validate tokens in backend
@@ -35,23 +38,18 @@ const PostsInput = () => {
         postInputRef.current.classList.add('is-valid');
         postInputRef.current.classList.remove('is-invalid')
 
-        data = {...data , userToken : cookies.token, postInput : postInput }
-
-        try{
-
-            axios.post('api_url',data )
-            .then(resp => console.log(err))
-
-        }catch(err){
-            console.log(err)
         }
 
+        data = {...data , userToken : cookies.token , postInput : postInput }
+       
+        if(isValid){
+            axios
+            .post(POSTS_API_URL, data , {headers : {Authorization : `Bearer ${cookies.token}`}})
+            .then(resp => console.log(resp))
+            .catch(err => console.log(err))
         }
 
 
-
-        //add axios post method here with try block
-        
     }
 
 

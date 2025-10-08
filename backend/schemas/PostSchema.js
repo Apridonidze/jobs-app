@@ -1,12 +1,13 @@
 const z = require('zod')
 
 const postSchema = z.object({
-    userId : z.number(),
-    post : z.string().max(500)
+    postInput : z.string()
 })
 
-function validatePost ([postData]) {
-    return z.safeParse(postData)
+function validatePost (data) {
+    
+    return postSchema.safeParse(data)
+
 } 
 
 
