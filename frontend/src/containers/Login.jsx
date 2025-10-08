@@ -104,8 +104,9 @@ const Login = () => {
                     <div className="input-group form-floating">
                         
                         <input className="form-control" type={passwordType} name="password" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Enter Your Password" ref={passwordRef}/>
- <button type="button" onClick={() => {setShowPassword(!showPassword); setPasswordType(passwordType => {if(showPassword == false){return 'text'} else return 'password'})}}>{showPassword ? <i class="fa-regular fa-eye-slash"></i> : <i class="fa-regular fa-eye"></i>}</button>
+                        <button type="button" onClick={() => {setShowPassword(!showPassword); setPasswordType(passwordType => {if(showPassword == false){return 'text'} else return 'password'})}}>{showPassword ? <i class="fa-regular fa-eye-slash"></i> : <i class="fa-regular fa-eye"></i>}</button>
                         <label htmlFor="password">Enter Your Password</label>
+                    
                     </div>
 
                     <span>{passwordError}</span>

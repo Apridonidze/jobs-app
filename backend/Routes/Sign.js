@@ -47,6 +47,11 @@ SignRouter.post('/', async (req, res) => {
         if(rows.length > 0){
             return res.status(400).json({ error: 'Account Already Exists With This Email' });
         }
+        const [phoneRows] = await db.query('select * from users where user_phoneNumber = ?' , [phoneNumber])
+
+        if(phoneRows.length > 0){
+            return res.status(400).json({ error: 'Account Already Exists With This Phone Number' });
+        }
 
 
         
