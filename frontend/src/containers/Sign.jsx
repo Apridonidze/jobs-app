@@ -4,7 +4,7 @@ import { useRef,useState  } from "react"
 import { Link } from 'react-router-dom'
 
 import CountryCode from "../components/CountryCode"
-import SignMessage from '../components/SignMessage';
+import SignMessage from '../alerts/SignMessage';
 
 
 const Sign = () => {

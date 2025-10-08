@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react"
 import {  Link  } from "react-router-dom"
 import { useCookies } from "react-cookie"
 
-import LoginMessage from "../components/LoginMessage"
+import LoginMessage from "../alerts/LoginMessage"
 
 const Login = () => {
 
