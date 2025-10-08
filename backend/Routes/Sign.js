@@ -37,7 +37,6 @@ SignRouter.post('/', async (req, res) => {
     
     
     try {
-        //console.log("Incoming body:", req.body);
         
         const { role, name, surname, password, email, phoneNumber, birthDate, gender } = req.body.data;
         
