@@ -1,7 +1,8 @@
-const jwt = require('jsonwebtoken')
-
 const express = require('express')
+const db = require('../db/db')
+
 const NewPostRouter = express.Router()
+
 require('dotenv').config()
 
 const PostSchema = require('../schemas/PostSchema')
@@ -19,6 +20,15 @@ NewPostRouter.post('/', verifyToken, async (req,res) => {
     if(!validatePost.success){
         return res.status(400).json({error : 'invalid input'})
     }
+
+    console.log(req.body.postInput)
+
+    const newpost = await db.query('Insert into posts (user_id, post_text) values (?,?)', [req.user.userId , req.body.postInput])
+
+
+
+
+
 
     //create table for users_posts and insert user_id and post_input (generate post_id in sql)
     //insert data to mysql
