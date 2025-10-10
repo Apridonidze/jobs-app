@@ -21,9 +21,17 @@ NewPostRouter.post('/', verifyToken, async (req,res) => {
         return res.status(400).json({error : 'invalid input'})
     }
 
-    console.log(req.user.userId)
+    try{
 
-    const newpost = await db.query('Insert into posts (user_id, post_text) values (?,?)', [req.user.userId , req.body.postInput])
+        const [ newpost ] = await db.query('Insert into posts (user_id, post_text) values (?,?)', [req.user.userId , req.body.postInput])
+
+        return res.status(200).json({message : 'Post Created Succesfully'})
+        
+    }catch(err){
+        return res.status(500).json({error : 'Database Error'})
+
+    }
+
 
 
 
