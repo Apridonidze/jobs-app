@@ -6,6 +6,7 @@ import NavBar from "../navbar/NavBar"
 import FindJobs from "../components/FindJobs"
 import CreateJobs from "../components/CreateJobs"
 import Footer from "../components/Foooter"
+import JobListings from "../components/JobListings"
 
 const Main = () => {
 
@@ -41,6 +42,7 @@ const Main = () => {
 
             {toggleFindJobs && <FindJobs />}
             {toggleCreateJobs && <CreateJobs />}
+            {toggleJobsListings && <JobListings/>}
 
             <Footer />
         </div>
