@@ -9,5 +9,4 @@ const NavBarFooter =  ( { setFindJobs ,setCreateJobs , toggleJobsListings, setTo
     )
 }
 
-
 export default NavBarFooter
