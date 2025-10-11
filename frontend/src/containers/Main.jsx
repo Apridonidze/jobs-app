@@ -11,6 +11,7 @@ const Main = () => {
 
     const [toggleFindJobs, setFindJobs] = useState(false)
     const [toggleCreateJobs, setCreateJobs] = useState(false)
+    const [toggleJobsListings, setToggleJobsListings] = useState(false)
     
     const MY_USER_API = 'http://localhost:8080/my-user' //move to .env
 
@@ -36,7 +37,7 @@ const Main = () => {
         <div className="main-container container d-flex flex-column  justify-content-between min-vh-100 py-2">
             {/** check if user has finished their page , (first step it to just sign up ,after that they need to finish their profile (add avatar, add about me , add resume file))*/}
 
-            <NavBar user={user} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs}/>
+            <NavBar user={user} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs} toggleJobsListings={toggleJobsListings} setToggleJobsListings={setToggleJobsListings}/>
 
             {toggleFindJobs && <FindJobs />}
             {toggleCreateJobs && <CreateJobs />}

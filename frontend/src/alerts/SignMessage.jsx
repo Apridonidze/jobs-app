@@ -41,10 +41,7 @@ const SignMessage = ( {setToggleSigMessage, isSuccessful , signMessage} ) => {
 
             {isSuccessful ? <i className="fa-regular fa-circle-check"></i> : <i className="fa-regular fa-circle-xmark"></i>}
             <span>{signMessage}</span>
-            <span>{isSuccessful ? <span>Redirecting In...</span> : <span>Window Closes In :</span> }{seconds}</span>
-            
-
-            
+            <span>{isSuccessful ? <span>Redirecting In...</span> : <span>Window Closes In :</span> }{seconds}</span>            
 
         </div>
     )
