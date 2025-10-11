@@ -1,8 +1,8 @@
-const NavBarFooter =  ( { setTogglePosts , setFindJobs ,setCreateJobs ,user } ) => {
+const NavBarFooter =  ( { setFindJobs ,setCreateJobs ,user } ) => {
     return (
         <div className="nav-bar-footer row">
 
-            {user && (user.role === 'Recruiter' ? <button onClick={() => {setTogglePosts(false); setCreateJobs(true) ; setFindJobs(false)}}>Create Job Offer</button> : <button onClick={() => {setTogglePosts(false); setCreateJobs(false) ; setFindJobs(true)}}>Find Job</button>)}
+            {user && (user.role === 'Recruiter' ? <button onClick={() => { setCreateJobs(true) ; setFindJobs(false)}}>Create Job Offer</button> : <button onClick={() => {setCreateJobs(false) ; setFindJobs(true)}}>Find Job</button>)}
 
         </div>
     )
