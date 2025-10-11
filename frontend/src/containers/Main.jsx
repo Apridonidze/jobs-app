@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import NavBar from "../navbar/NavBar"
 
-import Posts from "../posts/Posts"
 import FindJobs from "../components/FindJobs"
 import CreateJobs from "../components/CreateJobs"
 import Footer from "../components/Foooter"
@@ -40,7 +39,6 @@ const Main = () => {
 
             <NavBar user={user} setTogglePosts={setTogglePosts} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs}/>
 
-            {togglePosts && <Posts />}
             {toggleFindJobs && <FindJobs />}
             {toggleCreateJobs && <CreateJobs />}
 
