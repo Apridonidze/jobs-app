@@ -2,9 +2,9 @@ const NavBarFooter =  ( { setFindJobs ,setCreateJobs , toggleJobsListings, setTo
     return (
         <div className="nav-bar-footer row">
 
-            {user && (user.role === 'Recruiter' ? <button onClick={() => { setCreateJobs(true) ; setFindJobs(false)}}>Create Job Offer</button> : <button onClick={() => {setCreateJobs(false) ; setFindJobs(true)}}>Find Job</button>)}
+            {user && (user.role === 'Recruiter' ? <button onClick={() => { setCreateJobs(true) ; setFindJobs(false), setToggleJobsListings(false)}}>Create Job Offer</button> : <button onClick={() => {setCreateJobs(false) ; setFindJobs(true), setToggleJobsListings(false)}}>Find Job</button>)}
 
-            <button onClick={() => setToggleJobsListings(!toggleJobsListings)}>Jobs Listings</button>
+            <button onClick={() => {setToggleJobsListings(true) , setCreateJobs(false) ,setFindJobs(false)}}>Jobs Listings</button>
         </div>
     )
 }
