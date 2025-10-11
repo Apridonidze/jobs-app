@@ -3,8 +3,8 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import NavBar from "../navbar/NavBar"
 
+import CreateJobs from "../createjobs/CreateJobs"
 import FindJobs from "../components/FindJobs"
-import CreateJobs from "../components/CreateJobs"
 import Footer from "../components/Foooter"
 import JobListings from "../components/JobListings"
 
