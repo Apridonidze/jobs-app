@@ -1,27 +1,35 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 const CreateJobsInput = () => {
 
     const [title,setTitle] = useState('')
     const [desc, setDesc] = useState('')
     const [employeeList,setEmployeeList] = useState([''])
+
+    const [titleErr, setTitleErr] = useState('')
+    const [descErr, setDescErr] = useState('')
+    const [employeeListErr, setEmployeeListErr] = useState('')
+
+    const titleRef = useRef(null)
+    const descRef = useRef(null)
+    const employeeListRef = useRef(null)
     
     return (
         <div className="create-jobs-input-container container position-absolute top-50 bg-white">
             
             <div className="form-floating">
-                <input className="form-control text-start" type="text" name="title" onChange={e => setTitle(e.target.value)} value={title} placeholder="Create Job Title (For Example : Building Market Startup)"/>
+                <input className="form-control text-start" type="text" name="title" onChange={e => setTitle(e.target.value)} value={title} placeholder="Create Job Title (For Example : Building Market Startup)" ref={titleRef}/>
                 <label htmlFor="title">Create Job Title (For Example : Building Market Startup)</label>    
             </div>   
 
             
             <div className="form-floating">
-                <input className="form-control text-break"  type="text" name="title" onChange={e => setDesc(e.target.value)} value={desc} placeholder="Add Job Description..."/>
+                <input className="form-control text-break"  type="text" name="title" onChange={e => setDesc(e.target.value)} value={desc} placeholder="Add Job Description..." ref={descRef}/>
                 <label htmlFor="title">Add Job Description...</label>    
             </div>
 
             <div className="form">
-                <select className="form-control" onChange={e => setEmployeeList(employeeList => [...employeeList , e.target.value])}>
+                <select className="form-control" onChange={e => setEmployeeList(employeeList => [...employeeList , e.target.value])} ref={employeeListRef}>
                     <option value="blank">Who Are You Searching For</option>
                     <option value="Figma Designer">Figma Designer</option>
                     <option value="Frontend Developer">Frontend Developer</option>
@@ -37,7 +45,7 @@ const CreateJobsInput = () => {
 
                 <div className="choosed-roles">
                     {employeeList.map((e,i) => (
-                        <span key={i}>{e}</span>
+                        <span key={i} onClick={() => setEmployeeList(employeeList.filter(emp => emp !== e))}>{e}</span>
                     ))}
                 </div>
 

@@ -11,6 +11,7 @@ const CreateJobs = () => {
 
             {toggleCreateJobsInput && <> <div className="create-jobs-input-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleCreateJobsInput(false)}></div> <CreateJobsInput /></>}
 
+{/* add my posted jobs here */}
         </div>
     )
 }
