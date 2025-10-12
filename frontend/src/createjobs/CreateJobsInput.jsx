@@ -5,16 +5,19 @@ const CreateJobsInput = () => {
     const [title,setTitle] = useState('')
     const [desc, setDesc] = useState('')
     const [employeeList,setEmployeeList] = useState([''])
+    const [technologies, setTechnologies] = useState([''])
     const [languages, setLanguages] = useState([''])
 
     const [titleErr, setTitleErr] = useState('')
     const [descErr, setDescErr] = useState('')
     const [employeeListErr, setEmployeeListErr] = useState('')
+    const [technologiesErr, setTechnologiesErr] = useState('')
     const [languagesErr, setLanguagesErr] = useState('')
 
     const titleRef = useRef(null)
     const descRef = useRef(null)
     const employeeListRef = useRef(null)
+    const technologiesRef = useRef(null)
     const languageRef = useRef(null)
 
     const handleEmployees = (e) => {
@@ -25,6 +28,10 @@ const CreateJobsInput = () => {
 
         setEmployeeList(employeeList => [...employeeList , e])
         
+    }
+
+    const handleTechnologies = (e) => {
+
     }
 
     const handleLanguages = (e) => {
@@ -71,8 +78,34 @@ const CreateJobsInput = () => {
                 </div>
 
                 <div className="form">
-                    <select className="form-control" onChange={e => handleLanguages(e.target.value)} ref={languageRef}>
+                    <select className="form-control" onChange={e => handleTechnologies(e.target.value)} ref={technologiesRef}>
                         <option value="blank">What Technologies Are You Searching In Employee</option>
+                        <option value="GO">GO</option>
+                        <option value="C++">C++</option>
+                        <option value="C#">C#</option>
+                        <option value="C">C</option>
+                        <option value="Ruby">Ruby</option>
+                        <option value="Cobol">Cobol</option>
+                        <option value="Kotlin">Kotlin</option>
+                        <option value="Swift">Swift</option>
+                        <option value="Perl">Perl</option>
+                        <option value="Rust">Rust</option>
+                        <option value="Java">Java</option>
+                        <option value="Python">Python</option>
+                        <option value="TypeScript">TypeScript</option>
+                        <option value="Javacript">Javacript</option>
+                        <option value="PHP">PHP</option>
+                        <option value="HTML">HTML</option>
+                        <option value="CSS">CSS</option>
+                        <option value="React">React</option>
+                        <option value="Vue.js">Vue.js</option>
+                        <option value="Laravel">Laravel</option>
+                        <option value="AWS">AWS</option>
+                        <option value="Azure">Azure</option>
+                        <option value="Google Cloud">Google Cloud</option>
+                        <option value="MySQL">MySQL</option>
+                        <option value="MongoDb">MongoDb</option>
+                        <option value="Postgres">Postgres</option>
                     </select>
                         
                     <div className="choosed-techonologies"></div>
@@ -82,6 +115,9 @@ const CreateJobsInput = () => {
                 <div className="form">
                     <select className="form-control" onChange={e => handleLanguages(e.target.value)} ref={languageRef}>
                         <option value="blank">What Languages Do You Prefer That Employee Speaks</option>
+                        <option value="English">🇬🇧 English</option>
+                        <option value="Russian">🇷🇺 Russian</option>
+                        <option value="Georgian">🇬🇪 Georgian</option>
                     </select>
                         
                     <div className="choosed-languages"></div>
