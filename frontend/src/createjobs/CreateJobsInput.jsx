@@ -13,6 +13,14 @@ const CreateJobsInput = () => {
     const titleRef = useRef(null)
     const descRef = useRef(null)
     const employeeListRef = useRef(null)
+
+    const handleEmployees = (e) => {
+        
+        if(employeeList.includes(e)){return}
+
+        setEmployeeList(employeeList => [...employeeList , e])
+        
+    }
     
     return (
         <div className="create-jobs-input-container container position-absolute top-50 bg-white">
@@ -29,7 +37,7 @@ const CreateJobsInput = () => {
             </div>
 
             <div className="form">
-                <select className="form-control" onChange={e => setEmployeeList(employeeList => [...employeeList , e.target.value])} ref={employeeListRef}>
+                <select className="form-control" onChange={e => handleEmployees(e.target.value)} ref={employeeListRef}>
                     <option value="blank">Who Are You Searching For</option>
                     <option value="Figma Designer">Figma Designer</option>
                     <option value="Frontend Developer">Frontend Developer</option>
