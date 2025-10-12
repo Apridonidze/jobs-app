@@ -124,7 +124,7 @@ const CreateJobsInput = () => {
                         
                     <div className="choosed-techonologies">
                         {technologies.map((e,i) => (
-                            <span key={i} onClick={() => setTechnologies(technologies.filter(t => t !== e))}>{e}</span>
+                            <span key={i} onClick={() => setTechnologies(technologies.filter(tech => tech !== e))}>{e}</span>
                         ))}
                     </div>
                 </div>
@@ -138,7 +138,11 @@ const CreateJobsInput = () => {
                         <option value="Georgian">🇬🇪 Georgian</option>
                     </select>
                         
-                    <div className="choosed-languages"></div>
+                    <div className="choosed-languages">
+                        {languages.map((e,i) => (
+                            <span key={i} onClick={() => setLanguages(languages.filter(lang => lang !== e))}>{e}</span>
+                        ))}
+                    </div>
                 </div>
 
 
