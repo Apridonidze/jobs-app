@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import { useCookies } from "react-cookie"
 
 const CreateJobsInput = () => {
@@ -102,7 +102,7 @@ const CreateJobsInput = () => {
     }
     
     return (
-        <div className="create-jobs-input-container container position-absolute bottom-50 bg-white">
+        <div className="create-jobs-input-container container position-relative bg-white" style={{bottom: '5vh'}}>
             
             <form onSubmit={handleSubmit}>
                 
