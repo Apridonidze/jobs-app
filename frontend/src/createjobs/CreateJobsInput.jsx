@@ -4,9 +4,10 @@ import { useCookies } from "react-cookie"
 
 const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobsMessage } ) => {
 
+
+    //TODO(recruiter side) :prevent user from spam button clicking
+
     const [cookies,setCookies,removeCookies] = useCookies(['token'])
-
-
     
     const NEW_JOBS_URL = 'http://localhost:8080/new-jobs'
 

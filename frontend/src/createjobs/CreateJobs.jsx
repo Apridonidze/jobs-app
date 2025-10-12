@@ -4,6 +4,9 @@ import NewJobsMessage from "../alerts/NewJobsMessage"
 
 const CreateJobs = ( {} ) => {
 
+
+    //TODO (recruiter side):when timer is stopped in NewJobsMessage.jsx make this page toggle down 
+
     
     const [toggleCreateJobsInput,setToggleCreateJobsInput] = useState(false)
     const [toggleJobsMessage,setToggleJobsMessage] = useState(false)
@@ -16,7 +19,7 @@ const CreateJobs = ( {} ) => {
 
             {toggleCreateJobsInput && <> <div className="create-jobs-input-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleCreateJobsInput(false)}></div> <CreateJobsInput setIsJobsSuccessful={setIsJobsSuccessful} setToggleJobsMessage={setToggleJobsMessage} setJobsMessage={setJobsMessage}/> {toggleJobsMessage && <NewJobsMessage />} </> }
 
-{/* add my posted jobs here */}
+{/* (recruiter side) add my posted jobs here */}
 
         </div>
     )
