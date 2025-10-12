@@ -63,14 +63,7 @@ const CreateJobsInput = () => {
 
         e.preventDefault();
 
-        //validate datas 
-
-        //if valid send to server
-        //get data if job is created successfully or not based on res status 
-
-        //if successfuly popup alert and close createJobsInput.jsx 
-        //else pop up allerts and add errors 
-
+        
         let data = {}
         let isValid = false
 

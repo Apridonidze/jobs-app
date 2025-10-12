@@ -16,7 +16,7 @@ const countryCodes = [
 { name: "Belarus", iso: "by", code: "(+375)", flag: "🇧🇾" },
 { name: "Belgium", iso: "be", code: "(+32)", flag: "🇧🇪" },
 { name: "Belize", iso: "bz", code: "(+501)", flag: "🇧🇿" },
-{ name: "Benin", iso: "bj", code: "(+229)", flag: "🇧🇯" },
+{ name: "Benin", iso: "bj", code: "(+229)", flag: "" },
 { name: "Bhutan", iso: "bt", code: "(+975)", flag: "🇧🇹" },
 { name: "Bolivia", iso: "bo", code: "(+591)", flag: "🇧🇴" },
 { name: "Bosnia and Herzegovina", iso: "ba", code: "(+387)", flag: "🇧🇦" },

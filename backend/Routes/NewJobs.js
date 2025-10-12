@@ -9,6 +9,8 @@ NewJobsRouter.get('/', (req,res) => {
 
 
 NewJobsRouter.post('/', verifyToken, (req,res) => {
+
+    
     const JobsResp = JobsSchema(req.body)
 
     if(!JobsResp.success){
