@@ -32,9 +32,23 @@ const CreateJobsInput = () => {
 
     const handleTechnologies = (e) => {
 
+        
+        if(e === 'blank')return
+        
+        if(technologies.includes(e))return
+
+        setTechnologies(technologies => [...technologies, e])
+
     }
 
     const handleLanguages = (e) => {
+
+        
+        if(e === 'blank')return
+        
+        if(languages.includes(e))return
+
+        setLanguages(languages => [...languages, e])
         
     }
     
@@ -108,7 +122,11 @@ const CreateJobsInput = () => {
                         <option value="Postgres">Postgres</option>
                     </select>
                         
-                    <div className="choosed-techonologies"></div>
+                    <div className="choosed-techonologies">
+                        {technologies.map((e,i) => (
+                            <span key={i} onClick={() => setTechnologies(technologies.filter(t => t !== e))}>{e}</span>
+                        ))}
+                    </div>
                 </div>
 
 
