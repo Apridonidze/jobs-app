@@ -95,6 +95,8 @@ const CreateJobsInput = () => {
 
         if(isValid){
             console.log(data)
+
+            //send data via axios to backend server/jobs 
         }
 
     }

@@ -11,6 +11,7 @@ require('dotenv').config();
 const SignRouter = require('../backend/Routes/Sign')
 const LoginRouter = require('../backend/Routes/Login');
 const MyUserRouter = require('./Routes/MyUser');
+const NewJobsRouter = require('./Routes/NewJobs')
 
 const PORT = process.env.SERVER_PORT;
 
@@ -22,6 +23,7 @@ app.get('/', (req,res) => {
 app.use('/sign' , SignRouter)
 app.use('/login', LoginRouter)
 app.use('/my-user', MyUserRouter)
+app.use('/new-jobs', NewJobsRouter)
 
 
 app.listen(PORT, () => {
