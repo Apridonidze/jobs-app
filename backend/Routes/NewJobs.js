@@ -6,5 +6,9 @@ NewJobsRouter.get('/', (req,res) => {
 })
 
 
+NewJobsRouter.post('/', (req,res) => {
+    console.log(req.body)
+})
+
 
 module.exports = NewJobsRouter;
