@@ -7,6 +7,7 @@ import CreateJobs from "../createjobs/CreateJobs"
 import FindJobs from "../components/FindJobs"
 import Footer from "../components/Foooter"
 import JobListings from "../components/JobListings"
+import NewJobsMessage from "../alerts/NewJobsMessage"
 
 const Main = () => {
 
@@ -14,11 +15,16 @@ const Main = () => {
     const [toggleCreateJobs, setCreateJobs] = useState(false)
     const [toggleJobsListings, setToggleJobsListings] = useState(false)
     
+
+    
     const MY_USER_API = 'http://localhost:8080/my-user' //move to .env
 
     const [cookies, setCookies , removeCookies] = useCookies(['token'])
 
     const [user,setUser] = useState(null)
+
+
+
 
     useEffect(() => {
 
@@ -39,7 +45,7 @@ const Main = () => {
             {/** check if user has finished their page , (first step it to just sign up ,after that they need to finish their profile (add avatar, add about me , add resume file))*/}
 
             <NavBar user={user} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs} toggleJobsListings={toggleJobsListings} setToggleJobsListings={setToggleJobsListings}/>
-
+           
             {toggleFindJobs && <FindJobs />}
             {toggleCreateJobs && <CreateJobs />}
             {toggleJobsListings && <JobListings/>}

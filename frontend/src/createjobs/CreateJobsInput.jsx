@@ -2,10 +2,12 @@ import axios from "axios"
 import { useRef, useState } from "react"
 import { useCookies } from "react-cookie"
 
-const CreateJobsInput = () => {
+const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobsMessage } ) => {
 
     const [cookies,setCookies,removeCookies] = useCookies(['token'])
 
+
+    
     const NEW_JOBS_URL = 'http://localhost:8080/new-jobs'
 
     const [title,setTitle] = useState('')
@@ -96,9 +98,17 @@ const CreateJobsInput = () => {
             axios
             .post(NEW_JOBS_URL, data , {headers : {Authorization : `Bearer ${cookies.token}`}})
             .then(resp => {
-
+                setJobsMessage(resp.data.message)
+                setIsJobsSuccessful(true)
+                setToggleJobsMessage(true)
+                console.log(resp)
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                setJobsMessage(err)
+                setIsJobsSuccessful(false)
+                setToggleJobsMessage(true)
+                console.log(err)
+            })
         }
 
     }
