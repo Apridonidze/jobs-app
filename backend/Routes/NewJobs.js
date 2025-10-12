@@ -21,6 +21,8 @@ NewJobsRouter.post('/', verifyToken, async (req,res) => {
         return res.status(400).json({err : 'Invalid Input'})
     }
 
+    console.log(req.body)
+
     return res.status(200).json({message : 'Valid Input'})
 
     //add success message here and post data into database 
