@@ -35,7 +35,6 @@ NewJobsRouter.post('/', verifyToken, async (req,res) => {
         return res.status(500).json('Database Error')
     }
 
-    //add success message here and post data into database 
 })
 
 
