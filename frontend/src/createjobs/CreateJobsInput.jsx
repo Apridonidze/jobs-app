@@ -5,14 +5,17 @@ const CreateJobsInput = () => {
     const [title,setTitle] = useState('')
     const [desc, setDesc] = useState('')
     const [employeeList,setEmployeeList] = useState([''])
+    const [languages, setLanguages] = useState([''])
 
     const [titleErr, setTitleErr] = useState('')
     const [descErr, setDescErr] = useState('')
     const [employeeListErr, setEmployeeListErr] = useState('')
+    const [languagesErr, setLanguagesErr] = useState('')
 
     const titleRef = useRef(null)
     const descRef = useRef(null)
     const employeeListRef = useRef(null)
+    const languageRef = useRef(null)
 
     const handleEmployees = (e) => {
 
@@ -23,11 +26,15 @@ const CreateJobsInput = () => {
         setEmployeeList(employeeList => [...employeeList , e])
         
     }
+
+    const handleLanguages = (e) => {
+        
+    }
     
     return (
-        <div className="create-jobs-input-container container position-absolute top-50 bg-white">
+        <div className="create-jobs-input-container container position-absolute bottom-50 bg-white">
             
-            <form action="">
+            <form>
                 
                 <div className="form-floating">
                     <input className="form-control text-start" type="text" name="title" onChange={e => setTitle(e.target.value)} value={title} placeholder="Create Job Title (For Example : Building Market Startup)" ref={titleRef}/>
@@ -62,6 +69,24 @@ const CreateJobsInput = () => {
                     </div>
 
                 </div>
+
+                <div className="form">
+                    <select className="form-control" onChange={e => handleLanguages(e.target.value)} ref={languageRef}>
+                        <option value="blank">What Technologies Are You Searching In Employee</option>
+                    </select>
+                        
+                    <div className="choosed-techonologies"></div>
+                </div>
+
+
+                <div className="form">
+                    <select className="form-control" onChange={e => handleLanguages(e.target.value)} ref={languageRef}>
+                        <option value="blank">What Languages Do You Prefer That Employee Speaks</option>
+                    </select>
+                        
+                    <div className="choosed-languages"></div>
+                </div>
+
 
                 <button type="submit" className="btn btn-success">Create Job Opportunity</button>
 
