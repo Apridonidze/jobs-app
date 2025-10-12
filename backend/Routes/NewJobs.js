@@ -21,9 +21,19 @@ NewJobsRouter.post('/', verifyToken, async (req,res) => {
         return res.status(400).json({err : 'Invalid Input'})
     }
 
-    console.log(req.body)
+    const {title,desc,employeeList,technologies, languages } = req.body 
+    const {userId} = req.user
 
-    return res.status(200).json({message : 'Valid Input'})
+    try{
+        
+        await db.query('INSERT INTO jobs (user_id, job_title, job_desc, job_employeeList, job_technologies, job_languages) values (?,?,?,?,?,?)', [userId, title,desc,[JSON.stringify(employeeList)],[JSON.stringify(technologies)],[JSON.stringify(languages)]])
+        
+        return res.status(200).json({message : 'Job Opportunity Created Successfully'})
+
+
+    }catch(err){
+        return res.status(500).json('Database Error')
+    }
 
     //add success message here and post data into database 
 })
