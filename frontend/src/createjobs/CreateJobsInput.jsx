@@ -4,9 +4,9 @@ const CreateJobsInput = () => {
 
     const [title,setTitle] = useState('')
     const [desc, setDesc] = useState('')
-    const [employeeList,setEmployeeList] = useState([''])
-    const [technologies, setTechnologies] = useState([''])
-    const [languages, setLanguages] = useState([''])
+    const [employeeList,setEmployeeList] = useState([])
+    const [technologies, setTechnologies] = useState([])
+    const [languages, setLanguages] = useState([])
 
     const [titleErr, setTitleErr] = useState('')
     const [descErr, setDescErr] = useState('')
@@ -51,11 +51,58 @@ const CreateJobsInput = () => {
         setLanguages(languages => [...languages, e])
         
     }
+
+
+    const handleSubmit = (e) => {
+
+        e.preventDefault();
+
+        //validate datas 
+
+        //if valid send to server
+        //get data if job is created successfully or not based on res status 
+
+        //if successfuly popup alert and close createJobsInput.jsx 
+        //else pop up allerts and add errors 
+
+        let data = {}
+        let isValid = false
+
+
+        if(title == '' || title == ' ' || title == null ||title == undefined){isValid = false ; setTitleErr(`This Field Can't Be Empty`) ; titleRef.current.classList.add('is-invalid');titleRef.current.classList.remove('is-valid')}
+        else if(title.length < 6){isValid = false ; setTitleErr(`Title Length Is Too Small`) ; titleRef.current.classList.add('is-invalid');titleRef.current.classList.remove('is-valid')}
+        else if(title.length > 55){isValid = false ; setTitleErr(`Title Length Is Too Long`) ; titleRef.current.classList.add('is-invalid');titleRef.current.classList.remove('is-valid')}
+        else {isValid = true ; setTitleErr('') ; titleRef.current.classList.remove('is-invalid'); ;titleRef.current.classList.add('is-valid'); data = {...data, title: title}}
+
+        if(desc == '' || desc == ' ' || desc == null ||desc == undefined){isValid = false ; setDescErr(`This Field Can't Be Empty`) ; descRef.current.classList.add('is-invalid');descRef.current.classList.remove('is-valid')}
+        else if(desc.length < 25){isValid = false ; setDescErr(`Description Length Is Too Small`) ; descRef.current.classList.add('is-invalid');descRef.current.classList.remove('is-valid')}
+        else if(desc.length > 500){isValid = false ; setDescErr(`Description Length Is Too Long`) ; descRef.current.classList.add('is-invalid');descRef.current.classList.remove('is-valid')}
+        else {isValid = true ; setTitleErr('') ; descRef.current.classList.remove('is-invalid'); ;descRef.current.classList.add('is-valid'); data = {...data, desc: desc}}
+
+        
+        if(employeeList == '' || employeeList== ' ' || employeeList == null ||employeeList == undefined || employeeList.length < 1){isValid = false ; setEmployeeListErr(`This Field Can't Be Empty`) ; employeeListRef.current.classList.add('is-invalid');employeeListRef.current.classList.remove('is-valid')}
+        else if(desc.length > 10){isValid = false ; setEmployeeListErr(`Invalid Employees Amount`) ; employeeListRef.current.classList.add('is-invalid');employeeListRef.current.classList.remove('is-valid')}
+        else {isValid = true ; setEmployeeListErr('') ; employeeListRef.current.classList.remove('is-invalid'); ;employeeListRef.current.classList.add('is-valid'); data = {...data, employeeList: employeeList}}
+
+          
+        if(technologies== '' || technologies== ' ' || technologies == null ||technologies == undefined || technologies.length < 1){isValid = false ; setTechnologiesErr(`This Field Can't Be Empty`) ; technologiesRef.current.classList.add('is-invalid');technologiesRef.current.classList.remove('is-valid')}
+        else if(technologies.length > 26){isValid = false ; setTechnologiesErr(`Invalid Technologies Amount`) ; technologiesRef.current.classList.add('is-invalid');technologiesRef.current.classList.remove('is-valid')}
+        else {isValid = true ; setTechnologiesErr('') ; technologiesRef.current.classList.remove('is-invalid'); ;technologiesRef.current.classList.add('is-valid'); data = {...data, technologies: technologies}}
+
+        if(languages == '' || languages== ' ' || languages == null ||languages == undefined || languages.length < 1){isValid = false ; setLanguagesErr(`This Field Can't Be Empty`) ; languageRef.current.classList.add('is-invalid');languageRef.current.classList.remove('is-valid')}
+        else if(languages.length > 3){isValid = false ; setLanguagesErr(`Invalid Technologies Amount`) ; languageRef.current.classList.add('is-invalid');languageRef.current.classList.remove('is-valid')}
+        else {isValid = true ; setLanguagesErr('') ; languageRef.current.classList.remove('is-invalid'); ;languageRef.current.classList.add('is-valid'); data = {...data, languages: languages}}
+
+        if(isValid){
+            console.log(data)
+        }
+
+    }
     
     return (
         <div className="create-jobs-input-container container position-absolute bottom-50 bg-white">
             
-            <form>
+            <form onSubmit={handleSubmit}>
                 
                 <div className="form-floating">
                     <input className="form-control text-start" type="text" name="title" onChange={e => setTitle(e.target.value)} value={title} placeholder="Create Job Title (For Example : Building Market Startup)" ref={titleRef}/>
