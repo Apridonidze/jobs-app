@@ -1,6 +1,12 @@
+import axios from "axios"
 import { useEffect, useRef, useState } from "react"
+import { useCookies } from "react-cookie"
 
 const CreateJobsInput = () => {
+
+    const [cookies,setCookies,removeCookies] = useCookies(['token'])
+
+    const NEW_JOBS_URL = 'http://localhost:8080/new-jobs'
 
     const [title,setTitle] = useState('')
     const [desc, setDesc] = useState('')
@@ -81,7 +87,7 @@ const CreateJobsInput = () => {
 
         
         if(employeeList == '' || employeeList== ' ' || employeeList == null ||employeeList == undefined || employeeList.length < 1){isValid = false ; setEmployeeListErr(`This Field Can't Be Empty`) ; employeeListRef.current.classList.add('is-invalid');employeeListRef.current.classList.remove('is-valid')}
-        else if(desc.length > 10){isValid = false ; setEmployeeListErr(`Invalid Employees Amount`) ; employeeListRef.current.classList.add('is-invalid');employeeListRef.current.classList.remove('is-valid')}
+        else if(employeeList.length > 10){isValid = false ; setEmployeeListErr(`Invalid Employees Amount`) ; employeeListRef.current.classList.add('is-invalid');employeeListRef.current.classList.remove('is-valid')}
         else {isValid = true ; setEmployeeListErr('') ; employeeListRef.current.classList.remove('is-invalid'); ;employeeListRef.current.classList.add('is-valid'); data = {...data, employeeList: employeeList}}
 
           
@@ -94,9 +100,10 @@ const CreateJobsInput = () => {
         else {isValid = true ; setLanguagesErr('') ; languageRef.current.classList.remove('is-invalid'); ;languageRef.current.classList.add('is-valid'); data = {...data, languages: languages}}
 
         if(isValid){
-            console.log(data)
-
-            //send data via axios to backend server/jobs 
+            axios
+            .post(NEW_JOBS_URL, data , {headers : {Authorization : `Bearer ${cookies.token}`}})
+            .then(resp => console.log(resp))
+            .catch(err => console.log(err))
         }
 
     }
