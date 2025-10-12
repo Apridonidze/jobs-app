@@ -95,7 +95,9 @@ const CreateJobsInput = () => {
         if(isValid){
             axios
             .post(NEW_JOBS_URL, data , {headers : {Authorization : `Bearer ${cookies.token}`}})
-            .then(resp => console.log(resp))
+            .then(resp => {
+
+            })
             .catch(err => console.log(err))
         }
 
@@ -108,13 +110,16 @@ const CreateJobsInput = () => {
                 
                 <div className="form-floating">
                     <input className="form-control text-start" type="text" name="title" onChange={e => setTitle(e.target.value)} value={title} placeholder="Create Job Title (For Example : Building Market Startup)" ref={titleRef}/>
-                    <label htmlFor="title">Create Job Title (For Example : Building Market Startup)</label>    
+                    <label htmlFor="title">Create Job Title (For Example : Building Market Startup)</label>
+                    <span className="text-danger">{titleErr}</span>
                 </div>   
 
             
                 <div className="form-floating">
                     <input className="form-control text-break"  type="text" name="title" onChange={e => setDesc(e.target.value)} value={desc} placeholder="Add Job Description..." ref={descRef}/>
                     <label htmlFor="title">Add Job Description...</label>    
+
+                    <span className="text-danger">{descErr}</span>
                 </div>
 
                 <div className="form">
@@ -137,6 +142,8 @@ const CreateJobsInput = () => {
                             <span key={i} onClick={() => setEmployeeList(employeeList.filter(emp => emp !== e))}>{e}</span>
                         ))}
                     </div>
+
+                    <span className="text-danger">{employeeListErr}</span>
 
                 </div>
 
@@ -176,6 +183,9 @@ const CreateJobsInput = () => {
                             <span key={i} onClick={() => setTechnologies(technologies.filter(tech => tech !== e))}>{e}</span>
                         ))}
                     </div>
+                    
+                    <span className="text-danger">{technologiesErr}</span>
+
                 </div>
 
 
@@ -192,6 +202,8 @@ const CreateJobsInput = () => {
                             <span key={i} onClick={() => setLanguages(languages.filter(lang => lang !== e))}>{e}</span>
                         ))}
                     </div>
+
+                    <span className="text-danger">{languagesErr}</span>
                 </div>
 
 
