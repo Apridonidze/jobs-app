@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie"
 
 import Footer from "../components/Foooter"
 import NavBarHeader from "../navbar/NavBarHeader"
+import MyUserSidebar from "./MyUserSidebar"
 
 
 const MyUser = () => {
@@ -28,23 +29,24 @@ const MyUser = () => {
 
     },[])
 
+
+
     return (
         <div className="myuser-container container d-flex flex-column">
             <NavBarHeader user={user} />
 
-            {/* create sidebar where is shown :  */}
-            {/* user avatar if they havenot added yet return 'default avatar picture'*/} {/* add edit button here */}
-            {/* user description ,if they havenot added yet return 'no desc yet'*/} {/* add edit button here */}
-            {/* user tags ,if they havenot added yet return 'no tags yet'*/} {/* add edit button here */}
+            <MyUserSidebar />            
 
             {user && (
                 <>
-                <span>Your Name : {user.name}</span> {/**add edit button here */}
-                <span>Your Surname : {user.surname}</span> {/**add edit button here */}
-                <span>Your Birth Date : {user.birthDate.slice(0, 10)}</span> {/**add edit button here */}
-                <span>Your Gender: {user.gender}</span> {/**add edit button here */}
+                <span>Your Name : {user.name}</span> 
+                <span>Your Surname : {user.surname}</span>  
+                <span>Your Birth Date : {user.birthDate.slice(0, 10)}</span>    
+                <span>Your Gender: {user.gender}</span>     
                 </>
             )}
+
+
 
             <Footer />
             
