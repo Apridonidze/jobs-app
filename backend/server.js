@@ -14,7 +14,6 @@ const MyUserRouter = require('./Routes/MyUser');
 const NewJobsRouter = require('./Routes/NewJobs')
 const MyJobsRouter  = require('./Routes/MyJobs')
 const JobsRouter = require('./Routes/Jobs')
-const SendResumeRouter = require('./Routes/SendResume')
 
 const PORT = process.env.SERVER_PORT;
 
@@ -29,7 +28,6 @@ app.use('/my-user', MyUserRouter)
 app.use('/new-jobs', NewJobsRouter)
 app.use('/jobs', JobsRouter )
 app.use('/my-jobs', MyJobsRouter )
-app.use('/new-resume', SendResumeRouter)
 
 
 app.listen(PORT, () => {
