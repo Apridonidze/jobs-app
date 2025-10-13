@@ -19,6 +19,10 @@ UploadAvatarRouter.post('/' , verifyToken, upload.single('profile-picutre'), asy
 
         //add file type filter here with if statements 
 
+        //check if user already has avatar pickture
+        //if so then send update column
+        //if not use insert new column
+
         fs.readFile(file.path , async(err, data) => {
             if(err) return res.status(500).send('error reading image')
 

@@ -30,6 +30,8 @@ const MyUser = () => {
     },[])
 
 
+    //move myuser and myusersidebar.jsx to myuser fodler for more flexibility during development
+
 
     return (
         <div className="myuser-container container d-flex flex-column">
