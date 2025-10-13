@@ -9,10 +9,10 @@ const CreateJobs = ( {} ) => {
 
     const SubmitBtnRef = useRef(null)
     
-    const [toggleCreateJobsInput,setToggleCreateJobsInput] = useState(false)
-    const [toggleJobsMessage,setToggleJobsMessage] = useState(false)
+    const [toggleCreateJobsInput,setToggleCreateJobsInput] = useState(null)
+    const [toggleJobsMessage,setToggleJobsMessage] = useState(null)
     const [isJobsSuccessful,setIsJobsSuccessful] = useState(null)
-    const [jobsMessage,setJobsMessage] = useState()
+    const [jobsMessage,setJobsMessage] = useState('')
 
     return(
         <div className="create-jobs-container">
