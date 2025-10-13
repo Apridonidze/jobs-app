@@ -10,8 +10,8 @@ const MyJobs = () => {
 
     useEffect(() => {
         axios.get(JOBS_URL, {headers: {Authorization : `Bearer ${cookies.token}`}})
-        .then(resp => console.log(resp))
-        .catch(err => console.log(err))
+        .then(resp => console.log(resp.data.message))
+        .catch(err => console.log(err.response.data.error))
     },[])
 
     return (
