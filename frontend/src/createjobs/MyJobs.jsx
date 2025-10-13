@@ -4,10 +4,12 @@ import { useCookies } from "react-cookie"
 
 const MyJobs = () => {
 
+    const JOBS_URL = 'http://localhost:8080/jobs'
+
     const [cookies,setCookies,removeCookies] = useCookies(['token'])
 
     useEffect(() => {
-        axios.get('/add url here', {headers: {Authorization : `Bearer ${cookies.token}`}})
+        axios.get(JOBS_URL, {headers: {Authorization : `Bearer ${cookies.token}`}})
         .then(resp => console.log(resp))
         .catch(err => console.log(err))
     },[])
