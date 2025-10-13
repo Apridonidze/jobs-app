@@ -15,10 +15,10 @@ const MyUserSidebar = () => {
         }
 
         useEffect(() => {
-  if (profilePicture) {
-    console.log("New profile picture selected:", profilePicture)
-  }
-}, [profilePicture])
+            if (profilePicture) {
+
+            }
+        }, [profilePicture])
 
     return (
         <div className="my-user-sidebar-container">
@@ -26,7 +26,7 @@ const MyUserSidebar = () => {
             <i className="fa-solid fa-user"></i> {/** add logic : if user doesnot provide user profile picutre dispaly default user else dispaly their profile picture */}
             
             <div className="form-floating">
-                <input type="file" className="form-control" onChange={(e) => handleProfileSend(e)} />
+                <input type="file" className="form-control" onChange={(e) => handleProfileSend(e)}  accept="image/png, image/jpeg, image/webp" />
                 <label htmlFor="">Add Your Profile Picture...</label>
             </div>
 
