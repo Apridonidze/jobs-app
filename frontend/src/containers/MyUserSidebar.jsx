@@ -1,6 +1,12 @@
+import axios from "axios"
 import { useEffect, useState } from "react"
+import { useCookies } from "react-cookie"
 
 const MyUserSidebar = () => {
+
+    const [cookies,setCookies, removeCookies] = useCookies(['token'])
+
+    const UPLOAD_AVATAR_URL = 'http://localhost:8080/upload-avatar'
 
     const [profilePicture, setProfilePicture] = useState(null)
 
@@ -16,7 +22,10 @@ const MyUserSidebar = () => {
 
         useEffect(() => {
             if (profilePicture) {
-
+                axios
+                .post(UPLOAD_AVATAR_URL, {headers : {Authorization: `Bearer ${cookies.token}` }})
+                .then(resp => console.log(resp))
+                .catch(err => console.log(err))
             }
         }, [profilePicture])
 
