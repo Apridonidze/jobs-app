@@ -1,8 +1,8 @@
 import axios from "axios"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useCookies } from "react-cookie"
 
-const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobsMessage } ) => {
+const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobsMessage,SubmitBtnRef } ) => {
 
 
     //TODO(recruiter side) :prevent user from spam button clicking
@@ -10,6 +10,8 @@ const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobs
     const [cookies,setCookies,removeCookies] = useCookies(['token'])
     
     const NEW_JOBS_URL = 'http://localhost:8080/new-jobs'
+
+    const [seconds,setSeconds] = useState(3)
 
     const [title,setTitle] = useState('')
     const [desc, setDesc] = useState('')
@@ -113,7 +115,8 @@ const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobs
         }
 
     }
-    
+
+
     return (
         <div className="create-jobs-input-container container position-relative bg-white" style={{bottom: '5vh'}}>
             
@@ -218,7 +221,7 @@ const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobs
                 </div>
 
 
-                <button type="submit" className="btn btn-success">Create Job Opportunity</button>
+                <button type="submit"  className="btn btn-success" ref={SubmitBtnRef}>Create Job Opportunity</button>
 
             </form>
            

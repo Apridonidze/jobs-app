@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const NewJobsMessage = ( { isJobsSuccessful ,jobsMessage ,setToggleJobsMessage, setToggleCreateJobsInput } ) => {
+const NewJobsMessage = ( { isJobsSuccessful ,jobsMessage ,setToggleJobsMessage, setToggleCreateJobsInput,SubmitBtnRef } ) => {
 
     const [seconds, setSeconds] = useState(3)
     
@@ -12,6 +12,10 @@ const NewJobsMessage = ( { isJobsSuccessful ,jobsMessage ,setToggleJobsMessage, 
                 setSeconds(seconds => {
                     
                     if(seconds <= 0){clearInterval(handleTimer) ;setToggleJobsMessage(false) ;return 0}
+
+                    if(SubmitBtnRef.current){
+                        SubmitBtnRef.current.disabled = true
+                    }
                     return seconds - 1
                 
                 }) 
@@ -22,6 +26,7 @@ const NewJobsMessage = ( { isJobsSuccessful ,jobsMessage ,setToggleJobsMessage, 
             if(seconds == 0){
                 if(isJobsSuccessful){setToggleCreateJobsInput(false)}
                 else return
+                SubmitBtnRef.current.disabled = false
             }
             
             
