@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
 
 const MyJobs = () => {
@@ -8,15 +8,22 @@ const MyJobs = () => {
 
     const [cookies,setCookies,removeCookies] = useCookies(['token'])
 
+    const [yourJobs,setYourJobs] = useState([])
+    const [noJobsFound,setNoJobsFound] = useState('')
+
     useEffect(() => {
         axios.get(JOBS_URL, {headers: {Authorization : `Bearer ${cookies.token}`}})
-        .then(resp => console.log(resp.data.message))
-        .catch(err => console.log(err.response.data.error))
+        .then(resp => {setYourJobs(resp.data.jobs)})
+        .catch(err => {setNoJobsFound(err.response.data.error)})
     },[])
 
     return (
-        <div className="my-jobs-container">
+        <div className="my-jobs-container d-flex flex-column">
             my jobs
+            {yourJobs.map((e,i) => (
+                <span key={i}>{e.job_title}</span>
+            ))}
+            {noJobsFound}
         </div>
     )
 }
