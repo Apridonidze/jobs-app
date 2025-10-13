@@ -13,8 +13,8 @@ UploadAvatarRouter.get('/' , (req,res) => {
 UploadAvatarRouter.post('/' ,verifyToken , async(req,res) => {
     const [ rows ] = await db.query('select * from user_avatars where user_id = ?', [req.user.userId])
 
-    //if there is rows then send update 
-    //if there is not rows then send insert into 
+    //if there is rows then send update with user_id and user picture
+    //if there is not rows then send insert into table with user_id and user picture
 
 })
 
