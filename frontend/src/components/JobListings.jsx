@@ -19,7 +19,7 @@ const JobListings = () => {
     return (
         <div className="job-listing-container d-flex flex-column">
             Job Listings
-            {jobs.map((e,i) => (
+            {jobs.reverse().map((e,i) => (
                 <span key={i}>{e.job_title}</span>
             ))}
         </div>
