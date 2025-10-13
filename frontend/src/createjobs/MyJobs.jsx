@@ -19,7 +19,7 @@ const MyJobs = () => {
 
     return (
         <div className="my-jobs-container d-flex flex-column">
-            my jobs
+            <h1>Jobs Created By You: </h1>
             {yourJobs.reverse().map((e,i) => (
                 <span key={i}>{e.job_title}</span>
             ))}

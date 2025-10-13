@@ -12,7 +12,7 @@ const SignRouter = require('../backend/Routes/Sign')
 const LoginRouter = require('../backend/Routes/Login');
 const MyUserRouter = require('./Routes/MyUser');
 const NewJobsRouter = require('./Routes/NewJobs')
-const JobsRouter = require('./Routes/Jobs')
+const JobsRouter = require('./Routes/MyJobs')
 
 const PORT = process.env.SERVER_PORT;
 
