@@ -21,12 +21,18 @@ const MyUserSidebar = () => {
         }
 
         useEffect(() => {
-            if (profilePicture) {
-                axios
-                .post(UPLOAD_AVATAR_URL, {headers : {Authorization: `Bearer ${cookies.token}` }})
+            
+            if(profilePicture){
+                
+                const formData = new FormData();
+                formData.append("profile-picutre", profilePicture);
+
+                axios.post(UPLOAD_AVATAR_URL , formData , {headers : {Authorization : `Bearer ${cookies.token}`}})
                 .then(resp => console.log(resp))
                 .catch(err => console.log(err))
+
             }
+
         }, [profilePicture])
 
     return (
