@@ -1,10 +1,10 @@
 const express = require('express')
-const JobsRouter = express.Router()
+const MyJobsRouter = express.Router()
 
 const verifyToken = require('../config/verifyToken')
 const db = require('../db/db')
 
-JobsRouter.get('/' ,verifyToken, async (req,res) => {
+MyJobsRouter .get('/' ,verifyToken, async (req,res) => {
 
     try{
 
@@ -25,4 +25,4 @@ JobsRouter.get('/' ,verifyToken, async (req,res) => {
 
 
 
-module.exports = JobsRouter
+module.exports = MyJobsRouter 

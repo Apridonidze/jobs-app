@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie"
 
 const MyJobs = () => {
 
-    const JOBS_URL = 'http://localhost:8080/jobs'
+    const JOBS_URL = 'http://localhost:8080/my-jobs'
 
     const [cookies,setCookies,removeCookies] = useCookies(['token'])
 
