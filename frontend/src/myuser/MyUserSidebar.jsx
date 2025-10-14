@@ -15,7 +15,7 @@ const MyUserSidebar = () => {
         <div className="my-user-sidebar-container">
 
            
-           {toggleUploadAvatar && <UploadAvatar />}
+           {toggleUploadAvatar && <> <div className="upload-avatar-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadAvatar(false)}></div> <UploadAvatar /> </> }
 
 
             <h1>Finish Up Your Profile </h1>
