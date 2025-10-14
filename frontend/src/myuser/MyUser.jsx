@@ -29,7 +29,7 @@ const MyUser = () => {
     },[])
 
     return (
-        <div className="myuser-container container d-flex flex-column">
+        <div className="myuser-container container d-flex flex-column justify-content-between min-vh-100">
             <NavBarHeader user={user} />
 
             <div className="user-body d-flex">

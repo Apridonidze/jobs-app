@@ -66,7 +66,7 @@ const MyUserSidebar = () => {
             <img src={avatarImg || DefaultImage} className="border border-rounded" style={{borderRadius : '100%', width: '350px' , height:'350px'}}/>
             
 
-            <button onClick={() => setToggleUploadAvatar(true)}>Upload Your Avatar Picture</button>
+            <button className="btn btn-primary text-white" onClick={() => setToggleUploadAvatar(true)}>Upload Your Profile Picture</button>
 
             {/* import your profile picture here and pass down to uploadavatar to use it as a placeholder */}
 
