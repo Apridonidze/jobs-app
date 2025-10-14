@@ -1,4 +1,3 @@
-
 import axios from "axios"
 import { useState,useEffect } from "react"
 import { useCookies } from "react-cookie"
@@ -10,14 +9,17 @@ import DefaultImage from '../../assets/default-profile-picture.webp'
 const MyUserSidebar = () => {
 
     const [toggleUploadAvatar,setToggleUploadAvatar] = useState(false)
+    const [toggleUploadDesc,setToggleUploadDesc] = useState(false)
+    const [toggleUploadTags,setToggleUploadTags] = useState(false)
+    const [toggleUploadLanguages,setToggleUploadLanguages] = useState(false)
 
      const [avatarImg,setAvatarImg] = useState('')
 
     const MY_AVATAR_URL = 'http://localhost:8080/my-avatar' //move to .env
+    const UPLOAD_AVATAR_URL = 'http://localhost:8080/upload-avatar' //move to .env
 
     const [cookies,setCookies,removeCookies] = useCookies(['token']) 
 
-    const UPLOAD_AVATAR_URL = 'http://localhost:8080/upload-avatar'
 
     const [profilePicture, setProfilePicture] = useState(null)
 
@@ -68,9 +70,8 @@ const MyUserSidebar = () => {
 
             <button className="btn btn-primary text-white" onClick={() => setToggleUploadAvatar(true)}>Upload Your Profile Picture</button>
 
-            {/* import your profile picture here and pass down to uploadavatar to use it as a placeholder */}
+            <input type="text" className="form-control"  placeholder="Add About Me..."/>
 
-            {/* user avatar if they havenot added yet return 'default avatar picture'*/} 
             {/* user description ,if they havenot added yet return 'no desc yet'*/} 
             {/* user tags ,if they havenot added yet return 'no tags yet'*/} 
             {/* user speaking languages,if they havenot added yet return 'no langauges added yet'*/} 
