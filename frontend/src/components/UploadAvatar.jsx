@@ -48,9 +48,6 @@ const UploadAvatar = () => {
         
         <div className="form-floating">
             
-            
-
-            
             <input type="file" className="form-control" onChange={(e) => handleProfileSend(e)}  accept="image/png, image/jpeg, image/webp" />
             <label htmlFor="">Add Your Profile Picture...</label>
     

@@ -6,16 +6,15 @@ import UploadAvatar from "../components/UploadAvatar"
 const MyUserSidebar = () => {
 
     const [toggleUploadAvatar,setToggleUploadAvatar] = useState(false)
+    
+        // fetch profile piicture from server and set as a profileImage variable and set as profile image
 
     return (
         <div className="my-user-sidebar-container">
-
            
            {toggleUploadAvatar && <> <div className="upload-avatar-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadAvatar(false)}></div> <UploadAvatar /> </> }
 
-
             <h1>Finish Up Your Profile </h1>
-
 
             <button onClick={() => setToggleUploadAvatar(true)}>Upload Your Avatar Picture</button>
 
