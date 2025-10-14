@@ -6,6 +6,10 @@ import DefaultImage from '../../assets/default-profile-picture.webp'
 
 const UploadAvatar = () => {
 
+    const [avatarImg,setAvatarImg] = useState('')
+
+    const MY_AVATAR_URL = 'http://localhost:8080/my-avatar' //move to .env
+
     const [cookies,setCookies,removeCookies] = useCookies(['token']) 
 
     const UPLOAD_AVATAR_URL = 'http://localhost:8080/upload-avatar'
@@ -37,12 +41,19 @@ const UploadAvatar = () => {
 
         }, [profilePicture])
 
+        useEffect(() => {
+
+            axios.get(MY_AVATAR_URL, {headers: {Authorization : `bearer ${cookies.token}`}})
+            .then(resp => setAvatarImg(resp.data))
+            .catch(err => console.log(err))
+
+        },[])
 
     return(
         <div className="upload-avatar-container position-relative bg-white d-flex flex-column text-center">
             
             
-        <img src={DefaultImage} className="w-25 h-25 border border-rounded" style={{borderRadius : '50vh'}}/>
+        <img src={avatarImg} className="w-25 h-25 border border-rounded" style={{borderRadius : '50vh'}}/>
 
         <span>Upload Your Avatar</span>    
         
