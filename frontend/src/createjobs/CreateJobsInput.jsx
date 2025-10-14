@@ -107,7 +107,7 @@ const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobs
                 console.log(resp)
             })
             .catch(err => {
-                setJobsMessage(err)
+                setJobsMessage(err.data.err)
                 setIsJobsSuccessful(false)
                 setToggleJobsMessage(true)
                 console.log(err)

@@ -37,11 +37,16 @@ const UploadAvatar = () => {
 
 
     return(
+        <div className="upload-avatar-container">
+            
+        <i className="fa-solid fa-user"></i> {/** add logic : if user doesnot provide user profile picutre dispaly default user else dispaly their profile picture */}
 
-    <div className="form-floating">
+        <div className="form-floating">
+            
+            <input type="file" className="form-control" onChange={(e) => handleProfileSend(e)}  accept="image/png, image/jpeg, image/webp" />
+            <label htmlFor="">Add Your Profile Picture...</label>
     
-        <input type="file" className="form-control" onChange={(e) => handleProfileSend(e)}  accept="image/png, image/jpeg, image/webp" />
-        <label htmlFor="">Add Your Profile Picture...</label>
+        </div>
     
     </div>
     
