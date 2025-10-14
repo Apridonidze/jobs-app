@@ -36,7 +36,7 @@ const MyUser = () => {
         <div className="myuser-container container d-flex flex-column">
             <NavBarHeader user={user} />
 
-            <MyUserSidebar />            
+            <MyUserSidebar />
 
             {user && (
                 <>

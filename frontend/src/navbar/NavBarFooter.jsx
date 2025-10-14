@@ -1,4 +1,4 @@
-const NavBarFooter =  ( { setFindJobs ,setCreateJobs , toggleJobsListings, setToggleJobsListings,user } ) => {
+const NavBarFooter =  ( { setFindJobs ,setCreateJobs , setToggleJobsListings,user } ) => {
     return (
         <div className="nav-bar-footer row">
 

@@ -1,6 +1,10 @@
+import axios from "axios"
 import { useState,useEffect } from "react"
+import { useCookies } from "react-cookie"
 
 const UploadAvatar = () => {
+
+    const [cookies,setCookies,removeCookies] = useCookies(['token']) 
 
     const UPLOAD_AVATAR_URL = 'http://localhost:8080/upload-avatar'
 

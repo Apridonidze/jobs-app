@@ -6,7 +6,7 @@ import Login from './containers/Login';
 import Sign from './containers/Sign';
 import Main from './containers/Main';
 import NotFound from './containers/NotFound';
-import MyUser from './containers/MyUser';
+import MyUser from './myuser/MyUser';
 
 const App = () => {
   
