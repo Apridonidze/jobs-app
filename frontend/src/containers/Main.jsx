@@ -36,6 +36,9 @@ const Main = () => {
         .catch(err => console.log(err))
 
     },[])
+
+    //TODO : add database folder and add readme file for it 
+
     //if error reset cookies and navigate user to authentication page 
 
 
