@@ -7,7 +7,6 @@ import Footer from "../components/Foooter"
 import NavBarHeader from "../navbar/NavBarHeader"
 import MyUserSidebar from "./MyUserSidebar"
 
-
 const MyUser = () => {
 
     
