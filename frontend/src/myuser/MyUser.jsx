@@ -32,9 +32,11 @@ const MyUser = () => {
         <div className="myuser-container container d-flex flex-column">
             <NavBarHeader user={user} />
 
-            <MyUserSidebar />
+            <div className="user-body d-flex">
+                <MyUserSidebar />
 
-            {user && (
+                <div className="user-main d-flex flex-column">
+                    {user && (
                 <>
                 <span>Your Name : {user.name}</span> 
                 <span>Your Surname : {user.surname}</span>  
@@ -42,6 +44,8 @@ const MyUser = () => {
                 <span>Your Gender: {user.gender}</span>     
                 </>
             )}
+                </div>
+            </div>
 
 
 
