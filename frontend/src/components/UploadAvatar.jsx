@@ -2,6 +2,8 @@ import axios from "axios"
 import { useState,useEffect } from "react"
 import { useCookies } from "react-cookie"
 
+import DefaultImage from '../../assets/default-profile-picture.webp'
+
 const UploadAvatar = () => {
 
     const [cookies,setCookies,removeCookies] = useCookies(['token']) 
@@ -37,11 +39,17 @@ const UploadAvatar = () => {
 
 
     return(
-        <div className="upload-avatar-container">
+        <div className="upload-avatar-container position-relative bg-white d-flex flex-column text-center">
             
-        <i className="fa-solid fa-user"></i> {/** add logic : if user doesnot provide user profile picutre dispaly default user else dispaly their profile picture */}
+            
+        <img src={DefaultImage} className="w-25 h-25 border border-rounded" style={{borderRadius : '50vh'}}/>
 
+        <span>Upload Your Avatar</span>    
+        
         <div className="form-floating">
+            
+            
+
             
             <input type="file" className="form-control" onChange={(e) => handleProfileSend(e)}  accept="image/png, image/jpeg, image/webp" />
             <label htmlFor="">Add Your Profile Picture...</label>

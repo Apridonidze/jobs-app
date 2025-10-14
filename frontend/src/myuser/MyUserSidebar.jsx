@@ -1,14 +1,10 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
-import { useCookies } from "react-cookie"
+import { useState } from "react"
 
 import UploadAvatar from "../components/UploadAvatar"
 
 
 const MyUserSidebar = () => {
 
-    const [cookies,setCookies, removeCookies] = useCookies(['token'])
-    
     const [toggleUploadAvatar,setToggleUploadAvatar] = useState(false)
 
     return (
