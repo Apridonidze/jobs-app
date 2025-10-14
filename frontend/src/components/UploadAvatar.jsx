@@ -44,7 +44,7 @@ const UploadAvatar = () => {
         useEffect(() => {
 
             axios.get(MY_AVATAR_URL, {headers: {Authorization : `bearer ${cookies.token}`}})
-            .then(resp => setAvatarImg(resp.data))
+            .then(resp => console.log(resp.data))
             .catch(err => console.log(err))
 
         },[])

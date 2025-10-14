@@ -16,7 +16,7 @@ MyAvatarRouter.get('/', verifyToken, async (req,res) => {
             return res.status(400).json('no user avatar found')
         }
 
-        const imgBuffer = rows[1].user_avatar_content
+        const imgBuffer = rows[0].user_avatar_content
         const base64 = imgBuffer.toString('base64')
         
         return res.status(200).json(`data:image/jpeg;base64,${base64}`)
