@@ -44,16 +44,16 @@ const UploadAvatar = () => {
         useEffect(() => {
 
             axios.get(MY_AVATAR_URL, {headers: {Authorization : `bearer ${cookies.token}`}})
-            .then(resp => console.log(resp.data))
+            .then(resp => setAvatarImg(resp.data))
             .catch(err => console.log(err))
 
-        },[])
+        },[avatarImg])
 
     return(
         <div className="upload-avatar-container position-relative bg-white d-flex flex-column text-center">
             
             
-        <img src={avatarImg} className="w-25 h-25 border border-rounded" style={{borderRadius : '50vh'}}/>
+        <img src={avatarImg || DefaultImage} className="border border-rounded" style={{borderRadius : '100%', width: '350px' , height:'350px'}}/>
 
         <span>Upload Your Avatar</span>    
         
