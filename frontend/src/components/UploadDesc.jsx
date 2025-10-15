@@ -39,7 +39,7 @@ const UploadDesc = () => {
     return(
         <div className="upload-desc-container  container position-fixed bg-white">
 
-            <span>Add Infromation About You : Who Are You, What Are You Doing, etc</span>
+            {descErr ? <span className='text-danger'>{descErr}</span> : <span>Add Infromation About You : Who Are You, What Are You Doing, etc</span>}
 
             <form onSubmit={SubmitDesc}>
                 
