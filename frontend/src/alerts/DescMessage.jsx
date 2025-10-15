@@ -36,7 +36,7 @@ const DescMessage = ({ setToggleUploadDesc , setToggleUploadDescMessage, isDescS
 
     return(
         <div className="desc-message-container position-fixed top-0 start-0 bg-white">
-            Desc Message
+            <span>{/**adde description message here */}</span>
             {seconds}
             
         </div>

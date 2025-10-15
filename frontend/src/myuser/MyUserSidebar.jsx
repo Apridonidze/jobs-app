@@ -5,7 +5,6 @@ import { useCookies } from "react-cookie"
 import UploadAvatar from "../components/UploadAvatar"
 import DefaultImage from '../../assets/default-profile-picture.webp'
 import UploadDesc from "../components/UploadDesc"
-import DescMessage from "../alerts/DescMessage"
 
 
 const MyUserSidebar = () => {
@@ -62,13 +61,16 @@ const MyUserSidebar = () => {
 
         },[avatarImg])
     
-        // fetch profile piicture from server and set as a profileImage variable and set as profile image
 
     return (
         <div className="my-user-sidebar-container d-flex flex-column">
            
            {toggleUploadAvatar && <> <div className="upload-avatar-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadAvatar(false)}></div> <UploadAvatar handleProfileSend={handleProfileSend} avatarImg={avatarImg} DefaultImage={DefaultImage}/> </> }
-           {toggleUploadDesc && <><div className="upload-desc-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadDesc(false)}></div> <UploadDesc setToggleUploadDescMessage={setToggleUploadDescMessage} setIsDescSuccessfull={setIsDescSuccessfull}/> {toggleUploadDescMessage && <DescMessage setToggleUploadDesc={setToggleUploadDesc} setToggleUploadDescMessage={setToggleUploadDescMessage} isDescSuccessfull={isDescSuccessfull}/> }</>}
+           {toggleUploadDesc && 
+           <> <div className="upload-desc-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadDesc(false)}></div> 
+           <UploadDesc setToggleUploadDescMessage={setToggleUploadDescMessage} setIsDescSuccessfull={setIsDescSuccessfull} /> 
+           {toggleUploadDescMessage && 
+           <DescMessage setToggleUploadDesc={setToggleUploadDesc} setToggleUploadDescMessage={setToggleUploadDescMessage} isDescSuccessfull={isDescSuccessfull} /> }</>}
 
             <h1>Finish Up Your Profile </h1>
 
@@ -78,8 +80,7 @@ const MyUserSidebar = () => {
             <button className="btn btn-primary text-white" onClick={() => setToggleUploadAvatar(true)}>Upload Your Profile Picture</button>
 
             <input type="text" className="form-control" onClick={() => setToggleUploadDesc(true)} placeholder="Add About Me..."/>
-
-            {/* user description ,if they havenot added yet return 'no desc yet'*/} 
+ 
             {/* user tags ,if they havenot added yet return 'no tags yet'*/} 
             {/* user speaking languages,if they havenot added yet return 'no langauges added yet'*/} 
 
