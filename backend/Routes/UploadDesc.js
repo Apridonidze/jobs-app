@@ -9,7 +9,7 @@ UploadDescRouter.get('/', (req,res) => {
 
 UploadDescRouter.post('/', verifyToken, async(req,res) => {
 
-    console.log(req.body)
+    
 
 })
 
