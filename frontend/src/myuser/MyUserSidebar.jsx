@@ -14,7 +14,10 @@ const MyUserSidebar = () => {
     const [toggleUploadTags,setToggleUploadTags] = useState(false)
     const [toggleUploadLanguages,setToggleUploadLanguages] = useState(false)
 
-     const [avatarImg,setAvatarImg] = useState('')
+    const [toggleUploadDescMessage, setToggleUploadDescMessage] = useState(false)
+
+
+    const [avatarImg,setAvatarImg] = useState('')
 
     const MY_AVATAR_URL = 'http://localhost:8080/my-avatar' //move to .env
     const UPLOAD_AVATAR_URL = 'http://localhost:8080/upload-avatar' //move to .env
@@ -63,7 +66,7 @@ const MyUserSidebar = () => {
         <div className="my-user-sidebar-container d-flex flex-column">
            
            {toggleUploadAvatar && <> <div className="upload-avatar-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadAvatar(false)}></div> <UploadAvatar handleProfileSend={handleProfileSend} avatarImg={avatarImg} DefaultImage={DefaultImage}/> </> }
-           {toggleUploadDesc && <><div className="upload-desc-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadDesc(false)}></div> <UploadDesc /></>}
+           {toggleUploadDesc && <><div className="upload-desc-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadDesc(false)}></div> <UploadDesc setToggleUploadDescMessage={setToggleUploadDescMessage} /> {toggleUploadDescMessage && <div className="bg-white position-fixed top-0 left-0">Message</div> }</>}
 
             <h1>Finish Up Your Profile </h1>
 
