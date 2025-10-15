@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie"
 import UploadAvatar from "../components/UploadAvatar"
 import DefaultImage from '../../assets/default-profile-picture.webp'
 import UploadDesc from "../components/UploadDesc"
+import DescMessage from "../alerts/DescMessage"
 
 
 const MyUserSidebar = () => {
@@ -66,7 +67,7 @@ const MyUserSidebar = () => {
         <div className="my-user-sidebar-container d-flex flex-column">
            
            {toggleUploadAvatar && <> <div className="upload-avatar-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadAvatar(false)}></div> <UploadAvatar handleProfileSend={handleProfileSend} avatarImg={avatarImg} DefaultImage={DefaultImage}/> </> }
-           {toggleUploadDesc && <><div className="upload-desc-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadDesc(false)}></div> <UploadDesc setToggleUploadDescMessage={setToggleUploadDescMessage} /> {toggleUploadDescMessage && <div className="bg-white position-fixed top-0 left-0">Message</div> }</>}
+           {toggleUploadDesc && <><div className="upload-desc-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadDesc(false)}></div> <UploadDesc setToggleUploadDescMessage={setToggleUploadDescMessage} /> {toggleUploadDescMessage && <DescMessage /> }</>}
 
             <h1>Finish Up Your Profile </h1>
 
