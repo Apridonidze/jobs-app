@@ -18,6 +18,27 @@ UploadDescRouter.post('/', verifyToken, async(req,res) => {
     }
 
 
+    const [ rows ] = await db.query('select * from user_des where user_id = ?', [req.user.userId])
+
+    try{
+        if(rows.length > 0){
+
+            await db.query('update user_des set user_desc = ? where user_id = ?', [req.body, req.user.userId])
+
+            return res.status(200).json({message : 'Description Updated Successfully'})
+        }
+
+        await db.query('insert into user_des (user_id, user_desc) values (?,?)' , [req.user.userId, req.body.desc])
+
+        return res.status(200).json({message : 'Description Added Successfully'})
+
+    }catch(err){
+
+        return res.status(500).json({err : 'Database Error'})
+
+    }
+
+
 })
 
 
