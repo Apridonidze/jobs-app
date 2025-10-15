@@ -10,7 +10,7 @@ const UploadDesc = () => {
     const descRef = useRef(null)
     const btnRef = useRef(null)
 
-    const POST_USER_DESC_URL = '' //add server url here
+    const POST_USER_DESC_URL = 'http://localhost:8080/upload-desc' //add server url here
 
     const [cookies,setCookies,removeCookies] = useCookies(['token'])
 
