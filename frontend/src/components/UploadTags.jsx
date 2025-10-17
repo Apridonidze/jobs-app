@@ -1,7 +1,7 @@
 const UploadTags = () => {
     return (
-        <div className="upload-tags-container">
-            {/**fetch tags from server jhere if none return no tags yet*/}
+        <div className="upload-tags-container bg-white position-fixed">
+            Upload Tags
         </div>
     )
 }

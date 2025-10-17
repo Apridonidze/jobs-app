@@ -10,6 +10,7 @@ import EmployeeForms from "../components/EmployeeForms"
 import DescMessage from '../alerts/DescMessage'
 
 import DefaultImage from '../../assets/default-profile-picture.webp'
+import UploadTags from "../components/UploadTags"
 
 
 
@@ -106,6 +107,16 @@ const MyUserSidebar = ( { user } ) => {
 
             }
 
+            {toggleUploadTags &&
+                
+                <>
+                    <div className="upload-tags-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadTags(false)}></div>
+                    <UploadTags />
+                
+                </>
+
+            }
+
             <h1>Finish Up Your Profile </h1> {/**check if user has to finish their profile by fetching data form the database andd display it based on this option from backend (make another route to check if user has all data inserted )*/}
 
             <img src={avatarImg || DefaultImage} className="border border-rounded" style={{borderRadius : '100%', width: '350px' , height:'350px'}}/>
@@ -115,8 +126,8 @@ const MyUserSidebar = ( { user } ) => {
 
             <input type="text" className="form-control" value={descValue ? descValue : 'No Description Yet'} onClick={() => setToggleUploadDesc(true)} placeholder="Add About Me..."/>
 
-            {user.role === 'Recruiter' && <RecruiterForms setToggleUploadTags={setToggleUploadTags}/>}
-            {user.role === 'Employee' && <EmployeeForms />}
+            {user && user.role === 'Recruiter' && <RecruiterForms setToggleUploadTags={setToggleUploadTags}/>}
+            {user && user.role === 'Employee' && <EmployeeForms />}
 
         </div>
     )
