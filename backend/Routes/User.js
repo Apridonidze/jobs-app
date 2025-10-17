@@ -7,7 +7,7 @@ require('dotenv').config()
 
 const verifyToken = require('../config/verifyToken')
 
-UserRouter.get('/', verifyToken , async (req,res) => {
+UserRouter.get('/my-user', verifyToken , async (req,res) => {
 
     const userId = req.user.userId
 

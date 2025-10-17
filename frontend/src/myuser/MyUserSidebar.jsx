@@ -47,8 +47,8 @@ const MyUserSidebar = () => {
                 formData.append("profile-picutre", profilePicture);
 
                 axios.post(AVATAR_URL , formData , {headers : {Authorization : `Bearer ${cookies.token}`}})
-                .then(resp => console.log(resp))
-                .catch(err => console.log(err))
+                .then(resp => console.log(resp)) //addd alerts message here
+                .catch(err => console.log(err)) //add alert message here
 
             }
 

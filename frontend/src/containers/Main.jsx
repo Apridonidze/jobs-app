@@ -16,7 +16,7 @@ const Main = () => {
     
 
     
-    const USER_URL = 'http://localhost:8080/user' //move to .env
+    const MY_USER_API = 'http://localhost:8080/user/my-user' //move to .env
 
     const [cookies, setCookies , removeCookies] = useCookies(['token'])
 
@@ -26,7 +26,7 @@ const Main = () => {
     useEffect(() => {
 
         axios
-        .get(USER_URL, {headers : {Authorization : `Bearer ${cookies.token}`}})
+        .get(MY_USER_API, {headers : {Authorization : `Bearer ${cookies.token}`}})
         .then(resp => {
             const userData = resp.data.data[0]
             setUser({role : userData.user_role , name : userData.user_name, surname : userData.user_surname , birthDate : userData.user_birthdate, gender : userData.user_gender})

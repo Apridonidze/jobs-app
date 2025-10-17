@@ -9,7 +9,7 @@ const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobs
 
     const [cookies,setCookies,removeCookies] = useCookies(['token'])
     
-    const NEW_JOBS_URL = 'http://localhost:8080/new-jobs'
+    const NEW_JOBS_URL = 'http://localhost:8080/jobs/new-jobs'
 
     const [seconds,setSeconds] = useState(3)
 
