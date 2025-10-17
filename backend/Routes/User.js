@@ -1,13 +1,13 @@
 const db = require('../db/db')
 
 const express = require('express')
-const MyUserRouter = express.Router()
+const UserRouter = express.Router()
 
 require('dotenv').config()
 
 const verifyToken = require('../config/verifyToken')
 
-MyUserRouter.get('/', verifyToken , async (req,res) => {
+UserRouter.get('/', verifyToken , async (req,res) => {
 
     const userId = req.user.userId
 
@@ -24,4 +24,4 @@ MyUserRouter.get('/', verifyToken , async (req,res) => {
 
 
 
-module.exports = MyUserRouter
+module.exports = UserRouter

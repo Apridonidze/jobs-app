@@ -10,9 +10,8 @@ require('dotenv').config();
 
 const SignRouter = require('../backend/Routes/Sign')
 const LoginRouter = require('../backend/Routes/Login');
-const MyUserRouter = require('./Routes/MyUser');
+const UserRouter = require('./Routes/User')
 const NewJobsRouter = require('./Routes/NewJobs')
-const MyJobsRouter  = require('./Routes/MyJobs')
 const JobsRouter = require('./Routes/Jobs')
 const AvatarRouter = require('./Routes/Avatar');
 const UploadDescRouter = require('./Routes/UploadDesc')
@@ -25,9 +24,8 @@ app.get('/', (req,res) => {
 
 app.use('/sign' , SignRouter)
 app.use('/login', LoginRouter)
-app.use('/my-user', MyUserRouter)
+app.use('/user', UserRouter)
 app.use('/new-jobs', NewJobsRouter)
-app.use('/my-jobs', MyJobsRouter )
 app.use('/jobs', JobsRouter )
 app.use('/avatar', AvatarRouter )
 app.use('/upload-desc', UploadDescRouter )
