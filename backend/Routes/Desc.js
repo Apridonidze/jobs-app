@@ -1,15 +1,15 @@
 const express = require('express')
-const UploadDescRouter = express.Router()
+const DescRouter = express.Router()
 
 const db = require('../db/db')
 const validateDesc = require('../schemas/DescSchema')
 const verifyToken = require('../config/verifyToken')
 
-UploadDescRouter.get('/', (req,res) => {
+DescRouter.get('/', (req,res) => {
     res.send('upload desc path')
 })
 
-UploadDescRouter.post('/', verifyToken, async(req,res) => {
+DescRouter.post('/', verifyToken, async(req,res) => {
 
     const descResp = validateDesc(req.body)
 
@@ -46,4 +46,4 @@ UploadDescRouter.post('/', verifyToken, async(req,res) => {
 })
 
 
-module.exports = UploadDescRouter
+module.exports = DescRouter
