@@ -7,7 +7,7 @@ import DefaultImage from '../../assets/default-profile-picture.webp'
 import UploadDesc from "../components/UploadDesc"
 import DescMessage from '../alerts/DescMessage'
 
-const MyUserSidebar = () => {
+const MyUserSidebar = ( { user } ) => {
 
     const [toggleUploadAvatar,setToggleUploadAvatar] = useState(false)
     const [toggleUploadDesc,setToggleUploadDesc] = useState(false)
@@ -38,19 +38,21 @@ const MyUserSidebar = () => {
         if (e.target.files && e.target.files[0]) {
             const filePath = e.target.files[0]
             setProfilePicture(filePath)
-            }
         }
+    }
+
+
 
         useEffect(() => {
 
-            axios.get(AVATAR_URL, {headers: {Authorization : `bearer ${cookies.token}`}})
+            axios.get(AVATAR_URL, {headers: {Authorization : `Bearer ${cookies.token}`}})
             .then(resp => setAvatarImg(resp.data))
-            .catch(err => console.log(err))
+            .catch(err => console.log(err)) //setavatarimg to default if error
 
 
-            axios.get(USER_DESC_URL , {headers : {Authorization : `bearer ${cookies.token}`}})
-            .then(resp => setDescValue(`${resp.data.slice(0, 25)}...`))
-            .catch(err => console.log(err))
+            axios.get(USER_DESC_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
+            .then(resp => setDescValue(`${resp.data.slice(0, 25)}...`)) 
+            .catch(err => console.log(err)) //add error message here and setDescValue to empty if there is no desc or database error
         
 
         },[])
@@ -71,7 +73,6 @@ const MyUserSidebar = () => {
         }, [profilePicture])
 
     
-
     return (
         <div className="my-user-sidebar-container d-flex flex-column">
            
@@ -90,6 +91,8 @@ const MyUserSidebar = () => {
             <button className="btn btn-primary text-white" onClick={() => setToggleUploadAvatar(true)}>Upload Your Profile Picture</button>
 
             <input type="text" className="form-control" value={descValue ? descValue : 'No Description Yet'} onClick={() => setToggleUploadDesc(true)} placeholder="Add About Me..."/>
+
+            {user.role === 'Recruiter' ? <></> : <></>}
 
             {/* if user is worket dispaly these 
 
