@@ -24,7 +24,7 @@ const MyUserSidebar = () => {
     const [avatarImg,setAvatarImg] = useState('')
 
     const AVATAR_URL = 'http://localhost:8080/avatar' //move to .env
-    const USER_DESC_URL = 'http://localhost:8080/desc' //move to .env
+    const USER_DESC_URL = 'http://localhost:8080/desc/my-desc' //move to .env
 
     const [cookies,setCookies,removeCookies] = useCookies(['token']) 
 
@@ -42,6 +42,20 @@ const MyUserSidebar = () => {
         }
 
         useEffect(() => {
+
+            axios.get(AVATAR_URL, {headers: {Authorization : `bearer ${cookies.token}`}})
+            .then(resp => setAvatarImg(resp.data))
+            .catch(err => console.log(err))
+
+
+            axios.get(USER_DESC_URL , {headers : {Authorization : `bearer ${cookies.token}`}})
+            .then(resp => console.log(resp))
+            .catch(err => console.log(err))
+        
+
+        },[])
+
+        useEffect(() => {
             
             if(profilePicture){
                 
@@ -53,18 +67,6 @@ const MyUserSidebar = () => {
                 .catch(err => console.log(err)) //add alert message here
 
             }
-
-            axios.get(AVATAR_URL, {headers: {Authorization : `bearer ${cookies.token}`}})
-            .then(resp => setAvatarImg(resp.data))
-            .catch(err => console.log(err))
-
-
-            axios.get(USER_DESC_URL , {headers : {Authorization : `bearer ${cookies.token}`}})
-            .then(resp => console.log(resp)
-            .catch(err => console.log(err))
-        )
-
-
 
         }, [profilePicture])
 

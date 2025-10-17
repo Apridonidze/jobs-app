@@ -5,8 +5,28 @@ const db = require('../db/db')
 const validateDesc = require('../schemas/DescSchema')
 const verifyToken = require('../config/verifyToken')
 
-DescRouter.get('/', (req,res) => {
-    res.send('upload desc path')
+DescRouter.get('/my-desc', verifyToken , async (req,res) => {
+    
+
+    const [ rows ] = await db.query('select * from user_des where user_id = ?' , [req.user.userId])
+
+
+    try{
+
+        if(rows.length < 1){
+        
+            return res.status(200).json('No Description Yet')
+        
+        }
+    
+        return res.status(200).json(rows[0].user_desc)
+
+
+    }catch(err){
+        return res.status(400).json('Database Error')
+    }
+
+
 })
 
 DescRouter.post('/', verifyToken, async(req,res) => {
