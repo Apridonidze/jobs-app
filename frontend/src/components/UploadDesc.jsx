@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useRef, useState } from "react"
 import { useCookies } from 'react-cookie'
 
-const UploadDesc = ( { setToggleUploadDescMessage,setIsDescSuccessfull } ) => {
+const UploadDesc = ( { setToggleUploadDescMessage,setIsDescSuccessfull, setUploadMessage } ) => {
 
     const [desc,setDesc] = useState('');
     const [descErr,setDescErr] = useState('')
@@ -28,8 +28,8 @@ const UploadDesc = ( { setToggleUploadDescMessage,setIsDescSuccessfull } ) => {
 
         if(isValid){
             axios.post(POST_USER_DESC_URL, data , {headers:{authorization: `bearer ${cookies.token}`}})
-            .then(resp => {console.log(resp) ; setToggleUploadDescMessage(true);setIsDescSuccessfull(true)})
-            .catch(err => {console.log(err) ; setToggleUploadDescMessage(true);setIsDescSuccessfull(false)})
+            .then(resp => {setUploadMessage(resp.data.message) ; setToggleUploadDescMessage(true);setIsDescSuccessfull(true)})
+            .catch(err => {setUploadMessage(err.response.data.err) ; setToggleUploadDescMessage(true);setIsDescSuccessfull(false)})
         }
 
 

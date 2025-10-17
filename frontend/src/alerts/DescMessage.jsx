@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const DescMessage = ({ setToggleUploadDesc , setToggleUploadDescMessage, isDescSuccessfull }) => {
+const DescMessage = ({ setToggleUploadDesc , setToggleUploadDescMessage, isDescSuccessfull,UploadMessage }) => {
 
     const [seconds,setSeconds] = useState(3)
 
@@ -10,18 +10,18 @@ const DescMessage = ({ setToggleUploadDesc , setToggleUploadDescMessage, isDescS
                     
             setSeconds(seconds => {
                         
-            if(seconds <= 0){clearInterval(handleTimer) ;settogg(false) ;return 0}
-               
+                if(seconds <= 0){clearInterval(handleTimer) ;settogg(false) ;return 0}
+
                 return seconds - 1
                     
-                }) 
+            }) 
         
-                }, 1000);
+        }, 1000);
                 
         
             if(seconds == 0){
                     
-                if(!isDescSuccessfull){setToggleUploadDesc(false), setToggleUploadDescMessage(false)}
+                if(isDescSuccessfull){setToggleUploadDesc(false), setToggleUploadDescMessage(false)}
     
                 else setToggleUploadDesc(true) ; setToggleUploadDescMessage(false)
             
@@ -36,10 +36,11 @@ const DescMessage = ({ setToggleUploadDesc , setToggleUploadDescMessage, isDescS
 
     return(
         <div className="desc-message-container position-fixed top-0 end-0 bg-white">
-            <span>{/**adde description message here */}</span>
-            <span>error </span>
-            {seconds}
             
+            {isDescSuccessfull ? <i className="fa-regular fa-circle-check"></i> : <i className="fa-regular fa-circle-xmark"></i>}
+            <span>{UploadMessage}</span>
+            <span>{isDescSuccessfull ? <span>Redirecting In...</span> : <span>Window Closes In :</span> }{seconds}</span>   
+
         </div>
     )
 }
