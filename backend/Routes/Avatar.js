@@ -6,7 +6,7 @@ const cors = require('cors')
 const verifyToken = require('../config/verifyToken')
 const db = require('../db/db')
 
-const UploadAvatarRouter = express.Router()
+const AvatarRouter = express.Router()
 
 
 const corsOption = {
@@ -14,11 +14,37 @@ const corsOption = {
     methods : ["GET", 'POST'] ,
     credentials : true
 }
-UploadAvatarRouter.use(cors(corsOption))
+AvatarRouter.use(cors(corsOption))
+
+AvatarRouter.get('/', verifyToken, async (req,res) => {
+
+
+    try{
+
+
+        const [ rows ] = await db.query('select * from user_avatar where user_id = (?)' ,[req.user.userId])
+
+        if(rows.length < 1){
+            return res.status(400).json('no user avatar found')
+        }
+
+        const imgBuffer = rows[0].user_avatar_content
+        const base64 = imgBuffer.toString('base64')
+        
+        return res.status(200).json(`data:image/jpeg;base64,${base64}`)
+        
+
+    }catch(err){
+        return res.status(500).json({error : 'Database Error'})
+    }
+
+})
+
+
 
 const upload = multer({dest: '/uploads'})
 
-UploadAvatarRouter.post('/' , verifyToken, upload.single('profile-picutre'), async (req,res) => {
+AvatarRouter.post('/' , verifyToken, upload.single('profile-picutre'), async (req,res) => {
 
     try{
 
@@ -35,11 +61,11 @@ UploadAvatarRouter.post('/' , verifyToken, upload.single('profile-picutre'), asy
 
             if(rows.length < 1){
 
-                const [ insertRows ] = await db.query('insert into user_avatar (user_id, user_avatar_content) values (?,?)' , [req.user.userId, data])
+                await db.query('insert into user_avatar (user_id, user_avatar_content) values (?,?)' , [req.user.userId, data])
                 return res.status(200).json({message : 'avatar inserted successfully'})
             }
 
-            const [ updateRows ] = await db.query('update user_avatar set user_avatar_content = ? where user_id = ?',[data, req.user.userId])
+            await db.query('update user_avatar set user_avatar_content = ? where user_id = ?',[data, req.user.userId])
 
 
             return res.status(200).json('row updates successfully')
@@ -58,4 +84,4 @@ UploadAvatarRouter.post('/' , verifyToken, upload.single('profile-picutre'), asy
 
 
 
-module.exports = UploadAvatarRouter
+module.exports = AvatarRouter

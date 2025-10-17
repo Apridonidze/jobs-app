@@ -22,8 +22,7 @@ const MyUserSidebar = () => {
 
     const [avatarImg,setAvatarImg] = useState('')
 
-    const MY_AVATAR_URL = 'http://localhost:8080/my-avatar' //move to .env
-    const UPLOAD_AVATAR_URL = 'http://localhost:8080/upload-avatar' //move to .env
+    const AVATAR_URL = 'http://localhost:8080/avatar' //move to .env
 
     const [cookies,setCookies,removeCookies] = useCookies(['token']) 
 
@@ -47,7 +46,7 @@ const MyUserSidebar = () => {
                 const formData = new FormData();
                 formData.append("profile-picutre", profilePicture);
 
-                axios.post(UPLOAD_AVATAR_URL , formData , {headers : {Authorization : `Bearer ${cookies.token}`}})
+                axios.post(AVATAR_URL , formData , {headers : {Authorization : `Bearer ${cookies.token}`}})
                 .then(resp => console.log(resp))
                 .catch(err => console.log(err))
 
@@ -57,11 +56,16 @@ const MyUserSidebar = () => {
 
         useEffect(() => {
 
-            axios.get(MY_AVATAR_URL, {headers: {Authorization : `bearer ${cookies.token}`}})
+            axios.get(AVATAR_URL, {headers: {Authorization : `bearer ${cookies.token}`}})
             .then(resp => setAvatarImg(resp.data))
             .catch(err => console.log(err))
 
         },[avatarImg])
+
+        useEffect(() => {
+
+
+        },[])
     
 
     return (

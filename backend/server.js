@@ -14,8 +14,7 @@ const MyUserRouter = require('./Routes/MyUser');
 const NewJobsRouter = require('./Routes/NewJobs')
 const MyJobsRouter  = require('./Routes/MyJobs')
 const JobsRouter = require('./Routes/Jobs')
-const UploadAvatarRouter = require('./Routes/UploadAvatar');
-const MyAvatarRouter = require('./Routes/MyAvatar');
+const AvatarRouter = require('./Routes/Avatar');
 const UploadDescRouter = require('./Routes/UploadDesc')
 
 const PORT = process.env.SERVER_PORT;
@@ -30,9 +29,8 @@ app.use('/my-user', MyUserRouter)
 app.use('/new-jobs', NewJobsRouter)
 app.use('/my-jobs', MyJobsRouter )
 app.use('/jobs', JobsRouter )
-app.use('/upload-avatar', UploadAvatarRouter )
+app.use('/avatar', AvatarRouter )
 app.use('/upload-desc', UploadDescRouter )
-app.use('/my-avatar' , MyAvatarRouter)
 
 
 app.listen(PORT, () => {
