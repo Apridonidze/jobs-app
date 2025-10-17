@@ -28,7 +28,7 @@ app.use('/user', UserRouter)
 app.use('/new-jobs', NewJobsRouter)
 app.use('/jobs', JobsRouter )
 app.use('/avatar', AvatarRouter )
-app.use('/upload-desc', DescRouter )
+app.use('/desc', DescRouter )
 
 
 app.listen(PORT, () => {
