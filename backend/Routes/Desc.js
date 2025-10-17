@@ -15,7 +15,7 @@ DescRouter.get('/my-desc', verifyToken , async (req,res) => {
 
         if(rows.length < 1){
         
-            return res.status(200).json('No Description Yet')
+            return res.status(400).json('No Description Yet')
         
         }
     
