@@ -10,6 +10,7 @@ const UploadDesc = ( { setToggleUploadDescMessage,setIsDescSuccessfull, setUploa
     const descRef = useRef(null)
     const btnRef = useRef(null)
 
+    const ADD_USER_DESC_URL = 'http://localhost:8080/desc/add-desc' //move to .env
     const USER_DESC_URL = 'http://localhost:8080/desc/my-desc' //move to .env
 
     const [cookies,setCookies,removeCookies] = useCookies(['token'])
@@ -27,7 +28,7 @@ const UploadDesc = ( { setToggleUploadDescMessage,setIsDescSuccessfull, setUploa
 
 
         if(isValid){
-            axios.post(USER_DESC_URL, data , {headers:{authorization: `bearer ${cookies.token}`}})
+            axios.post(ADD_USER_DESC_URL, data , {headers:{authorization: `bearer ${cookies.token}`}})
             .then(resp => {setUploadMessage(resp.data.message) ; setToggleUploadDescMessage(true);setIsDescSuccessfull(true)})
             .catch(err => {setUploadMessage(err.response.data.err) ; setToggleUploadDescMessage(true);setIsDescSuccessfull(false)})
         }
@@ -37,9 +38,9 @@ const UploadDesc = ( { setToggleUploadDescMessage,setIsDescSuccessfull, setUploa
         
         axios.get(USER_DESC_URL , {headers : {Authorization : `bearer ${cookies.token}`}})
             .then(resp => setDesc(resp.data.slice(0, 25)))
-            .catch(err => console.log(err))
+            .catch(err => console.log(err) , setDesc(''))
 
-    },[desc])
+    },[])
 
     return(
         <div className="upload-desc-container  container position-fixed bg-white">
@@ -50,7 +51,7 @@ const UploadDesc = ( { setToggleUploadDescMessage,setIsDescSuccessfull, setUploa
                 
                 <div className="form-floating">
                 
-                    <textarea className="form-control" onChange={(e) => setDesc(e.target.value)} value={desc && desc} style={{resize : 'none' , height:  '300px'}} type="text" name="desc" placeholder="Add About Me..." ref={descRef}/>
+                    <textarea className="form-control" onChange={(e) => setDesc(e.target.value)} value={desc} style={{resize : 'none' , height:  '300px'}} type="text" name="desc" placeholder="Add About Me..." ref={descRef}/>
                     <label htmlFor="desc">Add About Me...</label>
                 
                 </div>

@@ -29,7 +29,7 @@ DescRouter.get('/my-desc', verifyToken , async (req,res) => {
 
 })
 
-DescRouter.post('/', verifyToken, async(req,res) => {
+DescRouter.post('/add-desc', verifyToken, async(req,res) => {
 
     const descResp = validateDesc(req.body)
 
