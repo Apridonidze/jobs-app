@@ -15,6 +15,7 @@ const MyUserSidebar = () => {
     const [toggleUploadLanguages,setToggleUploadLanguages] = useState(false)
 
     
+    const [descValue,setDescValue] = useState('')
     const [toggleUploadDescMessage, setToggleUploadDescMessage] = useState(false)
     const [UploadMessage,setUploadMessage] = useState('')
     const [isDescSuccessfull, setIsDescSuccessfull] = useState(null)
@@ -23,6 +24,7 @@ const MyUserSidebar = () => {
     const [avatarImg,setAvatarImg] = useState('')
 
     const AVATAR_URL = 'http://localhost:8080/avatar' //move to .env
+    const USER_DESC_URL = 'http://localhost:8080/desc' //move to .env
 
     const [cookies,setCookies,removeCookies] = useCookies(['token']) 
 
@@ -56,6 +58,14 @@ const MyUserSidebar = () => {
             .then(resp => setAvatarImg(resp.data))
             .catch(err => console.log(err))
 
+
+            axios.get(USER_DESC_URL , {headers : {Authorization : `bearer ${cookies.token}`}})
+            .then(resp => console.log(resp)
+            .catch(err => console.log(err))
+        )
+
+
+
         }, [profilePicture])
 
     
@@ -77,7 +87,7 @@ const MyUserSidebar = () => {
 
             <button className="btn btn-primary text-white" onClick={() => setToggleUploadAvatar(true)}>Upload Your Profile Picture</button>
 
-            <input type="text" className="form-control" onClick={() => setToggleUploadDesc(true)} placeholder="Add About Me..."/>
+            <input type="text" className="form-control" value={descValue ? descValue : 'Do Description Yet'} onClick={() => setToggleUploadDesc(true)} placeholder="Add About Me..."/>
  
             {/* user tags ,if they havenot added yet return 'no tags yet'*/} 
             {/* user speaking languages,if they havenot added yet return 'no langauges added yet'*/} 

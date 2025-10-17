@@ -10,7 +10,7 @@ const UploadDesc = ( { setToggleUploadDescMessage,setIsDescSuccessfull, setUploa
     const descRef = useRef(null)
     const btnRef = useRef(null)
 
-    const POST_USER_DESC_URL = 'http://localhost:8080/desc' //add server url here
+    const USER_DESC_URL = 'http://localhost:8080/desc' //move to .env
 
     const [cookies,setCookies,removeCookies] = useCookies(['token'])
 
@@ -27,7 +27,7 @@ const UploadDesc = ( { setToggleUploadDescMessage,setIsDescSuccessfull, setUploa
 
 
         if(isValid){
-            axios.post(POST_USER_DESC_URL, data , {headers:{authorization: `bearer ${cookies.token}`}})
+            axios.post(USER_DESC_URL, data , {headers:{authorization: `bearer ${cookies.token}`}})
             .then(resp => {setUploadMessage(resp.data.message) ; setToggleUploadDescMessage(true);setIsDescSuccessfull(true)})
             .catch(err => {setUploadMessage(err.response.data.err) ; setToggleUploadDescMessage(true);setIsDescSuccessfull(false)})
         }
