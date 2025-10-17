@@ -26,6 +26,11 @@ const MyUserSidebar = ( { user } ) => {
     const [UploadMessage,setUploadMessage] = useState('')
     const [isDescSuccessfull, setIsDescSuccessfull] = useState(null)
 
+    const [tags,setTags] = useState('')
+    const [tagsMessage,setTagsMessage] = useState('')
+    const [toggleTagsMessage,setToggleTagsMessage] = useState(false)
+    const [isTagsSuccessfull, setIsTagsSuccessfull] = useState(null)
+
 
     const [avatarImg,setAvatarImg] = useState('')
 
@@ -110,31 +115,8 @@ const MyUserSidebar = ( { user } ) => {
 
             <input type="text" className="form-control" value={descValue ? descValue : 'No Description Yet'} onClick={() => setToggleUploadDesc(true)} placeholder="Add About Me..."/>
 
-            {user.role === 'Recruiter' && <RecruiterForms />}
+            {user.role === 'Recruiter' && <RecruiterForms setToggleUploadTags={setToggleUploadTags}/>}
             {user.role === 'Employee' && <EmployeeForms />}
-
-
-
-
-            {/* if user is worket dispaly these 
-
-            /*<div className="technologies">
-                {/* fetch and map skills here if there is not any return no skills yet */
-               /*  <span>Add Skills</span>
-             /*</div>
-
-            <div className="languages">
-                /**fetch whichj language does user speaks and add add button hjere to add their language here */
-             /*</div>
-
-
-             else if user is recruiter display these :
-
-             <div className="tags">
-             add what type of comany he has and what type  of employees he is willing to attract 
-             </div>
- */}
-
 
         </div>
     )
