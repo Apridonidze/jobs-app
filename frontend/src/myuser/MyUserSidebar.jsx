@@ -52,20 +52,12 @@ const MyUserSidebar = () => {
 
             }
 
-        }, [profilePicture])
-
-        useEffect(() => {
-
             axios.get(AVATAR_URL, {headers: {Authorization : `bearer ${cookies.token}`}})
             .then(resp => setAvatarImg(resp.data))
             .catch(err => console.log(err))
 
-        },[avatarImg])
+        }, [profilePicture])
 
-        useEffect(() => {
-
-
-        },[])
     
 
     return (
