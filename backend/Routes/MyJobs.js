@@ -12,7 +12,6 @@ MyJobsRouter .get('/' ,verifyToken, async (req,res) => {
 
         if(rows.length < 1) return res.status(400).json({error : 'no jobs found'})
 
-            console.log(rows)
         return res.status(200).json({message : 'your jobs fetched successfully' , jobs : rows})
 
     }catch(err){
