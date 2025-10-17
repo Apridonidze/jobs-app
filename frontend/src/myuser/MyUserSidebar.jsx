@@ -3,9 +3,15 @@ import { useState,useEffect } from "react"
 import { useCookies } from "react-cookie"
 
 import UploadAvatar from "../components/UploadAvatar"
-import DefaultImage from '../../assets/default-profile-picture.webp'
 import UploadDesc from "../components/UploadDesc"
+import RecruiterForms from "../components/RecruiterForms"
+import EmployeeForms from "../components/EmployeeForms"
+
 import DescMessage from '../alerts/DescMessage'
+
+import DefaultImage from '../../assets/default-profile-picture.webp'
+
+
 
 const MyUserSidebar = ( { user } ) => {
 
@@ -104,11 +110,11 @@ const MyUserSidebar = ( { user } ) => {
 
             <input type="text" className="form-control" value={descValue ? descValue : 'No Description Yet'} onClick={() => setToggleUploadDesc(true)} placeholder="Add About Me..."/>
 
-            {user.role === 'Recruiter' && <></>}
-            {user.role === 'Employee' && <></>}
+            {user.role === 'Recruiter' && <RecruiterForms />}
+            {user.role === 'Employee' && <EmployeeForms />}
 
 
-            
+
 
             {/* if user is worket dispaly these 
 
