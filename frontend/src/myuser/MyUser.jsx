@@ -33,19 +33,19 @@ const MyUser = () => {
             <NavBarHeader user={user} />
 
             <div className="user-body d-flex">
-                <MyUserSidebar />
+                <MyUserSidebar user={user}/>
 
                 <div className="user-main d-flex flex-column">
                     {user && (
-                <>
-                <span>Your Name : {user.name}</span> 
-                <span>Your Surname : {user.surname}</span>  
-                <span>Your Birth Date : {user.birthDate.slice(0, 10)}</span>    
-                <span>Your Gender: {user.gender}</span>     
+                        <>
+                            <span>Your Name : {user.name}</span> 
+                            <span>Your Surname : {user.surname}</span>  
+                            <span>Your Birth Date : {user.birthDate.slice(0, 10)}</span>    
+                            <span>Your Gender: {user.gender}</span>     
                 </>
             )}
                 </div>
-            </div>
+            </div> {/** make components for it */}
 
 
 
@@ -54,5 +54,6 @@ const MyUser = () => {
         </div>
     )
 }
+
 
 export default MyUser
