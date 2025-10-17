@@ -82,7 +82,7 @@ const MyUserSidebar = () => {
            {toggleUploadDescMessage && 
            <DescMessage setToggleUploadDesc={setToggleUploadDesc} setToggleUploadDescMessage={setToggleUploadDescMessage} isDescSuccessfull={isDescSuccessfull} UploadMessage={UploadMessage} /> }</>}
 
-            <h1>Finish Up Your Profile </h1>
+            <h1>Finish Up Your Profile </h1> {/**check if user has to finish their profile by fetching data form the database andd display it based on this option from backend (make another route to check if user has all data inserted )*/}
 
             <img src={avatarImg || DefaultImage} className="border border-rounded" style={{borderRadius : '100%', width: '350px' , height:'350px'}}/>
             
@@ -90,9 +90,26 @@ const MyUserSidebar = () => {
             <button className="btn btn-primary text-white" onClick={() => setToggleUploadAvatar(true)}>Upload Your Profile Picture</button>
 
             <input type="text" className="form-control" value={descValue ? descValue : 'No Description Yet'} onClick={() => setToggleUploadDesc(true)} placeholder="Add About Me..."/>
- 
-            {/* user tags ,if they havenot added yet return 'no tags yet'*/} 
-            {/* user speaking languages,if they havenot added yet return 'no langauges added yet'*/} 
+
+            {/* if user is worket dispaly these 
+
+            /*<div className="technologies">
+                {/* fetch and map skills here if there is not any return no skills yet */
+               /*  <span>Add Skills</span>
+             /*</div>
+
+            <div className="languages">
+                /**fetch whichj language does user speaks and add add button hjere to add their language here */
+             /*</div>
+
+
+             else if user is recruiter display these :
+
+             <div className="tags">
+             add what type of comany he has and what type  of employees he is willing to attract 
+             </div>
+ */}
+
 
         </div>
     )
