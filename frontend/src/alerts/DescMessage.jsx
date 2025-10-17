@@ -35,8 +35,9 @@ const DescMessage = ({ setToggleUploadDesc , setToggleUploadDescMessage, isDescS
 
 
     return(
-        <div className="desc-message-container position-fixed top-0 start-0 bg-white">
+        <div className="desc-message-container position-fixed top-0 end-0 bg-white">
             <span>{/**adde description message here */}</span>
+            <span>error </span>
             {seconds}
             
         </div>

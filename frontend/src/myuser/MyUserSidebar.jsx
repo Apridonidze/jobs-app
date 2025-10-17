@@ -5,7 +5,7 @@ import { useCookies } from "react-cookie"
 import UploadAvatar from "../components/UploadAvatar"
 import DefaultImage from '../../assets/default-profile-picture.webp'
 import UploadDesc from "../components/UploadDesc"
-
+import DescMessage from '../alerts/DescMessage'
 
 const MyUserSidebar = () => {
 
