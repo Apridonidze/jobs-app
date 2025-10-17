@@ -49,7 +49,7 @@ const MyUserSidebar = () => {
 
 
             axios.get(USER_DESC_URL , {headers : {Authorization : `bearer ${cookies.token}`}})
-            .then(resp => console.log(resp))
+            .then(resp => setDescValue(`${resp.data.slice(0, 25)}...`))
             .catch(err => console.log(err))
         
 
@@ -89,7 +89,7 @@ const MyUserSidebar = () => {
 
             <button className="btn btn-primary text-white" onClick={() => setToggleUploadAvatar(true)}>Upload Your Profile Picture</button>
 
-            <input type="text" className="form-control" value={descValue ? descValue : 'Do Description Yet'} onClick={() => setToggleUploadDesc(true)} placeholder="Add About Me..."/>
+            <input type="text" className="form-control" value={descValue && descValue} onClick={() => setToggleUploadDesc(true)} placeholder="Add About Me..."/>
  
             {/* user tags ,if they havenot added yet return 'no tags yet'*/} 
             {/* user speaking languages,if they havenot added yet return 'no langauges added yet'*/} 
