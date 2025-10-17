@@ -10,7 +10,7 @@ import MyUserSidebar from "./MyUserSidebar"
 const MyUser = () => {
 
     
-    const MY_USER_API = 'http://localhost:8080/my-user' //move to .env
+    const MY_USER_API = 'http://localhost:8080/user' //move to .env
 
     const [user,setUser] = useState(null)
     
