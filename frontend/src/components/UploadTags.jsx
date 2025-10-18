@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const UploadTags = ( { tags , setTags } ) => {
 
 
@@ -5,8 +7,14 @@ const UploadTags = ( { tags , setTags } ) => {
         e.preventDefault()
 
         if(tags.length > 0){
-
+            //return error here
         }
+
+        //else send to server.js
+
+        axios.post()
+        .then()
+        .catch()
     }
 
     return (
