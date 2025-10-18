@@ -27,7 +27,7 @@ const MyUserSidebar = ( { user } ) => {
     const [UploadMessage,setUploadMessage] = useState('')
     const [isDescSuccessfull, setIsDescSuccessfull] = useState(null)
 
-    const [tags,setTags] = useState('')
+    const [tags,setTags] = useState([])
     const [tagsMessage,setTagsMessage] = useState('')
     const [toggleTagsMessage,setToggleTagsMessage] = useState(false)
     const [isTagsSuccessfull, setIsTagsSuccessfull] = useState(null)
@@ -113,7 +113,7 @@ const MyUserSidebar = ( { user } ) => {
                 
                 <>
                     <div className="upload-tags-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadTags(false)}></div>
-                    <UploadTags />
+                    <UploadTags tags={tags} setTags={setTags} />
                     {/* add tagsmessage popup whne toggletagsmesasge is true  */}
                 </>
 

@@ -1,20 +1,21 @@
-import { useState } from "react"
+const UploadTags = ( { tags , setTags } ) => {
 
-const UploadTags = () => {
-
-    const [tags,setTags] = useState([])
 
     const handleTags = (e) => {
         e.preventDefault()
+
+        if(tags.length > 0){
+
+        }
+        //add alert : no tags added
     }
 
     return (
         <div className="upload-tags-container bg-white position-fixed">
-            <h1>Add Tags To Attract Employees In Same Scope</h1>
-
             <form onSubmit={handleTags}>
                
-                <select onChange={(e) => setTags(tags => [...tags,e.target.value])}>
+                <select onChange={(e) => {setTags(tags => [...tags,e.target.value]) ; if(e.target.value === 'blank') setTags(tags) ; return}} className="form-control">
+                    <option value="blank">Add Tags To Attract Employees In Same Scope</option>
                     <option value="Web Developing">Web Developing</option>
                     <option value="Web Engineering">Web Engineering</option>
                     <option value="Dekstop App Developing">Dekstop App Developing</option>
@@ -25,7 +26,7 @@ const UploadTags = () => {
 
                 <div className="slected-tags">
                     {tags.map((tag, tagId) => (
-                        <span key={tagId} onClick={() => setTags(tags.filter(t => t !== tag))}>{tag}</span>
+                        <span key={tagId} onClick={() => {setTags(tags.filter(t => t !== tag))}}>{tag}</span>
                     ))}
                 </div>
 
