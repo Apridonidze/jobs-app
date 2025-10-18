@@ -1,7 +1,11 @@
 import axios from "axios"
+import { useCookies } from "react-cookie"
 
 const UploadTags = ( { tags , setTags } ) => {
+    
+    const [cookies,setCookies,removeCookies]  = useCookies(['token'])
 
+    const UPLOAD_TAGS_URL = 'http://localhost:8080/tags/upload-tags'
 
     const handleTags = (e) => {
         e.preventDefault()
@@ -12,9 +16,9 @@ const UploadTags = ( { tags , setTags } ) => {
 
         //else send to server.js
 
-        axios.post()
-        .then()
-        .catch()
+        axios.post(UPLOAD_TAGS_URL , tags, {headers: {Authorization : `Bearer ${cookies.token}`}})
+        .then(resp => console.log(resp))
+        .catch(err => console.log(err))
     }
 
     return (
