@@ -13,7 +13,7 @@ const UploadTags = ( { tags , setTags } ) => {
         <div className="upload-tags-container bg-white position-fixed">
             <form onSubmit={handleTags}>
                
-                <select onChange={(e) => {setTags(tags => [...tags,e.target.value]) ; if(e.target.value === 'blank') setTags(tags) ; return}} className="form-control">
+                <select onChange={(e) => {setTags(tags => [...tags,e.target.value]) ; if(e.target.value === 'blank') setTags(tags) ; if(tags.includes(e.target.value)) setTags(tags) ; return}} className="form-control">
                     <option value="blank">Add Tags To Attract Employees In Same Scope</option>
                     <option value="Web Developing">Web Developing</option>
                     <option value="Web Engineering">Web Engineering</option>
