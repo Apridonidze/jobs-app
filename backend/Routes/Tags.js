@@ -2,13 +2,25 @@ const express = require('express')
 const verifyToken = require('../config/verifyToken')
 const TagsRouter = express.Router()
 
+const TagsSchema = require('../schemas/TagsSchema')
+
+
 TagsRouter.get('/my-tags',verifyToken, (req,res) => {
     res.send('tags router get path')
 })
 
 
-TagsRouter.post('/upload-tags' ,verifyToken, (req,res) => {
+TagsRouter.post('/upload-tags' ,verifyToken, async (req,res) => {
+
     console.log(req.body)
+    const tagsResp = TagsSchema(req.body)
+
+    if(!tagsResp.success){
+        return res.status(400).json({err : 'Invalid Input'})
+    }
+
+
+    return res.status(200).json('data recieved')
 
     //check req.body in schema
     //if !success return res status 400
