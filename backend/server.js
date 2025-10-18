@@ -13,7 +13,8 @@ const LoginRouter = require('../backend/Routes/Login');
 const UserRouter = require('./Routes/User')
 const JobsRouter = require('./Routes/Jobs')
 const AvatarRouter = require('./Routes/Avatar');
-const DescRouter = require('./Routes/Desc')
+const DescRouter = require('./Routes/Desc');
+const TagsRouter = require('./Routes/Tags');
 
 const PORT = process.env.SERVER_PORT;
 
@@ -27,6 +28,7 @@ app.use('/user', UserRouter)
 app.use('/jobs', JobsRouter )
 app.use('/avatar', AvatarRouter )
 app.use('/desc', DescRouter )
+app.use('/tags', TagsRouter)
 
 
 app.listen(PORT, () => {
