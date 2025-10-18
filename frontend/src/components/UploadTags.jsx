@@ -7,7 +7,6 @@ const UploadTags = ( { tags , setTags } ) => {
         if(tags.length > 0){
 
         }
-        //add alert : no tags added
     }
 
     return (
@@ -30,7 +29,7 @@ const UploadTags = ( { tags , setTags } ) => {
                     ))}
                 </div>
 
-                <input type="submit" value="Upload Tags" />
+                <input type="submit" className="btn btn-success" value="Upload Tags" />
 
             </form>
         </div>

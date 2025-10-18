@@ -128,7 +128,7 @@ const MyUserSidebar = ( { user } ) => {
 
             <input type="text" className="form-control" value={descValue ? descValue : 'No Description Yet'} onClick={() => setToggleUploadDesc(true)} placeholder="Add About Me..."/>
 
-            {user && user.role === 'Recruiter' && <RecruiterForms setToggleUploadTags={setToggleUploadTags}/>}
+            {user && user.role === 'Recruiter' && <RecruiterForms setToggleUploadTags={setToggleUploadTags} tags={tags}/>}
             {user && user.role === 'Employee' && <EmployeeForms />}
 
         </div>
