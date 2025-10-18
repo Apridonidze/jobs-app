@@ -17,8 +17,8 @@ const UploadTags = ( { tags , setTags } ) => {
         //else send to server.js
 
         axios.post(UPLOAD_TAGS_URL , tags, {headers: {Authorization : `Bearer ${cookies.token}`}})
-        .then(resp => console.log(resp))
-        .catch(err => console.log(err))
+        .then(resp => console.log(resp)) //add alert messageToggle = true
+        .catch(err => console.log(err)) //add alert messageToggle = true
     }
 
     return (
