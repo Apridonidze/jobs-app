@@ -39,6 +39,8 @@ const MyUserSidebar = ( { user } ) => {
 
     const AVATAR_URL = 'http://localhost:8080/avatar' //move to .env
     const USER_DESC_URL = 'http://localhost:8080/desc/my-desc' //move to .env
+    const USER_TAGS_URL= 'http://localhost:8080/desc/my-tags' //move to .env
+    
 
     const [cookies,setCookies,removeCookies] = useCookies(['token']) 
 
@@ -67,6 +69,11 @@ const MyUserSidebar = ( { user } ) => {
             axios.get(USER_DESC_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
             .then(resp => setDescValue(`${resp.data.slice(0, 25)}...`)) 
             .catch(err => console.log(err)) //add error message here and setDescValue to empty if there is no desc or database error
+
+
+            axios.get(USER_TAGS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
+            .then(resp => console.log(resp))
+            .catch(err => console.log(err))
         
 
         },[])
