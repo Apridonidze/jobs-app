@@ -13,7 +13,6 @@ TagsRouter.get('/my-tags',verifyToken, (req,res) => {
 
 TagsRouter.post('/upload-tags' ,verifyToken, async (req,res) => {
 
-    console.log(req.body)
     const tagsResp = TagsSchema(req.body)
 
     if(!tagsResp.success){
@@ -25,27 +24,22 @@ TagsRouter.post('/upload-tags' ,verifyToken, async (req,res) => {
     try{
          const [rows] = await db.query('select * from user_tags where user_id = ?',[req.user.userId])
 
-    if(rows.length < 1){
+        if(rows.length < 1){
     
-        await db.query('insert into user_tags (user_id,user_tags) values (?,?)',[req.user.userId, JSON.stringify(req.body.tags)])
-        return res.status(200).json('data recieved')
+            await db.query('insert into user_tags (user_id,user_tags) values (?,?)',[req.user.userId, JSON.stringify(req.body.tags)])
+            return res.status(200).json('data recieved')
     
-    }
+        }
 
-    await db.query('update user_tags set user_tags = ? where user_id = ?',[JSON.stringify(req.body.tags), req.user.userId ])
-    return res.status(200).json('tags updated succesffulyly')
+        await db.query('update user_tags set user_tags = ? where user_id = ?',[JSON.stringify(req.body.tags), req.user.userId ])
+        return res.status(200).json('tags updated succesffulyly')
 
     }catch(err){
     
         return res.status(500).json({err : 'Database Error'})
     
     }
-    //check req.body in schema
-    //if !success return res status 400
-    
-    //else try inserting into table (check if user already has tags if so update table else if user doesnot have tags insert into table)
-    //if successfully return res status 200
-    //else send res status 500 (database error)
+
 })
 
 
