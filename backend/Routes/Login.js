@@ -6,6 +6,7 @@ require('dotenv').config()
 
 const LoginRouter = express.Router()
 const db = require('../db/db')
+const rateLimiter = require('../config/rateLimiter')
 
 const LoginSchema = require('../schemas/LoginSchema')
 
@@ -17,7 +18,7 @@ LoginRouter.get('/', (req,res) => {
 
 
 
-LoginRouter.post('/', async (req,res) => {
+LoginRouter.post('/', rateLimiter,async (req,res) => {
     
     const loginResp = LoginSchema(req.body)
 
