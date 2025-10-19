@@ -19,6 +19,7 @@ const MyUserSidebar = ( { user } ) => {
     const [toggleUploadAvatar,setToggleUploadAvatar] = useState(false)
     const [toggleUploadDesc,setToggleUploadDesc] = useState(false)
     const [toggleUploadTags,setToggleUploadTags] = useState(false)
+    const [toggleUploadTechnologies,setToggleUploadTechnologies] = useState(false)
     const [toggleUploadLanguages,setToggleUploadLanguages] = useState(false)
 
     
@@ -31,6 +32,11 @@ const MyUserSidebar = ( { user } ) => {
     const [tagsMessage,setTagsMessage] = useState('')
     const [toggleTagsMessage,setToggleTagsMessage] = useState(false)
     const [isTagsSuccessfull, setIsTagsSuccessfull] = useState(null)
+
+    const [technologies, setTechnologies] = useState([])
+    const [technologiesMessage, setTechnologiesMessage] = useState('')
+    const [toggleTechnologiesMessage, setToggleTechnologiesMessage] = useState(false)
+    const [isTechnologiesSuccessfull, setIsTechnologiesSuccessfull] = useState(null)
 
     
 
@@ -121,9 +127,16 @@ const MyUserSidebar = ( { user } ) => {
                 <>
                     <div className="upload-tags-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadTags(false)}></div>
                     <UploadTags tags={tags} setTags={setTags} />
-                    {/* add tagsmessage popup whne toggletagsmesasge is true  */}
                 </>
 
+            }
+
+            {toggleUploadTechnologies &&
+                <>
+                    <div className="upload-technologies-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadTechnologies(false)}></div>
+                    <UploadTechnologies />
+                    
+                </>
             }
 
             <h1>Finish Up Your Profile </h1> {/**check if user has to finish their profile by fetching data form the database andd display it based on this option from backend (make another route to check if user has all data inserted )*/}
@@ -136,7 +149,9 @@ const MyUserSidebar = ( { user } ) => {
             <input type="text" className="form-control" value={descValue ? descValue : 'No Description Yet'} onClick={() => setToggleUploadDesc(true)} placeholder="Add About Me..."/>
 
             {user && user.role === 'Recruiter' && <RecruiterForms setToggleUploadTags={setToggleUploadTags} tags={tags}/>}
-            {user && user.role === 'Employee' && <EmployeeForms />}
+            {user && user.role !== 'Employee' && <EmployeeForms setToggleUploadTechnologies={setToggleUploadTechnologies} technologies={technologies}/>}
+
+
 
         </div>
     )
