@@ -1,10 +1,11 @@
 const express = require('express')
 const JobsRouter =  express.Router()
 
-const verifyToken = require('../config/verifyToken')
 const db = require('../db/db')
+const verifyToken = require('../config/verifyToken')
+const rateLimiter  = require('../config/rateLimiter')
 
-JobsRouter.get('/', async (req,res) => {
+JobsRouter.get('/', verifyToken , rateLimiter,async (req,res) => {
 
     const [ rows ] = await db.query('select * from jobs')
 
@@ -16,7 +17,7 @@ JobsRouter.get('/', async (req,res) => {
 
 })
 
-JobsRouter.get('/user-jobs' ,verifyToken, async (req,res) => {
+JobsRouter.get('/user-jobs' , rateLimiter ,verifyToken, async (req,res) => {
 
     try{
 
@@ -34,7 +35,7 @@ JobsRouter.get('/user-jobs' ,verifyToken, async (req,res) => {
 
 })
 
-JobsRouter.post('/new-jobs', verifyToken, async (req,res) => {
+JobsRouter.post('/new-jobs', rateLimiter,verifyToken, async (req,res) => {
 
 
     const JobsResp = JobsSchema(req.body)
