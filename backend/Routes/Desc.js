@@ -4,6 +4,7 @@ const DescRouter = express.Router()
 const db = require('../db/db')
 const validateDesc = require('../schemas/DescSchema')
 const verifyToken = require('../config/verifyToken')
+const rateLimiter = require('../config/rateLimiter')
 
 DescRouter.get('/my-desc', verifyToken , async (req,res) => {
     
@@ -29,7 +30,7 @@ DescRouter.get('/my-desc', verifyToken , async (req,res) => {
 
 })
 
-DescRouter.post('/add-desc', verifyToken, async(req,res) => {
+DescRouter.post('/add-desc', rateLimiter,verifyToken, async(req,res) => {
 
     const descResp = validateDesc(req.body)
 
