@@ -1,7 +1,8 @@
 const UploadTechnologies = () => {
     return(
-        <div className="upload-technologies-container">
-            UploadTechnologies.jsx
+        <div className="upload-technologies-container bg-white position-fixed">
+            <select className="form-control">
+            </select>
         </div>
     )
 }
