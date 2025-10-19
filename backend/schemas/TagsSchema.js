@@ -1,7 +1,7 @@
 const z = require('zod')
 
 const tagsSchema = z.object({
-    tags: z.array().min(1)
+    tags: z.array(z.string().min(1, "Tag cannot be empty")).nonempty("Tag Fileds Are Empty"),
 })
 
 
