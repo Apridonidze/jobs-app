@@ -6,6 +6,7 @@ import UploadAvatar from "../components/UploadAvatar"
 import UploadDesc from "../components/UploadDesc"
 import RecruiterForms from "../components/RecruiterForms"
 import EmployeeForms from "../components/EmployeeForms"
+import UploadTechnologies from '../components/UploadTechnologies'
 
 import DescMessage from '../alerts/DescMessage'
 
