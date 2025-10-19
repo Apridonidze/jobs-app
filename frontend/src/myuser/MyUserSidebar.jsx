@@ -39,7 +39,7 @@ const MyUserSidebar = ( { user } ) => {
 
     const AVATAR_URL = 'http://localhost:8080/avatar' //move to .env
     const USER_DESC_URL = 'http://localhost:8080/desc/my-desc' //move to .env
-    const USER_TAGS_URL= 'http://localhost:8080/desc/my-tags' //move to .env
+    const USER_TAGS_URL= 'http://localhost:8080/tags/my-tags' //move to .env
     
 
     const [cookies,setCookies,removeCookies] = useCookies(['token']) 

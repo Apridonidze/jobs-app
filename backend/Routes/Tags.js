@@ -6,8 +6,14 @@ const verifyToken = require('../config/verifyToken')
 const TagsSchema = require('../schemas/TagsSchema')
 const rateLimiter = require('../config/rateLimiter')
 
-TagsRouter.get('/my-tags',verifyToken, (req,res) => {
-    res.send('tags router get path')
+TagsRouter.get('/my-tags',verifyToken, async (req,res) => {
+
+    const [ rows ] = await db.query('select * from user_tags where user_id = ?',[req.user.userId])
+
+    if(rows.length < 1)return res.status(200).json('No Tags Yet')
+    console.log(rows[0].user_tags)
+    return res.status(200).json(rows[0].user_tags)
+
 })
 
 
