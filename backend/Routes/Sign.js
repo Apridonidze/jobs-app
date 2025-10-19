@@ -9,6 +9,7 @@ require('dotenv').config()
 
 const validateUser = require('../schemas/UserSchema')
 const db = require('../db/db')
+const rateLimiter = require('../config/rateLimiter')
 
 const corsOption = {
     origin: 'http://localhost:5173', 
@@ -25,7 +26,7 @@ SignRouter.get('/' , (req,res) => {
     res.send('sign path')
 })
 
-SignRouter.post('/', async (req, res) => {
+SignRouter.post('/', rateLimiter ,async (req, res) => {
 
     const validationResp = validateUser(req.body);
 
