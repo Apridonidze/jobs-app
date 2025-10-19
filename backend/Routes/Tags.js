@@ -4,14 +4,14 @@ const TagsRouter = express.Router()
 const db = require('../db/db');
 const verifyToken = require('../config/verifyToken')
 const TagsSchema = require('../schemas/TagsSchema')
-
+const rateLimiter = require('../config/rateLimiter')
 
 TagsRouter.get('/my-tags',verifyToken, (req,res) => {
     res.send('tags router get path')
 })
 
 
-TagsRouter.post('/upload-tags' ,verifyToken, async (req,res) => {
+TagsRouter.post('/upload-tags' , rateLimiter, verifyToken, async (req,res) => {
 
     const tagsResp = TagsSchema(req.body)
 
