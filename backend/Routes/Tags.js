@@ -10,14 +10,14 @@ TagsRouter.get('/my-tags',verifyToken, async (req,res) => {
 
     const [ rows ] = await db.query('select * from user_tags where user_id = ?',[req.user.userId])
 
-    if(rows.length < 1)return res.status(200).json('No Tags Yet')
-    console.log(rows[0].user_tags)
+    if(rows.length < 1)return res.status(400).json('No Tags Yet')
+
     return res.status(200).json(rows[0].user_tags)
 
 })
 
 
-TagsRouter.post('/upload-tags' , rateLimiter, verifyToken, async (req,res) => {
+TagsRouter.post('/upload-tags' , verifyToken, rateLimiter, async (req,res) => {
 
     const tagsResp = TagsSchema(req.body)
 

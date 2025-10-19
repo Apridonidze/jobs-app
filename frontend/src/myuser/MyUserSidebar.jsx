@@ -72,7 +72,7 @@ const MyUserSidebar = ( { user } ) => {
 
 
             axios.get(USER_TAGS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
-            .then(resp => console.log(resp))
+            .then(resp => setTags(resp.data))
             .catch(err => console.log(err))
         
 

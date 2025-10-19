@@ -8,7 +8,7 @@ require('dotenv').config()
 const verifyToken = require('../config/verifyToken')
 const rateLimiter = require('../config/rateLimiter')
 
-UserRouter.get('/my-user', verifyToken ,rateLimiter, async (req,res) => {
+UserRouter.get('/my-user', verifyToken , async (req,res) => {
 
     const userId = req.user.userId
 
