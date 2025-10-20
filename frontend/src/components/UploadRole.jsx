@@ -1,6 +1,6 @@
 const UploadRole = () => {
     return(
-        <div className="upload-role-container">
+        <div className="upload-role-container position-fixed bg-white">
             <select>        
                 <option value="blank">I Am A:</option>
                 <option value="Figma Designer">Figma Designer</option>
