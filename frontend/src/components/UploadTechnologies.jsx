@@ -1,7 +1,7 @@
-const UploadTechnologies = () => {
+const UploadTechnologies = ( { technologies ,setTechnologies } ) => {
     return(
         <div className="upload-technologies-container bg-white position-fixed">
-            <select className="form-control">
+            <select className="form-control" onChange={(e) => setTechnologies(tech => [...tech, e.target.value])}>
                 <option value="blank">What Technologies Are You Searching In Employee</option>
                 <option value="GO">GO</option>
                 <option value="C++">C++</option>
@@ -30,6 +30,13 @@ const UploadTechnologies = () => {
                 <option value="MongoDb">MongoDb</option>
                 <option value="Postgres">Postgres</option>
             </select>
+
+            <div className="technologies-list">
+                {technologies.map((tech, techId) => (
+                    <span key={techId} onClick={() => setTechnologies(technologies.filter(t => t !== tech))}>{tech}</span>
+                ))}
+            </div>
+
         </div>
     )
 }

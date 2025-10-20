@@ -138,7 +138,7 @@ const MyUserSidebar = ( { user } ) => {
             {toggleUploadTechnologies &&
                 <>
                     <div className="upload-technologies-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadTechnologies(false)}></div>
-                    <UploadTechnologies />
+                    <UploadTechnologies technologies={technologies} setTechnologies={setTechnologies}/>
                     
                 </>
             }
