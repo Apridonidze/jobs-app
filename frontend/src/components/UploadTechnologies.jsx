@@ -1,7 +1,7 @@
 const UploadTechnologies = ( { technologies ,setTechnologies } ) => {
     return(
         <div className="upload-technologies-container bg-white position-fixed">
-            <select className="form-control" onChange={(e) => setTechnologies(tech => [...tech, e.target.value])}>
+            <select className="form-control" onChange={(e) => {setTechnologies(tech => [...tech, e.target.value]) ;if(e.target.value === 'blank') setTechnologies(technologies) ; if(technologies.includes(e.target.value)) setTechnologies(technologies) ; return}}>
                 <option value="blank">What Technologies Are You Searching In Employee</option>
                 <option value="GO">GO</option>
                 <option value="C++">C++</option>
