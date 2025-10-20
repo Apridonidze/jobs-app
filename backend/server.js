@@ -15,6 +15,7 @@ const JobsRouter = require('./Routes/Jobs')
 const AvatarRouter = require('./Routes/Avatar');
 const DescRouter = require('./Routes/Desc');
 const TagsRouter = require('./Routes/Tags');
+const TechRouter = require('./Routes/Technologies');
 
 const PORT = process.env.SERVER_PORT;
 
@@ -29,6 +30,7 @@ app.use('/jobs', JobsRouter )
 app.use('/avatar', AvatarRouter )
 app.use('/desc', DescRouter )
 app.use('/tags', TagsRouter)
+app.use('/technologies' , TechRouter)
 
 
 app.listen(PORT, () => {
