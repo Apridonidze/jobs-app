@@ -1,15 +1,19 @@
 import axios from "axios"
+import { useCookies } from "react-cookie"
 
 const UploadTechnologies = ( { technologies ,setTechnologies } ) => {
 
+    const [cookies] = useCookies(['token'])
+
+    const UPLOAD_TECH_URL = 'http://localhost:8080/technologies/new-technologies'
 
     const handleUploadTech = () => {
         if(technologies.length < 1)return
 
         axios
-        .post()
-        .then()
-        .catch()
+        .post(UPLOAD_TECH_URL , technologies , {headers : {Authorization : `Bearer ${cookies.token}`}})
+        .then(resp => console.log(resp))
+        .catch(err => console.log(err))
     }
 
 
