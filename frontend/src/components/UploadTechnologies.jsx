@@ -7,7 +7,10 @@ const UploadTechnologies = ( { technologies ,setTechnologies } ) => {
 
     const UPLOAD_TECH_URL = 'http://localhost:8080/technologies/new-technologies'
 
-    const handleUploadTech = () => {
+    const handleUploadTech = (e) => {
+
+        e.preventDefault()
+
         if(technologies.length < 1)return
 
         axios
@@ -57,6 +60,8 @@ const UploadTechnologies = ( { technologies ,setTechnologies } ) => {
                         <span key={techId} onClick={() => setTechnologies(technologies.filter(t => t !== tech))}>{tech}</span>
                     ))}
                 </div>
+
+                <input type="submit" value="Upload Your Technologies List" />
         
         </form>
 
