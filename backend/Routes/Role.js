@@ -11,12 +11,19 @@ RoleRouter.get('/my-roles' , (req, res) => {
 
 
 RoleRouter.post('/upload-roles' , verifyToken  , rateLimiter , async(req,res) => {
-    console.log(req.body)
 
-    const roleResp = await RoleSchema(data)
+    const roleResp = RoleSchema(req.body)
     
     if(!roleResp.success){
         return res.status(400).json('invalid input')
+    }
+
+    try{
+
+        const [ rows ] = await db.query('select * from user_roles where user_id = ?',[req.user.userId])
+
+    }catch(err){
+        return res.status(500).json('Database Error')
     }
 
 })
