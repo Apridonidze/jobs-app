@@ -24,7 +24,7 @@ const Main = () => {
 
     const [user,setUser] = useState(null)
 
-    const [isProfileFinished,setIsProfileFinished] = useState('')
+    const [isProfileFinished,setIsProfileFinished] = useState(null)
 
 
     useEffect(() => {
@@ -38,8 +38,8 @@ const Main = () => {
         .catch(err => console.log(err))
 
         axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}})
-        .then(resp => console.log(resp))
-        .catch(err => console.log(err))
+        .then(resp => setIsProfileFinished(true))
+        .catch(err => setIsProfileFinished(false))
 
     },[])
 
@@ -60,7 +60,8 @@ const Main = () => {
     
     return(
         <div className="main-container container d-flex flex-column  justify-content-between min-vh-100 py-2">
-            {/** check if user has finished their page , (first step it to just sign up ,after that they need to finish their profile (add avatar, add about me , add resume file))*/}
+
+            {isProfileFinished && !isProfileFinished && <h1>profile not finished</h1>}
 
             <NavBar user={user} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs} toggleJobsListings={toggleJobsListings} setToggleJobsListings={setToggleJobsListings}/>
            
