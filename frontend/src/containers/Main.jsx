@@ -21,7 +21,7 @@ const Main = () => {
     const IS_PROFILE_FINISHED_URL = 'http://localhost:8080/is-profile-finished' //move to .env
 
 
-    const [cookies, setCookies , removeCookies] = useCookies(['token'])
+    const [cookies] = useCookies(['token'])
 
     const [user,setUser] = useState(null)
 
@@ -38,13 +38,12 @@ const Main = () => {
         })
         .catch(err => console.log(err))
 
-    },[])
-
-    useEffect(() => {
-         axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}})
+        axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}})
         .then(resp => console.log(resp) , setIsProfileFinished(true))
         .catch(err => console.log(err) , setIsProfileFinished(false))
-    },[isProfileFinished])
+    
+
+    },[])
 
     //TODO : add database folder and add readme file for it 
 
