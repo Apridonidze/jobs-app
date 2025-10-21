@@ -1,7 +1,7 @@
-const UploadRole = () => {
+const UploadRole = ( { setRoles, roles} ) => {
     return(
         <div className="upload-role-container position-fixed bg-white">
-            <select>        
+            <select onChange={(e) => {setRoles(role => [...role, e.target.value]) ;if(e.target.value === 'blank') setRoles(roles) ; if(roles.includes(e.target.value)) setRoles(roles) ; return}}>        
                 <option value="blank">I Am A:</option>
                 <option value="Figma Designer">Figma Designer</option>
                 <option value="Frontend Developer">Frontend Developer</option>
@@ -14,6 +14,11 @@ const UploadRole = () => {
                 <option value="Manual Tester">Manual Tester</option>
                 <option value="Automation Tester">Automat Tester</option>
             </select>
+
+            <div className="role-list">
+
+            </div>
+
         </div>
     )
 }

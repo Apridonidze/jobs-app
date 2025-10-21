@@ -1,4 +1,4 @@
-const EmployeeForms = ( { setToggleUploadTechnologies , technologies, roles ,setToggleUploadRole  } ) => {
+const EmployeeForms = ( { setToggleUploadTechnologies , technologies,  roles ,setToggleUploadRole  } ) => {
     return(
         <div className="employee-forms-container">
 

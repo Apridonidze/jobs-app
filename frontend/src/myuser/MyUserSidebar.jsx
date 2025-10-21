@@ -152,7 +152,7 @@ const MyUserSidebar = ( { user } ) => {
             {toggleUploadRole &&
                 <>
                     <div className="upload-roles-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadRole(false)}></div>
-                    <UploadRole />
+                    <UploadRole setRoles={setRoles} roles={roles}/>
                 </>
             }
 
