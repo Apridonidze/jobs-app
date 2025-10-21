@@ -7,6 +7,7 @@ import CreateJobs from "../createjobs/CreateJobs"
 import FindJobs from "../components/FindJobs"
 import Footer from "../components/Foooter"
 import JobListings from "../components/JobListings"
+import isProfileFinishedMessage from "../alerts/isProfileFinishedMessage"
 
 const Main = () => {
 
@@ -17,7 +18,7 @@ const Main = () => {
 
     
     const MY_USER_API = 'http://localhost:8080/user/my-user' //move to .env
-    const IS_PROFILE_FINISHED_URL = 'http://localhost:8080/user/my-user' //move to .env
+    const IS_PROFILE_FINISHED_URL = 'http://localhost:8080/is-profile-finished' //move to .env
 
 
     const [cookies, setCookies , removeCookies] = useCookies(['token'])
@@ -37,11 +38,13 @@ const Main = () => {
         })
         .catch(err => console.log(err))
 
-        axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}})
-        .then(resp => setIsProfileFinished(true))
-        .catch(err => setIsProfileFinished(false))
-
     },[])
+
+    useEffect(() => {
+         axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}})
+        .then(resp => console.log(resp) , setIsProfileFinished(true))
+        .catch(err => console.log(err) , setIsProfileFinished(false))
+    },[isProfileFinished])
 
     //TODO : add database folder and add readme file for it 
 
@@ -61,9 +64,9 @@ const Main = () => {
     return(
         <div className="main-container container d-flex flex-column  justify-content-between min-vh-100 py-2">
 
-            {isProfileFinished && !isProfileFinished && <h1>profile not finished</h1>}
 
             <NavBar user={user} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs} toggleJobsListings={toggleJobsListings} setToggleJobsListings={setToggleJobsListings}/>
+            {isProfileFinished && isProfileFinished && <isProfileFinishedMessage />}
            
             {toggleFindJobs && <FindJobs />}
             {toggleCreateJobs && <CreateJobs />}
