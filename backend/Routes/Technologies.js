@@ -7,8 +7,22 @@ const rateLimiter = require('../config/rateLimiter')
 const TechnologiesSchema = require('../schemas/TechnologiesSchema')
 const db = require('../db/db')
 
-TechRouter.get('/user-technologies', (req,res) => {
-    res.send('/technologies path')
+TechRouter.get('/user-technologies', verifyToken ,async (req,res) => {
+
+    const [ rows ] = await db.query('select * from user_technologies where user_id = ?', [req.user.userId])
+
+    try{
+
+        if(rows.length < 1){
+            return res.status(200).json('No Technologies Yet')
+        }
+
+        return res.status(200).json(rows)
+
+    }catch(err){
+        return res.status(500).json('Database Error')
+    }
+
 })
 
 
