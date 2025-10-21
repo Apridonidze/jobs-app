@@ -1,6 +1,7 @@
 const express = require('express')
 const RoleRouter = express.Router()
 
+const RoleSchema = require('../schemas/RoleSchema')
 const verifyToken = require('../config/verifyToken')
 const rateLimiter = require('../config/rateLimiter')
 
@@ -11,6 +12,13 @@ RoleRouter.get('/my-roles' , (req, res) => {
 
 RoleRouter.post('/upload-roles' , verifyToken  , rateLimiter , async(req,res) => {
     console.log(req.body)
+
+    const roleResp = await RoleSchema(data)
+    
+    if(!roleResp.success){
+        return res.status(400).json('invalid input')
+    }
+
 })
 
 
