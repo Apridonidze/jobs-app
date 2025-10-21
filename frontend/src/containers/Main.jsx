@@ -17,10 +17,14 @@ const Main = () => {
 
     
     const MY_USER_API = 'http://localhost:8080/user/my-user' //move to .env
+    const IS_PROFILE_FINISHED_URL = 'http://localhost:8080/user/my-user' //move to .env
+
 
     const [cookies, setCookies , removeCookies] = useCookies(['token'])
 
     const [user,setUser] = useState(null)
+
+    const [isProfileFinished,setIsProfileFinished] = useState('')
 
 
     useEffect(() => {
@@ -31,6 +35,10 @@ const Main = () => {
             const userData = resp.data.data[0]
             setUser({role : userData.user_role , name : userData.user_name, surname : userData.user_surname , birthDate : userData.user_birthdate, gender : userData.user_gender})
         })
+        .catch(err => console.log(err))
+
+        axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}})
+        .then(resp => console.log(resp))
         .catch(err => console.log(err))
 
     },[])

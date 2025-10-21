@@ -17,6 +17,7 @@ const DescRouter = require('./Routes/Desc');
 const TagsRouter = require('./Routes/Tags');
 const TechRouter = require('./Routes/Technologies');
 const RoleRouter = require('./Routes/Role');
+const isProfileFinishedRouter = require('./Routes/isProfileFinished');
 
 const PORT = process.env.SERVER_PORT;
 
@@ -33,6 +34,8 @@ app.use('/desc', DescRouter )
 app.use('/tags', TagsRouter)
 app.use('/technologies' , TechRouter)
 app.use('/roles', RoleRouter)
+app.use('/is-profile-finished', isProfileFinishedRouter)
+
 
 app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
