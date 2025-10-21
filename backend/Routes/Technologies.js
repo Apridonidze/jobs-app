@@ -21,10 +21,15 @@ TechRouter.post('/new-technologies', verifyToken, rateLimiter, async (req,res) =
     
     try{
 
-        const [ rows ] = await db.query('select * from ')
+        const [ rows ] = await db.query('select * from user_technologies')
 
-        //if rows.length < 1 send insert query
-        //if rows.length > 1 send update query
+        if(rows.length < 1){
+
+            await db.query('update ')
+
+            return res.status(200).json('Technologies Uploaded Successfully')
+
+        }
 
     }
 
