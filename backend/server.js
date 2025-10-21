@@ -16,6 +16,7 @@ const AvatarRouter = require('./Routes/Avatar');
 const DescRouter = require('./Routes/Desc');
 const TagsRouter = require('./Routes/Tags');
 const TechRouter = require('./Routes/Technologies');
+const RoleRouter = require('./Routes/Role');
 
 const PORT = process.env.SERVER_PORT;
 
@@ -31,7 +32,7 @@ app.use('/avatar', AvatarRouter )
 app.use('/desc', DescRouter )
 app.use('/tags', TagsRouter)
 app.use('/technologies' , TechRouter)
-
+app.use('/roles', RoleRouter)
 
 app.listen(PORT, () => {
     console.log(`http://localhost:${PORT}`);
