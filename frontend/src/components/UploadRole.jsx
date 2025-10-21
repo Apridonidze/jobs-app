@@ -1,14 +1,20 @@
 import axios from "axios"
+import { useCookies } from "react-cookie"
 
 const UploadRole = ( { setRoles, roles} ) => {
 
-    const UPLOAD_ROLE_URL = ''
+    const UPLOAD_ROLE_URL = 'http://localhost:8080/roles/upload-roles'
+
+    const [cookies] = useCookies(['token'])
 
 
-    const handleUploadRole = () => {
+    const handleUploadRole = (e) => {
+
+        e.preventDefault()
+
         if(roles.length < 1) return
 
-        axios.post()
+        axios.post(UPLOAD_ROLE_URL , {roles : roles}, {headers : {Authorization : `Bearer ${cookies.token}`}})
         .then(resp => console.log(resp))
         .catch(err => console.log(err))
     }
