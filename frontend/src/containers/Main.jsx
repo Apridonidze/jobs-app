@@ -7,7 +7,7 @@ import CreateJobs from "../createjobs/CreateJobs"
 import FindJobs from "../components/FindJobs"
 import Footer from "../components/Foooter"
 import JobListings from "../components/JobListings"
-import isProfileFinishedMessage from "../alerts/isProfileFinishedMessage"
+import ProfileMessage from "../alerts/ProfileMessage"
 
 const Main = () => {
 
@@ -25,7 +25,7 @@ const Main = () => {
 
     const [user,setUser] = useState(null)
 
-    const [isProfileFinished,setIsProfileFinished] = useState(null)
+    const [isProfileFinished , setIsProfileFinished] = useState(null)
 
 
     useEffect(() => {
@@ -39,7 +39,7 @@ const Main = () => {
         .catch(err => console.log(err))
 
         axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}})
-        .then(resp => console.log(resp) , setIsProfileFinished(true))
+        .then(resp => {console.log(resp) ; setIsProfileFinished(resp.data.code)})
         .catch(err => console.log(err) , setIsProfileFinished(false))
     
 
@@ -65,7 +65,7 @@ const Main = () => {
 
 
             <NavBar user={user} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs} toggleJobsListings={toggleJobsListings} setToggleJobsListings={setToggleJobsListings}/>
-            {isProfileFinished && isProfileFinished && <isProfileFinishedMessage />}
+            {isProfileFinished && isProfileFinished && <ProfileMessage />}
            
             {toggleFindJobs && <FindJobs />}
             {toggleCreateJobs && <CreateJobs />}

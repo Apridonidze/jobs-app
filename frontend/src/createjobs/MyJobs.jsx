@@ -6,7 +6,7 @@ const MyJobs = () => {
 
     const JOBS_URL = 'http://localhost:8080/jobs/user-jobs'
 
-    const [cookies,setCookies,removeCookies] = useCookies(['token'])
+    const [cookies] = useCookies(['token'])
 
     const [yourJobs,setYourJobs] = useState([])
     const [noJobsFound,setNoJobsFound] = useState('')

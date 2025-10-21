@@ -1,4 +1,4 @@
-const isProfileFinished = () => {
+const ProfileMessage = () => {
     return (
         <div className="is-profile-finished-container ">
             Profile is not finished
@@ -8,4 +8,4 @@ const isProfileFinished = () => {
 }
 
 
-export default isProfileFinished
+export default ProfileMessage
