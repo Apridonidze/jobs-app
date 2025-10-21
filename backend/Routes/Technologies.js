@@ -13,6 +13,7 @@ TechRouter.get('/user-technologies', (req,res) => {
 
 
 TechRouter.post('/new-technologies', verifyToken, rateLimiter, async (req,res) => {
+    
     const TechResp = TechnologiesSchema(req.body)
 
     if(!TechResp.success){
@@ -25,12 +26,16 @@ TechRouter.post('/new-technologies', verifyToken, rateLimiter, async (req,res) =
 
         if(rows.length < 1){
 
-            await db.query('update ')
-
+            await db.query('insert into user_technologies (user_id,user_technologies) values (?,?)', [req.user.userId, JSON.stringify(req.body.technologies)])
+            
             return res.status(200).json('Technologies Uploaded Successfully')
-
+            
         }
 
+        await db.query('update user_technologies set user_technologies = ? where user_id = ?' , [JSON.stringify(req.body.technologies),req.user.userId])
+    
+        return res.status(200).json('Technologies Updated Successfully')
+    
     }
 
     catch(err){
