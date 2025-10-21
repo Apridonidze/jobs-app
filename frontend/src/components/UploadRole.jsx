@@ -16,7 +16,9 @@ const UploadRole = ( { setRoles, roles} ) => {
             </select>
 
             <div className="role-list">
-
+                {roles.map((role,roleId) => (
+                    <span key={roleId} onClick={() => setRoles(roles.filter(r => r !== role))}>{role}</span>
+                ))}
             </div>
 
         </div>
