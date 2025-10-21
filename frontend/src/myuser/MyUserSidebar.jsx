@@ -49,7 +49,8 @@ const MyUserSidebar = ( { user } ) => {
 
     const AVATAR_URL = 'http://localhost:8080/avatar' //move to .env
     const USER_DESC_URL = 'http://localhost:8080/desc/my-desc' //move to .env
-    const USER_TAGS_URL= 'http://localhost:8080/tags/my-tags' //move to .env
+    const USER_TAGS_URL = 'http://localhost:8080/tags/my-tags' //move to .env
+    const USER_TECHNOLOGIES_URL = 'http://localhost:8080/technologies/user-technologies' //move to .env
     
 
     const [cookies,setCookies,removeCookies] = useCookies(['token']) 
@@ -84,6 +85,11 @@ const MyUserSidebar = ( { user } ) => {
             axios.get(USER_TAGS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
             .then(resp => setTags(resp.data))
             .catch(err => console.log(err))
+
+
+            axios.get(USER_TECHNOLOGIES_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
+            .then(resp => setTechnologies(resp.data[0].user_technologies))
+            .catch(err => console.log(err))
         
 
         },[])
@@ -96,7 +102,7 @@ const MyUserSidebar = ( { user } ) => {
                 formData.append("profile-picutre", profilePicture);
 
                 axios.post(AVATAR_URL , formData , {headers : {Authorization : `Bearer ${cookies.token}`}})
-                .then(resp => console.log(resp)) //addd alerts message here
+                .then(resp => console.log(resp.data[0].user_technologies)) //addd alerts message here
                 .catch(err => console.log(err)) //add alert message here
 
             }
@@ -161,8 +167,6 @@ const MyUserSidebar = ( { user } ) => {
 
             {user && user.role === 'Recruiter' && <RecruiterForms setToggleUploadTags={setToggleUploadTags} tags={tags}/>}
             {user && user.role !== 'Employee' && <EmployeeForms setToggleUploadTechnologies={setToggleUploadTechnologies} roles={roles} setToggleUploadRole={setToggleUploadRole} />}
-
-
 
         </div>
     )
