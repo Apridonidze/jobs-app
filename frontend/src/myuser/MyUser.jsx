@@ -12,6 +12,8 @@ const MyUser = () => {
 
     
     const MY_USER_API = 'http://localhost:8080/user/my-user' //move to .env
+    const IS_PROFILE_FINISHED_URL = 'http://localhost:8080/is-profile-finished' //move to .env
+
 
     const [user,setUser] = useState(null)
     const [isProfileFinished , setIsProfileFinished] = useState(null)
@@ -28,6 +30,13 @@ const MyUser = () => {
             setUser({role : userData.user_role , name : userData.user_name, surname : userData.user_surname , birthDate : userData.user_birthdate, gender : userData.user_gender})
         })
         .catch(err => console.log(err))
+
+
+        
+        axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}})
+        .then(resp => setIsProfileFinished(true))
+        .catch(err => setIsProfileFinished(false))
+
     
 
     },[])
@@ -35,9 +44,9 @@ const MyUser = () => {
     return (
         <div className="myuser-container container d-flex flex-column justify-content-between min-vh-100">
             <NavBarHeader user={user} />
-
-            {isProfileFinished && isProfileFinished && <ProfileMessage />}
            
+            {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
+            
             <div className="user-body d-flex">
                 <MyUserSidebar user={user}/>
 
