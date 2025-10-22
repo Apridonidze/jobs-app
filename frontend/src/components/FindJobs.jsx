@@ -1,3 +1,5 @@
+import FindJobsMessage from "../alerts/FindJobsMessage"
+
 const FindJobs = ( { isProfileFinished } ) => {
 
     //TODO (employee side): fetch jobs from database 
@@ -9,7 +11,7 @@ const FindJobs = ( { isProfileFinished } ) => {
         <div className="create-jobs-container ">
             FindJobs
 
-            {isProfileFinished !==null && !isProfileFinished ? <h1>Your Profile is not finished please finish it to find jobs that match your skills</h1> : <h1>profile finished</h1>} 
+            {isProfileFinished !==null && !isProfileFinished ? <FindJobsMessage /> : <h1></h1>} 
 
         </div>
     )
