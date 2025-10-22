@@ -1,12 +1,11 @@
 const Job = ( { jobId , job } ) => {
 
-    console.log(job)
     return(
-        <div className="job-container col border border-1 d-flex flex-column justify-content-between" key={jobId}>
+        <div className="job-container col col-6 border border-1 justify-content-between " key={jobId}>
             <div className="job-header">
             
-                <h4>{job.job_title}</h4>
-                <h6>{job.job_desc}</h6>
+                <h4 className="text-break">{job.job_title}</h4>
+                <h6 className="text-break">{job.job_desc}</h6>
             
             </div>
             
