@@ -156,8 +156,6 @@ const MyUserSidebar = ( { user } ) => {
                 </>
             }
 
-            <h1>Finish Up Your Profile </h1> {/**check if user has to finish their profile by fetching data form the database andd display it based on this option from backend (make another route to check if user has all data inserted )*/}
-
             <img src={avatarImg || DefaultImage} className="border border-rounded" style={{borderRadius : '100%', width: '350px' , height:'350px'}}/>
             
 

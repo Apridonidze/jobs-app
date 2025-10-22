@@ -19,7 +19,7 @@ const Main = () => {
     
     const MY_USER_API = 'http://localhost:8080/user/my-user' //move to .env
     const IS_PROFILE_FINISHED_URL = 'http://localhost:8080/is-profile-finished' //move to .env
-
+    
 
     const [cookies] = useCookies(['token'])
 
@@ -38,12 +38,18 @@ const Main = () => {
         })
         .catch(err => console.log(err))
 
+
+        
         axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}})
-        .then(resp => {console.log(resp) ; setIsProfileFinished(resp.data.code)})
-        .catch(err => console.log(err) , setIsProfileFinished(false))
-    
+        .then(resp => setIsProfileFinished(true))
+        .catch(err => setIsProfileFinished(false))
+
 
     },[])
+
+
+    console.log(isProfileFinished)
+
 
     //TODO : add database folder and add readme file for it 
 
@@ -65,7 +71,7 @@ const Main = () => {
 
 
             <NavBar user={user} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs} toggleJobsListings={toggleJobsListings} setToggleJobsListings={setToggleJobsListings}/>
-            {isProfileFinished && isProfileFinished && <ProfileMessage />}
+            {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
            
             {toggleFindJobs && <FindJobs />}
             {toggleCreateJobs && <CreateJobs />}

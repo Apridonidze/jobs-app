@@ -6,6 +6,7 @@ import { useCookies } from "react-cookie"
 import Footer from "../components/Foooter"
 import NavBarHeader from "../navbar/NavBarHeader"
 import MyUserSidebar from "./MyUserSidebar"
+import ProfileMessage from "../alerts/ProfileMessage"
 
 const MyUser = () => {
 
@@ -13,6 +14,8 @@ const MyUser = () => {
     const MY_USER_API = 'http://localhost:8080/user/my-user' //move to .env
 
     const [user,setUser] = useState(null)
+    const [isProfileFinished , setIsProfileFinished] = useState(null)
+
     
     const [cookies, setCookies , removeCookies] = useCookies(['token'])
 
@@ -25,6 +28,7 @@ const MyUser = () => {
             setUser({role : userData.user_role , name : userData.user_name, surname : userData.user_surname , birthDate : userData.user_birthdate, gender : userData.user_gender})
         })
         .catch(err => console.log(err))
+    
 
     },[])
 
@@ -32,6 +36,8 @@ const MyUser = () => {
         <div className="myuser-container container d-flex flex-column justify-content-between min-vh-100">
             <NavBarHeader user={user} />
 
+            {isProfileFinished && isProfileFinished && <ProfileMessage />}
+           
             <div className="user-body d-flex">
                 <MyUserSidebar user={user}/>
 
