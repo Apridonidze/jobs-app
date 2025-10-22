@@ -55,12 +55,6 @@ const Main = () => {
 
     //if error reset cookies and navigate user to authentication page 
 
-
-    //TODO : get data from backend (does user have profile picutre and does user have description and techonologeis and languages selected) if not so popup alert message to alert them to finish their profile for easier access to jobs that are related to them 
-    //if they finished up their profile do not append that window 
-    //check it from the server side path where every info is gathered together and checked (use verifytoken here) if everything is not fould (false) return varaible named hasFinished = false else return hasAFinished = true and store it in cookies 
-
-
     //TODO (recruiter side): Add button to see who submited for your work , and add feature that accepts ,declines , ignoers employee
 
     //TODO (employee side): Add notification button that shows if you get hired or declined 
