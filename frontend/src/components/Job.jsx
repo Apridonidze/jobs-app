@@ -1,7 +1,7 @@
 const Job = ( { jobId , job } ) => {
 
     return(
-        <div className="job-container col col-6 border border-1 justify-content-between " key={jobId}>
+        <div className="job-container col col-5 col-sm-5 col-lg-2 border border-1 justify-content-between " key={jobId}>
             <div className="job-header">
             
                 <h4 className="text-break">{job.job_title}</h4>
