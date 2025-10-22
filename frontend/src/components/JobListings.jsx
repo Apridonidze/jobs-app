@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
 
+import Job from "./Job"
 
 const JobListings = () => {
 
@@ -20,11 +21,13 @@ const JobListings = () => {
     },[])
 
     return (
-        <div className="job-listing-container d-flex flex-column">
-            Job Listings
+        <div className="job-listing-container ">
+            <h1>Job Listing : </h1>
+            <div className="job-listing d-flex row justify-content-start text-start align-center">
             {jobs.reverse().map((job,jobId) => (
-                <span key={jobId}>{job.job_title}</span>
+                <Job jobId={jobId} job={job}/>
             ))}
+            </div>
         </div>
     )
 }
