@@ -1,4 +1,4 @@
-const FindJobs = () => {
+const FindJobs = ( { isProfileFinished } ) => {
 
     //TODO (employee side): fetch jobs from database 
     //TODO (employee side): if user has finished his profile get his role (exp : web developer, testser ...etc) and technologies and display jobs suitable for him 
@@ -8,6 +8,9 @@ const FindJobs = () => {
     return(
         <div className="create-jobs-container ">
             FindJobs
+
+            {isProfileFinished !==null && !isProfileFinished ? <h1>Your Profile is not finished please finish it to find jobs that match your skills</h1> : <h1>profile finished</h1>} 
+
         </div>
     )
 }

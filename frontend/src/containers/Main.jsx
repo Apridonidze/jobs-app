@@ -48,9 +48,6 @@ const Main = () => {
     },[])
 
 
-    console.log(isProfileFinished)
-
-
     //TODO : add database folder and add readme file for it 
 
     //if error reset cookies and navigate user to authentication page 
@@ -67,7 +64,7 @@ const Main = () => {
             <NavBar user={user} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs} toggleJobsListings={toggleJobsListings} setToggleJobsListings={setToggleJobsListings}/>
             {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
            
-            {toggleFindJobs && <FindJobs />}
+            {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished}/>}
             {toggleCreateJobs && <CreateJobs />}
             {toggleJobsListings && <JobListings/>}
 

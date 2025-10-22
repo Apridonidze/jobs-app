@@ -23,7 +23,7 @@ const JobListings = () => {
     return (
         <div className="job-listing-container container gap-3">
             <h1>Job Listing : </h1>
-            <div className="job-listing row gap-3">
+            <div className="job-listing container py-3 row gap-3 justify-content-start">
             {jobs.reverse().map((job,jobId) => (
                 <Job jobId={jobId} job={job}/>
             ))}
