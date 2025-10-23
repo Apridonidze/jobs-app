@@ -64,8 +64,6 @@ const Main = () => {
 
     //TODO : add database folder and add readme file for it 
 
-    //if error reset cookies and navigate user to authentication page 
-
     //TODO (recruiter side): Add button to see who submited for your work , and add feature that accepts ,declines , ignoers employee
 
     //TODO (employee side): Add notification button that shows if you get hired or declined 
@@ -78,7 +76,7 @@ const Main = () => {
             <NavBar user={user} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs} toggleJobsListings={toggleJobsListings} setToggleJobsListings={setToggleJobsListings}/>
             {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
            
-            {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished}/>}
+            {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} jobs={jobs}/>}
             {toggleCreateJobs && <CreateJobs />}
             {toggleJobsListings && <JobListings jobs={jobs}/>}
 
