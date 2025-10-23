@@ -19,11 +19,17 @@ const Main = () => {
     
     const MY_USER_API = 'http://localhost:8080/user/my-user' //move to .env
     const IS_PROFILE_FINISHED_URL = 'http://localhost:8080/is-profile-finished' //move to .env
+    const JOBS_URL = 'http://localhost:8080/jobs/job-listing'
+
+   
     
 
     const [cookies] = useCookies(['token'])
 
     const [user,setUser] = useState(null)
+    const [jobs,setJobs] = useState([])
+    const [jobsErr ,setJobsErr] = useState('')
+    
 
     const [isProfileFinished , setIsProfileFinished] = useState(null)
 
@@ -44,8 +50,16 @@ const Main = () => {
         .then(resp => setIsProfileFinished(true))
         .catch(err => setIsProfileFinished(false))
 
+        axios
+        .get(JOBS_URL, {headers : {Authorization : `Bearer ${cookies.token}`}})
+        .then(resp => setJobs(resp.data.jobs))
+        .catch(err => setJobsErr(err.response.data.error))
+
 
     },[])
+
+
+   
 
 
     //TODO : add database folder and add readme file for it 
@@ -66,7 +80,7 @@ const Main = () => {
            
             {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished}/>}
             {toggleCreateJobs && <CreateJobs />}
-            {toggleJobsListings && <JobListings/>}
+            {toggleJobsListings && <JobListings jobs={jobs}/>}
 
             <Footer />
         </div>
