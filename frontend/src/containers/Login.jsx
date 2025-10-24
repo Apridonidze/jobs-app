@@ -52,7 +52,9 @@ const Login = () => {
         else {isValid = true; setPasswordError('') ; data = {...data, password : password}}
 
         if(isValid){
-            axios
+            
+            try{
+                axios
             .post(LOGIN_API_URL, data)
             .then(resp => {
 
@@ -62,7 +64,10 @@ const Login = () => {
                 setIsSuccesfull(true)
                 setToggleLoginMessage(true)
             })
-            .catch(err => {
+            
+            }catch(err){
+
+              
                 console.log(err.response.data) //remove in future
                 setLoginMessage(err.response.data.error)
                 setIsSuccesfull(false)
@@ -70,9 +75,8 @@ const Login = () => {
 
                 if(loginMessage === 'Invalid Password'){passwordRef.current.classList.remove('is-valid'); passwordRef.current.classList.add('is-invalid')}
                 if(loginMessage === 'User Not Found'){emailRef.current.classList.remove('is-valid'); emailRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid'); passwordRef.current.classList.add('is-invalid')}
-
-    
-            })
+                
+            }
         }
 
   

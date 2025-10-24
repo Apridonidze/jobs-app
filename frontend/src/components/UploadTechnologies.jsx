@@ -19,8 +19,11 @@ const UploadTechnologies = ( { technologies ,setTechnologies } ) => {
             .post(UPLOAD_TECH_URL , {technologies : technologies} , {headers : {Authorization : `Bearer ${cookies.token}`}})
             .then(resp => console.log(resp))
 
+            ///add success message toggle 
+
         }catch(err){
             console.log(err)
+            //addd error message toggle herer
         }
 
     }
