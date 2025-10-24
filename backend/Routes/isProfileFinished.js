@@ -19,21 +19,21 @@ isProfileFinishedRouter.get('/', verifyToken , async (req,res) => {
             
             if(hasAvatar.length > 0 && hasDesc.length > 0 && hasTags.length > 0){
                 
-                return res.status(200).json('Profile is Finished')
+                return res.status(200).json(true)
             
             }
 
-            return res.status(204).json('Profile is Not Finished')
+            return res.status(204).json(false)
         }
 
          if(req.user.userRole === 'employee'){
 
             if(hasAvatar.length > 0 && hasDesc.length > 0 && hasTags.length > 0 && hasRole.length > 1 && hasTechnologies.length > 0){
                     
-                return res.status(200).json('Profile is Finished')
+                return res.status(200).json(true)
             }
 
-            return res.status(204).json('Profile is Not Finished')
+            return res.status(204).json(false)
 
         }
 
