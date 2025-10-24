@@ -5,9 +5,6 @@ const db = require('../db/db')
 const verifyToken = require('../config/verifyToken')
 
 isProfileFinishedRouter.get('/', verifyToken , async (req,res) => {
-
-    
-    const [ user ] = await db.query('select * from users where user_id = ?',[req.user.userId])
     
     const [ hasRole ] = await db.query('select * from user_roles where user_id = ?',[req.user.userId])
     const [ hasTags ] = await db.query('select * from user_tags where user_id = ?',[req.user.userId])
@@ -26,7 +23,7 @@ isProfileFinishedRouter.get('/', verifyToken , async (req,res) => {
             
             }
 
-            return res.status(400).json('Profile is Not Finished')
+            return res.status(204).json('Profile is Not Finished')
         }
 
          if(req.user.userRole === 'employee'){
@@ -36,7 +33,7 @@ isProfileFinishedRouter.get('/', verifyToken , async (req,res) => {
                 return res.status(200).json('Profile is Finished')
             }
 
-            return res.status(400).json('Profile is Not Finished')
+            return res.status(204).json('Profile is Not Finished')
 
         }
 
