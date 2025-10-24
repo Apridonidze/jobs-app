@@ -12,9 +12,15 @@ const MyJobs = () => {
     const [noJobsFound,setNoJobsFound] = useState('')
 
     useEffect(() => {
-        axios.get(JOBS_URL, {headers: {Authorization : `Bearer ${cookies.token}`}})
-        .then(resp => {setYourJobs(resp.data.jobs)})
-        .catch(err => {setNoJobsFound(err.response.data.error)})
+
+        try{
+             axios.get(JOBS_URL, {headers: {Authorization : `Bearer ${cookies.token}`}})
+            .then(resp => {setYourJobs(resp.data.jobs)})
+
+        }catch(err){
+            setNoJobsFound(err.response.data.error)
+        }
+
     },[])
 
     return (
