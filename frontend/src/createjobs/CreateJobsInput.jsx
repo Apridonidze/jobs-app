@@ -98,6 +98,8 @@ const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobs
         else {isValid = true ; setLanguagesErr('') ; languageRef.current.classList.remove('is-invalid'); ;languageRef.current.classList.add('is-valid'); data = {...data, languages: languages}}
 
         if(isValid){
+           
+            try{
             axios
             .post(NEW_JOBS_URL, data , {headers : {Authorization : `Bearer ${cookies.token}`}})
             .then(resp => {
@@ -106,12 +108,16 @@ const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobs
                 setToggleJobsMessage(true)
                 console.log(resp)
             })
-            .catch(err => {
+
+
+            }catch(err){
                 setJobsMessage(err.data.err)
                 setIsJobsSuccessful(false)
                 setToggleJobsMessage(true)
                 console.log(err)
-            })
+            }
+
+
         }
 
     }
