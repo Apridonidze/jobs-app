@@ -15,7 +15,6 @@ isProfileFinishedRouter.get('/', verifyToken , async (req,res) => {
     const [ hasAvatar ] = await db.query('select * from user_avatar where user_id = ?',[req.user.userId])
     const [ hasDesc ] = await db.query('select * from user_des where user_id = ?',[req.user.userId])
 
-    console.log(req.user.userRole)
     
     try{
         

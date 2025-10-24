@@ -14,7 +14,7 @@ TechRouter.get('/user-technologies', verifyToken ,async (req,res) => {
     try{
 
         if(rows.length < 1){
-            return res.status(200).json('No Technologies Yet')
+            return res.status(204).json('No Technologies Yet')
         }
 
         return res.status(200).json(rows)

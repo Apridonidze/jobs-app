@@ -8,6 +8,7 @@ const rateLimiter = require('../config/rateLimiter')
 
 RoleRouter.get('/my-roles' , (req, res) => {
     res.send('role router default path')
+    //make fetching for user roles
 })
 
 

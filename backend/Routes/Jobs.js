@@ -13,7 +13,7 @@ JobsRouter.get('/job-listing', verifyToken ,async (req,res) => {
         return res.status(200).json({message: 'Jobs Found', jobs : rows})
     }
 
-    return res.status(400).json({error : 'No Jobs Found Yet'})
+    return res.status(204).json({error : 'No Jobs Found Yet'})
 
 })
 

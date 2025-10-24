@@ -10,7 +10,7 @@ TagsRouter.get('/my-tags',verifyToken, async (req,res) => {
 
     const [ rows ] = await db.query('select * from user_tags where user_id = ?',[req.user.userId])
 
-    if(rows.length < 1)return res.status(400).json('No Tags Yet')
+    if(rows.length < 1)return res.status(204).json('No Tags Yet')
 
     return res.status(200).json(rows[0].user_tags)
 
