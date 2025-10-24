@@ -10,15 +10,20 @@ const UploadTags = ( { tags , setTags } ) => {
     const handleTags = (e) => {
         e.preventDefault()
 
-        if(tags.length > 0){
-            //return error here
+        if(tags.length < 1){
+        return    //return error here
         }
 
-        //else send to server.js
+        
+        try{
+            
+            axios.post(UPLOAD_TAGS_URL , {tags : tags}, {headers: {Authorization : `Bearer ${cookies.token}`}})
+            .then(resp => console.log(resp)) //add success message toggle here
 
-        axios.post(UPLOAD_TAGS_URL , {tags : tags}, {headers: {Authorization : `Bearer ${cookies.token}`}})
-        .then(resp => console.log(resp)) //add alert messageToggle = true
-        .catch(err => console.log(err)) //add alert messageToggle = true
+        }catch(err){
+            console.log(err) //add error message toggle here 
+        }
+
     }
 
     return (
