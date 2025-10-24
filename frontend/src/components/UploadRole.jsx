@@ -14,9 +14,19 @@ const UploadRole = ( { setRoles, roles} ) => {
 
         if(roles.length < 1) return
 
-        axios.post(UPLOAD_ROLE_URL , {roles : roles}, {headers : {Authorization : `Bearer ${cookies.token}`}})
-        .then(resp => console.log(resp))
-        .catch(err => console.log(err))
+        try{
+            
+            axios.post(UPLOAD_ROLE_URL , {roles : roles}, {headers : {Authorization : `Bearer ${cookies.token}`}})
+            .then(resp => console.log(resp))
+
+            //add message toggle variables here and countdown to toggle down windows when data is posted successfully
+
+        }catch(err){
+            console.log(err)
+            
+            //add error message toggle variables here when data is not posted 
+        }
+
     }
 
 
