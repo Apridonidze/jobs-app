@@ -16,7 +16,7 @@ RoleRouter.get('/my-roles' , verifyToken ,  async(req, res) => {
             return res.status(204).json("No Roles Yet")
         }
 
-        return res.status(200).json({roles : rows})
+        return res.status(200).json(rows)
 
     }catch(err){
         return res.status(500).json('Database Error')

@@ -51,6 +51,7 @@ const MyUserSidebar = ( { user } ) => {
     const USER_DESC_URL = 'http://localhost:8080/desc/my-desc' //move to .env
     const USER_TAGS_URL = 'http://localhost:8080/tags/my-tags' //move to .env
     const USER_TECHNOLOGIES_URL = 'http://localhost:8080/technologies/user-technologies' //move to .env
+    const USER_ROLES_URL = 'http://localhost:8080/roles/my-roles' //move to .env
     
 
     const [cookies,setCookies,removeCookies] = useCookies(['token']) 
@@ -75,15 +76,18 @@ const MyUserSidebar = ( { user } ) => {
             const fetchUserData = async () => {
                 try{
                     
-                    const [userAvatar, userDesc, userTags,userTechnologies] = await Promise.all([
+                    const [userAvatar, userDesc, userTags, userRoles,userTechnologies] = await Promise.all([
                     axios.get(AVATAR_URL, {headers: {Authorization : `Bearer ${cookies.token}`}}),
                     axios.get(USER_DESC_URL , {headers : {Authorization : `Bearer ${cookies.token}`}}),
                     axios.get(USER_TAGS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}}),
+                    axios.get(USER_ROLES_URL, {headers : {Authorization : `Bearer ${cookies.token}`}}),
                     axios.get(USER_TECHNOLOGIES_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})])
 
                     setAvatarImg(userAvatar.data)
                     setDescValue(userDesc.data)
-                    setTags(prev => [...prev ,userAvatar.data])
+                    setTags(prev => [...prev ,userTags.data])
+                    
+                    setRoles(prev => [...prev, userRoles.data[0].user_roles])
                     setTechnologies(prev => [...prev ,userTechnologies.data])
 
                 }catch(err){
