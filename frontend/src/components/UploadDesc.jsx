@@ -47,9 +47,16 @@ const UploadDesc = ( { setToggleUploadDescMessage,setIsDescSuccessfull, setUploa
 
     useEffect(() => {
         
-        axios.get(USER_DESC_URL , {headers : {Authorization : `bearer ${cookies.token}`}})
+
+        try{
+            
+            axios.get(USER_DESC_URL , {headers : {Authorization : `bearer ${cookies.token}`}})
             .then(resp => setDesc(resp.data.slice(0, 25)))
-            .catch(err => console.log(err) , setDesc(''))
+    
+        }catch(err){
+            console.log(err)
+            setDesc('')
+        }
 
     },[])
 
