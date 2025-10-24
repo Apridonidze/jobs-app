@@ -45,7 +45,7 @@ const Main = () => {
             const userData = user.data.data[0]
             setUser({role : userData.user_role , name : userData.user_name, surname : userData.user_surname , birthDate : userData.user_birthdate, gender : userData.user_gender})
             setIsProfileFinished(isProfileFinished.data)
-            setJobs(prev => [...prev, jobs.data.jobs])
+            setJobs(jobs.data.jobs)
 
 
         }catch(err){

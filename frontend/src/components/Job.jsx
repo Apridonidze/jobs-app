@@ -1,4 +1,4 @@
-const Job = ( { jobId , job } ) => {
+const Job = ( { job , jobId } ) => {
 
     return(
         <div className="job-container col-5 border border-1 justify-content-between" key={jobId}>
