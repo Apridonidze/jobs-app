@@ -45,5 +45,4 @@ const DescMessage = ({ setToggleUploadDesc , setToggleUploadDescMessage, isDescS
     )
 }
 
-
-export default DescMessage
+export default DescMessage 

@@ -72,24 +72,23 @@ const MyUserSidebar = ( { user } ) => {
 
         useEffect(() => {
 
-            axios.get(AVATAR_URL, {headers: {Authorization : `Bearer ${cookies.token}`}})
-            .then(resp => setAvatarImg(resp.data))
-            .catch(err => console.log(err)) //setavatarimg to default if error
+            const fetchUserData = async () => {
+                try{
+                    
+                    const [userAvatar, userDesc, userTags,userTechnologies] = await Promise.all([
+                    axios.get(AVATAR_URL, {headers: {Authorization : `Bearer ${cookies.token}`}}),
+                    axios.get(USER_DESC_URL , {headers : {Authorization : `Bearer ${cookies.token}`}}),
+                    axios.get(USER_TAGS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}}),
+                    axios.get(USER_TECHNOLOGIES_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})])
 
+                    console.log([userAvatar, userDesc, userTags,userTechnologies])
 
-            axios.get(USER_DESC_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
-            .then(resp => setDescValue(`${resp.data.slice(0, 25)}...`)) 
-            .catch(err => console.log(err)) //add error message here and setDescValue to empty if there is no desc or database error
+                }catch(err){
+                    console.log(err)
+                }
+            }
 
-
-            axios.get(USER_TAGS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
-            .then(resp => setTags(resp.data))
-            .catch(err => console.log(err))
-
-
-            axios.get(USER_TECHNOLOGIES_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
-            .then(resp => setTechnologies(resp.data[0].user_technologies))
-            .catch(err => console.log(err))
+            fetchUserData()
         
 
         },[])
