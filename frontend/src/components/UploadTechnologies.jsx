@@ -13,10 +13,16 @@ const UploadTechnologies = ( { technologies ,setTechnologies } ) => {
 
         if(technologies.length < 1)return
 
-        axios
-        .post(UPLOAD_TECH_URL , {technologies : technologies} , {headers : {Authorization : `Bearer ${cookies.token}`}})
-        .then(resp => console.log(resp))
-        .catch(err => console.log(err))
+        try{
+
+            axios
+            .post(UPLOAD_TECH_URL , {technologies : technologies} , {headers : {Authorization : `Bearer ${cookies.token}`}})
+            .then(resp => console.log(resp))
+
+        }catch(err){
+            console.log(err)
+        }
+
     }
 
 
