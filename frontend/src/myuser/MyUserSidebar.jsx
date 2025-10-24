@@ -81,7 +81,10 @@ const MyUserSidebar = ( { user } ) => {
                     axios.get(USER_TAGS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}}),
                     axios.get(USER_TECHNOLOGIES_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})])
 
-                    console.log([userAvatar, userDesc, userTags,userTechnologies])
+                    setAvatarImg(userAvatar.data)
+                    setDescValue(userDesc.data)
+                    setTags(prev => [...prev ,userAvatar.data])
+                    setTechnologies(prev => [...prev ,userTechnologies.data])
 
                 }catch(err){
                     console.log(err)
