@@ -67,7 +67,6 @@ const Main = () => {
     //TODO (recruiter side): Add button to see who submited for your work , and add feature that accepts ,declines , ignoers employee
 
     //TODO (employee side): Add notification button that shows if you get hired or declined 
-    //TODO (reqruiter side): Add notification button that shows who submitted for your job (with accoutn path) see this user and decline or accept him
     
     return(
         <div className="main-container container d-flex flex-column  justify-content-between min-vh-100 py-2">

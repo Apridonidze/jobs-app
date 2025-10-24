@@ -103,9 +103,10 @@ const Sign = () => {
 
 
         if(isValid){
-            axios
-                .post(SIGN_PORT, {data})
-                .then(res => {
+
+            try{
+
+                axios.post(SIGN_PORT , {data}).then(res => {
                     const respToken = res.data.token; //save in onlyHttp-cookie
                     setCookies('token', respToken, {
                         path: '/',
@@ -122,13 +123,13 @@ const Sign = () => {
                     
 
                 }) 
-                .catch(err => {
-                    setSignMessage(err.response.data.error)
-                    setIsSuccessful(false)
 
-                    
-                    setToggleSigMessage(true)
-                }) 
+            }catch(err){
+                setSignMessage(err.response.data.error)
+                setIsSuccessful(false)
+                setToggleSigMessage(true)
+            }
+           
         } 
 
         
