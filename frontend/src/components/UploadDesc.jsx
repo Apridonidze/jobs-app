@@ -27,11 +27,22 @@ const UploadDesc = ( { setToggleUploadDescMessage,setIsDescSuccessfull, setUploa
         else {isValid = true; setDescErr(''); descRef.current.classList.add('is-valid'); btnRef.current.classList.add('btn-success');descRef.current.classList.remove('is-invalid'); btnRef.current.classList.remove('btn-danger'); data = {...data,desc : desc}}
 
 
+
         if(isValid){
-            axios.post(ADD_USER_DESC_URL, data , {headers:{authorization: `bearer ${cookies.token}`}})
+            try{
+            
+            axios.post(ADD_USER_DESC_URL, data , {headers:{authorization: `Bearer ${cookies.token}`}})
             .then(resp => {setUploadMessage(resp.data.message) ; setToggleUploadDescMessage(true);setIsDescSuccessfull(true)})
-            .catch(err => {setUploadMessage(err.response.data.err) ; setToggleUploadDescMessage(true);setIsDescSuccessfull(false)})
+
+            }catch(err){
+                console.log(err)
+
+                setUploadMessage(err.response.data.err) ;
+                setToggleUploadDescMessage(true);
+                setIsDescSuccessfull(false)
+            }
         }
+
     }
 
     useEffect(() => {
