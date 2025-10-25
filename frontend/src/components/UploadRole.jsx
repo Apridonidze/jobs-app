@@ -33,7 +33,7 @@ const UploadRole = ( { setRoles, roles} ) => {
     return(
         <div className="upload-role-container position-fixed bg-white">
             <form onSubmit={handleUploadRole}>
-                <select onChange={(e) => {setRoles(role => [...role, e.target.value]) ;if(e.target.value === 'blank') setRoles(roles) ; if(roles.includes(e.target.value)) setRoles(roles) ; return}}>        
+                <select onChange={(e) => {setRoles(roles => [...roles, e.target.value]) ;if(e.target.value === 'blank') return setRoles(roles) ; if(roles.includes(e.target.value)) return setRoles(roles) ; }}>        
                     <option value="blank">I Am A:</option>
                     <option value="Figma Designer">Figma Designer</option>
                     <option value="Frontend Developer">Frontend Developer</option>

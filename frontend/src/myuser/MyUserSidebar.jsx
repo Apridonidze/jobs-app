@@ -41,7 +41,7 @@ const MyUserSidebar = ( { user } ) => {
     const [toggleTechnologiesMessage, setToggleTechnologiesMessage] = useState(false)
     const [isTechnologiesSuccessfull, setIsTechnologiesSuccessfull] = useState(null)
 
-    const [roles,setRoles] = useState([])
+    const [roles,setRoles] = useState(Array)
     
 
 
@@ -86,11 +86,11 @@ const MyUserSidebar = ( { user } ) => {
                     setAvatarImg(userAvatar.data)
                     setDescValue(userDesc.data)
                     setTags(prev => [...prev ,userTags.data])
-                    setRoles(prev => [...prev, userRoles.data[0].user_roles])
+                    setRoles([...userRoles.data[0].user_roles])
                     setTechnologies(prev => [...prev, userTechnologies.data])
-                    
+
                 }catch(err){
-                    console.log(err)
+                    console.log(err) //add alert messsage fro database error
                 }
             }
 

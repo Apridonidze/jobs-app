@@ -6,34 +6,38 @@ const verifyToken = require('../config/verifyToken')
 
 isProfileFinishedRouter.get('/', verifyToken , async (req,res) => {
     
-    const [ hasRole ] = await db.query('select * from user_roles where user_id = ?',[req.user.userId])
-    const [ hasTags ] = await db.query('select * from user_tags where user_id = ?',[req.user.userId])
-    const [ hasTechnologies ] = await db.query('select * from user_technologies where user_id = ?',[req.user.userId])
-    const [ hasAvatar ] = await db.query('select * from user_avatar where user_id = ?',[req.user.userId])
-    const [ hasDesc ] = await db.query('select * from user_des where user_id = ?',[req.user.userId])
-
     
     try{
+
         
-        if(req.user.userRole === 'recruiter'){
+        const [ hasRole ] = await db.query('select * from user_roles where user_id = ?',[req.user.userId])
+        const [ hasTags ] = await db.query('select * from user_tags where user_id = ?',[req.user.userId])
+        const [ hasTechnologies ] = await db.query('select * from user_technologies where user_id = ?',[req.user.userId])
+        const [ hasAvatar ] = await db.query('select * from user_avatar where user_id = ?',[req.user.userId])
+        const [ hasDesc ] = await db.query('select * from user_des where user_id = ?',[req.user.userId])
+        
+
+        console.log([hasRole.length >= 1, hasTags.length >= 1,hasTechnologies.length >= 1, hasAvatar.length >= 1, hasDesc.length >= 1])
+        if(req.user.userRole == 'recruiter'){
+
             
             if(hasAvatar.length > 0 && hasDesc.length > 0 && hasTags.length > 0){
                 
                 return res.status(200).json(true)
             
             }
+            return res.status(200).json(false)
 
-            return res.status(204).json(false)
         }
 
-         if(req.user.userRole === 'employee'){
+         if(req.user.userRole == 'employee'){
 
-            if(hasAvatar.length > 0 && hasDesc.length > 0 && hasTags.length > 0 && hasRole.length > 1 && hasTechnologies.length > 0){
+            if(hasAvatar.length >= 1 && hasDesc.length >= 1 && hasTags.length >= 1 && hasRole.length  >= 1 && hasTechnologies.length >= 1 ){
                     
                 return res.status(200).json(true)
             }
 
-            return res.status(204).json(false)
+            return res.status(200).json(false)
 
         }
 

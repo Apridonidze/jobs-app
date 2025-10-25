@@ -27,6 +27,7 @@ TagsRouter.post('/upload-tags' , verifyToken, rateLimiter, async (req,res) => {
     
     }
 
+
     try{
          const [rows] = await db.query('select * from user_tags where user_id = ?',[req.user.userId])
 
