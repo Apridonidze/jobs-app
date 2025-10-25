@@ -17,7 +17,8 @@ isProfileFinishedRouter.get('/', verifyToken , async (req,res) => {
         const [ hasDesc ] = await db.query('select * from user_des where user_id = ?',[req.user.userId])
         
 
-        console.log([hasRole.length >= 1, hasTags.length >= 1,hasTechnologies.length >= 1, hasAvatar.length >= 1, hasDesc.length >= 1])
+        console.log(hasTags)
+        
         if(req.user.userRole == 'recruiter'){
 
             
