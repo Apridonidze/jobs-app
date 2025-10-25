@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const FilteredJobs = ( { jobs } ) => {
 
@@ -6,9 +6,16 @@ const FilteredJobs = ( { jobs } ) => {
 
     const [filteredJobs, setFilteredJobs] = useState([])
 
+    useEffect(() => {
+
+        //take jobs jhere filter it based on job.tags and job.technologies and display mapped filtered jobs in div
+
+    },[])
+
     return(
         <div className="filtered-jobs-container">
-           {jobs && jobs.reverse().filter((job) => setFilteredJobs(filteredJobs => [...filteredJobs, job.job_employeeList.includes('Frontend Developer')]))}
+            <h1>Jobs For You: </h1>
+             
         </div>
     )
 }

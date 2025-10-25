@@ -4,7 +4,7 @@ const FindJobs = ( { isProfileFinished, jobs } ) => {
         
     return(
         <div className="create-jobs-container ">
-            {isProfileFinished !==null && !isProfileFinished ? <FindJobsMessage /> : <FilteredJobs jobs={jobs}/>} 
+            {isProfileFinished && !isProfileFinished ? <FindJobsMessage /> : <FilteredJobs jobs={jobs}/>} 
 
         </div>
     )
