@@ -86,10 +86,9 @@ const MyUserSidebar = ( { user } ) => {
                     setAvatarImg(userAvatar.data)
                     setDescValue(userDesc.data)
                     setTags(prev => [...prev ,userTags.data])
-                    
                     setRoles(prev => [...prev, userRoles.data[0].user_roles])
-                    //setTechnologies()
-console.log(userTechnologies.data)
+                    setTechnologies(prev => [...prev, userTechnologies.data])
+                    
                 }catch(err){
                     console.log(err)
                 }
