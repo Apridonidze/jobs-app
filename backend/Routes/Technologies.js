@@ -16,8 +16,8 @@ TechRouter.get('/user-technologies', verifyToken ,async (req,res) => {
         if(rows.length < 1){
             return res.status(204).json('No Technologies Yet')
         }
-
-        return res.status(200).json(rows)
+        
+        return res.status(200).json(rows[0].user_technologies)
 
     }catch(err){
         return res.status(500).json('Database Error')
@@ -28,6 +28,8 @@ TechRouter.get('/user-technologies', verifyToken ,async (req,res) => {
 
 TechRouter.post('/new-technologies', verifyToken, rateLimiter, async (req,res) => {
     
+    
+
     const TechResp = TechnologiesSchema(req.body)
 
     if(!TechResp.success){
@@ -36,7 +38,7 @@ TechRouter.post('/new-technologies', verifyToken, rateLimiter, async (req,res) =
     
     try{
 
-        const [ rows ] = await db.query('select * from user_technologies')
+        const [ rows ] = await db.query('select * from user_technologies where user_id = ?' , [req.user.userId])
 
         if(rows.length < 1){
 

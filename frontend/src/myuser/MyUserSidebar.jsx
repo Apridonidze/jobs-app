@@ -88,8 +88,8 @@ const MyUserSidebar = ( { user } ) => {
                     setTags(prev => [...prev ,userTags.data])
                     
                     setRoles(prev => [...prev, userRoles.data[0].user_roles])
-                    setTechnologies(prev => [...prev ,userTechnologies.data])
-
+                    //setTechnologies()
+console.log(userTechnologies.data)
                 }catch(err){
                     console.log(err)
                 }
