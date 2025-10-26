@@ -58,6 +58,8 @@ const Sign = () => {
         let isValid
         let data = {} //data to send to server 
 
+        //validate user name not to be anything else than plain text
+        //validate user surname not to be anything else than plain text
 
         const currentDate = new Date()
         

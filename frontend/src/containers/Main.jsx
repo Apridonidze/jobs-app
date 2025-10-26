@@ -1,5 +1,5 @@
 import { useCookies } from "react-cookie"
-import { useEffect, useState } from "react"
+import { use, useEffect, useState } from "react"
 import axios from "axios"
 import NavBar from "../navbar/NavBar"
 
@@ -32,33 +32,26 @@ const Main = () => {
 
     useEffect(() => {
 
-       const fetchUserData = async() => {
-         try{
+        const fetchData = async() => {
 
-            const [user, isProfileFinished, jobs] = await Promise.all([
-                axios.get(MY_USER_API, {headers : {Authorization : `Bearer ${cookies.token}`}}),
-                axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}}),
-                axios.get(JOBS_URL, {headers : {Authorization : `Bearer ${cookies.token}`}})
+            try{
+                await Promise.all([
+                axios.get(MY_USER_API, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {const userData = resp.data.data[0]  ; setUser({role : userData.user_role , name : userData.user_name, surname : userData.user_surname , birthDate : userData.user_birthdate, gender : userData.user_gender})}),
+                axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsProfileFinished(resp.data)),
+                axios.get(JOBS_URL, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setJobs(resp.data.jobs))
             ])
        
-    
-            const userData = user.data.data[0]
-            setUser({role : userData.user_role , name : userData.user_name, surname : userData.user_surname , birthDate : userData.user_birthdate, gender : userData.user_gender})
-            setIsProfileFinished(isProfileFinished.data)
-            setJobs(jobs.data.jobs)
-
+     
+            
 
         }catch(err){
             console.log(err)
+        }
 
         }
-    }
-    
-    fetchUserData()
+        fetchData()
 
     },[])
-
-
    
 
 
