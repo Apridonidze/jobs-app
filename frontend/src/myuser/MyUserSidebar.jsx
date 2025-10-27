@@ -76,18 +76,19 @@ const MyUserSidebar = ( { user } ) => {
             const fetchUserData = async () => {
                 try{
                     
-                    const [userAvatar, userDesc, userTags, userRoles,userTechnologies] = await Promise.all([
-                    axios.get(AVATAR_URL, {headers: {Authorization : `Bearer ${cookies.token}`}}),
-                    axios.get(USER_DESC_URL , {headers : {Authorization : `Bearer ${cookies.token}`}}),
-                    axios.get(USER_TAGS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}}),
-                    axios.get(USER_ROLES_URL, {headers : {Authorization : `Bearer ${cookies.token}`}}),
+                    await Promise.all([
+                    axios.get(AVATAR_URL, {headers: {Authorization : `Bearer ${cookies.token}`}})
+                    .then(resp => setAvatarImg(resp.data)),
+                    axios.get(USER_DESC_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
+                    .then(resp => setDescValue(resp.data)),
+                    axios.get(USER_TAGS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
+                    .then(resp => setTags([...resp.data])),
+                    axios.get(USER_ROLES_URL, {headers : {Authorization : `Bearer ${cookies.token}`}})
+                    .then(resp => setRoles([...resp.data[0].user_roles])),
                     axios.get(USER_TECHNOLOGIES_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})])
+                    .then(resp => setTechnologies(resp.filter(res => res != undefined)[0].data))
 
-                    setAvatarImg(userAvatar.data)
-                    setDescValue(userDesc.data)
-                    setTags(prev => [...prev ,userTags.data])
-                    setRoles([...userRoles.data[0].user_roles])
-                    setTechnologies(prev => [...prev, userTechnologies.data])
+                    
 
                 }catch(err){
                     console.log(err) //add alert messsage fro database error
@@ -98,6 +99,7 @@ const MyUserSidebar = ( { user } ) => {
         
 
         },[])
+
 
         useEffect(() => {
             

@@ -28,7 +28,7 @@ const Login = () => {
     const [passwordType,setPasswordType] = useState('password')
 
 
-      const handleLogin = (e) => {
+      const handleLogin = async (e) => {
     
         e.preventDefault()
 
@@ -54,7 +54,9 @@ const Login = () => {
         if(isValid){
             
             try{
-                axios
+                
+                await Promise.all([
+                    axios
             .post(LOGIN_API_URL, data)
             .then(resp => {
 
@@ -64,6 +66,7 @@ const Login = () => {
                 setIsSuccesfull(true)
                 setToggleLoginMessage(true)
             })
+                ])
             
             }catch(err){
 

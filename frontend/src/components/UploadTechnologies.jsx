@@ -7,7 +7,7 @@ const UploadTechnologies = ( { technologies ,setTechnologies } ) => {
 
     const UPLOAD_TECH_URL = 'http://localhost:8080/technologies/new-technologies'
 
-    const handleUploadTech = (e) => {
+    const handleUploadTech = async(e) => {
 
         e.preventDefault()
 
@@ -15,9 +15,11 @@ const UploadTechnologies = ( { technologies ,setTechnologies } ) => {
 
         try{
 
-            axios
-            .post(UPLOAD_TECH_URL , {technologies : technologies} , {headers : {Authorization : `Bearer ${cookies.token}`}})
-            .then(resp => console.log(resp))
+            await Promise.all([
+                axios
+                .post(UPLOAD_TECH_URL , {technologies : technologies} , {headers : {Authorization : `Bearer ${cookies.token}`}})
+                .then(resp => console.log(resp))
+            ])
 
             ///add success message toggle 
 

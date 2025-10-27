@@ -7,7 +7,7 @@ const UploadTags = ( { tags , setTags } ) => {
 
     const UPLOAD_TAGS_URL = 'http://localhost:8080/tags/upload-tags'
 
-    const handleTags = (e) => {
+    const handleTags = async(e) => {
         e.preventDefault()
 
         if(tags.length < 1){
@@ -17,9 +17,11 @@ const UploadTags = ( { tags , setTags } ) => {
         
         try{
             
-            axios.post(UPLOAD_TAGS_URL , {tags : tags}, {headers: {Authorization : `Bearer ${cookies.token}`}})
+            await Promise.all([
+                axios.post(UPLOAD_TAGS_URL , {tags : tags}, {headers: {Authorization : `Bearer ${cookies.token}`}})
             .then(resp => console.log(resp)) //add success message toggle here
-
+            ])
+            
         }catch(err){
             console.log(err) //add error message toggle here 
         }
