@@ -10,19 +10,19 @@ const FilteredJobs = ({ jobs }) => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-    const MY_USER_ROLE_URL = "http://localhost:8080/roles/my-roles";
-    const MY_USER_TECH_URL = "http://localhost:8080/technologies/user-technologies";
+      const MY_USER_ROLE_URL = "http://localhost:8080/roles/my-roles";
+      const MY_USER_TECH_URL = "http://localhost:8080/technologies/user-technologies";
 
-    try {
+      try {
         
-      await Promise.all([
-        axios.get(MY_USER_TECH_URL, { headers: { Authorization: `Bearer ${cookies.token}` } }).then(resp => setUserTechnologies(resp.data)),
-        axios.get(MY_USER_ROLE_URL, { headers: { Authorization: `Bearer ${cookies.token}` } }).then(resp => setUserRoles(resp.data[0].user_roles))
-      ]);
+        await Promise.all([
+          axios.get(MY_USER_TECH_URL, { headers: { Authorization: `Bearer ${cookies.token}` } }).then(resp => setUserTechnologies(resp.data)),
+          axios.get(MY_USER_ROLE_URL, { headers: { Authorization: `Bearer ${cookies.token}` } }).then(resp => setUserRoles(resp.data[0].user_roles))
+        ]);
 
-    } catch (err) {
-      console.log(err);
-    }
+      } catch (err) {
+        console.log(err);
+      }
     };
 
     fetchUserData();
