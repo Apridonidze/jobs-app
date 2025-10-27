@@ -26,15 +26,11 @@ const MyUser = () => {
         const FetchMyUser = async () => {
             try{
 
-            const [MyUser, CheckUserProfile] = await Promise.all([
-                axios.get(MY_USER_API, {headers : {Authorization : `Bearer ${cookies.token}`}}),
-                axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}})
+             await Promise.all([
+                axios.get(MY_USER_API, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {const userData = resp.data.data[0] ; setUser({role : userData.user_role , name : userData.user_name, surname : userData.user_surname , birthDate : userData.user_birthdate, gender : userData.user_gender})
+}),
+                axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsProfileFinished(resp.data))
             ])
-
-            const userData = MyUser.data.data[0]
-            setUser({role : userData.user_role , name : userData.user_name, surname : userData.user_surname , birthDate : userData.user_birthdate, gender : userData.user_gender})
-
-            console.log(CheckUserProfile)
 
             }catch(err){
                 console.log(err)
