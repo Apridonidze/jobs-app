@@ -32,8 +32,7 @@ const FilteredJobs = ({ jobs }) => {
 
   useEffect(() => {
     if (userTechnologies.length > 0 && userRoles.length > 0 && jobs.length > 0) {
-      const filtered = jobs.filter(
-        job =>
+      const filtered = jobs.filter(job =>
           job.job_technologies.some(tech => userTechnologies.includes(tech)) &&
           job.job_employeeList.some(role => userRoles.includes(role))
       );

@@ -17,7 +17,7 @@ isProfileFinishedRouter.get('/', verifyToken , async (req,res) => {
         const [ hasDesc ] = await db.query('select * from user_des where user_id = ?',[req.user.userId])
         
 
-        if(req.user.userRole == 'recruiter'){
+        if(req.user.userRole.toLowerCase() == 'recruiter'){
 
             
             if(hasAvatar.length >= 1 && hasDesc.length >= 1 && hasTags.length >= 1){
@@ -25,16 +25,20 @@ isProfileFinishedRouter.get('/', verifyToken , async (req,res) => {
                 return res.status(200).json(true)
             
             }
+            
+            console.log([hasAvatar,hasDesc,hasRole,hasTechnologies])
             return res.status(200).json(false)
 
         }
 
-         if(req.user.userRole == 'employee'){
+         if(req.user.userRole.toLowerCase() == 'employee'){
 
            if(hasAvatar.length >= 1 && hasDesc.length >= 1 && hasRole.length  >= 1 && hasTechnologies.length >= 1){
                     
                 return res.status(200).json(true)
             }
+
+            console.log([hasAvatar,hasDesc,hasRole,hasTechnologies])
 
             return res.status(200).json(false)
 
