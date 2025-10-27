@@ -14,6 +14,9 @@ const Main = () => {
     const [toggleFindJobs, setFindJobs] = useState(false)
     const [toggleCreateJobs, setCreateJobs] = useState(false)
     const [toggleJobsListings, setToggleJobsListings] = useState(false)
+    const [toggleSaved,setToggleSaved] = useState(false)
+    const [toggleApplied,setToggleApplied] = useState(false)
+    const [togglePending,setTogglePending] = useState(false)
     
     const MY_USER_API = 'http://localhost:8080/user/my-user' //move to .env
     const IS_PROFILE_FINISHED_URL = 'http://localhost:8080/is-profile-finished' //move to .env
@@ -62,7 +65,7 @@ const Main = () => {
         <div className="main-container container d-flex flex-column  justify-content-between min-vh-100 py-2">
 
 
-            <NavBar user={user} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs} toggleJobsListings={toggleJobsListings} setToggleJobsListings={setToggleJobsListings}/>
+            <NavBar user={user} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs} toggleJobsListings={toggleJobsListings} setToggleJobsListings={setToggleJobsListings} setToggleSaved={setToggleSaved} setToggleApplied={setToggleApplied} setTogglePending={setTogglePending}/>
             {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
            
             {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} jobs={jobs}/>}
