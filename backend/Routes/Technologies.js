@@ -28,8 +28,6 @@ TechRouter.get('/user-technologies', verifyToken ,async (req,res) => {
 
 TechRouter.post('/new-technologies', verifyToken, rateLimiter, async (req,res) => {
     
-    
-
     const TechResp = TechnologiesSchema(req.body)
 
     if(!TechResp.success){
@@ -57,6 +55,15 @@ TechRouter.post('/new-technologies', verifyToken, rateLimiter, async (req,res) =
     catch(err){
         return res.status(500).json({err : 'Database Error'})
     }
+
+
+
+
+
+
+   
+    
+    
     
 
 })
