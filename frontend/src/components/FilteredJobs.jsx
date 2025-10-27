@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import NoJobFound from "./NoJobFound";
+import FilteredJob from "./FilteredJob";
 
 const FilteredJobs = ({ jobs }) => {
   const [cookies] = useCookies(["token"]);
@@ -43,17 +45,8 @@ const FilteredJobs = ({ jobs }) => {
     <div className="filtered-jobs-container">
       <h1>Jobs For You:</h1>
 
-      {filteredJobs.length === 0 ? (
-        <p>No matching jobs found.</p>
-      ) : (
-        filteredJobs.map(job => (
-          <div key={job.id} className="job-card">
-            <h2>{job.job_title}</h2>
-            <p>Technologies: {job.job_technologies.join(", ")}</p>
-            <p>Employee Roles: {job.job_employeeList.join(", ")}</p>
-          </div>
-        ))
-      )}
+      {filteredJobs.length < 1  ? <NoJobFound /> : filteredJobs.map((filteredJob,filteredJobId) => <FilteredJob filteredJob={filteredJob} filteredJobId={filteredJobId} key={filteredJobId}/>)}
+
     </div>
   );
 };
