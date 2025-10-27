@@ -42,10 +42,10 @@ const FilteredJobs = ({ jobs }) => {
   }, [userTechnologies, userRoles, jobs]);
 
   return (
-    <div className="filtered-jobs-container">
+    <div className="filtered-jobs-container container py-3 row gap-3 justify-content-start">
       <h1>Jobs For You:</h1>
 
-      {filteredJobs.length < 1  ? <NoJobFound /> : filteredJobs.map((filteredJob,filteredJobId) => <FilteredJob filteredJob={filteredJob} filteredJobId={filteredJobId} key={filteredJobId}/>)}
+      {filteredJobs.length < 1  ? <NoJobFound /> : filteredJobs.map((filteredJob,filteredJobId) => (<FilteredJob filteredJob={filteredJob} key={filteredJobId} />))}
 
     </div>
   );
