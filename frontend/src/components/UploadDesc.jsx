@@ -15,7 +15,7 @@ const UploadDesc = ( { setToggleUploadDescMessage,setIsDescSuccessfull, setUploa
 
     const [cookies,setCookies,removeCookies] = useCookies(['token'])
 
-    const SubmitDesc = (e) => {
+    const SubmitDesc = async (e) => {
 
         e.preventDefault()
 
@@ -30,10 +30,11 @@ const UploadDesc = ( { setToggleUploadDescMessage,setIsDescSuccessfull, setUploa
 
         if(isValid){
             try{
+                await Promise.all([
+                    axios.post(ADD_USER_DESC_URL, data , {headers:{authorization: `Bearer ${cookies.token}`}})
+                    .then(resp => {setUploadMessage(resp.data.message) ; setToggleUploadDescMessage(true);setIsDescSuccessfull(true)})
+                ])
             
-            axios.post(ADD_USER_DESC_URL, data , {headers:{authorization: `Bearer ${cookies.token}`}})
-            .then(resp => {setUploadMessage(resp.data.message) ; setToggleUploadDescMessage(true);setIsDescSuccessfull(true)})
-
             }catch(err){
                 console.log(err)
 
@@ -48,15 +49,20 @@ const UploadDesc = ( { setToggleUploadDescMessage,setIsDescSuccessfull, setUploa
     useEffect(() => {
         
 
-        try{
+        const FetchDesc = async() => {
+            try{
             
-            axios.get(USER_DESC_URL , {headers : {Authorization : `bearer ${cookies.token}`}})
-            .then(resp => setDesc(resp.data.slice(0, 25)))
-    
-        }catch(err){
-            console.log(err)
-            setDesc('')
+                await Promise.all([
+                    axios.get(USER_DESC_URL , {headers : {Authorization : `bearer ${cookies.token}`}})
+                    .then(resp => setDesc(resp.data))  
+                ])
+            }catch(err){
+                console.log(err)
+                
+            }
         }
+
+        FetchDesc()
 
     },[])
 
