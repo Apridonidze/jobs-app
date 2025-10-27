@@ -41,19 +41,16 @@ const Main = () => {
                 axios.get(JOBS_URL, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setJobs(resp.data.jobs) )
             ])
        
-     
-            
-
-        }catch(err){
-            console.log(err)
-        }
+            }catch(err){
+                console.log(err)
+            }
 
         }
+
         fetchData()
 
     },[cookies.token])
 
-    console.log(isProfileFinished)
 
     //TODO : add database folder and add readme file for it 
 

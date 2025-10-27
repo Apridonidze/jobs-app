@@ -1,7 +1,7 @@
-const Job = ( { job , jobId } ) => {
+const Job = ( { job ,key , jobId } ) => {
 
     return(
-        <div className="job-container col-5 border border-1 justify-content-between" key={jobId}>
+        <div className="job-container col-5 border border-1 justify-content-between p-2" key={jobId}>
             <div className="job-header">
             
                 <h4 className="text-break">{job.job_title}</h4>

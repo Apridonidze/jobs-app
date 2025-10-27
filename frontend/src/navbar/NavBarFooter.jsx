@@ -8,6 +8,7 @@ const NavBarFooter =  ( { setFindJobs ,setCreateJobs , setToggleJobsListings,use
             </div>
             
             <div className="footer-right">
+                {user.role === 'Employee' ? <><button className="btn">Saved</button> <button className="btn">Applied Jobs</button> </>: <button className="btn">Job Pending</button>}
                 <button className="btn" onClick={() => {setToggleJobsListings(true) , setCreateJobs(false) ,setFindJobs(false)}}>Jobs Listings</button>
             </div>
 
