@@ -4,7 +4,21 @@ const SavedRouter = express.Router()
 const db = require('../db/db')
 const verifyToken = require('../config/verifyToken')
 
-SavedRouter.get('/my-saved-jobs', (req,res) => {
+SavedRouter.get('/my-saved-jobs', verifyToken, async(req,res) => {
+
+    try{
+
+        const [ SavedJobs ] = await db.query('select * from saved_jobs where user_id = ? ' , [req.user.userId])
+
+        if(SavedJobs.length < 1){
+            return res.status(204).json('no jobs saved yet')
+        }
+        return res.status(200).json(SavedJobs)
+
+
+    }catch(err){
+        console.log(err)
+    }
     //verify token 
     //fetch data based on req.user.userId
     //if there is not any data return 400 status code
