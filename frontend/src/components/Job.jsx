@@ -1,16 +1,18 @@
 import axios from "axios"
+import { useCookies } from "react-cookie"
 
 const Job = ( { job ,key , jobId } ) => {
 
 
-    const APPLY_URL = '' 
+    const APPLY_URL = 'http://localhost:8080/applied/post-my-applied-jobs' 
     const SAVE_URL = ''
 
     const handleApply = async(e) => {
 
+        
         e.preventDefault()
 
-        try{
+         try{
 
             await Promise.all([
                 axios.post(APPLY_URL, {job_id : job.job_id , user_id : job.user_id} , {headers:  auth})
