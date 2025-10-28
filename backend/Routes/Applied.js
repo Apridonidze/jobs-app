@@ -15,17 +15,20 @@ AppliedRouter.post('/post-my-applied-jobs',verifyToken , async (req,res) => {
 
     try{
 
-        //{ job_id: 3, user_id: 76 }
-
+        
         const [ JobsRow ] = await db.query('select * from jobs where job_id = ?', [req.body.job_id])
 
-        if(JobsRow.length >= 1){
+        if(JobsRow.length > 0){
+
+            const [ isApplied ] = await db.query('select * from applied_jobs where job_id = ? and applicant_id = ?' , [req.body.job_id , req.user.userId])
+            console.log(isApplied)
+            if(isApplied.length > 0){
+                return res.status(200).json('You Already Applied For This Job')
+            }
             
             await db.query('insert into applied_jobs (job_id, user_id, applicant_id) values (?,?,?)' , [req.body.job_id , req.body.user_id, req.user.userId ])
+            return res.send('inserted')
         }
-
-        return res.status(400).json('Invalid Job Apply')
-
 
     }catch(err){
         console.log(err)
