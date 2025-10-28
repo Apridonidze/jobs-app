@@ -9,6 +9,7 @@ import Footer from "../components/Foooter"
 import JobListings from "../components/JobListings"
 import ProfileMessage from "../alerts/ProfileMessage"
 import Saved from "../components/Saved"
+import Applied from "../components/Applied"
 
 const Main = () => {
 
@@ -73,7 +74,7 @@ const Main = () => {
             {toggleCreateJobs && <CreateJobs />}
             {toggleJobsListings && <JobListings jobs={jobs}/>}
             {toggleSaved && <Saved />}
-            {toggleApplied && <h1>applied</h1>}
+            {toggleApplied && <Applied />}
             {togglePending && <h1>job pendings</h1>}
 
             <Footer />
