@@ -12,13 +12,14 @@ SavedRouter.get('/', (req,res) => {
 
 SavedRouter.post('/post-my-saved-jobs',verifyToken , async (req,res) => {
 
-    const [ JobsRow ] = await db.query('select * from jobs where job_id = ?', [req.body.job_id])
+    try{
+        const [ JobsRow ] = await db.query('select * from jobs where job_id = ?', [req.body.job_id])
 
     if(JobsRow.length > 0){
 
         const [ isSaved ] = await db.query('select * from saved_jobs where job_id = ?' , [req.body.job_id ])
 
-        if(isSaved.length <= 1){
+        if(isSaved.length < 1){
             await db.query('insert into saved_jobs (job_id) values (?)' , [req.body.job_id])
             return res.status(200).json('Saved')
         }
@@ -26,6 +27,10 @@ SavedRouter.post('/post-my-saved-jobs',verifyToken , async (req,res) => {
         return res.status(200).json('You Have Already Saved This Job')
 
 
+    }
+
+    }catch(err){
+        return res.status(500).json('Database Error')
     }
 
 })
