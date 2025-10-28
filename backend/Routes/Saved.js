@@ -4,7 +4,7 @@ const SavedRouter = express.Router()
 const db = require('../db/db')
 const verifyToken = require('../config/verifyToken')
 
-SavedRouter.get('/', (req,res) => {
+SavedRouter.get('/my-saved-jobs', (req,res) => {
     //verify token 
     //fetch data based on req.user.userId
     //if there is not any data return 400 status code
