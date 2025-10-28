@@ -71,6 +71,9 @@ const Main = () => {
             {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} jobs={jobs}/>}
             {toggleCreateJobs && <CreateJobs />}
             {toggleJobsListings && <JobListings jobs={jobs}/>}
+            {toggleSaved && <h1>saved</h1>}
+            {toggleApplied && <h1>applied</h1>}
+            {togglePending && <h1>job pendings</h1>}
 
             <Footer />
         </div>
