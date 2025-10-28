@@ -8,6 +8,7 @@ import FindJobs from "../components/FindJobs"
 import Footer from "../components/Foooter"
 import JobListings from "../components/JobListings"
 import ProfileMessage from "../alerts/ProfileMessage"
+import Saved from "../components/Saved"
 
 const Main = () => {
 
@@ -71,7 +72,7 @@ const Main = () => {
             {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} jobs={jobs}/>}
             {toggleCreateJobs && <CreateJobs />}
             {toggleJobsListings && <JobListings jobs={jobs}/>}
-            {toggleSaved && <h1>saved</h1>}
+            {toggleSaved && <Saved />}
             {toggleApplied && <h1>applied</h1>}
             {togglePending && <h1>job pendings</h1>}
 
