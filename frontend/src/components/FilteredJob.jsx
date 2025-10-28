@@ -2,12 +2,12 @@ import { useCookies } from "react-cookie"
 import axios from "axios"
 
 const FilteredJob = ( { filteredJob , filteredJobId , key } ) => {
-
-    const APPLY_URL = 'http://localhost:8080/applied/post-my-applied-jobs' 
-    const SAVE_URL = ''
-
-    console.log()
+    
     const [cookies] = useCookies(['token'])
+    
+    const APPLY_URL = 'http://localhost:8080/applied/post-my-applied-jobs' 
+    const SAVE_URL = 'http://localhost:8080/saved/post-my-saved-jobs'
+
 
     const handleApply = async(e) => {
 
@@ -35,7 +35,7 @@ const FilteredJob = ( { filteredJob , filteredJobId , key } ) => {
          try{
 
             await Promise.all([
-                axios.post(SAVE_URL, {job_id : job.job_id , user_id : job.user_id} , {headers:  auth})
+                axios.post(SAVE_URL, {job_id : filteredJob.job_id , user_id : filteredJob.user_id} , {headers:  {Authorization : `Bearer ${cookies.token}`}})
                 .then(resp => console.log(resp))
             ])
 
