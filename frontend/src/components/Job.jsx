@@ -4,8 +4,11 @@ import { useCookies } from "react-cookie"
 const Job = ( { job ,key , jobId } ) => {
 
 
+     const [cookies] = useCookies(['token'])
+    
     const APPLY_URL = 'http://localhost:8080/applied/post-my-applied-jobs' 
-    const SAVE_URL = ''
+    const SAVE_URL = 'http://localhost:8080/saved/post-my-saved-jobs'
+
 
     const handleApply = async(e) => {
 
@@ -15,7 +18,7 @@ const Job = ( { job ,key , jobId } ) => {
          try{
 
             await Promise.all([
-                axios.post(APPLY_URL, {job_id : job.job_id , user_id : job.user_id} , {headers:  auth})
+                axios.post(APPLY_URL, {job_id : job.job_id , user_id : job.user_id} , {headers:  {Authorization : `Bearer ${cookies.token}`}})
                 .then(resp => console.log(resp))
             ])
 
@@ -33,7 +36,7 @@ const Job = ( { job ,key , jobId } ) => {
          try{
 
             await Promise.all([
-                axios.post(SAVE_URL, {job_id : job.job_id , user_id : job.user_id} , {headers:  auth})
+                axios.post(SAVE_URL, {job_id : job.job_id , user_id : job.user_id} , {headers:  {Authorization : `Bearer ${cookies.token}`}})
                 .then(resp => console.log(resp))
             ])
 
@@ -47,6 +50,7 @@ const Job = ( { job ,key , jobId } ) => {
 
         e.preventDefault()
     }
+
 
     return(
         <div className="job-container col-5 border border-1 d-flex flex-column  justify-content-between min-vh-50 py-2" key={jobId}>
