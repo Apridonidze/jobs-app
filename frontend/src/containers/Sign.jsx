@@ -1,15 +1,17 @@
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useRef,useState  } from "react"
-import { Link } from 'react-router-dom'
-
+import { Link , useNavigate} from 'react-router-dom'
 import CountryCode from "../components/CountryCode"
 import SignMessage from '../alerts/SignMessage';
+import { useEffect } from 'react';
 
 
 const Sign = () => {
 
-    const SIGN_PORT = 'http://localhost:8080/sign' // move to .env file
+    const navigator = useNavigate()
+
+    const SIGN_PORT = 'http://localhost:8080/sign/create-account' // move to .env file
     
     const [cookies, setCookies , removeCookies] = useCookies(['token'])
 
@@ -101,42 +103,25 @@ const Sign = () => {
         if(gender.trim() == '' || gender == null || gender.trim() == undefined){isValid = false ; genderRef.current.classList.add('border-danger') ; genderRef.current.classList.remove('border-success')}
         else { isValid = true ; genderRef.current.classList.add('border-success') ; genderRef.current.classList.remove('border-danger'); data = {...data, gender : gender}}
         
-        
 
-
-        if(isValid){
-
+        if(isValid) {
             try{
 
-                axios.post(SIGN_PORT , {data}).then(res => {
-                    const respToken = res.data.token; //save in onlyHttp-cookie
-                    setCookies('token', respToken, {
-                        path: '/',
-                        maxAge : 60 * 60 * 24 * 30,
-                        secure : true,
-                        sameSite : 'strict'
-                    })
-
-                    setSignMessage([res.data.message])
+                await Promise.all([
+                axios.post(SIGN_PORT , data ).then(res => {
                     setIsSuccessful(true)
-
+                    setSignMessage(res.data.message)
+                    setCookies(res.data.token)
                     setToggleSigMessage(true)
-
-                    
-
-                }) 
-
+                })])
+                
             }catch(err){
-                setSignMessage(err.response.data.error)
-                setIsSuccessful(false)
-                setToggleSigMessage(true)
+                console.log(err)
             }
-           
-        } 
-
-        
         }
 
+
+    }
     const handleReset = () => {
 
     setRole('')
@@ -190,7 +175,6 @@ const Sign = () => {
     genderRef.current.classList.remove('is-valid')
 
     }
-
 
     return(
         <div className="sign-container container text-center">

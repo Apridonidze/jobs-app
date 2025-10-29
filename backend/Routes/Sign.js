@@ -26,38 +26,30 @@ SignRouter.get('/' , (req,res) => {
     res.send('sign path')
 })
 
-SignRouter.post('/', rateLimiter ,async (req, res) => {
-
-    const validationResp = validateUser(req.body);
+SignRouter.post('/create-account', rateLimiter ,async (req, res) => {
+ const validationResp = validateUser(req.body);
 
     if (!validationResp.success) {
-        return res.status(400).json({ errors: validationResp.error.errors });
+        return res.status(400).json('invalid input');
     }
 
-
-    
     
     try {
         
-        const { role, name, surname, password, email, phoneNumber, birthDate, gender } = req.body.data;
+        const { role, name, surname, password, email, phoneNumber, birthDate, gender } = req.body;
         
-       
+        
         const [rows] = await db.query('select * from users where user_email = ?' , [email])
-
-        if(rows.length > 0){
-            return res.status(400).json({ error: 'Account Already Exists With This Email' });
-        }
         const [phoneRows] = await db.query('select * from users where user_phoneNumber = ?' , [phoneNumber])
-
-        if(phoneRows.length > 0){
-            return res.status(400).json({ error: 'Account Already Exists With This Phone Number' });
-        }
-
-
-        
-
         const hasshedPassword = await bcrypt.hash(password, 10); 
 
+        if(rows.length > 0){
+            return res.status(400).json('Account With This Email Already Exists')
+        }
+
+        if(phoneRows.length > 0){
+            return res.status(400).json('Account With This Phone Number Already Exists')
+        }
 
         const [userInsertion] = await db.query(
             `INSERT INTO users 
@@ -75,10 +67,10 @@ SignRouter.post('/', rateLimiter ,async (req, res) => {
             token : token,
         }); 
 
-
     } catch (err) {
-        return res.status(500).json({ error: 'Database error' });
+        return res.status(500).json('Database error');
     }
+
 });
 
 

@@ -11,7 +11,7 @@ const userSchema = z.object({
     gender : z.enum(['male','female'])
 })
 
-function validateUser ({data}) {
+function validateUser (data) {
 
     return userSchema.safeParse(data)
     
