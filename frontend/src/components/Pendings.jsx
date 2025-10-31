@@ -12,6 +12,8 @@ const Pendings = () => {
     const [jobs ,setJobs] = useState([])
     const [applicants,setApplicant] = useState([])
 
+    const [toggleSeeMore , setToggleSeeMore] = useState(false)
+
     useEffect(() => {
 
         const fetchPendings = async() =>{
@@ -38,11 +40,12 @@ const Pendings = () => {
             <div className="pendings-container">
                 {jobs?.map(job => (
                 
-                <PendingJob job={job} applicants={applicants}/>
+                <PendingJob job={job} applicants={applicants} setToggleSeeMore={setToggleSeeMore}/>
             ))}
             
             </div>
             
+            {toggleSeeMore && <><div className="see-more-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleSeeMore(false)}></div> <div className="see-more-container container position-fixed bg-white top-50"><h1>job desc</h1></div></>}
             
             
         </div>

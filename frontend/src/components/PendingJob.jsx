@@ -1,6 +1,6 @@
 import Applicant from "./Applicant"
 
-const PendingJob = ( { job, applicants } ) => {
+const PendingJob = ( { job, applicants, setToggleSeeMore } ) => {
     return ( 
         <div className="pending-job-container">
             <h3 key={job.job_id}>{job.job_title}</h3>
@@ -9,7 +9,7 @@ const PendingJob = ( { job, applicants } ) => {
                 <Applicant applicant={applicant}/>
             ))
             }
-            <button>See More</button>
+            <button onClick={() => setToggleSeeMore(true)}>See More</button>
         </div>
     )
 } 
