@@ -37,19 +37,11 @@ AppliedRouter.get('/my-applicants' , verifyToken , async(req,res) => {
             
         }
 
-        
-
-        return res.status(204).json('No Jobs Created Yet')
+        return res.status(200).json('asdasd')
 
     }catch(err){
         console.log(err)
     }
-
-    //get applied jobs wher euser id = req.user.userId
-    //get user from table where applied_job's applicant user id 
-
-    //at the end send full job that is crated by recruiter with applicants account's
-
     
 })
 
