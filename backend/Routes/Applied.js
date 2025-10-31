@@ -6,17 +6,19 @@ const verifyToken = require('../config/verifyToken')
 
 AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
     console.log(req.body)
-    //integrate beriftytoken
     //check if user aplied for jos baed on their token
     //return no jobs found if there is not rovs
     //else return jobs user has applied and status form recuiter /not checked yet // seen user // acceped user //denied user
 })
 
 AppliedRouter.get('/my-applicants' , verifyToken , async(req,res) => {
+    console.log(req.user.userId)
     //get applied jobs wher euser id = req.user.userId
     //get user from table where applied_job's applicant user id 
 
     //at the end send full job that is crated by recruiter with applicants account's
+
+    
 })
 
 AppliedRouter.post('/post-my-applied-jobs',verifyToken , async (req,res) => {
