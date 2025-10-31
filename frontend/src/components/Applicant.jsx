@@ -1,9 +1,9 @@
 const Applicant = ( { applicant } ) => {
     return(
-        <div className="applicant-container">
+        <div className="applicant-container d d-flex">
             
-            <span key={applicant.user_id}>{applicant.user_name}</span>
-
+            <h4>Applicants:</h4>
+            <h4 key={applicant.user_id}>{applicant.user_name}</h4>
         </div>
     )
 }

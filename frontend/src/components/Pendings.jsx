@@ -38,7 +38,7 @@ const Pendings = () => {
             <div className="pendings-container">
                 {jobs?.map(job => (
                 
-                <PendingJob job={job}/>
+                <PendingJob job={job} applicants={applicants}/>
             ))}
             
             </div>
