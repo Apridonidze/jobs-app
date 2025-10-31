@@ -3,6 +3,7 @@ const AppliedRouter = express.Router()
 
 const db = require('../db/db')
 const verifyToken = require('../config/verifyToken')
+const { watchFile } = require('fs')
 
 AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
     console.log(req.body)
@@ -12,7 +13,38 @@ AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
 })
 
 AppliedRouter.get('/my-applicants' , verifyToken , async(req,res) => {
-    console.log(req.user.userId)
+    try{
+
+        const [ Jobs ] = await db.query('select * from applied_jobs where user_id = ?', [req.user.userId])
+
+        if( Jobs ){
+
+            
+            for(let i = 0 ; i < Jobs.length ; i++){
+
+                const [ Applicants ] = await db.query('select * from users where user_id =? ', [Jobs[i].applicant_id])
+                const [MyJobs]  = await db.query('select * from jobs where user_id = ?' ,[Jobs[i].user_id])
+
+                if(Applicants.length){
+                    
+                return res.status(200).json({job: MyJobs , applicants : Applicants})
+                }
+
+                return res.status(200).json({job : MyJobs ,Applicants : 'No Applicants Yet'})
+
+            }
+
+            
+        }
+
+        
+
+        return res.status(204).json('No Jobs Created Yet')
+
+    }catch(err){
+        console.log(err)
+    }
+
     //get applied jobs wher euser id = req.user.userId
     //get user from table where applied_job's applicant user id 
 
