@@ -16,7 +16,7 @@ const PendingJob = ( { job, applicants,setToggleAcceptDecline } ) => {
             ))
             }
 
-            <button onClick={() => setToggleAcceptDecline(true)}>Accept/Deciline Applicant</button>
+            <button onClick={() => setToggleAcceptDecline({status:true , job_id : job.job_id})}>Accept/Deciline Applicant</button>
 
            
         

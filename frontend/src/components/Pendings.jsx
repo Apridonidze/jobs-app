@@ -12,7 +12,7 @@ const Pendings = () => {
 
     const [jobs ,setJobs] = useState([])
     const [applicants,setApplicant] = useState([])
-    const [toggleAcceptDecline, setToggleAcceptDecline] = useState(false)
+    const [toggleAcceptDecline, setToggleAcceptDecline] = useState({status:false , job_id : null})
 
 
     useEffect(() => {
@@ -33,12 +33,13 @@ const Pendings = () => {
 
     },[])
 
+    console.log(toggleAcceptDecline)
 
     return(
         <div className="pendings-container">
             <h1>Pendings For Your Jobs</h1>
 
-            {toggleAcceptDecline && <> <div className="accept-decline-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleAcceptDecline(false)}></div> <AccpetDecline /></>}
+            {toggleAcceptDecline.status && <> <div className="accept-decline-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleAcceptDecline({status:false , job_id : null})}></div> <AccpetDecline /></>}
            
             <div className="pendings-container">
                 {jobs?.map(job => (
