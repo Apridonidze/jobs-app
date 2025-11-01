@@ -1,7 +1,17 @@
-const AccpetDecline = () => {
+import Applicant from "./Applicant"
+
+const AccpetDecline = ( { toggleAcceptDecline,job ,applicants } ) => {
     return(
-        <div className="accept-decline-container d d-flex position-fixed top-50 bg-white">
-            Accept or decline
+        <div className="accept-decline-container d d-flex flex-column position-fixed top-50 bg-white">
+            
+
+            <h3 key={toggleAcceptDecline.job_id}>{job.job_title}</h3>
+
+            {applicants?.map(applicant => (
+                <Applicant applicant={applicant}/>
+            ))
+            }
+            
         </div>
     )
 }

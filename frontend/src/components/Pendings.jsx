@@ -33,19 +33,19 @@ const Pendings = () => {
 
     },[])
 
-    console.log(toggleAcceptDecline)
 
     return(
         <div className="pendings-container">
             <h1>Pendings For Your Jobs</h1>
 
-            {toggleAcceptDecline.status && <> <div className="accept-decline-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleAcceptDecline({status:false , job_id : null})}></div> <AccpetDecline /></>}
            
             <div className="pendings-container">
                 {jobs?.map(job => (
-                
-                <PendingJob job={job} applicants={applicants} setToggleAcceptDecline={setToggleAcceptDecline}/>
-            ))}
+                    <>
+                        {toggleAcceptDecline.status && <> <div className="accept-decline-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleAcceptDecline({status:false , job_id : null})}></div> <AccpetDecline toggleAcceptDecline={toggleAcceptDecline} job={job} applicants={applicants}/></>}
+                        <PendingJob job={job} applicants={applicants} setToggleAcceptDecline={setToggleAcceptDecline}/>
+                    </>    
+                ))}
             
             </div>
             
