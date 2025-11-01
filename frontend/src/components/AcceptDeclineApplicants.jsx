@@ -5,7 +5,7 @@ const AcceptDeclineApplicants = ( { applicant } ) => {
 
     const [ cookies ] = useCookies(['token'])
 
-    const ACCEPT_DECLINE_APPLICANTS_URL = '' //move to .env
+    const ACCEPT_DECLINE_APPLICANTS_URL = 'http://localhost:8080/accept-decline/accept-decline-employee' //move to .env
 
         const AcceptDeclineApplicants = async(e) => {
             e.preventDefault()
@@ -13,8 +13,8 @@ const AcceptDeclineApplicants = ( { applicant } ) => {
 
             try{
                 await Promise.all([
-                    axios.post(ACCEPT_DECLINE_APPLICANTS_URL , e.target.value , {headers : {Authorization : `Bearer ${cookies.token}`}})
-                    .then(resp => console.log(resp))
+                    axios.post(ACCEPT_DECLINE_APPLICANTS_URL , {applicant_id : applicant.user_id , status: e.target.value} , {headers : {Authorization : `Bearer ${cookies.token}`}})
+                    .then(resp => console.log(resp.data))
                 ])
                 
             }catch(err){
