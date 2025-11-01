@@ -4,6 +4,7 @@ import {  } from "react"
 import { useCookies } from "react-cookie"
 
 import PendingJob from "./PendingJob"
+import AccpetDecline from "./AcceptDecline"
 const Pendings = () => {
 
     const PENDINGS_URL = 'http://localhost:8080/applied/my-applicants'
@@ -11,6 +12,7 @@ const Pendings = () => {
 
     const [jobs ,setJobs] = useState([])
     const [applicants,setApplicant] = useState([])
+    const [toggleAcceptDecline, setToggleAcceptDecline] = useState(false)
 
 
     useEffect(() => {
@@ -35,11 +37,13 @@ const Pendings = () => {
     return(
         <div className="pendings-container">
             <h1>Pendings For Your Jobs</h1>
+
+            {toggleAcceptDecline && <> <div className="accept-decline-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleAcceptDecline(false)}></div> <AccpetDecline /></>}
            
             <div className="pendings-container">
                 {jobs?.map(job => (
                 
-                <PendingJob job={job} applicants={applicants} />
+                <PendingJob job={job} applicants={applicants} setToggleAcceptDecline={setToggleAcceptDecline}/>
             ))}
             
             </div>
