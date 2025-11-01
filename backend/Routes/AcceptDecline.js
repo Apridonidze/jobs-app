@@ -30,7 +30,7 @@ AcceptDeclineRouter.post('/accept-decline-employee', rateLimiter , verifyToken ,
 
         }
 
-        await db.query('insert into AcceptedDeclined (job_id, applicant_id , status) values (?,?,?)' , [req.body.job_id, req.body.applicant_id , req.body.status])
+        await db.query('insert into AcceptedDeclined (job_id, applicant_id , status, recruiter_id) values (? , ? , ? , ?)' , [req.body.job_id, req.body.applicant_id , req.body.status , req.user.userId])
 
         console.log('response sended to database')
         
