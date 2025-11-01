@@ -20,6 +20,7 @@ const RoleRouter = require('./Routes/Role');
 const isProfileFinishedRouter = require('./Routes/isProfileFinished');
 const SavedRouter = require('./Routes/Saved');
 const AppliedRouter = require('./Routes/Applied');
+const AcceptDeclineRouter = require('./Routes/AcceptDecline');
 
 const PORT = process.env.SERVER_PORT;
 
@@ -39,6 +40,7 @@ app.use('/roles', RoleRouter)
 app.use('/is-profile-finished', isProfileFinishedRouter)
 app.use('/saved', SavedRouter)
 app.use('/applied', AppliedRouter)
+app.use('/accept-decline', AcceptDeclineRouter)
 
 
 app.listen(PORT, () => {
