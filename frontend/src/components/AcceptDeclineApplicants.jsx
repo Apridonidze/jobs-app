@@ -1,9 +1,25 @@
+import axios from 'axios'
+import { useCookies } from 'react-cookie'
+
 const AcceptDeclineApplicants = ( { applicant } ) => {
 
-        const AcceptDeclineApplicants = (e) => {
+    const [ cookies ] = useCookies(['token'])
+
+    const ACCEPT_DECLINE_APPLICANTS_URL = '' //move to .env
+
+        const AcceptDeclineApplicants = async(e) => {
             e.preventDefault()
 
-            console.log(e.target.value)
+
+            try{
+                await Promise.all([
+                    axios.post(ACCEPT_DECLINE_APPLICANTS_URL , e.target.value , {headers : {Authorization : `Bearer ${cookies.token}`}})
+                    .then(resp => console.log(resp))
+                ])
+                
+            }catch(err){
+                console.log(err)
+            }
 
         }
 
