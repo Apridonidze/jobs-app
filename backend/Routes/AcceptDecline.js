@@ -26,13 +26,14 @@ AcceptDeclineRouter.post('/accept-decline-employee', rateLimiter , verifyToken ,
 
         if(rows.length > 1){
 
-            console.log('you already sent status to this user') // add status code
+            return res.status(200).json('already sended response to this employee')
 
         }
 
         await db.query('insert into AcceptedDeclined (job_id, applicant_id , status, recruiter_id) values (? , ? , ? , ?)' , [req.body.job_id, req.body.applicant_id , req.body.status , req.user.userId])
 
-        console.log('response sended to database')
+        if(req.body.status === 'false') return res.status(200).json(`You Have Successfully Declined Employee`)
+        return res.status(200).json(`You Have Successfully Accepted Employee`)
         
 
     }catch(err){
