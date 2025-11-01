@@ -6,8 +6,10 @@ const AcceptDeclineSchema = require('../schemas/AcceptDeclineSchema')
 const rateLimiter = require('../config/rateLimiter')
 const db = require('../db/db')
 
-AcceptDeclineRouter.get('/', (req, res) => {
-    res.send('accept or decline default path')
+AcceptDeclineRouter.get('/:applicant_id/:job_id', verifyToken , async (req, res) => {
+      const { applicant_id, job_id } = req.params;
+
+      await db.query('select * from AcceptedDeclined where applicant_id = ? and job_id = ?' , [applicant_id, job_id])
 })
 
 

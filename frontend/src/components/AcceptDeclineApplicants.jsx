@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useEffect } from 'react'
 import { useCookies } from 'react-cookie'
 
 const AcceptDeclineApplicants = ( { applicant, toggleAcceptDecline } ) => {
@@ -14,7 +15,7 @@ const AcceptDeclineApplicants = ( { applicant, toggleAcceptDecline } ) => {
             try{
                 await Promise.all([
                     axios.post(ACCEPT_DECLINE_APPLICANTS_URL , {applicant_id : applicant.user_id , job_id : toggleAcceptDecline.job_id, status: e.target.value} , {headers : {Authorization : `Bearer ${cookies.token}`}})
-                    .then(resp => console.log(resp.data))
+                    .then(resp => console.log(resp.data)),
                 ])
                 
             }catch(err){
@@ -23,6 +24,22 @@ const AcceptDeclineApplicants = ( { applicant, toggleAcceptDecline } ) => {
 
         }
 
+        useEffect(() => {
+            const FetchUserStatus = async () => {
+                try{
+
+                    await Promise.all([
+                        axios.get(`http://localhost:8080/accept-decline/${applicant.user_id}/${toggleAcceptDecline.job_id}` ,{headers: {Authorization : `Bearer ${cookies.token}`}})
+                    .then(resp => console.log(resp))
+                    ])
+
+                }catch(err){
+                    console.log(err)
+                }
+            }
+
+            FetchUserStatus()
+        },[])
 
     return(
         <div className="accept-decline-applicants-container">
