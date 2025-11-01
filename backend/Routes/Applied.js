@@ -3,7 +3,6 @@ const AppliedRouter = express.Router()
 
 const db = require('../db/db')
 const verifyToken = require('../config/verifyToken')
-const { watchFile } = require('fs')
 
 AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
     console.log(req.body)

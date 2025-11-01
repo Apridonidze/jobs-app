@@ -9,7 +9,7 @@ const AccpetDecline = ( { toggleAcceptDecline,job ,applicants } ) => {
             <h3 key={toggleAcceptDecline.job_id}>{job.job_title}</h3>
 
             {applicants?.map(applicant => (
-                <AcceptDeclineApplicants applicant={applicant}/>
+                <AcceptDeclineApplicants applicant={applicant} toggleAcceptDecline={toggleAcceptDecline}/>
             ))
             }
             

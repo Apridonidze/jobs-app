@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useCookies } from 'react-cookie'
 
-const AcceptDeclineApplicants = ( { applicant } ) => {
+const AcceptDeclineApplicants = ( { applicant, toggleAcceptDecline } ) => {
 
     const [ cookies ] = useCookies(['token'])
 
@@ -13,7 +13,7 @@ const AcceptDeclineApplicants = ( { applicant } ) => {
 
             try{
                 await Promise.all([
-                    axios.post(ACCEPT_DECLINE_APPLICANTS_URL , {applicant_id : applicant.user_id , status: e.target.value} , {headers : {Authorization : `Bearer ${cookies.token}`}})
+                    axios.post(ACCEPT_DECLINE_APPLICANTS_URL , {applicant_id : applicant.user_id , job_id : toggleAcceptDecline.job_id, status: e.target.value} , {headers : {Authorization : `Bearer ${cookies.token}`}})
                     .then(resp => console.log(resp.data))
                 ])
                 
