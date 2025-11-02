@@ -1,21 +1,22 @@
 import axios from 'axios'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
 
 const AcceptDeclineApplicants = ( { applicant, toggleAcceptDecline } ) => {
 
     const [ cookies ] = useCookies(['token'])
+    const [status , setStatus] = useState(null)
+    const [statusMessage, setStatusMessage] = useState('')
 
     const ACCEPT_DECLINE_APPLICANTS_URL = 'http://localhost:8080/accept-decline/accept-decline-employee' //move to .env
 
         const AcceptDeclineApplicants = async(e) => {
-            e.preventDefault()
 
 
             try{
                 await Promise.all([
-                    axios.post(ACCEPT_DECLINE_APPLICANTS_URL , {applicant_id : applicant.user_id , job_id : toggleAcceptDecline.job_id, status: e.target.value} , {headers : {Authorization : `Bearer ${cookies.token}`}})
-                    .then(resp => console.log(resp.data)),
+                    axios.post(ACCEPT_DECLINE_APPLICANTS_URL , {applicant_id : applicant.user_id , job_id : toggleAcceptDecline.job_id, status: e.target.value } , {headers : {Authorization : `Bearer ${cookies.token}`}})
+                    .then(resp => {setStatusMessage(resp.data.message) , setStatus(resp.data.status) , console.log(resp.data)}),
                 ])
                 
             }catch(err){
@@ -30,7 +31,7 @@ const AcceptDeclineApplicants = ( { applicant, toggleAcceptDecline } ) => {
 
                     await Promise.all([
                         axios.get(`http://localhost:8080/accept-decline/${applicant.user_id}/${toggleAcceptDecline.job_id}` ,{headers: {Authorization : `Bearer ${cookies.token}`}})
-                    .then(resp => console.log(resp))
+                    .then(resp => {setStatusMessage(resp.data.message) , setStatus(resp.data.status) })
                     ])
 
                 }catch(err){
@@ -48,12 +49,16 @@ const AcceptDeclineApplicants = ( { applicant, toggleAcceptDecline } ) => {
 
            <div className="acceot-decline-applicants-body d d-flex justify-content-between">
 
-                 <h4 key={applicant.user_id}>{applicant.user_name}</h4>
+                <h4 key={applicant.user_id}>{applicant.user_name}</h4>
 
-                <div className="buttons-container">
+
+                {status == true ? <><div className="buttons-container">
                     <button onClick={(e) => AcceptDeclineApplicants(e)} value={true}>Accept</button>
                     <button onClick={(e) => AcceptDeclineApplicants(e)} value={false}>Decline</button>
-                </div>
+
+                </div></> : <h4>{statusMessage}</h4>}
+
+                
 
             </div> 
            
