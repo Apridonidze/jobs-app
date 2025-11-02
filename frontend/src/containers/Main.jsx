@@ -60,8 +60,6 @@ const Main = () => {
 
     //TODO : add database folder and add readme file for it 
 
-    //TODO (recruiter side): Add button to see who submited for your work , and add feature that accepts ,declines , ignoers employee
-
     //TODO (employee side): Add notification button that shows if you get hired or declined 
     
     return(

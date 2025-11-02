@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
 import MyJob from "./MyJob"
+import SeeMore from "./SeeMore"
 
 const MyJobs = () => {
 
@@ -29,7 +30,7 @@ const MyJobs = () => {
     return (
         <div className="my-jobs-container d-flex flex-column">
 
-            {toggleSeeMore.status && <h1>asd</h1>} {/* toggle see more component when true */}
+            {toggleSeeMore.status && <><div className="my-jobs-container-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleSeeMore({status:false, job_id : null})}></div><SeeMore /></>}
 
             <h1>Jobs Created By You: </h1>
             {yourJobs.reverse().map((job,jobId) => (
