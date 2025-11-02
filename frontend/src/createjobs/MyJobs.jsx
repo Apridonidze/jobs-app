@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
+import MyJob from "./MyJob"
 
 const MyJobs = () => {
 
@@ -26,8 +27,8 @@ const MyJobs = () => {
     return (
         <div className="my-jobs-container d-flex flex-column">
             <h1>Jobs Created By You: </h1>
-            {yourJobs.reverse().map((e,i) => (
-                <span key={i}>{e.job_title}</span>
+            {yourJobs.reverse().map((job,jobId) => (
+                <MyJob key={jobId} job={job} jobId={jobId}/>
             ))}
             {noJobsFound}
         </div>
