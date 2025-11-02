@@ -42,10 +42,10 @@ JobsRouter.get('/user-jobs/:job_id' , verifyToken , async (req,res) => {
 
         const [ rows ] = await db.query('select * from jobs where job_id = ? and user_id = ?' , [req.params.job_id , req.user.userId])
 
-        if(rows.length < 1) return res.status(400).json({error : 'no jobs found'})
+        if(rows.length < 1) return res.status(400).json('Error While Fetching Your Job')
 
-        return res.status(200).json({message : 'your jobs fetched successfully' , jobs : rows})
-        console
+        return res.status(200).json(rows)
+        
 
     }catch(err){
         
