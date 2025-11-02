@@ -8,7 +8,7 @@ const AcceptDeclineApplicants = ( { applicant, toggleAcceptDecline } ) => {
     const [status , setStatus] = useState(null)
     const [statusMessage, setStatusMessage] = useState('')
 
-    const ACCEPT_DECLINE_APPLICANTS_URL = 'http://localhost:8080/accept-decline/accept-decline-employee' //move to .env
+    const ACCEPT_DECLINE_APPLICANTS_URL = 'http://localhost:8080/accept-decline/' //move to .env
 
         const AcceptDeclineApplicants = async(e) => {
 
