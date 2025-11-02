@@ -47,7 +47,7 @@ const AcceptDeclineApplicants = ( { applicant, toggleAcceptDecline } ) => {
 
             <h1>Applicants for this job</h1>
 
-           <div className="acceot-decline-applicants-body d d-flex justify-content-between">
+           <div className="accept-decline-applicants-body d d-flex justify-content-between">
 
                 <h4 key={applicant.user_id}>{applicant.user_name}</h4>
 
