@@ -30,7 +30,10 @@ const MyJobs = () => {
     return (
         <div className="my-jobs-container d-flex flex-column">
 
-            {toggleSeeMore.status && <><div className="my-jobs-container-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleSeeMore({status:false, job_id : null})}></div><SeeMore /></>}
+            {toggleSeeMore.status && <>
+            <div className="my-jobs-container-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleSeeMore({status:false, job_id : null})}></div>
+            <SeeMore toggleSeeMore={toggleSeeMore}/>
+            </>}
 
             <h1>Jobs Created By You: </h1>
             {yourJobs.reverse().map((job,jobId) => (
