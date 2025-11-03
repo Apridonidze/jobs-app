@@ -48,7 +48,6 @@ const MyUserSidebar = ( { user } ) => {
     const [avatarImg,setAvatarImg] = useState('')
 
     const AVATAR_URL = 'http://localhost:8080/avatar' //move to .env
-    const USER_DESC_URL = 'http://localhost:8080/desc/my-desc' //move to .env
     const USER_TAGS_URL = 'http://localhost:8080/tags/my-tags' //move to .env
     const USER_TECHNOLOGIES_URL = 'http://localhost:8080/technologies/user-technologies' //move to .env
     const USER_ROLES_URL = 'http://localhost:8080/roles/my-roles' //move to .env
@@ -79,8 +78,6 @@ const MyUserSidebar = ( { user } ) => {
                     await Promise.all([
                     axios.get(AVATAR_URL, {headers: {Authorization : `Bearer ${cookies.token}`}})
                     .then(resp => setAvatarImg(resp.data)),
-                    axios.get(USER_DESC_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
-                    .then(resp => setDescValue(resp.data)),
                     axios.get(USER_TAGS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
                     .then(resp => setTags([...resp.data])),
                     axios.get(USER_ROLES_URL, {headers : {Authorization : `Bearer ${cookies.token}`}})
@@ -128,16 +125,7 @@ const MyUserSidebar = ( { user } ) => {
             }
            
            
-           {toggleUploadDesc && 
-
-                <> 
-                    <div className="upload-desc-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadDesc(false)}></div> 
-                    <UploadDesc setToggleUploadDescMessage={setToggleUploadDescMessage} setIsDescSuccessfull={setIsDescSuccessfull} setUploadMessage={setUploadMessage}/> 
-                    {toggleUploadDescMessage && 
-                    <DescMessage setToggleUploadDesc={setToggleUploadDesc} setToggleUploadDescMessage={setToggleUploadDescMessage} isDescSuccessfull={isDescSuccessfull} UploadMessage={UploadMessage} /> }
-                </>
-
-            }
+           
 
             {toggleUploadTags &&
                 
@@ -168,7 +156,6 @@ const MyUserSidebar = ( { user } ) => {
 
             <button className="btn btn-primary text-white" onClick={() => setToggleUploadAvatar(true)}>Upload Your Profile Picture</button>
 
-            <input type="text" className="form-control" value={descValue ? descValue : 'No Description Yet'} onClick={() => setToggleUploadDesc(true)} placeholder="Add About Me..."/>
 
             {user && user.role === 'Recruiter' && <RecruiterForms setToggleUploadTags={setToggleUploadTags} tags={tags}/>}
             {user && user.role === 'Employee' && <EmployeeForms setToggleUploadTechnologies={setToggleUploadTechnologies} roles={roles} setToggleUploadRole={setToggleUploadRole} technologies={technologies}/>}

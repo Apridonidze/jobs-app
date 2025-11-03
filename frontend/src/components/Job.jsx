@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect } from "react"
 import { useCookies } from "react-cookie"
 
-const Job = ( { job ,key , jobId, user } ) => {
+const Job = ( { job , user, setToggleSeeMore } ) => {
 
 
      const [cookies] = useCookies(['token'])
@@ -47,14 +47,9 @@ const Job = ( { job ,key , jobId, user } ) => {
 
     }
 
-    const handleSeeMore = (e) => {
-
-        e.preventDefault()
-    }
-
 
     return(
-        <div className="job-container col-5 border border-1 d-flex flex-column  justify-content-between min-vh-50 py-2" key={jobId}>
+        <div className="job-container col-5 border border-1 d-flex flex-column  justify-content-between min-vh-50 py-2" key={job.job_id}>
             <div className="job-header">
             
                 <h4 className="text-break">{job.job_title}</h4>
@@ -79,7 +74,7 @@ const Job = ( { job ,key , jobId, user } ) => {
                 
                 }
                 <div className="buttons-footer col">
-                    <button className="btn btn-primary w-100" onClick={(e) => handleSeeMore(e)}>See More...</button>
+                    <button className="btn btn-primary w-100" onClick={() => setToggleSeeMore({staus: true , job_id : job.job_id})}>See More...</button>
                 </div>
            </div>
         </div>

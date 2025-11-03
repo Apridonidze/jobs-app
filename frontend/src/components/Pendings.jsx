@@ -16,6 +16,8 @@ const Pendings = () => {
 
 
     useEffect(() => {
+        
+    const PENDINGS_URL = 'http://localhost:8080/applied/my-applicants'
 
         const fetchPendings = async() =>{
             try{
