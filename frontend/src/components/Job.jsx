@@ -1,7 +1,8 @@
 import axios from "axios"
+import { useEffect } from "react"
 import { useCookies } from "react-cookie"
 
-const Job = ( { job ,key , jobId } ) => {
+const Job = ( { job ,key , jobId, user } ) => {
 
 
      const [cookies] = useCookies(['token'])
@@ -69,10 +70,14 @@ const Job = ( { job ,key , jobId } ) => {
             </div>
 
            <div className="buttons row d d-flex flex-column gap-2">
+                {user && user.role !== 'Recruiter' && 
+                
                 <div className="buttons-header d d-flex gap-2 col">
                     <button className="btn btn-success w-50" onClick={(e) => handleApply(e)}>Apply</button>
                     <button className="btn border border-2 border-success w-50" onClick={(e) => handleSave(e)}>Save</button>
                 </div>
+                
+                }
                 <div className="buttons-footer col">
                     <button className="btn btn-primary w-100" onClick={(e) => handleSeeMore(e)}>See More...</button>
                 </div>

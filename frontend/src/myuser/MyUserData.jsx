@@ -19,7 +19,13 @@ const MyUserData = ( { user, descValue , setToggleUploadDesc } ) => {
                     <h1 onClick={() => setToggleUploadDesc(true)}>Edit...</h1>
                 
                 </div>
-                <h4>{descValue ? descValue : 'No Description Yet'}</h4>
+                
+                <div className="desc-main">
+
+                    <h4>{descValue ? descValue : 'No Description Yet'}</h4>
+                
+                </div>
+                
             </div>
 
         </div>

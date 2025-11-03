@@ -71,7 +71,7 @@ const Main = () => {
            
             {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} jobs={jobs}/>}
             {toggleCreateJobs && <CreateJobs />}
-            {toggleJobsListings && <JobListings jobs={jobs}/>}
+            {toggleJobsListings && <JobListings jobs={jobs} user={user}/>}
             {toggleSaved && <Saved />}
             {toggleApplied && <Applied />}
             {togglePending && <Pendings />}
