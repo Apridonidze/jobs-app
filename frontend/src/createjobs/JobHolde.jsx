@@ -1,4 +1,4 @@
-const JobHolder = ( { job, applicants } ) => {
+const JobHolder = ( { job, applicants,setToggleDelete } ) => {
 
 
     return(
@@ -16,11 +16,12 @@ const JobHolder = ( { job, applicants } ) => {
 
             <div className="job-applicants">
                 <h3>Applicants For This Job : </h3>
-                {applicants.applicant.user_name}
+                <span>{applicants.applicant.user_name}</span>
+                <span>{applicants.message}</span>
             </div>
 
             <div className="job-buttons">
-                <button>Delete</button>
+                <button onClick={() => setToggleDelete(true)}>Delete Job Offer</button>
             </div>
 
 

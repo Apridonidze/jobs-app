@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
 import MyJob from "./MyJob"
 import SeeMore from "./SeeMore"
+import Delete from "./Delete"
 
 const MyJobs = () => {
 
@@ -14,6 +15,7 @@ const MyJobs = () => {
     const [noJobsFound,setNoJobsFound] = useState('')
 
     const [toggleSeeMore, setToggleSeeMore] = useState({status : null , job_id : null})
+    const [toggleDelete, setToggleDelete] = useState()
 
     useEffect(() => {
 
@@ -32,8 +34,11 @@ const MyJobs = () => {
 
             {toggleSeeMore.status && <>
             <div className="my-jobs-container-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleSeeMore({status:false, job_id : null})}></div>
-            <SeeMore toggleSeeMore={toggleSeeMore}/>
-            </>}
+            <SeeMore toggleSeeMore={toggleSeeMore} setToggleDelete={setToggleDelete}/>
+            {toggleDelete && <> <div className="delete-background position-fixed w-100 h-100 top-0 start-0 opacity-50 bg-dark" onClick={() => setToggleDelete(false)}></div> <Delete /> </>}
+            </>
+            }
+
 
             <h1>Jobs Created By You: </h1>
             {yourJobs.reverse().map(job => (

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
 import JobHolder from "./JobHolde"
 
-const SeeMore = ( {toggleSeeMore} ) => {
+const SeeMore = ( {toggleSeeMore, setToggleDelete} ) => {
 
     const [ cookies ] = useCookies(['token'])
     const [job, setJob] = useState(null)
@@ -34,17 +34,9 @@ const SeeMore = ( {toggleSeeMore} ) => {
     },[])
 
 
-    console.log(applicants)
-    console.log(job)
-
-    
-
-
-    //job_id, user_id, job_title, job_desc, job_employeeList, job_technologies, job_languages
-
     return(
         <div className="see-more-container position-fixed bg-white">
-            {job && applicants && <JobHolder job={job} applicants={applicants}/>}
+            {job && applicants && <JobHolder job={job} applicants={applicants} setToggleDelete={setToggleDelete}/>}
         </div>
     )
 }
