@@ -10,11 +10,12 @@ const db = require('../db/db')
 
 AcceptDeclineRouter.get('/my-applicants/:job_id' , verifyToken , async(req,res) => {
     
-    const [ rows ]= await db.query('select * from AcceptedDeclined where job_id = ?' , [req.params.job_id])
+    try{
+        const [ rows ]= await db.query('select * from AcceptedDeclined where job_id = ?' , [req.params.job_id])
 
     if(rows.length < 1){
         
-        return res.status(200).json('No Applicants Yet')
+        return res.status(200).json({message : 'No Applicants Yet', data : rows[0] , applicant: applicant[0]})
 
     }
 
@@ -24,6 +25,10 @@ AcceptDeclineRouter.get('/my-applicants/:job_id' , verifyToken , async(req,res) 
     return res.status(200).json({message : 'You Have Already Accepted This Employee', data : rows[0], applicant : applicant[0]})
     
     
+
+    }catch(err){
+        return res.status(500).json('Database Error')
+    }
     
     
 })

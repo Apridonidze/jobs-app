@@ -9,8 +9,6 @@ const SeeMore = ( {toggleSeeMore, setToggleDelete} ) => {
     const [job, setJob] = useState(null)
     const [applicants,setApplicants] = useState(null)
     const JOBS_URL = 'http://localhost:8080/jobs/user-jobs'
-    const APPLICANTS_URL = 'http://localhost:8080/accept-decline/my-job-application'
-    
     const PENDINGS_URL = 'http://localhost:8080/accept-decline/my-applicants'
 
     useEffect(() => {
