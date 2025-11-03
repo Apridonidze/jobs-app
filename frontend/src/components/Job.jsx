@@ -74,7 +74,7 @@ const Job = ( { job , user, setToggleSeeMore } ) => {
                 
                 }
                 <div className="buttons-footer col">
-                    <button className="btn btn-primary w-100" onClick={() => setToggleSeeMore({staus: true , job_id : job.job_id})}>See More...</button>
+                    <button className="btn btn-primary w-100" onClick={() => setToggleSeeMore({status: true , job_id : job.job_id})}>See More...</button>
                 </div>
            </div>
         </div>
