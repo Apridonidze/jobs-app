@@ -19,8 +19,10 @@ const SeeMore = ( {toggleSeeMore} ) => {
 
             try{
                 await Promise.all([
+                axios.get(`${JOBS_URL}/${toggleSeeMore.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}})
+                .then(resp => {setJob(resp.data[0])}),
                 axios.get(`${PENDINGS_URL}/${toggleSeeMore.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}})
-                .then(resp => {console.log(resp.data) })
+                .then(resp => {setApplicants(resp.data)})
             ])
             }catch(err){
                 console.log(err)
@@ -31,6 +33,10 @@ const SeeMore = ( {toggleSeeMore} ) => {
         fetchJob()
     },[])
 
+
+    console.log(applicants)
+    console.log(job)
+
     
 
 
@@ -38,7 +44,7 @@ const SeeMore = ( {toggleSeeMore} ) => {
 
     return(
         <div className="see-more-container position-fixed bg-white">
-            {job && <JobHolder job={job} applicants={applicants}/>}
+            {job && applicants && <JobHolder job={job} applicants={applicants}/>}
         </div>
     )
 }

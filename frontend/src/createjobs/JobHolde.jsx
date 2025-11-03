@@ -16,7 +16,7 @@ const JobHolder = ( { job, applicants } ) => {
 
             <div className="job-applicants">
                 <h3>Applicants For This Job : </h3>
-                {applicants.user_name}
+                {applicants.applicant.user_name}
             </div>
 
             <div className="job-buttons">
