@@ -6,6 +6,28 @@ const AcceptDeclineSchema = require('../schemas/AcceptDeclineSchema')
 const rateLimiter = require('../config/rateLimiter')
 const db = require('../db/db')
 
+
+
+AcceptDeclineRouter.get('/my-applicants/:job_id' , verifyToken , async(req,res) => {
+    
+    const [ rows ]= await db.query('select * from AcceptedDeclined where job_id = ?' , [req.params.job_id])
+
+    if(rows.length < 1){
+        
+        return res.status(200).json('No Applicants Yet')
+
+    }
+
+    const [ applicant ] = await db.query('select * from users where user_id = ?' , [rows[0].applicant_id])
+
+    if(rows.status === 'true')return res.status(200).json({message : 'You Have Already Accepted This Employee', data : rows[0] , applicant: applicant[0]})
+    return res.status(200).json({message : 'You Have Already Accepted This Employee', data : rows[0], applicant : applicant[0]})
+    
+    
+    
+    
+})
+
 AcceptDeclineRouter.get('/:applicant_id/:job_id', verifyToken , async (req, res) => {
     
     const { applicant_id, job_id } = req.params;

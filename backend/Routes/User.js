@@ -21,6 +21,4 @@ UserRouter.get('/my-user', verifyToken , async (req,res) => {
 })
 
 
-
-
 module.exports = UserRouter

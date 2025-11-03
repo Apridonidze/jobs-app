@@ -9,35 +9,36 @@ const SeeMore = ( {toggleSeeMore} ) => {
     const [job, setJob] = useState(null)
     const [applicants,setApplicants] = useState(null)
     const JOBS_URL = 'http://localhost:8080/jobs/user-jobs'
-    const APPLICANTS_URL = 'http://localhost:8080/applied/my-applicants'
+    const APPLICANTS_URL = 'http://localhost:8080/accept-decline/my-job-application'
+    
+    const PENDINGS_URL = 'http://localhost:8080/accept-decline/my-applicants'
 
     useEffect(() => {
-        const fetchJob = async() => { 
+        const fetchJob = async() => {
+
+
             try{
                 await Promise.all([
-                axios.get(`${JOBS_URL}/${toggleSeeMore.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}})
-                .then(resp => {setJob(resp.data[0])}),
-                axios.get(APPLICANTS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
-                .then(resp => console.log(resp))
+                axios.get(`${PENDINGS_URL}/${toggleSeeMore.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}})
+                .then(resp => {console.log(resp.data) })
             ])
-            
             }catch(err){
                 console.log(err)
             }
         }
+        
 
         fetchJob()
     },[])
 
     
-    console.log(job && job.job_id)
 
 
     //job_id, user_id, job_title, job_desc, job_employeeList, job_technologies, job_languages
 
     return(
         <div className="see-more-container position-fixed bg-white">
-            {job && applicants && <JobHolder job={job} />}
+            {job && <JobHolder job={job} applicants={applicants}/>}
         </div>
     )
 }

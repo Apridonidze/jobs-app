@@ -36,8 +36,8 @@ const MyJobs = () => {
             </>}
 
             <h1>Jobs Created By You: </h1>
-            {yourJobs.reverse().map((job,jobId) => (
-                <MyJob key={jobId} job={job} jobId={jobId} setToggleSeeMore={setToggleSeeMore}/>
+            {yourJobs.reverse().map(job => (
+                <MyJob job={job} setToggleSeeMore={setToggleSeeMore}/>
             ))}
             {noJobsFound}
         </div>

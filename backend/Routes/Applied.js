@@ -4,13 +4,6 @@ const AppliedRouter = express.Router()
 const db = require('../db/db')
 const verifyToken = require('../config/verifyToken')
 
-AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
-    console.log(req.body)
-    //check if user aplied for jos baed on their token
-    //return no jobs found if there is not rovs
-    //else return jobs user has applied and status form recuiter /not checked yet // seen user // acceped user //denied user
-})
-
 AppliedRouter.get('/my-applicants' , verifyToken , async(req,res) => {
     try{
 
@@ -36,13 +29,15 @@ AppliedRouter.get('/my-applicants' , verifyToken , async(req,res) => {
             
         }
 
-        return res.status(200).json('asdasd')
+        return res.status(200).json('No Applicants Found')
 
     }catch(err){
         console.log(err)
     }
     
 })
+
+
 
 AppliedRouter.post('/post-my-applied-jobs',verifyToken , async (req,res) => {
 
@@ -69,12 +64,6 @@ AppliedRouter.post('/post-my-applied-jobs',verifyToken , async (req,res) => {
         console.log(err)
     }
             
-        
-
-    
- //check user token
- //if job exists
- //pushinto table
 })
 
 

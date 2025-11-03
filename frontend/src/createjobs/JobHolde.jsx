@@ -1,8 +1,8 @@
-const JobHolder = ( { job } ) => {
+const JobHolder = ( { job, applicants } ) => {
 
 
     return(
-        <div className="job-holder-container">
+        <div className="job-holder-container position-fixed bg-white">
             <div className="job-info">
                     
                 <h1>{job.job_title}</h1>
@@ -16,11 +16,14 @@ const JobHolder = ( { job } ) => {
 
             <div className="job-applicants">
                 <h3>Applicants For This Job : </h3>
+                {applicants.user_name}
             </div>
 
             <div className="job-buttons">
                 <button>Delete</button>
             </div>
+
+
         </div>
     )
 }
