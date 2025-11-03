@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie"
 const Delete = ( { setToggleDelete, toggleSeeMore} ) => {
 
     const [cookies] = useCookies(['token'])
-    const DELETE_JOB_URL = 'http://localhost:8080/jobs/delete-job'
+    const DELETE_JOB_URL = 'http://localhost:8080/jobs/delete-job';
 
     const handleDeleteJob = async () => {
         
