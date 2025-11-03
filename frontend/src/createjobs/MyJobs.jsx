@@ -15,7 +15,7 @@ const MyJobs = () => {
     const [noJobsFound,setNoJobsFound] = useState('')
 
     const [toggleSeeMore, setToggleSeeMore] = useState({status : null , job_id : null})
-    const [toggleDelete, setToggleDelete] = useState({status: null , job_id : null})
+    const [toggleDelete, setToggleDelete] = useState(null)
 
     useEffect(() => {
 
@@ -35,7 +35,7 @@ const MyJobs = () => {
             {toggleSeeMore.status && <>
             <div className="my-jobs-container-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleSeeMore({status:false, job_id : null})}></div>
             <SeeMore toggleSeeMore={toggleSeeMore} setToggleDelete={setToggleDelete}/>
-            {toggleDelete.status && <> <div className="delete-background position-fixed w-100 h-100 top-0 start-0 opacity-50 bg-dark" onClick={() => setToggleDelete(false)}></div> <Delete setToggleDelete={setToggleDelete} toggleDelete={toggleDelete}/> </>}
+            {toggleDelete && <> <div className="delete-background position-fixed w-100 h-100 top-0 start-0 opacity-50 bg-dark" onClick={() => setToggleDelete(false)}></div> <Delete setToggleDelete={setToggleDelete} toggleSeeMore={toggleSeeMore}/> </>}
             </>
             }
 

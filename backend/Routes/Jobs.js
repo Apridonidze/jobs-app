@@ -80,6 +80,21 @@ JobsRouter.post('/new-jobs', rateLimiter,verifyToken, async (req,res) => {
 
 })
 
+JobsRouter.delete('/delete-job/:job_id' , verifyToken , async(req , res) => {
 
+    try{
+
+        await db.query('delete from accepteddeclined where job_id = ? ', [req.params.job_id])
+        await db.query('delete from applied_jobs where job_id = ? ', [req.params.job_id])
+        await db.query('delete from jobs where job_id = ? ', [req.params.job_id])
+        await db.query('delete from saved_jobs where job_id = ? ', [req.params.job_id])
+
+        return res.status(200).json('Job Deleted Successfully')
+
+    }catch(err){
+        return res.status(500).json('Database Error')
+    }
+
+})
 
 module.exports = JobsRouter
