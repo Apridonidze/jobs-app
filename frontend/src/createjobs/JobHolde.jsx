@@ -21,7 +21,7 @@ const JobHolder = ( { job, applicants,setToggleDelete } ) => {
             </div>
 
             <div className="job-buttons">
-                <button onClick={() => setToggleDelete(true)}>Delete Job Offer</button>
+                <button onClick={() => setToggleDelete({status: true, job_id : job.job_id})}>Delete Job Offer</button>
             </div>
 
 
