@@ -1,9 +1,9 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
-import JobHolder from "../createjobs/JobHolde"
+import JobHolder from "./JobHolder"
 
-const SeeMore = ( { toggleSeeMore } ) => {
+const SeeMore = ( { toggleSeeMore, user } ) => {
 
     const [cookies] = useCookies(['token'])
     const [job,setJob] = useState(null)
@@ -33,7 +33,7 @@ const SeeMore = ( { toggleSeeMore } ) => {
 
     return (
         <div className="see-more-container position-fixed bg-white">
-            {job && applicants && <JobHolder job={job} applicants={applicants} />}
+            {job  && <JobHolder job={job} user={user} />}
         </div>
     )
 }

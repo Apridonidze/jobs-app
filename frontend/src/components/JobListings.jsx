@@ -8,7 +8,7 @@ const JobListings = ( { jobs, user } ) => {
     
     return (
         <div className="job-listing-container container gap-3">
-            {toggleSeeMore.status && <> <div className="see-more-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleSeeMore({status: false , job_id : null})}></div> <SeeMore toggleSeeMore={toggleSeeMore}/></>}
+            {toggleSeeMore.status && <> <div className="see-more-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleSeeMore({status: false , job_id : null})}></div> <SeeMore user={user} toggleSeeMore={toggleSeeMore}/></>}
            
 
             <h1>Job Listing : </h1>
