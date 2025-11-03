@@ -1,5 +1,5 @@
 import { useCookies } from "react-cookie"
-import { use, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import NavBar from "../navbar/NavBar"
 

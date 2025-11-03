@@ -2,21 +2,34 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
 
+import DescMessage from '../alerts/DescMessage'
+import UploadDesc from "../components/UploadDesc"
+
 
 import Footer from "../components/Foooter"
 import NavBarHeader from "../navbar/NavBarHeader"
 import MyUserSidebar from "./MyUserSidebar"
 import ProfileMessage from "../alerts/ProfileMessage"
+import MyUserData from "./MyUserData"
 
 const MyUser = () => {
 
     
     const MY_USER_API = 'http://localhost:8080/user/my-user' //move to .env
     const IS_PROFILE_FINISHED_URL = 'http://localhost:8080/is-profile-finished' //move to .env
-
+    const USER_DESC_URL = 'http://localhost:8080/desc/my-desc' //move to .env
 
     const [user,setUser] = useState(null)
     const [isProfileFinished , setIsProfileFinished] = useState(null)
+
+    const [toggleUploadDesc,setToggleUploadDesc] = useState(false)
+
+
+    const [descValue,setDescValue] = useState('')
+    const [toggleUploadDescMessage, setToggleUploadDescMessage] = useState(false)
+    const [UploadMessage,setUploadMessage] = useState('')
+    const [isDescSuccessfull, setIsDescSuccessfull] = useState(null)
+
 
     
     const [cookies, setCookies , removeCookies] = useCookies(['token'])
@@ -29,7 +42,8 @@ const MyUser = () => {
              await Promise.all([
                 axios.get(MY_USER_API, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {const userData = resp.data.data[0] ; setUser({role : userData.user_role , name : userData.user_name, surname : userData.user_surname , birthDate : userData.user_birthdate, gender : userData.user_gender})
 }),
-                axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsProfileFinished(resp.data))
+                axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsProfileFinished(resp.data)),
+                axios.get(USER_DESC_URL , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setDescValue(resp.data)),
             ])
 
             }catch(err){
@@ -46,21 +60,23 @@ const MyUser = () => {
             <NavBarHeader user={user} />
            
             {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
+            {toggleUploadDesc && 
+
+                <> 
+                    <div className="upload-desc-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadDesc(false)}></div> 
+                    <UploadDesc setToggleUploadDescMessage={setToggleUploadDescMessage} setIsDescSuccessfull={setIsDescSuccessfull} setUploadMessage={setUploadMessage}/> 
+                    {toggleUploadDescMessage && 
+                    <DescMessage setToggleUploadDesc={setToggleUploadDesc} setToggleUploadDescMessage={setToggleUploadDescMessage} isDescSuccessfull={isDescSuccessfull} UploadMessage={UploadMessage} /> }
+                </>
+
+            }
             
             <div className="user-body d-flex">
                 <MyUserSidebar user={user}/>
 
-                <div className="user-main d-flex flex-column">
-                    {user && (
-                        <>
-                            <span>Your Name : {user.name}</span> 
-                            <span>Your Surname : {user.surname}</span>  
-                            <span>Your Birth Date : {user.birthDate.slice(0, 10)}</span>    
-                            <span>Your Gender: {user.gender}</span>     
-                </>
-            )}
-                </div>
-            </div> {/** make components for it */}
+                {user && descValue && <MyUserData user={user} setToggleUploadDesc={setToggleUploadDesc} descValue={descValue}/>}
+                
+            </div> 
 
 
 
