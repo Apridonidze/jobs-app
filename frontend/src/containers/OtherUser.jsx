@@ -6,8 +6,8 @@ import { useParams } from "react-router-dom"
 const OtherUser = () => {
 
     const { userId } = useParams()
-    const {cookies} = useCookies(['token'])
-    const USER_URL = 
+    const [ cookies ] = useCookies(['token'])
+    const USER_URL = 'http://localhost:8080/user/user' // move to .env
 
     useEffect(() => {
 
@@ -21,7 +21,9 @@ const OtherUser = () => {
                 ])
 
             }catch(err){
+
                 console.log(err)
+
             }
 
         }
