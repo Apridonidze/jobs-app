@@ -18,8 +18,14 @@ const FilteredJobs = ({ jobs }) => {
       try {
         
         await Promise.all([
-          axios.get(MY_USER_TECH_URL, { headers: { Authorization: `Bearer ${cookies.token}` } }).then(resp => setUserTechnologies(resp.data)),
-          axios.get(MY_USER_ROLE_URL, { headers: { Authorization: `Bearer ${cookies.token}` } }).then(resp => setUserRoles(resp.data[0].user_roles))
+          axios.get(MY_USER_TECH_URL, { headers: { Authorization: `Bearer ${cookies.token}` } }).then(resp => {
+            if(resp.status === 204) setUserTechnologies([])
+            else setUserTechnologies(resp.data)
+          }),
+          axios.get(MY_USER_ROLE_URL, { headers: { Authorization: `Bearer ${cookies.token}` } }).then(resp => {
+            if(resp.status === 204) setUserRoles([])
+            else setUserRoles([resp.data[0].user_roles])
+          })
         ]);
 
       } catch (err) {

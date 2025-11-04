@@ -8,8 +8,14 @@ const NavBarFooter =  ( { setFindJobs ,setCreateJobs , setToggleJobsListings,use
             </div>
             
             <div className="footer-right">
-                {user.role === 'Employee' ? <><button className="btn" onClick={() => {setToggleSaved(true); setToggleApplied(false) ; setTogglePending(false) ; setCreateJobs(false) ; setFindJobs(false), setToggleJobsListings(false)}}>Saved</button> <button className="btn" onClick={() => {setToggleSaved(false); setToggleApplied(true) ; setTogglePending(false) ; setCreateJobs(false) ; setFindJobs(false), setToggleJobsListings(false)}}>Applied Jobs</button> </>: <button className="btn" onClick={() => {setToggleSaved(false); setToggleApplied(false) ; setTogglePending(true) ; setCreateJobs(false) ; setFindJobs(false), setToggleJobsListings(false)}}>Job Pending</button>}
-                <button className="btn" onClick={() => {setToggleSaved(true); setToggleApplied(false) ; setTogglePending(false) ; setCreateJobs(false) ; setFindJobs(false), setToggleJobsListings(true)}}>Jobs Listings</button>
+                {user.role === 'Employee' && <>
+                    
+                    <button className="btn" onClick={() => {setToggleSaved(true); setToggleApplied(false) ; setTogglePending(false) ; setCreateJobs(false) ; setFindJobs(false), setToggleJobsListings(false)}}>Saved</button> 
+                    <button className="btn" onClick={() => {setToggleSaved(false); setToggleApplied(true) ; setTogglePending(false) ; setCreateJobs(false) ; setFindJobs(false), setToggleJobsListings(false)}}>Applied Jobs</button>
+                    <button className="btn" onClick={() => {setToggleSaved(false); setToggleApplied(false) ; setTogglePending(true) ; setCreateJobs(false) ; setFindJobs(false), setToggleJobsListings(false)}}>Job Pending</button>
+                    <button className="btn" onClick={() => {setToggleSaved(false); setToggleApplied(false) ; setTogglePending(false) ; setCreateJobs(false) ; setFindJobs(false), setToggleJobsListings(true)}}>Jobs Listings</button>
+
+                </>}
             </div>
 
         </div>

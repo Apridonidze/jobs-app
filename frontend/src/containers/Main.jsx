@@ -14,12 +14,12 @@ import Pendings from "../components/Pendings"
 
 const Main = () => {
 
-    const [toggleFindJobs, setFindJobs] = useState(false)
-    const [toggleCreateJobs, setCreateJobs] = useState(false)
-    const [toggleJobsListings, setToggleJobsListings] = useState(false)
-    const [toggleSaved,setToggleSaved] = useState(false)
-    const [toggleApplied,setToggleApplied] = useState(false)
-    const [togglePending,setTogglePending] = useState(false)
+    const [toggleFindJobs, setFindJobs] = useState(null)
+    const [toggleCreateJobs, setCreateJobs] = useState(null)
+    const [toggleJobsListings, setToggleJobsListings] = useState(null)
+    const [toggleSaved,setToggleSaved] = useState(null)
+    const [toggleApplied,setToggleApplied] = useState(null)
+    const [togglePending,setTogglePending] = useState(null)
     
     const MY_USER_API = 'http://localhost:8080/user/my-user' //move to .env
     const IS_PROFILE_FINISHED_URL = 'http://localhost:8080/is-profile-finished' //move to .env
