@@ -16,7 +16,7 @@ const OtherUser = () => {
             try{
 
                 await Promise.all([
-                    axios.get(`${USER_URL}/${userId}` , {headers : `${cookies.token}`})
+                    axios.get(`${USER_URL}/${userId}` , {headers : {Authorization : `Bearer ${cookies.token}`}})
                     .then(resp => console.log(resp.data))
                 ])
 
