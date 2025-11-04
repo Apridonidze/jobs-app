@@ -50,7 +50,7 @@ UserRouter.get('/user/:userId' , verifyToken , async (req,res) => {
                 if(user_technologies.length > 0){ data = {...data, user_technologies : user_technologies[0].user_technologies}} else {data = {...data, user_technologies : null}}
 
 
-                return res.status(200).json({message : "User Found" , status : true , data : data})
+                return res.status(200).json({message : "User Found" , status : true , data : data , myuser: false})
 
             }
 
