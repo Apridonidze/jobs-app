@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
 import { replace, useNavigate, useParams } from "react-router-dom"
+import OtherUserData from "./OtherUserData"
 
 const OtherUser = () => {
 
@@ -55,22 +56,10 @@ const OtherUser = () => {
 
     return (
         <div className="other-user-container">
-            other user
-            {userData && <>
-                
-                <h1>{userData.user.user_name}</h1>
-                <h1>{userData.user.user_surname}</h1>
-                <h1>{userData.user.user_email}</h1>
-                <h1>{userData.user.user_birthdate.slice(0,10)}</h1>
-            
 
-            <div className="my-user-data">
-
+            {userData && <OtherUserData userData={userData} />}
           
-            
 
-        </div>
-            </>}
         </div>
     )
 }
