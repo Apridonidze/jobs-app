@@ -7,6 +7,6 @@ const NoJobFound = () => {
         </div>
     )
 }
-
+//add link to you profile to finish profile
 
 export default NoJobFound

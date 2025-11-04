@@ -18,6 +18,8 @@ const JobHolder = ( { job, applicants,setToggleDelete } ) => {
                 <h3>Applicants For This Job : </h3>
                 <span></span>
                 <span>{applicants.message}</span>
+                <Link to={`/user-account/${applicants.user_id}`} ><h4 key={applicants.user_id}>{applicants.user_name}</h4></Link>
+
             </div>
 
             <div className="job-buttons">
