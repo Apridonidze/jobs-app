@@ -1,6 +1,5 @@
 import DefaultImage from '../../assets/default-profile-picture.webp'
 import Footer from '../components/Foooter'
-import NavBar from '../navbar/NavBar'
 import NavBarHeader from '../navbar/NavBarHeader'
 
 
@@ -22,7 +21,7 @@ console.log(userData)
                     
                     {userData.user.user_role === 'Employee' && <><h4>{userData.user_roles}</h4> <h4>{userData.user_technologies}</h4> </>}
                     
-                    <h4>{userData.user_desc}</h4>
+                    <h4>{userData.user_desc ? userData.user_desc : 'No Description Yet.'}</h4>
                 </div>
             </div>
             <Footer />

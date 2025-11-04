@@ -11,10 +11,12 @@ import NavBarHeader from "../navbar/NavBarHeader"
 import MyUserSidebar from "./MyUserSidebar"
 import ProfileMessage from "../alerts/ProfileMessage"
 import MyUserData from "./MyUserData"
+import { useNavigate } from "react-router-dom"
 
 const MyUser = () => {
 
-    
+    const navigator = useNavigate()
+
     const MY_USER_API = 'http://localhost:8080/user/my-user' //move to .env
     const IS_PROFILE_FINISHED_URL = 'http://localhost:8080/is-profile-finished' //move to .env
     const USER_DESC_URL = 'http://localhost:8080/desc/my-desc' //move to .env
@@ -77,6 +79,12 @@ const MyUser = () => {
                 {user && descValue && <MyUserData user={user} setToggleUploadDesc={setToggleUploadDesc} descValue={descValue}/>}
                 
             </div> 
+
+            <div className="user-footer d-flex">
+                
+                <button className="btn btn-danger" onClick={() => {removeCookies('token'), navigator('/authentication' , {replace : true})}}>Log Out</button>
+            
+            </div>
 
 
 
