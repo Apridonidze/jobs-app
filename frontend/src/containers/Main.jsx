@@ -64,7 +64,9 @@ const Main = () => {
 
     //TODO : make user names linkable so you can see their account (if account id === my account id link to my page)
     //TODO : fix navigate functions in app
-    
+
+    //TODO : add logout button in myaccount
+
     //TODO : add name and surname validation in signup page
     //TODO : add alert messages
     ////TODO : finish design
