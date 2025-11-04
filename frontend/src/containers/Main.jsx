@@ -64,7 +64,6 @@ const Main = () => {
 
     //TODO : fix navigate functions in app
 
-    //TODO : add logout button in myaccount
 
     //TODO : add name and surname validation in signup page
     //TODO : add alert messages

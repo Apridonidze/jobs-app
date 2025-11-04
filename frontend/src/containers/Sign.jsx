@@ -74,10 +74,14 @@ const Sign = () => {
 
         if(name.trim() == '' || name.trim() == null || name.trim() == undefined){isValid = false ; setNameErr(`This Field Can't Be Empty`); nameRef.current.classList.add('is-invalid');nameRef.current.classList.remove('is-valid')}
         else if(name.trim().length <= 1){isValid = false; setNameErr('Your Name Length Should Be Atleast 2 Letters Long'); nameRef.current.classList.add('is-invalid');nameRef.current.classList.remove('is-valid')}
+        else if(regexContainsSpecial.test(name) === true){isValid = false; setNameErr('Your Name Should Not Contain Special Characters'); nameRef.current.classList.add('is-invalid');nameRef.current.classList.remove('is-valid')}
+        else if(NumberRegex.test(name) === true){isValid = false; setNameErr('Your Name Should Not Contain Numbers Characters'); nameRef.current.classList.add('is-invalid');nameRef.current.classList.remove('is-valid')}
         else {isValid = true; setNameErr('') ;nameRef.current.classList.add('is-valid') ;nameRef.current.classList.remove('is-invalid'); data = {...data,name:name}}
 
         if(surname.trim() == '' || surname.trim() == null || surname.trim() == undefined){isValid = false ; setSurnameErr(`This Field Can't Be Empty`); surnameRef.current.classList.add('is-invalid'); surnameRef.current.classList.remove('is-valid')}
         else if (surname.trim().length <= 2) {isValid = false ; setSurnameErr('Your Surname Length Should Be Atleast 3 Letters Long'); surnameRef.current.classList.add('is-invalid');surnameRef.current.classList.remove('is-valid') }
+        else if(regexContainsSpecial.test(surname) === true){isValid = false; setSurnameErr('Your Surname Should Not Contain Special Characters'); nameRef.current.classList.add('is-invalid');nameRef.current.classList.remove('is-valid')}
+        else if(NumberRegex.test(surname) === true){isValid = false; setSurnameErr('Your Surname Should Not Contain Numbers Characters'); nameRef.current.classList.add('is-invalid');nameRef.current.classList.remove('is-valid')}
         else {isValid = true ; setSurnameErr(''); surnameRef.current.classList.add('is-valid'); surnameRef.current.classList.remove('is-invalid'); data = {...data, surname: surname}}
 
         if(password.trim() == '' || password.trim() == null || password.trim() == undefined){isValid = false; setPasswordErr(`This Field Can't Be Empty`) ; passwordRef.current.classList.add('is-invalid'); passwordRef.current.classList.remove('is-valid')}
