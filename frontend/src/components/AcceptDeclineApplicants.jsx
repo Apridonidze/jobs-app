@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie'
+import { Link } from 'react-router-dom'
 
 const AcceptDeclineApplicants = ( { applicant, toggleAcceptDecline } ) => {
 
@@ -49,7 +50,7 @@ const AcceptDeclineApplicants = ( { applicant, toggleAcceptDecline } ) => {
 
            <div className="accept-decline-applicants-body d d-flex justify-content-between">
 
-                <h4 key={applicant.user_id}>{applicant.user_name}</h4>
+                <Link to={`/user-account/${applicant.user_id}`} ><h4 key={applicant.user_id}>{applicant.user_name}</h4></Link>
 
 
                 {status == true ? <><div className="buttons-container">
