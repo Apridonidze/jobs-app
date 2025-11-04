@@ -42,10 +42,9 @@ const MyUser = () => {
             try{
 
              await Promise.all([
-                axios.get(MY_USER_API, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {const userData = resp.data.data[0] ; setUser({role : userData.user_role , name : userData.user_name, surname : userData.user_surname , birthDate : userData.user_birthdate, gender : userData.user_gender})
-}),
-                axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsProfileFinished(resp.data)),
-                axios.get(USER_DESC_URL , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setDescValue(resp.data)),
+                axios.get(MY_USER_API, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {const userData = resp.data[0] ; setUser({role : userData.user_role , name : userData.user_name, surname : userData.user_surname , birthDate : userData.user_birthdate, gender : userData.user_gender})}),
+                axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}}).then(resp => console.log(resp.data)), //setIsProfileFinished
+                axios.get(USER_DESC_URL , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => console.log(resp.data)), //setDescValue
             ])
 
             }catch(err){
@@ -76,7 +75,7 @@ const MyUser = () => {
             <div className="user-body d-flex">
                 <MyUserSidebar user={user}/>
 
-                {user && descValue && <MyUserData user={user} setToggleUploadDesc={setToggleUploadDesc} descValue={descValue}/>}
+                {user && <MyUserData user={user} setToggleUploadDesc={setToggleUploadDesc} descValue={descValue}/>}
                 
             </div> 
 

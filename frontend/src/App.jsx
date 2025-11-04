@@ -16,7 +16,7 @@ const App = () => {
   
   const router = createBrowserRouter([
     
-    {path: '/main', element : cookies ? <Main /> : <Navigate to='/authentication' />},//directs user to authentication page when not loggined
+    {path: '/', element : cookies ? <Main /> : <Navigate to='/authentication' />},//directs user to authentication page when not loggined
     {path: '/authentication', element : <Authentication /> }, //directs user to main page when loggined
     {path : '/sign', element :<Sign />}, //check if user has cookies and make them direct to main page if so (do not change now)
     {path : '/login', element : <Login />},//check if user has cookies and make them direct to main page if so (do not change now)

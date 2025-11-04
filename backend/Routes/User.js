@@ -13,7 +13,7 @@ UserRouter.get('/my-user', verifyToken , async (req,res) => {
 
         const [ userData ] = await db.query('select * from users where user_id = ?' , req.user.userId)
 
-        return res.status(200).json({data : userData})
+        return res.status(200).json(userData)
     }
     return res.status(401).json({error : 'no user found with this token '})
 

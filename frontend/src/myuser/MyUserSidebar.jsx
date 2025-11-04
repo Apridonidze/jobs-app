@@ -53,7 +53,7 @@ const MyUserSidebar = ( { user } ) => {
     const USER_ROLES_URL = 'http://localhost:8080/roles/my-roles' //move to .env
     
 
-    const [cookies,setCookies,removeCookies] = useCookies(['token']) 
+    const [cookies] = useCookies(['token']) 
 
 
     const [profilePicture, setProfilePicture] = useState(null)
@@ -77,13 +77,32 @@ const MyUserSidebar = ( { user } ) => {
                     
                     await Promise.all([
                     axios.get(AVATAR_URL, {headers: {Authorization : `Bearer ${cookies.token}`}})
-                    .then(resp => setAvatarImg(resp.data)),
+                    .then(resp => {
+
+                        if(resp.status === 204)setAvatarImg(DefaultImage)
+                        else setAvatarImg(resp.data)
+
+                    }),
+
                     axios.get(USER_TAGS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
-                    .then(resp => setTags([...resp.data])),
+                    .then(resp => {
+                        if(resp.status === 204) setTags([])        
+                        else setTags([...resp.data])
+                    
+                    }), 
+
                     axios.get(USER_ROLES_URL, {headers : {Authorization : `Bearer ${cookies.token}`}})
-                    .then(resp => setRoles([...resp.data[0].user_roles])),
+                    .then(resp => {
+                        if(resp.status === 204) setRoles([])
+                        else setRoles([resp.data[0].user_roles])
+                    }), 
+                    
                     axios.get(USER_TECHNOLOGIES_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})])
-                    .then(resp => setTechnologies(resp.filter(res => res != undefined)[0].data))
+                    .then(resp => {
+                        if(resp.status === 204) setTechnologies([])
+                        else setTechnologies(resp.filter(res => res != undefined)[0].data)
+                    }
+                    )
 
                     
 

@@ -22,6 +22,8 @@ AvatarRouter.get('/', verifyToken, async (req,res) => {
     try{
         const [ rows ] = await db.query('select * from user_avatar where user_id = (?)' ,[req.user.userId])
 
+        
+
         if(rows.length < 1){
             return res.status(204).json('no user avatar found')
         }
