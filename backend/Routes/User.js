@@ -21,11 +21,15 @@ UserRouter.get('/my-user', verifyToken , async (req,res) => {
 
 UserRouter.get('/user/:userId' , verifyToken , async (req,res) => {
 
-    console.log(req.user.userId)
-
     try{
 
         const [ user ] = await db.query('select * from users where user_id = ?' , [req.params.userId])
+
+        if(req.user.userId === req.params.userId){
+        
+            return res.status(200).json({message : "" , status : false , data : null , myuser : true})
+        
+        }
 
         if(user.length > 0){
            
@@ -62,14 +66,14 @@ UserRouter.get('/user/:userId' , verifyToken , async (req,res) => {
                 
 
                 
-                return res.status(200).json({message : "User Found" , status : true , data : data})
+                return res.status(200).json({message : "User Found" , status : true , data : data , myuser : false})
             }
 
             
         }
         
         
-        return res.status(200).json({message : "User Not Found" , status : false , data : null })
+        return res.status(200).json({message : "User Not Found" , status : false , data : null , myuser : false})
 
     }catch(err){
         return res.status(500).json('Internal Error')
