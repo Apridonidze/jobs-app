@@ -1,15 +1,15 @@
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useRef,useState  } from "react"
-import { Link , useNavigate} from 'react-router-dom'
+import { Link , Navigate, useNavigate} from 'react-router-dom'
 import CountryCode from "../components/CountryCode"
 import SignMessage from '../alerts/SignMessage';
-import { useEffect } from 'react';
 
 
 const Sign = () => {
 
-    const navigator = useNavigate()
+    const [seconds, setSeconds] = useState(3)
+       
 
     const SIGN_PORT = 'http://localhost:8080/sign/create-account' // move to .env file
     
@@ -58,10 +58,7 @@ const Sign = () => {
         e.preventDefault()
 
         let isValid
-        let data = {} //data to send to server 
-
-        //validate user name not to be anything else than plain text
-        //validate user surname not to be anything else than plain text
+        let data = {} 
 
         const currentDate = new Date()
         
@@ -106,6 +103,8 @@ const Sign = () => {
 
         if(gender.trim() == '' || gender == null || gender.trim() == undefined){isValid = false ; genderRef.current.classList.add('border-danger') ; genderRef.current.classList.remove('border-success')}
         else { isValid = true ; genderRef.current.classList.add('border-success') ; genderRef.current.classList.remove('border-danger'); data = {...data, gender : gender}}
+
+        
         
 
         if(isValid) {
@@ -113,10 +112,11 @@ const Sign = () => {
 
                 await Promise.all([
                 axios.post(SIGN_PORT , data ).then(res => {
-                    setIsSuccessful(true)
-                    setSignMessage(res.data.message)
-                    setCookies(res.data.token)
-                    setToggleSigMessage(true)
+                setIsSuccessful(true)
+                setSignMessage(res.data.message)
+                setCookies('token' , res.data.token , {path : '/' ,maxAge: 2592000})
+                setToggleSigMessage(true)
+
                 })])
                 
             }catch(err){
@@ -126,6 +126,7 @@ const Sign = () => {
 
 
     }
+
     const handleReset = () => {
 
     setRole('')
@@ -185,7 +186,7 @@ const Sign = () => {
             
             <h1>Sign-Up Page</h1>
             
-            {toggleSigMessage && <SignMessage setToggleSigMessage={setToggleSigMessage} isSuccessful={isSuccessful} signMessage={signMessage} /> }
+            {toggleSigMessage && <SignMessage setToggleSigMessage={setToggleSigMessage} isSuccessful={isSuccessful} signMessage={signMessage} setSeconds={setSeconds} seconds={seconds}/> }
 
             <form onSubmit={SubmitSign}>
                 

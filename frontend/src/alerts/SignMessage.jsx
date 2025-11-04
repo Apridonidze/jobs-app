@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
+import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
-const SignMessage = ( {setToggleSigMessage, isSuccessful , signMessage} ) => {
+const SignMessage = ( {setToggleSigMessage, isSuccessful , signMessage, setSeconds, seconds } ) => {
+
+    const navigate = useNavigate()
+    const [cookies] = useCookies(['token'])
 
 
-    const navigator = useNavigate()
-    const [seconds, setSeconds] = useState(3)
-
-
-    useEffect(() => {
+        useEffect(() => {
 
         const handleTimer = setInterval(() => {
             
@@ -19,20 +19,22 @@ const SignMessage = ( {setToggleSigMessage, isSuccessful , signMessage} ) => {
             
             }) 
 
+              
+            if (seconds === 0  && cookies.token) {
+                console.log(cookies.token)
+    navigate("/main", { replace: true }); // redirect immediately after token is set
+  }
+
         }, 1000);
         
 
-        if(seconds == 0){
-            if(isSuccessful){navigator('/', {replace: true})}
-            else return
-        }
-        
         
 
         return () =>  {clearInterval(handleTimer)}
 
     
-},[seconds,navigator])
+},[seconds, isSuccessful , navigate, cookies])
+
 
 
     return(
@@ -41,8 +43,7 @@ const SignMessage = ( {setToggleSigMessage, isSuccessful , signMessage} ) => {
 
             {isSuccessful ? <i className="fa-regular fa-circle-check"></i> : <i className="fa-regular fa-circle-xmark"></i>}
             <span>{signMessage}</span>
-            <span>{isSuccessful ? <span>Redirecting In...</span> : <span>Window Closes In :</span> }{seconds}</span>            
-
+            <span>{isSuccessful ? <span>Redirecting In...</span> : <span>Window Closes In :</span> }{seconds}</span>          
         </div>
     )
 }

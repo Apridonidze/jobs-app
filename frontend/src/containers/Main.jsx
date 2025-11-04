@@ -64,8 +64,6 @@ const Main = () => {
 
     //TODO : fix navigate functions in app
 
-
-    //TODO : add name and surname validation in signup page
     //TODO : add alert messages
     ////TODO : finish design
     ////TODO : polish code and documentate
