@@ -16,7 +16,8 @@ AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
 
                 if(job_data.length === 0)return res.status(204)
 
-                return res.status(200).json(job_data)
+                const [ user_data ] = await db.query('select * from users where user_id = ? ' ,[req.user.userId])
+                return res.status(200).json({Job: job_data, user : user_data})
             }
             
         }
@@ -27,6 +28,7 @@ AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
     }
 
 })
+
 
 AppliedRouter.get('/my-applicants' , verifyToken , async(req,res) => {
     try{
@@ -73,13 +75,13 @@ AppliedRouter.post('/post-my-applied-jobs',verifyToken , async (req,res) => {
         if(JobsRow.length > 0){
 
             const [ isApplied ] = await db.query('select * from applied_jobs where job_id = ? and applicant_id = ?' , [req.body.job_id , req.user.userId])
-            console.log(isApplied)
+            
             if(isApplied.length > 0){
-                return res.status(200).json('You Already Applied For This Job')
+                return res.status(200).json({message: 'You Already Applied For This Job' , status : false})
             }
 
             await db.query('insert into applied_jobs (job_id, user_id, applicant_id) values (?,?,?)' , [req.body.job_id , req.body.user_id, req.user.userId ])
-            return res.send('inserted')
+            return res.status(200).send({message: 'Successfully Applied' , status : false})
         }
 
         return res.status(400).json('Could Not Apply For Job')

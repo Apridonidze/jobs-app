@@ -2,12 +2,14 @@ import { useEffect, useState } from "react"
 import axios from 'axios'
 
 import { useCookies } from 'react-cookie'
+import JobHolder from "./JobHolder"
 
 const Applied = () => {
 
     const [cookies] = useCookies(['token'])
     const MY_APPLIED_JOBS_URL = 'http://localhost:8080/applied/my-applied-jobs'
     const [appliedJobs,setAppliedJobs] = useState([])
+    const [user, setUser] = useState()
 
     useEffect(() => {
         const FetchUserJobs = async() => {
@@ -18,7 +20,7 @@ const Applied = () => {
                     axios.get(MY_APPLIED_JOBS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
                     .then(resp => {
                         if(resp.status === 204) console.log('no jobs applied')
-                        else setAppliedJobs(resp.data)
+                        else setAppliedJobs(resp.data.Job) ,setUser(resp.data.user)
                     })
                 ])
                 
@@ -34,8 +36,9 @@ const Applied = () => {
     return (
         <div className="applied-container">
             <h1>Your Applied Jobs:</h1>
-            {appliedJobs.length ? appliedJobs.map(appliedJob => (
-                <span key={appliedJob.job_id}>{appliedJob.job_id}</span>
+            {appliedJobs.length ? appliedJobs.map(job => (
+                
+                <JobHolder job={job} user={user}/>
             )) : <h1>No Jobs Applied Yet.</h1>}
         </div>
     )

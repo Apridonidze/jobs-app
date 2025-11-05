@@ -17,11 +17,8 @@ SavedRouter.get('/my-saved-jobs', verifyToken, async(req,res) => {
 
 
     }catch(err){
-        console.log(err)
+        return res.status(500).json(`Database Error`)
     }
-    //verify token 
-    //fetch data based on req.user.userId
-    //if there is not any data return 400 status code
 })
 
 SavedRouter.post('/post-my-saved-jobs',verifyToken , async (req,res) => {
@@ -35,10 +32,10 @@ SavedRouter.post('/post-my-saved-jobs',verifyToken , async (req,res) => {
 
         if(isSaved.length < 1){
             await db.query('insert into saved_jobs (job_id) values (?)' , [req.body.job_id])
-            return res.status(200).json('Saved')
+            return res.status(200).json({message : 'Job Saved Successfully' , status : true})
         }
 
-        return res.status(200).json('You Have Already Saved This Job')
+        return res.status(200).json({message : 'You Have Already Saved This Job' , status : false})
 
 
     }
