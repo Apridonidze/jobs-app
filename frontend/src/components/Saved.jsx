@@ -22,7 +22,7 @@ const Saved = () => {
                     axios.get(SAVED_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
                     .then(resp => {
                         if(!resp.data.status)setJobs(null) , setUser(resp.data.user), setStatus(resp.data.status)
-                        else setJobs([resp.data.jobs]) , setUser(resp.data.user), setStatus(resp.data.status) ,console.log(resp.data.jobs)
+                        else setJobs([resp.data.jobs]) , setUser(resp.data.user), setStatus(resp.data.status)
                     })
                 ])
 

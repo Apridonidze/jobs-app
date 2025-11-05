@@ -70,7 +70,7 @@ const JobHolder = ( {user, job} ) => {
             
         </div>
     )
-}
+}// add layout and design for it
 
 
 export default JobHolder
