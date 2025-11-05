@@ -49,6 +49,7 @@ const JobHolder = ( {user, job} ) => {
 
     }
 
+
     return(
         <div className="job-holder-container" key={job.job_id}>
             <div className="job-info">
@@ -61,16 +62,12 @@ const JobHolder = ( {user, job} ) => {
 
             </div>
 
-<div className="buttons-header d d-flex gap-2 col">
-            {user.role !== 'Recruiter' && applied && applied.status ?  
-                <button className="btn btn-success w-50" onClick={(e) => handleApply(e)}>Apply</button>
-                : <h3>You Have Already Applied For This Job. Wait Untill Recruiter Responds To You</h3>
-            }{
-                user.role !== "Recruiter" && saved && saved.status ? 
-                <button className="btn border border-2 border-success w-50" onClick={(e) => handleSave(e)}>Save</button> : 
-                <h3>You Have Already Saved This Job</h3>
-            }
-</div>
+            <div className="buttons-header d d-flex gap-2 col">
+
+                {user.role !== 'Recruiter' && applied && applied.status && applied.status}
+
+            </div>
+            
         </div>
     )
 }

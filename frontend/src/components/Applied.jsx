@@ -19,8 +19,8 @@ const Applied = () => {
                 await Promise.all([
                     axios.get(MY_APPLIED_JOBS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
                     .then(resp => {
-                        if(resp.status === 204) console.log('no jobs applied')
-                        else setAppliedJobs(resp.data.Job) ,setUser(resp.data.user)
+                        if(resp.status === 204) setAppliedJobs([])
+                        else setAppliedJobs({appliedJobs : resp.data.Job , status : resp.data.status}) ,setUser(resp.data.user)
                     })
                 ])
                 
@@ -36,7 +36,7 @@ const Applied = () => {
     return (
         <div className="applied-container">
             <h1>Your Applied Jobs:</h1>
-            {appliedJobs.length ? appliedJobs.map(job => (
+            {appliedJobs.length > 0 ? appliedJobs.map(job => (
                 
                 <JobHolder job={job} user={user}/>
             )) : <h1>No Jobs Applied Yet.</h1>}

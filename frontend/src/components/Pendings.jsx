@@ -7,7 +7,7 @@ import PendingJob from "./PendingJob"
 import AccpetDecline from "./AcceptDecline"
 const Pendings = () => {
 
-    const PENDINGS_URL = 'http://localhost:8080/applied/my-applicants'
+   
     const [cookies] = useCookies(['token'])
 
     const [jobs ,setJobs] = useState([])
