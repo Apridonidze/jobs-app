@@ -50,7 +50,7 @@ const JobHolder = ( {user, job} ) => {
     }
 
     return(
-        <div className="job-holder-container">
+        <div className="job-holder-container" key={job.job_id}>
             <div className="job-info">
                     
                 <h1>{job.job_title}</h1>
