@@ -38,8 +38,6 @@ isProfileFinishedRouter.get('/', verifyToken , async (req,res) => {
                 return res.status(200).json(true)
             }
 
-            console.log([hasAvatar,hasDesc,hasRole,hasTechnologies])
-
             return res.status(200).json(false)
 
         }

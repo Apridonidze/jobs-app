@@ -5,10 +5,20 @@ const db = require('../db/db')
 const verifyToken = require('../config/verifyToken')
 
 AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
-    console.log(req.body)
-    //check if user aplied for jos baed on their token
-    //return no jobs found if there is not rovs
-    //else return jobs user has applied and status form recuiter /not checked yet // seen user // acceped user //denied user
+
+    try{
+
+        const [ applied_jobs ] = await db.query('select * from applied_jobs where applicant_id = ? ', [req.user.userId])
+
+        if(applied_jobs.length > 0){
+            return res.status(200).json(applied_jobs)
+        }
+        return res.status(204)
+        
+    }catch(err){
+        return res.status(500).json('Database Error')
+    }
+
 })
 
 AppliedRouter.get('/my-applicants' , verifyToken , async(req,res) => {
