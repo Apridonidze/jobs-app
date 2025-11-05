@@ -15,7 +15,10 @@ const Applied = () => {
 
                 await Promise.all([
                     axios.get(MY_APPLIED_JOBS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
-                    .then(resp => console.log(resp))
+                    .then(resp => {
+                        if(resp.status === 204) console.log('no jobs applied')
+                        else console.log(resp.data)
+                    })
                 ])
                 
             }catch(err){
