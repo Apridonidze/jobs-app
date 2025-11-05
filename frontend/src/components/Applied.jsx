@@ -18,7 +18,7 @@ const Applied = () => {
                     axios.get(MY_APPLIED_JOBS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
                     .then(resp => {
                         if(resp.status === 204) console.log('no jobs applied')
-                        else setAppliedJobs([resp.data])
+                        else setAppliedJobs(resp.data)
                     })
                 ])
                 
@@ -34,9 +34,9 @@ const Applied = () => {
     return (
         <div className="applied-container">
             <h1>Your Applied Jobs:</h1>
-            {appliedJobs && appliedJobs.map(appliedJob => (
+            {appliedJobs.length ? appliedJobs.map(appliedJob => (
                 <span key={appliedJob.job_id}>{appliedJob.job_id}</span>
-            ))}
+            )) : <h1>No Jobs Applied Yet.</h1>}
         </div>
     )
 }

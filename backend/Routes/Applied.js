@@ -11,7 +11,14 @@ AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
         const [ applied_jobs ] = await db.query('select * from applied_jobs where applicant_id = ? ', [req.user.userId])
 
         if(applied_jobs.length > 0){
-            return res.status(200).json(applied_jobs[0])
+            for(let i = 0 ; i < applied_jobs.length ; i++){
+                const [job_data] = await db.query('select * from jobs where job_id = ? ', applied_jobs[i].job_id)
+
+                if(job_data.length === 0)return res.status(204)
+
+                return res.status(200).json(job_data)
+            }
+            
         }
         return res.status(204)
         
