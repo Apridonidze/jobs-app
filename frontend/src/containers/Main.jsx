@@ -23,7 +23,7 @@ const Main = () => {
     
     const MY_USER_API = 'http://localhost:8080/user/my-user' //move to .env
     const IS_PROFILE_FINISHED_URL = 'http://localhost:8080/is-profile-finished' //move to .env
-    const JOBS_URL = 'http://localhost:8080/jobs/job-listing'
+    const JOBS_URL = 'http://localhost:8080/jobs/job-listing' ////move to .env
 
 
     const [cookies] = useCookies(['token'])

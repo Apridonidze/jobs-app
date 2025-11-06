@@ -8,7 +8,8 @@ const Applied = () => {
 
     const [cookies] = useCookies(['token'])
     const MY_APPLIED_JOBS_URL = 'http://localhost:8080/applied/my-applied-jobs'
-    const [appliedJobs,setAppliedJobs] = useState([])
+    const MY_USER_URL = 'http://localhost:8080/user/user'
+    const [appliedJobList,setAppliedJobList] = useState(null)
     const [user, setUser] = useState()
 
     useEffect(() => {
@@ -19,9 +20,9 @@ const Applied = () => {
                 await Promise.all([
                     axios.get(MY_APPLIED_JOBS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
                     .then(resp => {
-                        if(resp.status === 204) setAppliedJobs([])
-                        else setAppliedJobs({appliedJobs : resp.data.Job , status : resp.data.status}) ,setUser(resp.data.user)
-                    })
+                        if(resp.status === 204) setAppliedJobList(null)
+                        else  setAppliedJobList([resp.data]) , setUser(resp.data.user) 
+                    }),
                 ])
                 
             }catch(err){
@@ -36,10 +37,11 @@ const Applied = () => {
     return (
         <div className="applied-container">
             <h1>Your Applied Jobs:</h1>
-            {appliedJobs.length > 0 ? appliedJobs.map(job => (
-                
-                <JobHolder job={job} user={user}/>
-            )) : <h1>No Jobs Applied Yet.</h1>}
+            {appliedJobList !== null && <h1>{appliedJobList.map(appliedJob => (
+                appliedJob.Job.map(job => (
+                    <JobHolder job={job} user={user}/>
+                ))
+            ))}</h1>}
         </div>
     )
 }
