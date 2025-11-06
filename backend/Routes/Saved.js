@@ -34,6 +34,10 @@ SavedRouter.get('/my-saved-jobs', verifyToken, async(req,res) => {
     }
 })
 
+SavedRouter.get('/check-job/:jobId' , verifyToken , async (req, res) => {
+
+})
+
 SavedRouter.post('/post-my-saved-jobs',verifyToken , async (req,res) => {
 
     try{

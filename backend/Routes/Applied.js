@@ -28,6 +28,10 @@ AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
     }
 })
 
+AppliedRouter.get('/check-applied/:jobId' , verifyToken, async(req ,res) => {
+    
+})
+
 
 AppliedRouter.get('/my-applicants' , verifyToken , async(req,res) => {
     try{
