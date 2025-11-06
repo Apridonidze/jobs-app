@@ -10,18 +10,24 @@ SavedRouter.get('/my-saved-jobs', verifyToken, async(req,res) => {
 
         
         const [ Saved ] = await db.query('select * from saved_jobs where user_id = ?' , [req.user.userId])
-        const [ user ] = await db.query('select * from users where user_id = ?', [req.user.userId])
-
-        if(Saved.length < 1){
-            return res.status(200).json({jobs : 'No Jobs Found' , user : user[0] , status : false})
-        }
-
-        for(let i = 0;  i <= Saved.length ; i++){
-            const [job_data] = await db.query('select * from jobs where job_id = ?', [Saved[i].job_id])
         
-            return res.status(200).json({jobs : job_data[0], user : user[0] , status : true})
-    
-        }
+        if(Saved.length === 0) return res.status(204).send('No Saved Jobs Yet.')
+
+        const savedId = Saved.map(s => s.job_id)
+
+
+        const jobs = savedId.map(id => 
+            db.query('select * from jobs where job_id = ?',[id])
+        )
+
+        const jobResults = await Promise.all(jobs)
+        const jobData = jobResults.map(job => job[0][0])
+
+
+        return res.status(200).json(jobData)
+
+
+         
         
     }catch(err){
         return res.status(500).json('Database Error')

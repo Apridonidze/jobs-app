@@ -9,8 +9,9 @@ const Saved = () => {
     const [cookies] = useCookies(['token'])
 
     const SAVED_URL = 'http://localhost:8080/saved/my-saved-jobs'
+    const MY_USER_API = 'http://localhost:8080/user/my-user' //move to .env
 
-    const [user , setUser] = useState(null)
+    const [user , setUser] = useState()
     const [jobs , setJobs] = useState(null)
     const [status , setStatus] = useState(null)
 
@@ -21,9 +22,12 @@ const Saved = () => {
                 await Promise.all([
                     axios.get(SAVED_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
                     .then(resp => {
-                        if(!resp.data.status)setJobs(null) , setUser(resp.data.user), setStatus(resp.data.status)
-                        else setJobs([resp.data.jobs]) , setUser(resp.data.user), setStatus(resp.data.status)
-                    })
+                        if(resp.status === 204) setJobs([])
+                        else setJobs(resp.data)    
+                    }),
+                    axios.get(MY_USER_API, {headers : {Authorization : `Bearer ${cookies.token}`}})
+                    .then(resp => {const userData = resp.data  ; setUser({role : userData.user_role , name : userData.user_name, surname : userData.user_surname , birthDate : userData.user_birthdate, gender : userData.user_gender})})
+
                 ])
 
             }catch(err){
@@ -37,10 +41,9 @@ const Saved = () => {
     return (
         <div className="saved-container">
             <h1>Your Saved Jobs:</h1>
-            {status && status ? jobs.map(job => 
+           {jobs !== null && user && jobs.length > 0 ? jobs.map(job => 
                 <JobHolder job={job} user={user}/>
-            )
-            :<h1>no jobs</h1>}
+            ) : <h1>No Jobs Applied Yet</h1>}
         </div>
     )
 }
