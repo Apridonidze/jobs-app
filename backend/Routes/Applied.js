@@ -7,26 +7,25 @@ const verifyToken = require('../config/verifyToken')
 AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
 
     try{
-
+        
         const [ applied_jobs ] = await db.query('select * from applied_jobs where applicant_id = ? ', [req.user.userId])
 
-        if(applied_jobs.length > 0){
-            for(let i = 0 ; i <= applied_jobs.length ; i++){
-                const [job_data] = await db.query('select * from jobs where job_id = ? ', applied_jobs[i].job_id)
-
-                if(job_data.length === 0)return res.status(204)
-
-                const [ user_data ] = await db.query('select * from users where user_id = ? ' ,[req.user.userId])
-                return res.status(200).json({Job: job_data, user : user_data , status: true})
-            }
+        if(applied_jobs.length < 1) return res.status(204).send('No Applied Jobs Yet.')
             
-        }
-        return res.status(204)
-        
+        const jobIds = applied_jobs.map(j => j.job_id)
+            
+        const jobs = jobIds.map(id => 
+            db.query('select * from jobs where job_id = ?',[id])
+        )
+
+        const jobResults = await Promise.all(jobs)
+        const jobData = jobResults.map(job => job[0][0])
+
+        return res.status(200).json(jobData)
+
     }catch(err){
         return res.status(500).json('Database Error')
     }
-
 })
 
 

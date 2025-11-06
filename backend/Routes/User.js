@@ -11,9 +11,9 @@ UserRouter.get('/my-user', verifyToken , async (req,res) => {
 
     if(req.user.userId){
 
-        const [ userData ] = await db.query('select * from users where user_id = ?' , req.user.userId)
+        const [ userData ] = await db.query('select * from users where user_id = ?' , req.user.userId) //chnage * with data that is needed and do not send everything
 
-        return res.status(200).json(userData)
+        return res.status(200).json(userData[0])
     }
     return res.status(401).json({error : 'no user found with this token '})
 
