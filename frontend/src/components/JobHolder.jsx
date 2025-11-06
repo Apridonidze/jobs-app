@@ -1,5 +1,5 @@
 import axios from "axios"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
 
 
@@ -49,6 +49,28 @@ const JobHolder = ( {user, job} ) => {
 
     }
 
+    const IS_SAVED_URL = ''
+    const IS_APPLIED_URL = ''
+
+    useEffect(() => {
+
+        const fetchJobStatus = async() => {
+            try{
+                await Promise.all([
+                axios.get(IS_SAVED_URL, {headers : {Authorization : `${cookies.token}`}}).then(console.log(resp.data)),
+                axios.get(IS_APPLIED_URL, {headers : {Authorization : `${cookies.token}`}}).then(console.log(resp.data)),
+            ])
+
+            }catch(err){
+                console.log(err)
+            }
+        }
+
+        fetchJobStatus()
+
+    },[])
+
+    //add useeffetct so you can check if you saved or accepted job offer as an employee
 
     return(
         <div className="job-holder-container" key={job.job_id}>
