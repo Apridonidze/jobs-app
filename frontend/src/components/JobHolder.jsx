@@ -49,16 +49,16 @@ const JobHolder = ( {user, job} ) => {
 
     }
 
-    const IS_SAVED_URL = ''
-    const IS_APPLIED_URL = ''
+    const IS_SAVED_URL = 'http://localhost:8080/saved/check-job'
+    const IS_APPLIED_URL = 'http://localhost:8080/applied/check-applied'
 
     useEffect(() => {
 
         const fetchJobStatus = async() => {
             try{
                 await Promise.all([
-                axios.get(IS_SAVED_URL, {headers : {Authorization : `${cookies.token}`}}).then(console.log(resp.data)),
-                axios.get(IS_APPLIED_URL, {headers : {Authorization : `${cookies.token}`}}).then(console.log(resp.data)),
+                axios.get(`${IS_SAVED_URL}/${job.job_id}`, {headers : {Authorization : `${cookies.token}`}}).then(console.log(resp.data)),
+                axios.get(`${IS_APPLIED_URL}/${job.job_id}`, {headers : {Authorization : `${cookies.token}`}}).then(console.log(resp.data)),
             ])
 
             }catch(err){
@@ -70,7 +70,6 @@ const JobHolder = ( {user, job} ) => {
 
     },[])
 
-    //add useeffetct so you can check if you saved or accepted job offer as an employee
 
     return(
         <div className="job-holder-container" key={job.job_id}>
