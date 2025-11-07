@@ -30,9 +30,11 @@ AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
 
 AppliedRouter.get('/check-applied/:jobId' , verifyToken, async(req ,res) => {
     
-    const [isApplied] = await db.query('select * from applied_jobs where job_id = ? and user_id = ?', [req.params.jobId , req.user.userId])
+    const [isApplied] = await db.query('select * from applied_jobs where job_id = ? and applicant_id = ?', [req.params.jobId , req.user.userId])
+    console.log(isApplied)
 
     if(isApplied.length < 1) return res.status(200).json(false)
+
     
     return res.status(200).json(true)
 })
