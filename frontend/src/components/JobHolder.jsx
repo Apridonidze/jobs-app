@@ -64,9 +64,9 @@ const JobHolder = ( {user, job} ) => {
         const fetchJobStatus = async() => {
             try{
                 await Promise.all([
-                axios.get(`${IS_SAVED_URL}/${job.job_id}` , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsSaved(resp.data)),
-                axios.get(`${IS_APPLIED_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsApplied(resp.data)),
-            ])
+                axios.get(`${IS_SAVED_URL}/${job.job_id}` , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {setIsSaved(resp.data) ;console.log(resp.data)}),
+                axios.get(`${IS_APPLIED_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {setIsApplied(resp.data) ; console.log(resp.data)}),
+                ])
 
             }catch(err){
                 console.log(err)
@@ -75,7 +75,7 @@ const JobHolder = ( {user, job} ) => {
 
         fetchJobStatus()
 
-    },[isSaved , isApplied ])
+    },[ ])
 
 
     return(
@@ -88,22 +88,21 @@ const JobHolder = ( {user, job} ) => {
                 <h3>{job.job_technologies}</h3>
                 <h3>{job.job_languages}</h3>
             </div>
-
+ 
             
             <div className="job-status">
-                <h4>Job Status :</h4>
+                <h4>Job Status : {user.role !== 'Recruiter' ? '' : 'nmot '}</h4>
             </div>
 
             <div className="buttons-header d d-flex gap-2 col">
 
-                {user.role !== 'Recruiter' && isSaved !== null && isApplied !== null &&
-                    
+                    {user.role !== 'Recruiter' && isSaved !== null && isApplied !== null &&
+                
                     <div className="job-buttons d-flex w-100 justify-content-between gap-2">
                         {isApplied ? <button className="btn btn-success opacity-50 w-50">Applied</button> : <button className="btn btn-success w-50" onClick={handleApply}>Apply</button>}
-                        {isSaved ? <button className="btn opacity-75 border w-50">Saved</button> : <button className="btn border w-50" onClick={handleSave}>Saved</button>}
+                        {isSaved ? <button className="btn opacity-75 border w-50 position-relative">Saved</button> : <button className="btn border w-50" onClick={handleSave}>Saved</button>}
                     </div>
-                
-                }                
+                }
 
             </div>
 

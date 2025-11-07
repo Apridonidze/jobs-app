@@ -6,37 +6,31 @@ const verifyToken = require('../config/verifyToken')
 
 AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
 
-    try{
-        
-        const [ applied_jobs ] = await db.query('select * from applied_jobs where applicant_id = ? ', [req.user.userId])
+    try {
+        const [applied_jobs] = await db.query('SELECT * FROM applied_jobs WHERE applicant_id = ?',[req.user.userId]);
 
-        if(applied_jobs.length < 1) return res.status(204).send('No Applied Jobs Yet.')
-            
-        const jobIds = applied_jobs.map(j => j.job_id)
-            
-        const jobs = jobIds.map(id => 
-            db.query('select * from jobs where job_id = ?',[id])
-        )
+        if (applied_jobs.length === 0) return res.sendStatus(204);
 
-        const jobResults = await Promise.all(jobs)
-        const jobData = jobResults.map(job => job[0][0])
+        const jobIds = applied_jobs.map(job => job.job_id);
+        const jobQueries = jobIds.map(jobId => db.query('SELECT * FROM jobs WHERE job_id = ?', [jobId]));
+        const jobResults = await Promise.all(jobQueries);
+        const jobList = jobResults.map(([rows]) => rows[0]);
 
-        return res.status(200).json(jobData)
+        return res.status(200).json(jobList);
 
-    }catch(err){
-        return res.status(500).json('Database Error')
+
+    } catch (err) {
+        return res.status(500).json('Database Error');
     }
+
 })
 
 AppliedRouter.get('/check-applied/:jobId' , verifyToken, async(req ,res) => {
     
-    const [isApplied] = await db.query('select * from applied_jobs where job_id = ? and applicant_id = ?', [req.params.jobId , req.user.userId])
-    console.log(isApplied)
 
-    if(isApplied.length < 1) return res.status(200).json(false)
-
+    const [ jobStatus ] = await db.query('select * from accepteddeclined where job_id = ? and applicant_id = ?', [req.params.jobId,req.user.userId ])
     
-    return res.status(200).json(true)
+
 })
 
 

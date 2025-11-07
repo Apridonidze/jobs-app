@@ -37,18 +37,23 @@ SavedRouter.get('/my-saved-jobs', verifyToken, async(req,res) => {
 SavedRouter.get('/check-job/:jobId' , verifyToken , async (req, res) => {
 
 
-    const [isSaved] = await db.query('select * from saved_jobs where job_id = ? and user_id = ?', [req.params.jobId , req.user.userId])
+    try{
+        const [isSaved] = await db.query('select * from saved_jobs where job_id = ? and user_id = ?', [req.params.jobId , req.user.userId])
 
-    if(isSaved.length < 1) return res.status(200).json(false)
-    
-    return res.status(200).json(true)
+        if(isSaved.length < 1) return res.status(200).json(false)
+        
+        return res.status(200).json(true)
+            
+    }catch(err){
+        return res.status(500).json('Database Error')
+    }
 
 })
 
 SavedRouter.post('/post-my-saved-jobs',verifyToken , async (req,res) => {
 
     try{
-        const [ JobsRow ] = await db.query('select * from jobs where job_id = ?', [req.body.job_id])
+    const [ JobsRow ] = await db.query('select * from jobs where job_id = ?', [req.body.job_id])
 
     if(JobsRow.length > 0){
 

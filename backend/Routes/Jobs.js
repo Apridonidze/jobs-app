@@ -7,13 +7,17 @@ const rateLimiter  = require('../config/rateLimiter')
 
 JobsRouter.get('/job-listing', verifyToken ,async (req,res) => {
 
-    const [ rows ] = await db.query('select * from jobs')
+    try{
+        const [ rows ] = await db.query('select * from jobs')
 
     if(rows.length > 0) {
         return res.status(200).json({message: 'Jobs Found', jobs : rows})
     }
 
     return res.status(204).json({error : 'No Jobs Found Yet'})
+    }catch(err){
+        return res.status(500).json('Database Error')
+    }
 
 })
 

@@ -11,13 +11,6 @@ const rateLimiter = require('../config/rateLimiter')
 const LoginSchema = require('../schemas/LoginSchema')
 
 
-
-LoginRouter.get('/', (req,res) => {
-    res.send('login route')
-})
-
-
-
 LoginRouter.post('/', rateLimiter,async (req,res) => {
     
     const loginResp = LoginSchema(req.body)

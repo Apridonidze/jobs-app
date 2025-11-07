@@ -24,12 +24,17 @@ const Main = () => {
     const MY_USER_API = 'http://localhost:8080/user/my-user' //move to .env
     const IS_PROFILE_FINISHED_URL = 'http://localhost:8080/is-profile-finished' //move to .env
     const JOBS_URL = 'http://localhost:8080/jobs/job-listing' ////move to .env
+    const SAVED_URL = 'http://localhost:8080/saved/my-saved-jobs';
+    const APPLIED_URL = 'http://localhost:8080/applied/my-applied-jobs'
+
 
 
     const [cookies] = useCookies(['token'])
 
     const [user,setUser] = useState(null)
     const [jobs,setJobs] = useState([])
+    const [savedJobs,setSavedJobs] = useState([])
+    const [appliedJobs,setAppliedJobs] = useState([])
     const [jobsErr ,setJobsErr] = useState('')
     
 
@@ -42,10 +47,12 @@ const Main = () => {
 
             try{
                 await Promise.all([
-                axios.get(MY_USER_API, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {const userData = resp.data  ; setUser({role : userData.user_role , name : userData.user_name, surname : userData.user_surname , birthDate : userData.user_birthdate, gender : userData.user_gender})}),
-                axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsProfileFinished(resp.data)),
-                axios.get(JOBS_URL, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setJobs(resp.data.jobs) )
-            ])
+                    axios.get(MY_USER_API, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {const userData = resp.data  ; setUser({role : userData.user_role , name : userData.user_name, surname : userData.user_surname , birthDate : userData.user_birthdate, gender : userData.user_gender})}),
+                    axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsProfileFinished(resp.data)),
+                    axios.get(JOBS_URL, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setJobs(resp.data.jobs) ),
+                    axios.get(SAVED_URL , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {if(resp.status === 204) setSavedJobs([]) ;else setSavedJobs(resp.data)}),
+                    axios.get(APPLIED_URL, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {if(resp.status === 204) setAppliedJobs([]) ; else setAppliedJobs(resp.data)})
+                  ])
        
             }catch(err){
                 console.log(err)
@@ -57,11 +64,7 @@ const Main = () => {
 
     },[cookies.token])
 
-
-
-    //TODO (employee side): Add notification button that shows if you get hired or declined 
-
-
+   
     //TODO : add alert messages
     ////TODO : finish design
     ////TODO : polish code and documentate
@@ -75,13 +78,12 @@ const Main = () => {
             
             {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
 
-            
            
             {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} jobs={jobs}/>}
             {toggleCreateJobs && <CreateJobs />}
             {toggleJobsListings && <JobListings jobs={jobs} user={user}/>}
-            {toggleSaved && <Saved />}
-            {toggleApplied && <Applied />}
+            {toggleSaved && <Saved user={user} jobs={savedJobs}/>}
+            {toggleApplied && <Applied user={user} jobs={appliedJobs}/>}
             {togglePending && <Pendings />}
 
             <Footer />

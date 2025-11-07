@@ -16,7 +16,7 @@ const SeeMore = ( { toggleSeeMore, user } ) => {
             try{
                 await Promise.all([
                     axios.get(`${JOBS_URL}/${toggleSeeMore.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}})
-                    .then(resp => {setJob(resp.data[0])})
+                    .then(resp => {console.log(resp.data)})
                 ])
 
             }catch(err){

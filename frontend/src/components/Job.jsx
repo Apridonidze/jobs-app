@@ -13,6 +13,8 @@ const Job = ( { job , user, setToggleSeeMore } ) => {
     const IS_SAVED_URL = 'http://localhost:8080/saved/check-job'
     const IS_APPLIED_URL = 'http://localhost:8080/applied/check-applied'
 
+    const MY_JOB_STATUS_URL = 'http://localhost:8080/accept-decline/check-applied'
+
 
     const [isApplied, setIsApplied] = useState(null)
     const [isSaved, setIsSaved] = useState(null)
@@ -63,6 +65,7 @@ const Job = ( { job , user, setToggleSeeMore } ) => {
                 await Promise.all([
                 axios.get(`${IS_SAVED_URL}/${job.job_id}` , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsSaved(resp.data)),
                 axios.get(`${IS_APPLIED_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsApplied(resp.data)),
+                
             ])
 
             }catch(err){
@@ -93,7 +96,7 @@ const Job = ( { job , user, setToggleSeeMore } ) => {
             </div>
 
            <div className="buttons row d d-flex flex-column gap-2">
-                {user.role !== 'Recruiter' && isSaved !== null && isApplied !== null &&
+                {user.role === 'Employee' && isSaved && isApplied &&
                 
                     <div className="job-buttons d-flex w-100 justify-content-between gap-2">
                         {isApplied ? <button className="btn btn-success opacity-50 w-50">Applied</button> : <button className="btn btn-success w-50" onClick={handleApply}>Apply</button>}

@@ -9,6 +9,7 @@ const db = require('../db/db')
 
 
 AcceptDeclineRouter.get('/my-applicants/:job_id' , verifyToken , async(req,res) => {
+
     
     try{
 
@@ -52,14 +53,6 @@ AcceptDeclineRouter.get('/:applicant_id/:job_id', verifyToken , async (req, res)
     return res.status(200).json({message : 'You Have Already Accepted This Employee', status : false})
 
 })
-
-
-AcceptDeclineRouter.get('/my-job-status/:jobId' , verifyToken , async(req , res) => {
-
-    console.log(req.params.jobId)
-
-})
-
 
 AcceptDeclineRouter.post('/accept-decline-employee', rateLimiter , verifyToken , async(req,res) => {
 
