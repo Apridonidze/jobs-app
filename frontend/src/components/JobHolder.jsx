@@ -10,8 +10,16 @@ const JobHolder = ( {user, job} ) => {
     const APPLY_URL = 'http://localhost:8080/applied/post-my-applied-jobs' 
     const SAVE_URL = 'http://localhost:8080/saved/post-my-saved-jobs'
 
+    const IS_SAVED_URL = 'http://localhost:8080/saved/check-job'
+    const IS_APPLIED_URL = 'http://localhost:8080/applied/check-applied'
+
+
     const [applied, setApplied] = useState(null)
     const [saved, setSaved] = useState(null)
+    
+
+    const [isApplied , setIsApplied]  = useState(null)
+    const [isSaved , setIsSaved]  = useState(null)
 
     const handleApply = async(e) => {
 
@@ -49,16 +57,14 @@ const JobHolder = ( {user, job} ) => {
 
     }
 
-    const IS_SAVED_URL = 'http://localhost:8080/saved/check-job'
-    const IS_APPLIED_URL = 'http://localhost:8080/applied/check-applied'
-
+    
     useEffect(() => {
 
         const fetchJobStatus = async() => {
             try{
                 await Promise.all([
-                axios.get(`${IS_SAVED_URL}/${job.job_id}`, {headers : {Authorization : `${cookies.token}`}}).then(console.log(resp.data)),
-                axios.get(`${IS_APPLIED_URL}/${job.job_id}`, {headers : {Authorization : `${cookies.token}`}}).then(console.log(resp.data)),
+                axios.get(`${IS_SAVED_URL}/${job.job_id}` , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsSaved(resp.data)),
+                axios.get(`${IS_APPLIED_URL}/${job.job_id}`, {headers : {Authorization : `${cookies.token}`}}).then(resp => setIsApplied(resp.data)),
             ])
 
             }catch(err){
