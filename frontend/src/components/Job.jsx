@@ -27,7 +27,7 @@ const Job = ( { job , user, setToggleSeeMore } ) => {
 
             await Promise.all([
                 axios.post(APPLY_URL, {job_id : job.job_id , user_id : job.user_id} , {headers:  {Authorization : `Bearer ${cookies.token}`}})
-                .then(resp => console.log(resp))
+                .then(resp => console.log(resp.data), setIsApplied(true))
             ])
 
         }catch(err){
@@ -45,7 +45,7 @@ const Job = ( { job , user, setToggleSeeMore } ) => {
 
             await Promise.all([
                 axios.post(SAVE_URL, {job_id : job.job_id , user_id : job.user_id} , {headers:  {Authorization : `Bearer ${cookies.token}`}})
-                .then(resp => console.log(resp))
+                .then(resp => console.log(resp.data) , setIsSaved(true))
             ])
 
         }catch(err){
