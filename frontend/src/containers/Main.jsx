@@ -69,6 +69,9 @@ const Main = () => {
     ////TODO : finish design
     ////TODO : polish code and documentate
 
+
+    //TO FIX : debug code in JobHolder.jsx and Job.jsx
+
     
     return(
         <div className="main-container container d-flex flex-column  justify-content-between min-vh-100 py-2">
