@@ -18,8 +18,8 @@ const JobHolder = ( {user, job} ) => {
     const [saved, setSaved] = useState(null)
     
 
-    const [isApplied , setIsApplied]  = useState(null)
-    const [isSaved , setIsSaved]  = useState(null)
+    const [isApplied , setIsApplied]  = useState(false)
+    const [isSaved , setIsSaved]  = useState(false)
 
     const handleApply = async(e) => {
 
@@ -30,7 +30,7 @@ const JobHolder = ( {user, job} ) => {
 
             await Promise.all([
                 axios.post(APPLY_URL, {job_id : job.job_id , user_id : job.user_id} , {headers:  {Authorization : `Bearer ${cookies.token}`}})
-                .then(resp => setApplied({message : resp.data.message, status : resp.data.status}))
+                .then(resp => setApplied({message : resp.data.message, status : resp.data.status})) ,setIsApplied(true)
             ])
 
         }catch(err){
@@ -48,7 +48,7 @@ const JobHolder = ( {user, job} ) => {
 
             await Promise.all([
                 axios.post(SAVE_URL, {job_id : job.job_id , user_id : job.user_id} , {headers:  {Authorization : `Bearer ${cookies.token}`}})
-                .then(resp => setSaved({message : resp.data.message , status : resp.data.status}))
+                .then(resp => {setSaved({message : resp.data.message, status : resp.data.status}) , setIsSaved(true)})
             ])
 
         }catch(err){
@@ -74,7 +74,7 @@ const JobHolder = ( {user, job} ) => {
 
         fetchJobStatus()
 
-    },[])
+    },[isSaved , isApplied ])
 
 
     return(
@@ -86,17 +86,17 @@ const JobHolder = ( {user, job} ) => {
                 <h3>{job.job_employeeList}</h3>
                 <h3>{job.job_technologies}</h3>
                 <h3>{job.job_languages}</h3>
-
             </div>
 
             <div className="buttons-header d d-flex gap-2 col">
 
                 {user.role !== 'Recruiter' && isSaved !== null && isApplied !== null &&
+                    
+                    <div className="job-buttons d-flex w-100 justify-content-between gap-2">
+                        {isApplied ? <button className="btn btn-success opacity-50 w-50">Applied</button> : <button className="btn btn-success w-50" onClick={handleApply}>Apply</button>}
+                        {isSaved ? <button className="btn opacity-75 border w-50">Saved</button> : <button className="btn border w-50" onClick={handleSave}>Saved</button>}
+                    </div>
                 
-                    <>
-                        {isApplied ? <h1>applied</h1> : <button onClick={handleApply}>Apply</button>}
-                        {isSaved ? <h1>saved</h1> : <button onClick={handleSave}>Saved</button>}
-                    </>
                 }
 
                 
