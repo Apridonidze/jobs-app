@@ -64,7 +64,7 @@ const JobHolder = ( {user, job} ) => {
             try{
                 await Promise.all([
                 axios.get(`${IS_SAVED_URL}/${job.job_id}` , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsSaved(resp.data)),
-                axios.get(`${IS_APPLIED_URL}/${job.job_id}`, {headers : {Authorization : `${cookies.token}`}}).then(resp => setIsApplied(resp.data)),
+                axios.get(`${IS_APPLIED_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsApplied(resp.data)),
             ])
 
             }catch(err){
