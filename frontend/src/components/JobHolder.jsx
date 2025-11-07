@@ -13,6 +13,7 @@ const JobHolder = ( {user, job} ) => {
     const IS_SAVED_URL = 'http://localhost:8080/saved/check-job'
     const IS_APPLIED_URL = 'http://localhost:8080/applied/check-applied'
 
+    const MY_JOB_STATUS_URL = 'http://localhost:8080/accept-decline/my-job-status'
 
     const [applied, setApplied] = useState(null)
     const [saved, setSaved] = useState(null)
@@ -88,6 +89,11 @@ const JobHolder = ( {user, job} ) => {
                 <h3>{job.job_languages}</h3>
             </div>
 
+            
+            <div className="job-status">
+                <h4>Job Status :</h4>
+            </div>
+
             <div className="buttons-header d d-flex gap-2 col">
 
                 {user.role !== 'Recruiter' && isSaved !== null && isApplied !== null &&
@@ -97,11 +103,10 @@ const JobHolder = ( {user, job} ) => {
                         {isSaved ? <button className="btn opacity-75 border w-50">Saved</button> : <button className="btn border w-50" onClick={handleSave}>Saved</button>}
                     </div>
                 
-                }
-
-                
+                }                
 
             </div>
+
             
         </div>
     )

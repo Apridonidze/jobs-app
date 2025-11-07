@@ -54,6 +54,13 @@ AcceptDeclineRouter.get('/:applicant_id/:job_id', verifyToken , async (req, res)
 })
 
 
+AcceptDeclineRouter.get('/my-job-status/:jobId' , verifyToken , async(req , res) => {
+
+    console.log(req.params.jobId)
+
+})
+
+
 AcceptDeclineRouter.post('/accept-decline-employee', rateLimiter , verifyToken , async(req,res) => {
 
     const AcceptDeclineResep = AcceptDeclineSchema(req.body)

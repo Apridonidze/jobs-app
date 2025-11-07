@@ -7,9 +7,7 @@ const SeeMore = ( { toggleSeeMore, user } ) => {
 
     const [cookies] = useCookies(['token'])
     const [job,setJob] = useState(null)
-    const [applicants, setApplicants] = useState(null)
     const JOBS_URL = 'http://localhost:8080/jobs/user-jobs'
-    const PENDINGS_URL = 'http://localhost:8080/accept-decline/my-applicants'
 
     useEffect(() => {
         
