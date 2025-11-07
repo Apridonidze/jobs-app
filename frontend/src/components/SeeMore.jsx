@@ -32,7 +32,7 @@ const SeeMore = ( { toggleSeeMore, user } ) => {
     },[])
 
     return (
-        <div className="see-more-container position-fixed bg-white">
+        <div className="see-more-container position-fixed bg-white z-50" style={{zIndex: 1055}}>
             {job  && <JobHolder job={job} user={user} />}
         </div>
     )
