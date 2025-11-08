@@ -1,21 +1,14 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
-import { useCookies } from "react-cookie"
-import JobHolder from "./JobHolder"
 
-const SeeMore = ( { toggleSeeMore, user } ) => {
+const SeeMore = ({ user, toggleSeeMore, job }) => { 
 
-    const [cookies] = useCookies(['token'])
-    const [job,setJob] = useState(null)
-    
-    const JOBS_URL = 'http://localhost:8080/jobs/user-jobs'
+  console.log(job)
 
-    return (
-        <div className="see-more-container position-fixed bg-white" style={{zIndex: 1055}}>
-            <h1>asdasdsadas</h1>
-        </div>
-    )
-}
+  return(
+    <div className="see-more-container position-fixed bg-white w-50">
+      <h1>{job.job_title}</h1>
+    </div>
+  )
 
+};
 
-export default SeeMore
+export default SeeMore;

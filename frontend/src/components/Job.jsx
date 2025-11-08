@@ -13,7 +13,7 @@ const Job = ( { job , user, setToggleSeeMore } ) => {
     const IS_SAVED_URL = 'http://localhost:8080/saved/check-job'
     const IS_APPLIED_URL = 'http://localhost:8080/applied/check-applied'
 
-    const MY_JOB_STATUS_URL = 'http://localhost:8080/accept-decline/check-applied'
+    const MY_JOB_STATUS_URL = 'http://localhost:8080/toggle-job'
 
 
     const [isApplied, setIsApplied] = useState(null)
@@ -65,7 +65,6 @@ const Job = ( { job , user, setToggleSeeMore } ) => {
                 await Promise.all([
                 axios.get(`${IS_SAVED_URL}/${job.job_id}` , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {setIsSaved(resp.data); console.log('issaved ' + resp.data)}),
                 axios.get(`${IS_APPLIED_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {setIsApplied(resp.data) ; console.log('is applied' + resp.data)}),
-                
             ])
 
             }catch(err){
@@ -105,7 +104,7 @@ const Job = ( { job , user, setToggleSeeMore } ) => {
                     }
                 
                 <div className="buttons-footer col">
-                    <button className="btn btn-primary w-100" onClick={() => setToggleSeeMore({status: true , job_id : job.job_id})}>See More...</button>
+                    <button className="btn btn-primary w-100" onClick={() => {setToggleSeeMore({status: true , job_id : job.job_id})}}>See More...</button>
                 </div>
            </div>
         </div>

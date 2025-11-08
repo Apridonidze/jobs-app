@@ -11,7 +11,7 @@ import ProfileMessage from "../alerts/ProfileMessage"
 import Saved from "../components/Saved"
 import Applied from "../components/Applied"
 import Pendings from "../components/Pendings"
-import SeeMore from "../createjobs/SeeMore"
+import SeeMore from "../components/SeeMore"
 
 
 const Main = () => {
@@ -22,7 +22,6 @@ const Main = () => {
     const [toggleSaved,setToggleSaved] = useState(null)
     const [toggleApplied,setToggleApplied] = useState(null)
     const [togglePending,setTogglePending] = useState(null)
-    const [toggleSeeMore,setToggleSeeMore] = useState({status: null , job_id : null})
 
     const MY_USER_API = 'http://localhost:8080/user/my-user' //move to .env
     const IS_PROFILE_FINISHED_URL = 'http://localhost:8080/is-profile-finished' //move to .env
@@ -31,6 +30,9 @@ const Main = () => {
     const APPLIED_URL = 'http://localhost:8080/applied/my-applied-jobs'
 
 
+
+    const [toggleSeeMore , setToggleSeeMore] = useState({status: null , job_id : null})
+    const [job,setJob] = useState(null)
 
     const [cookies] = useCookies(['token'])
 
@@ -54,8 +56,8 @@ const Main = () => {
                     axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsProfileFinished(resp.data)),
                     axios.get(JOBS_URL, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setJobs(resp.data.jobs) ),
                     axios.get(SAVED_URL , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {if(resp.status === 204) setSavedJobs([]) ;else setSavedJobs(resp.data)}),
-                    axios.get(APPLIED_URL, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {if(resp.status === 204) setAppliedJobs([]) ; else setAppliedJobs(resp.data)})
-                  ])
+                    axios.get(APPLIED_URL, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {if(resp.status === 204) setAppliedJobs([]) ; else setAppliedJobs(resp.data)}),
+                ])
        
             }catch(err){
                 console.log(err)
@@ -63,10 +65,26 @@ const Main = () => {
 
         }
 
+       
         fetchData()
-
+        
     },[cookies.token])
 
+
+   
+    useEffect(() => {
+
+        const fetchSeeMore = () => {
+
+            if(toggleSeeMore?.job_id) setJob(jobs.filter(job => job.job_id === toggleSeeMore.job_id)[0])
+            
+        } 
+
+
+        fetchSeeMore()
+        
+
+    },[toggleSeeMore])
    
     //TODO : add alert messages
     ////TODO : finish design
@@ -84,12 +102,12 @@ const Main = () => {
             
             {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
 
-            {toggleSeeMore.status !== null && toggleSeeMore.status !== null  && <> <div className="see-more-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleSeeMore({status: null , job_id : null})}></div> <SeeMore user={user} toggleSeeMore={toggleSeeMore}/></>}
+            {toggleSeeMore.status && user && <> <div className="see-more-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => {setToggleSeeMore({status: null , job_id : null}) }}></div> <SeeMore user={user} toggleSeeMore={toggleSeeMore} job={job}/></>}
            
            
             {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} jobs={jobs}/>}
             {toggleCreateJobs && <CreateJobs />}
-            {toggleJobsListings && <JobListings jobs={jobs} user={user} setToggleSeeMore={setToggleSeeMore}/>}
+            {toggleJobsListings && <JobListings jobs={jobs} user={user} toggleSeeMore={toggleSeeMore}  setToggleSeeMore={setToggleSeeMore}/>}
             {toggleSaved && <Saved user={user} jobs={savedJobs}/>}
             {toggleApplied && <Applied user={user} jobs={appliedJobs}/>}
             {togglePending && <Pendings />}
