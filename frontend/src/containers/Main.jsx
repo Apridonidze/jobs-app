@@ -42,7 +42,6 @@ const Main = () => {
     const [jobs,setJobs] = useState([])
     const [savedJobs,setSavedJobs] = useState([])
     const [appliedJobs,setAppliedJobs] = useState([])
-    const [jobsErr ,setJobsErr] = useState('')
     
 
     const [isProfileFinished , setIsProfileFinished] = useState(false)
@@ -94,25 +93,14 @@ const Main = () => {
     const handleApply = async (jobId) => {
        console.log(jobId)
 
-        try{
 
-            await Promise.all([axios.post(`${APPLY_URL}/${jobId}` , {} , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => console.log(resp))])
-
-        }catch(err){
-            console.log(err)
-        }
+       
     };
 
     const handleSave = async (jobId) => {
         console.log(jobId)
 
-        try{
-
-            await Promise.all([axios.post(`${SAVE_URL}/${jobId}` , {} , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => console.log(resp))])
-
-        }catch(err){
-            console.log(err)
-        }
+       
     };
 
 
@@ -133,14 +121,14 @@ const Main = () => {
             
             {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
 
-            {toggleSeeMore.status && user && job && <> <div className="see-more-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => {setToggleSeeMore({status: null , job_id : null}) }}></div> <SeeMore user={user} toggleSeeMore={toggleSeeMore} job={job}/></>}
+            {toggleSeeMore.status && user && job && <> <div className="see-more-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => {setToggleSeeMore({status: null , job_id : null}) }}></div> <SeeMore user={user} toggleSeeMore={toggleSeeMore} job={job} handleApply={handleApply} handleSave={handleSave}/></>}
            
            
             {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} jobs={jobs}/>}
             {toggleCreateJobs && <CreateJobs />}
             {toggleJobsListings && <JobListings jobs={jobs} user={user} toggleSeeMore={toggleSeeMore}  setToggleSeeMore={setToggleSeeMore}  handleSave={handleSave} handleApply={handleApply}/>}
-            {toggleSaved && <Saved user={user} jobs={savedJobs}/>}
-            {toggleApplied && <Applied user={user} jobs={appliedJobs}/>}
+            {toggleSaved && <Saved user={user} jobs={savedJobs} handleSave={handleSave} handleApply={handleApply}/>}
+            {toggleApplied && <Applied user={user} jobs={appliedJobs} handleSave={handleSave} handleApply={handleApply}/>}
             {togglePending && <Pendings />}
 
             <Footer />

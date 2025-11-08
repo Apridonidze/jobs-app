@@ -68,15 +68,7 @@ AppliedRouter.get('/my-applicants' , verifyToken , async(req,res) => {
     
 })
 
-AppliedRouter.post('/post-my-applied-jobs/:jobId' , verifyToken, async(req,res) => {
-     try{
 
-    }catch(err){
-        return res.status(500).json(err)
-    }
-    
-
-})
 
 
 module.exports = AppliedRouter

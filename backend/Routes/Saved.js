@@ -51,20 +51,4 @@ SavedRouter.get('/check-job/:jobId' , verifyToken , async (req, res) => {
 })
 
 
-
-SavedRouter.post('/post-my-saved-jobs/:jobId',verifyToken , async (req,res) => {
-
-    try{
-
-        return res.status(200).json(req.params.jobId)
-
-    }catch(err){
-        return res.status(500).json(err)
-    }
-    
-
-})
-
-
-
 module.exports = SavedRouter

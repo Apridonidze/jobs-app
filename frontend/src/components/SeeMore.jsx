@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 
 
-const SeeMore = ({ user, job }) => { 
+const SeeMore = ({ user, job , handleApply ,handleSave }) => { 
 
     const [applied, setApplied] = useState(null)
     const [saved, setSaved] = useState(null)
@@ -53,8 +53,8 @@ const SeeMore = ({ user, job }) => {
  
       <div className="job-buttons d-flex w-100 justify-content-between gap-2">
         
-        {isApplied ? <button className="btn btn-success opacity-50 w-50">Applied</button> : <button className="btn btn-success w-50" onClick={handleApply}>Apply</button>}
-        {isSaved ? <button className="btn opacity-75 border w-50 position-relative">Saved</button> : <button className="btn border w-50" onClick={handleSave}>Save</button>}
+        {isApplied ? <button className="btn btn-success opacity-50 w-50">Applied</button> : <button className="btn btn-success w-50" onClick={() => handleApply(job.job_id)}>Apply</button>}
+        {isSaved ? <button className="btn opacity-75 border w-50 position-relative">Saved</button> : <button className="btn border w-50" onClick={() => handleSave(job.job_id)}>Save</button>}
       
       </div>
 

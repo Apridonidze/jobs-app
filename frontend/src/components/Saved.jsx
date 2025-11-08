@@ -1,7 +1,7 @@
 import JobHolder from './JobHolder'
 
 
-const Saved = ( { user , jobs } ) => {
+const Saved = ( { user , jobs, handleSave , handleApply } ) => {
 
     
 
@@ -10,7 +10,7 @@ const Saved = ( { user , jobs } ) => {
             <h1>Your Saved Jobs:</h1>
             
            {jobs && user && jobs.length > 0 ? jobs.map(job => 
-                <JobHolder job={job} user={user}/>
+                <JobHolder job={job} user={user} handleSave={handleSave} handleApply={handleApply}/>
             ) : <h1>No Jobs Applied Yet</h1>}
         </div>
     )
