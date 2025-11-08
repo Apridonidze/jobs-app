@@ -96,13 +96,12 @@ const JobHolder = ( {user, job} ) => {
 
             <div className="buttons-header d d-flex gap-2 col">
 
-                    {user.role !== 'Recruiter' && isSaved !== null && isApplied !== null &&
-                
+                    
                     <div className="job-buttons d-flex w-100 justify-content-between gap-2">
                         {isApplied ? <button className="btn btn-success opacity-50 w-50">Applied</button> : <button className="btn btn-success w-50" onClick={handleApply}>Apply</button>}
                         {isSaved ? <button className="btn opacity-75 border w-50 position-relative">Saved</button> : <button className="btn border w-50" onClick={handleSave}>Saved</button>}
                     </div>
-                }
+                
 
             </div>
 
