@@ -50,33 +50,21 @@ SavedRouter.get('/check-job/:jobId' , verifyToken , async (req, res) => {
 
 })
 
-SavedRouter.post('/post-my-saved-jobs',verifyToken , async (req,res) => {
+
+
+SavedRouter.post('/post-my-saved-jobs/:jobId',verifyToken , async (req,res) => {
 
     try{
-    const [ JobsRow ] = await db.query('select * from jobs where job_id = ?', [req.body.job_id])
 
-    if(JobsRow.length > 0){
-
-        const [ isSaved ] = await db.query('select * from saved_jobs where job_id = ?' , [req.body.job_id ])
-        const [ user ] = await db.query('select * from users where user_id = ?', [req.user.userId])
-
-        if(isSaved.length < 1){
-            await db.query('insert into saved_jobs (job_id, user_id) values (?, ?)' , [req.body.job_id , req.user.userId])
-            return res.status(200).json({message : 'Job Saved Successfully' , status : true , user: user})
-        }
-
-        return res.status(200).json({message : 'You Have Already Saved This Job' , status : false, user: user})
-
-
-    }
+        return res.status(200).json(req.params.jobId)
 
     }catch(err){
-        return res.status(500).json('Database Error')
+        return res.status(500).json(err)
     }
+    
 
 })
 
-//add delete statement
 
 
 module.exports = SavedRouter

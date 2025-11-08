@@ -1,6 +1,6 @@
 import Job from "./Job"
 
-const JobListings = ( { jobs, user , setToggleSeeMore } ) => {
+const JobListings = ( { jobs, user , setToggleSeeMore, handleSave ,handleApply } ) => {
 
 
     return (
@@ -12,7 +12,7 @@ const JobListings = ( { jobs, user , setToggleSeeMore } ) => {
              <div className="job-listing container py-3 row gap-3 justify-content-start">
                 
                 {jobs.slice().reverse().map((job) => (
-                    <Job job={job} user={user} setToggleSeeMore={setToggleSeeMore} />
+                    <Job job={job} user={user} setToggleSeeMore={setToggleSeeMore} handleSave={handleSave} handleApply={handleApply} />
                 ))}
 
             </div>

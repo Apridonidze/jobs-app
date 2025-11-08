@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect , useState } from "react"
 import { useCookies } from "react-cookie"
 
-const Job = ( { job , user, setToggleSeeMore } ) => {
+const Job = ( { job , user, setToggleSeeMore, handleSave ,handleApply } ) => {
 
 
      const [cookies] = useCookies(['token'])
@@ -18,45 +18,6 @@ const Job = ( { job , user, setToggleSeeMore } ) => {
 
     const [isApplied, setIsApplied] = useState(null)
     const [isSaved, setIsSaved] = useState(null)
-    
-
-    const handleApply = async(e) => {
-
-        
-        e.preventDefault()
-
-         try{
-
-            await Promise.all([
-                axios.post(APPLY_URL, {job_id : job.job_id , user_id : job.user_id} , {headers:  {Authorization : `Bearer ${cookies.token}`}})
-                .then(resp => console.log(resp.data), setIsApplied(true))
-            ])
-
-        }catch(err){
-            console.log(err)
-        }
-
-    }
-
-    const handleSave = async(e) => {
-
-        
-        e.preventDefault()
-
-         try{
-
-            await Promise.all([
-                axios.post(SAVE_URL, {job_id : job.job_id , user_id : job.user_id} , {headers:  {Authorization : `Bearer ${cookies.token}`}})
-                .then(resp => console.log(resp.data) , setIsSaved(true))
-            ])
-
-        }catch(err){
-            console.log(err)
-        }
-
-    }
-
-
 
      useEffect(() => {
 
@@ -98,8 +59,8 @@ const Job = ( { job , user, setToggleSeeMore } ) => {
                 
                     {user && user.role !== 'Recruiter' && 
                         <div className="job-buttons d-flex w-100 justify-content-between gap-2">
-                            {isApplied ? <button className="btn btn-success opacity-50 w-50">Applied</button> : <button className="btn btn-success w-50" onClick={handleApply}>Apply</button>}
-                            {isSaved ? <button className="btn opacity-75 border w-50 position-relative">Saved</button> : <button className="btn border w-50" onClick={handleSave}>Save</button>}
+                            {isApplied ? <button className="btn btn-success opacity-50 w-50">Applied</button> : <button className="btn btn-success w-50" onClick={() =>handleApply(job.job_id)}>Apply</button>}
+                            {isSaved ? <button className="btn opacity-75 border w-50 position-relative">Saved</button> : <button className="btn border w-50" onClick={() => handleSave(job.job_id)}>Save</button>}
                         </div>
                     }
                 

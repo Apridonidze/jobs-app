@@ -31,6 +31,7 @@ JobsRouter.get('/user-jobs' ,verifyToken, async (req,res) => {
 
         return res.status(200).json({message : 'your jobs fetched successfully' , jobs : rows})
 
+
     }catch(err){
         
         return res.status(500).json({error : 'error'})

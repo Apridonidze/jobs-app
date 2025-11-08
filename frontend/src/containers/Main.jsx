@@ -29,6 +29,8 @@ const Main = () => {
     const SAVED_URL = 'http://localhost:8080/saved/my-saved-jobs';
     const APPLIED_URL = 'http://localhost:8080/applied/my-applied-jobs'
 
+    const APPLY_URL = 'http://localhost:8080/applied/post-my-applied-jobs' 
+    const SAVE_URL = 'http://localhost:8080/saved/post-my-saved-jobs'
 
 
     const [toggleSeeMore , setToggleSeeMore] = useState({status: null , job_id : null})
@@ -85,6 +87,35 @@ const Main = () => {
         
 
     },[toggleSeeMore])
+
+
+    
+   
+    const handleApply = async (jobId) => {
+       console.log(jobId)
+
+        try{
+
+            await Promise.all([axios.post(`${APPLY_URL}/${jobId}` , {} , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => console.log(resp))])
+
+        }catch(err){
+            console.log(err)
+        }
+    };
+
+    const handleSave = async (jobId) => {
+        console.log(jobId)
+
+        try{
+
+            await Promise.all([axios.post(`${SAVE_URL}/${jobId}` , {} , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => console.log(resp))])
+
+        }catch(err){
+            console.log(err)
+        }
+    };
+
+
    
     //TODO : add alert messages
     ////TODO : finish design
@@ -107,7 +138,7 @@ const Main = () => {
            
             {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} jobs={jobs}/>}
             {toggleCreateJobs && <CreateJobs />}
-            {toggleJobsListings && <JobListings jobs={jobs} user={user} toggleSeeMore={toggleSeeMore}  setToggleSeeMore={setToggleSeeMore}/>}
+            {toggleJobsListings && <JobListings jobs={jobs} user={user} toggleSeeMore={toggleSeeMore}  setToggleSeeMore={setToggleSeeMore}  handleSave={handleSave} handleApply={handleApply}/>}
             {toggleSaved && <Saved user={user} jobs={savedJobs}/>}
             {toggleApplied && <Applied user={user} jobs={appliedJobs}/>}
             {togglePending && <Pendings />}

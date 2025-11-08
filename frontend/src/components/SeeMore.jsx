@@ -12,56 +12,13 @@ const SeeMore = ({ user, job }) => {
 
     const [cookies] = useCookies(['token'])
     
-    const APPLY_URL = 'http://localhost:8080/applied/post-my-applied-jobs' 
-    const SAVE_URL = 'http://localhost:8080/saved/post-my-saved-jobs'
 
     const IS_SAVED_URL = 'http://localhost:8080/saved/check-job'
     const IS_APPLIED_URL = 'http://localhost:8080/applied/check-applied'
 
-    const MY_JOB_STATUS_URL = 'http://localhost:8080/accept-decline/my-job-status'
-
-   
-    
-    
-
-    const handleApply = async(e) => {
-
-        
-        e.preventDefault()
-
-          try{
-
-            await Promise.all([
-              axios.post(APPLY_URL, {job_id : job.job_id , user_id : job.user_id} , {headers:  {Authorization : `Bearer ${cookies.token}`}})
-              .then(resp => setApplied({message : resp.data.message, status : resp.data.status})) ,setIsApplied(true)
-            ])
-
-        }catch(err){
-            console.log(err)
-        }
-
-    }
-
-    const handleSave = async(e) => {
-
-        
-        e.preventDefault()
-
-         try{
-
-            await Promise.all([
-                axios.post(SAVE_URL, {job_id : job.job_id , user_id : job.user_id} , {headers:  {Authorization : `Bearer ${cookies.token}`}})
-                .then(resp => {setSaved({message : resp.data.message, status : resp.data.status}) , setIsSaved(true)})
-            ])
-
-        }catch(err){
-            console.log(err)
-        }
-
-    }
 
 
-    useEffect(() => {
+  useEffect(() => {
 
         const fetchJobStatus = async() => {
             try{
@@ -77,8 +34,7 @@ const SeeMore = ({ user, job }) => {
 
         fetchJobStatus()
 
-    },[ ])
-
+    },[isApplied, isSaved])
 
 
 
