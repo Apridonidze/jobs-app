@@ -102,7 +102,7 @@ const Main = () => {
             
             {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
 
-            {toggleSeeMore.status && user && <> <div className="see-more-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => {setToggleSeeMore({status: null , job_id : null}) }}></div> <SeeMore user={user} toggleSeeMore={toggleSeeMore} job={job}/></>}
+            {toggleSeeMore.status && user && job && <> <div className="see-more-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => {setToggleSeeMore({status: null , job_id : null}) }}></div> <SeeMore user={user} toggleSeeMore={toggleSeeMore} job={job}/></>}
            
            
             {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} jobs={jobs}/>}
