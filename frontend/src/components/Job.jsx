@@ -63,8 +63,8 @@ const Job = ( { job , user, setToggleSeeMore } ) => {
         const fetchJobStatus = async() => {
             try{
                 await Promise.all([
-                axios.get(`${IS_SAVED_URL}/${job.job_id}` , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsSaved(resp.data)),
-                axios.get(`${IS_APPLIED_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsApplied(resp.data)),
+                axios.get(`${IS_SAVED_URL}/${job.job_id}` , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {setIsSaved(resp.data); console.log('issaved ' + resp.data)}),
+                axios.get(`${IS_APPLIED_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {setIsApplied(resp.data) ; console.log('is applied' + resp.data)}),
                 
             ])
 

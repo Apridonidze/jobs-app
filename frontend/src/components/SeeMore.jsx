@@ -7,31 +7,12 @@ const SeeMore = ( { toggleSeeMore, user } ) => {
 
     const [cookies] = useCookies(['token'])
     const [job,setJob] = useState(null)
+    
     const JOBS_URL = 'http://localhost:8080/jobs/user-jobs'
 
-    useEffect(() => {
-        
-        const fetchJob = async() => {
-
-            try{
-                await Promise.all([
-                    axios.get(`${JOBS_URL}/${toggleSeeMore.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}})
-                    .then(resp => {console.log(resp.data)})
-                ])
-
-            }catch(err){
-                console.log(err)
-            }
-
-        }
-
-        fetchJob()
-
-    },[])
-
     return (
-        <div className="see-more-container position-fixed bg-white z-50" style={{zIndex: 1055}}>
-            {job  && <JobHolder job={job} user={user} />}
+        <div className="see-more-container position-fixed bg-white" style={{zIndex: 1055}}>
+            <h1>asdasdsadas</h1>
         </div>
     )
 }

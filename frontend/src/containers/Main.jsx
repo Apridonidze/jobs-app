@@ -11,6 +11,8 @@ import ProfileMessage from "../alerts/ProfileMessage"
 import Saved from "../components/Saved"
 import Applied from "../components/Applied"
 import Pendings from "../components/Pendings"
+import SeeMore from "../createjobs/SeeMore"
+
 
 const Main = () => {
 
@@ -20,7 +22,8 @@ const Main = () => {
     const [toggleSaved,setToggleSaved] = useState(null)
     const [toggleApplied,setToggleApplied] = useState(null)
     const [togglePending,setTogglePending] = useState(null)
-    
+    const [toggleSeeMore,setToggleSeeMore] = useState({status: null , job_id : null})
+
     const MY_USER_API = 'http://localhost:8080/user/my-user' //move to .env
     const IS_PROFILE_FINISHED_URL = 'http://localhost:8080/is-profile-finished' //move to .env
     const JOBS_URL = 'http://localhost:8080/jobs/job-listing' ////move to .env
@@ -81,10 +84,12 @@ const Main = () => {
             
             {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
 
+            {toggleSeeMore.status !== null && toggleSeeMore.status !== null  && <> <div className="see-more-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleSeeMore({status: null , job_id : null})}></div> <SeeMore user={user} toggleSeeMore={toggleSeeMore}/></>}
+           
            
             {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} jobs={jobs}/>}
             {toggleCreateJobs && <CreateJobs />}
-            {toggleJobsListings && <JobListings jobs={jobs} user={user}/>}
+            {toggleJobsListings && <JobListings jobs={jobs} user={user} setToggleSeeMore={setToggleSeeMore}/>}
             {toggleSaved && <Saved user={user} jobs={savedJobs}/>}
             {toggleApplied && <Applied user={user} jobs={appliedJobs}/>}
             {togglePending && <Pendings />}
