@@ -31,7 +31,7 @@ AppliedRouter.get('/check-applied/:jobId' , verifyToken, async(req ,res) => {
 
     const [job_status] = await db.query('select * from accepteddeclined where applicant_id  = ?' , [req.user.userId])
 
-
+// return jobs
 })
 
 
@@ -68,7 +68,9 @@ AppliedRouter.get('/my-applicants' , verifyToken , async(req,res) => {
     
 })
 
-
+AppliedRouter.post('/post-my-applied-jobs/:jobId' , verifyToken , async (req,res) => {
+    console.log(req.params.jobId)
+})
 
 
 module.exports = AppliedRouter

@@ -91,17 +91,43 @@ const Main = () => {
     
    
     const handleApply = async (jobId) => {
-       console.log(jobId)
+        try{
+            
+            console.log(jobId)
+
+            await Promise.all([
+                axios.post(`${APPLY_URL}/${jobId}` , {} , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => console.log(resp.data))
+            ])
+            
+            
+        }catch(err){
+            console.log(err)
+        }
 
 
        
     };
 
     const handleSave = async (jobId) => {
-        console.log(jobId)
+        try{
+            
+            console.log(jobId)
 
+            await Promise.all([
+                axios.post(`${SAVE_URL}/${jobId}` , {} , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => console.log(resp.data))
+            ])
+            
+        }catch(err){
+            console.log(err)
+        }
        
     };
+
+
+    useEffect(() => {
+        handleApply()
+        handleSave()
+    },[])
 
 
    
