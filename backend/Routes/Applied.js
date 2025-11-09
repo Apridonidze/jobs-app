@@ -4,6 +4,14 @@ const AppliedRouter = express.Router()
 const db = require('../db/db')
 const verifyToken = require('../config/verifyToken')
 
+const cors = require('cors');
+
+AppliedRouter.use(cors({
+    origin : 'http://localhost:5173/',
+    credentials: true,
+}))
+
+
 AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
 
     try {
@@ -68,9 +76,12 @@ AppliedRouter.get('/my-applicants' , verifyToken , async(req,res) => {
     
 })
 
-AppliedRouter.post('/post-my-applied-jobs/:jobId' , verifyToken , async (req,res) => {
+
+AppliedRouter.post('/post-apply/:jobId'  , async (req,res) => {
     console.log(req.params.jobId)
+
 })
 
 
-module.exports = AppliedRouter
+
+module.exports = AppliedRouter 
