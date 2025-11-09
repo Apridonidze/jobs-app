@@ -4,6 +4,12 @@ const SavedRouter = express.Router()
 const db = require('../db/db')
 const verifyToken = require('../config/verifyToken')
 
+
+
+const cors = require('cors')
+const corsOptions = require('../config/corsOptions')
+SavedRouter.use(cors(corsOptions))
+
 SavedRouter.get('/my-saved-jobs', verifyToken, async(req,res) => {
 
     try{
@@ -50,5 +56,9 @@ SavedRouter.get('/check-job/:jobId' , verifyToken , async (req, res) => {
 
 })
 
+
+SavedRouter.post('/post-save/:jobId', verifyToken , async (req,res) => {
+    console.log(req.params.jobId)
+})
 
 module.exports = SavedRouter

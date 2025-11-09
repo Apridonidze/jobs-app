@@ -30,7 +30,7 @@ const Main = () => {
     const APPLIED_URL = 'http://localhost:8080/applied/my-applied-jobs'
 
     const APPLY_URL = 'http://localhost:8080/applied/post-apply' 
-    const SAVE_URL = 'http://localhost:8080/saved/post-my-saved-jobs'
+    const SAVE_URL = 'http://localhost:8080/saved/post-save'
 
 
     const [toggleSeeMore , setToggleSeeMore] = useState({status: null , job_id : null})
@@ -92,19 +92,27 @@ const Main = () => {
    
     const handleApply = async (jobId) => {
 
-       try{
-        console.log(jobId)
-        const res = await axios.post(`${APPLY_URL}/${jobId}`, {}, { headers: { Authorization: `Bearer ${cookies.token}` } });
-        console.log(res)
+        try{
+            console.log(jobId)
+            const res = await axios.post(`${APPLY_URL}/${jobId}`, {}, { headers: { Authorization: `Bearer ${cookies.token}` } });
+            console.log(res)
 
-       }catch(err){
-        console.log(err)
-       }
+        }catch(err){
+            console.log(err)
+        }
        
     };
 
     const handleSave = async (jobId) => {
-      console.log(jobId)
+        try{
+            console.log(jobId)
+            const res = await axios.post(`${SAVE_URL}/${jobId}` , {}, {headers : {Authorization : `Bearer ${cookies.token}`}})
+            console.log(res)
+
+        }catch(err){
+            console.log(err)
+        }
+
     };
 
 
