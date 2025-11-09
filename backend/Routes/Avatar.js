@@ -2,16 +2,10 @@ const express = require('express')
 
 const fs = require('fs')
 const multer = require('multer')
-const cors = require('cors')
 const verifyToken = require('../config/verifyToken')
 const db = require('../db/db')
 
 const AvatarRouter = express.Router()
-
-
-const corsOptions = require('../config/corsOptions')
-AvatarRouter.use(cors(corsOptions))
-
 
 AvatarRouter.get('/', verifyToken, async (req,res) => {
 

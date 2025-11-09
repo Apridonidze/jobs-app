@@ -26,12 +26,41 @@ const Main = () => {
     const MY_USER_API = 'http://localhost:8080/user/my-user' //move to .env
     const IS_PROFILE_FINISHED_URL = 'http://localhost:8080/is-profile-finished' //move to .env
     const JOBS_URL = 'http://localhost:8080/jobs/job-listing' ////move to .env
-    const SAVED_URL = 'http://localhost:8080/saved/my-saved-jobs';
-    const APPLIED_URL = 'http://localhost:8080/applied/my-applied-jobs'
+    const IS_SAVED_URL = 'http://localhost:8080/saved/my-saved-jobs';
+    const IS_APPLIED_URL = 'http://localhost:8080/applied/my-applied-jobs'
 
     const APPLY_URL = 'http://localhost:8080/applied/post-apply' 
-    const SAVE_URL = 'http://localhost:8080/applied/post-save'
+    const SAVE_URL = 'http://localhost:8080/saved/post-save'
+ const handleApply = async (jobId) => {
 
+        
+        try{
+
+            
+            //create get axios request in same route as axios post to ensure that backend is up , when we check that then execute axios post request
+            console.log(jobId)
+            const res = await axios.post(`${APPLY_URL}/${jobId}`, {}, { headers: { Authorization: `Bearer ${cookies.token}` } });
+            console.log(res)
+
+            
+        }catch(err){
+            console.log(err)
+        }
+       
+    };
+
+    const handleSave = async (jobId) => {
+        try{
+            console.log(jobId)
+            //create get axios request in same route as axios post to ensure that backend is up , when we check that then execute axios post request
+            const res = await axios.post(`${SAVE_URL}/${jobId}` , {}, {headers : {Authorization : `Bearer ${cookies.token}`}})
+            console.log(res)
+
+        }catch(err){
+            console.log(err)
+        }
+
+    };
 
     const [toggleSeeMore , setToggleSeeMore] = useState({status: null , job_id : null})
     const [job,setJob] = useState(null)
@@ -56,8 +85,8 @@ const Main = () => {
                     axios.get(MY_USER_API, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {const userData = resp.data  ; setUser({role : userData.user_role , name : userData.user_name, surname : userData.user_surname , birthDate : userData.user_birthdate, gender : userData.user_gender})}),
                     axios.get(IS_PROFILE_FINISHED_URL , {headers: {Authorization : `Bearer ${cookies.token}`}}).then(resp => setIsProfileFinished(resp.data)),
                     axios.get(JOBS_URL, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setJobs(resp.data.jobs) ),
-                    axios.get(SAVED_URL , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {if(resp.status === 204) setSavedJobs([]) ;else setSavedJobs(resp.data)}),
-                    axios.get(APPLIED_URL, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {if(resp.status === 204) setAppliedJobs([]) ; else setAppliedJobs(resp.data)}),
+                    axios.get(IS_SAVED_URL , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {if(resp.status === 204) setSavedJobs([]) ;else setSavedJobs(resp.data)}),
+                    axios.get(IS_APPLIED_URL, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {if(resp.status === 204) setAppliedJobs([]) ; else setAppliedJobs(resp.data)}),
                 ])
        
             }catch(err){
@@ -87,37 +116,8 @@ const Main = () => {
 
     },[toggleSeeMore])
 
-
-    
    
-    const handleApply = async (jobId) => {
 
-        try{
-            const res = await axios.post(`${APPLY_URL}/${jobId}`, {}, { headers: { Authorization: `Bearer ${cookies.token}` } });
-            console.log(res)
-
-        }catch(err){
-            console.log(err)
-        }
-       
-    };
-
-    const handleSave = async (jobId) => {
-        try{
-            const res = await axios.post(`${SAVE_URL}/${jobId}` , {}, {headers : {Authorization : `Bearer ${cookies.token}`}})
-            console.log(res)
-
-        }catch(err){
-            console.log(err)
-        }
-
-    };
-
-
-    useEffect(() => {
-        handleSave()
-        handleApply()
-    },[])
 
 
 

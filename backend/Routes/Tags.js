@@ -6,13 +6,6 @@ const verifyToken = require('../config/verifyToken')
 const TagsSchema = require('../schemas/TagsSchema')
 const rateLimiter = require('../config/rateLimiter')
 
-
-
-const cors = require('cors')
-const corsOptions = require('../config/corsOptions')
-TagsRouter.use(cors(corsOptions))
-
-
 TagsRouter.get('/my-tags',verifyToken, async (req,res) => {
 
     const [ rows ] = await db.query('select * from user_tags where user_id = ?',[req.user.userId])

@@ -7,14 +7,6 @@ const rateLimiter = require('../config/rateLimiter')
 const TechnologiesSchema = require('../schemas/TechnologiesSchema')
 const db = require('../db/db')
 
-
-
-const cors = require('cors')
-const corsOptions = require('../config/corsOptions')
-TechRouter.use(cors(corsOptions))
-
-
-
 TechRouter.get('/user-technologies', verifyToken ,async (req,res) => {
 
     const [ rows ] = await db.query('select * from user_technologies where user_id = ?', [req.user.userId])

@@ -7,13 +7,6 @@ require('dotenv').config()
 
 const verifyToken = require('../config/verifyToken')
 
-
-
-const cors = require('cors')
-const corsOptions = require('../config/corsOptions')
-UserRouter.use(cors(corsOptions))
-
-
 UserRouter.get('/my-user', verifyToken , async (req,res) => {
 
     if(req.user.userId){

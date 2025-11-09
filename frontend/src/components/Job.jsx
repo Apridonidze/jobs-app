@@ -57,12 +57,17 @@ const Job = ( { job , user, setToggleSeeMore, handleSave ,handleApply } ) => {
 
            <div className="buttons row d d-flex flex-column gap-2">
                 
-                    {user && user.role !== 'Recruiter' && 
-                        <div className="job-buttons d-flex w-100 justify-content-between gap-2">
-                            {isApplied ? <button className="btn btn-success opacity-50 w-50">Applied</button> : <button className="btn btn-success w-50" onClick={() =>handleApply(job.job_id)}>Apply</button>}
-                            {isSaved ? <button className="btn opacity-75 border w-50 position-relative">Saved</button> : <button className="btn border w-50" onClick={() => handleSave(job.job_id)}>Save</button>}
-                        </div>
-                    }
+                <div className="job-buttons d-flex w-100 justify-content-between gap-2">
+                    {isApplied !== null && isApplied 
+                        ? <button className="btn btn-success opacity-50 w-50">Applied</button> 
+                        : <button className="btn btn-success w-50" onClick={() => handleApply(job.job_id)}>Apply</button>
+                        }
+
+                        {isSaved !== null && isSaved 
+                        ? <button className="btn opacity-75 border w-50 position-relative">Saved</button> 
+                        : <button className="btn border w-50" onClick={() => handleSave(job.job_id)}>Save</button>
+}                   </div>
+                    
                 
                 <div className="buttons-footer col">
                     <button className="btn btn-primary w-100" onClick={() => {setToggleSeeMore({status: true , job_id : job.job_id})}}>See More...</button>

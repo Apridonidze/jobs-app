@@ -8,10 +8,6 @@ const rateLimiter = require('../config/rateLimiter')
 
 
 
-const cors = require('cors')
-const corsOptions = require('../config/corsOptions')
-RoleRouter.use(cors(corsOptions))
-
 
 RoleRouter.get('/my-roles' , verifyToken ,  async(req, res) => {
 

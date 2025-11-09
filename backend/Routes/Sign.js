@@ -1,8 +1,6 @@
 const expres = require('express')
 const SignRouter = expres()
 
-const cors = require('cors') 
-const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 require('dotenv').config()
@@ -11,15 +9,6 @@ const validateUser = require('../schemas/UserSchema')
 const db = require('../db/db')
 const rateLimiter = require('../config/rateLimiter')
 
-
-const corsOptions = require('../config/corsOptions')
-SignRouter.use(cors(corsOptions))
-
-
-
-SignRouter.get('/' , (req,res) => {
-    res.send('sign path')
-})
 
 SignRouter.post('/create-account', rateLimiter ,async (req, res) => {
  const validationResp = validateUser(req.body);

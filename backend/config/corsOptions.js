@@ -1,4 +1,4 @@
-const cors = require('cors');
+
 require('dotenv').config();
 
 const corsOptions = {
@@ -7,5 +7,7 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 };
+
+
 
 module.exports = corsOptions;

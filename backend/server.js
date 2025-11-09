@@ -1,15 +1,17 @@
 const express = require('express');
 const app = express();
+const cors = require('cors')
+
+const corsOptions = require('./config/corsOptions');
 
 require('dotenv').config();
 
-
-const cors = require('cors')
-const corsOptions = require('./config/corsOptions')
 app.use(cors(corsOptions))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-const SignRouter = require('../backend/Routes/Sign')
-const LoginRouter = require('../backend/Routes/Login');
+const SignRouter = require('./Routes/Sign')
+const LoginRouter = require('./Routes/Login');
 const UserRouter = require('./Routes/User')
 const JobsRouter = require('./Routes/Jobs')
 const AvatarRouter = require('./Routes/Avatar');

@@ -5,11 +5,6 @@ const db = require('../db/db')
 const verifyToken = require('../config/verifyToken')
 
 
-const cors = require('cors')
-const corsOptions = require('../config/corsOptions')
-SavedRouter.use(cors(corsOptions))
-
-
 
 SavedRouter.get('/my-saved-jobs', verifyToken, async(req,res) => {
 
@@ -61,7 +56,18 @@ SavedRouter.get('/check-job/:jobId' , verifyToken , async (req, res) => {
 SavedRouter.post('/post-save/:jobId', verifyToken , async (req,res) => {
 
     
-    console.log(req.params.jobId)
+    try{
+
+        const [isAlreadySaved] = await db.query('select * from saved_jobs where job_id = ? and user_id = ?', [req.params.jobId, req.user.userId])
+        
+        if(isAlreadySaved.length > 0) return res.status(200).json('You Have Already Saved This Job')
+            
+        await db.query('insert into saved_jobs (job_id,user_id) values (?,?) ' , [req.params.jobId, req.user.userId])
+        return res.status(200).json('Successfully Saved Job')
+        
+    }catch(err){
+        return res.status(500).json('Database Error')
+    }
 
 })
 
