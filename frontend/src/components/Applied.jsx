@@ -1,7 +1,3 @@
-import { useEffect, useState } from "react"
-import axios from 'axios'
-
-import { useCookies } from 'react-cookie'
 import JobHolder from "./JobHolder"
 
 const Applied = ( {user , jobs, handleSave , handleApply }) => {
