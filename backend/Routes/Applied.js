@@ -1,9 +1,10 @@
 const express = require('express')
 const AppliedRouter = express.Router()
-const cors = require('cors')
 
 const db = require('../db/db')
 const verifyToken = require('../config/verifyToken')
+
+const cors = require('cors')
 const corsOptions = require('../config/corsOptions')
 AppliedRouter.use(cors(corsOptions))
 
@@ -76,6 +77,8 @@ AppliedRouter.post('/post-apply/:jobId'  , verifyToken, async (req,res) => {
 
     
     try{
+
+        
 
 
         const [ isAlreadyApplied ] = await db.query('select * from applied_jobs where job_id = ? and applicant_id = ?', [req.params.jobId , req.user.userId])

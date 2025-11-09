@@ -1,15 +1,12 @@
-const cors = require('cors')
 const express = require('express');
 const app = express();
 
-const corsOptions = require('./config/corsOptions')
-
-
 require('dotenv').config();
 
+
+const cors = require('cors')
+const corsOptions = require('./config/corsOptions')
 app.use(cors(corsOptions))
-
-
 
 const SignRouter = require('../backend/Routes/Sign')
 const LoginRouter = require('../backend/Routes/Login');
@@ -26,6 +23,8 @@ const AppliedRouter = require('./Routes/Applied');
 const AcceptDeclineRouter = require('./Routes/AcceptDecline');
 
 const PORT = process.env.SERVER_PORT;
+
+
 
 app.get('/', (req,res) => {
     res.send('/ path');

@@ -11,6 +11,10 @@ const rateLimiter = require('../config/rateLimiter')
 const LoginSchema = require('../schemas/LoginSchema')
 
 
+const cors = require('cors')
+const corsOptions = require('../config/corsOptions')
+LoginRouter.use(cors(corsOptions))
+
 LoginRouter.post('/', rateLimiter,async (req,res) => {
     
     const loginResp = LoginSchema(req.body)

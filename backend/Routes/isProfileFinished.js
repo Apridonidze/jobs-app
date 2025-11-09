@@ -4,6 +4,13 @@ const isProfileFinishedRouter = express.Router()
 const db = require('../db/db')
 const verifyToken = require('../config/verifyToken')
 
+
+
+const cors = require('cors')
+const corsOptions = require('../config/corsOptions')
+isProfileFinishedRouter.use(cors(corsOptions))
+
+
 isProfileFinishedRouter.get('/', verifyToken , async (req,res) => {
     
     

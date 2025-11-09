@@ -5,6 +5,12 @@ const db = require('../db/db')
 const verifyToken = require('../config/verifyToken')
 const rateLimiter  = require('../config/rateLimiter')
 
+
+const cors = require('cors')
+const corsOptions = require('../config/corsOptions')
+JobsRouter.use(cors(corsOptions))
+
+
 JobsRouter.get('/job-listing', verifyToken ,async (req,res) => {
 
     try{

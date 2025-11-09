@@ -7,6 +7,11 @@ const rateLimiter = require('../config/rateLimiter')
 const db = require('../db/db')
 
 
+const cors = require('cors')
+const corsOptions = require('../config/corsOptions')
+AcceptDeclineRouter.use(cors(corsOptions))
+
+
 
 AcceptDeclineRouter.get('/my-applicants/:job_id' , verifyToken , async(req,res) => {
 

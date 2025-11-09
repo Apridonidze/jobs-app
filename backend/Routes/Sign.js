@@ -11,15 +11,10 @@ const validateUser = require('../schemas/UserSchema')
 const db = require('../db/db')
 const rateLimiter = require('../config/rateLimiter')
 
-const corsOption = {
-    origin: 'http://localhost:5173', 
-    methods : ["GET", 'POST'] ,
-    credentials : true
-}
 
+const corsOptions = require('../config/corsOptions')
+SignRouter.use(cors(corsOptions))
 
-SignRouter.use(cors(corsOption))
-SignRouter.use(bodyParser.json())
 
 
 SignRouter.get('/' , (req,res) => {

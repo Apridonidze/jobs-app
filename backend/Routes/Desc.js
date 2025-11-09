@@ -6,6 +6,12 @@ const validateDesc = require('../schemas/DescSchema')
 const verifyToken = require('../config/verifyToken')
 const rateLimiter = require('../config/rateLimiter')
 
+
+const cors = require('cors')
+const corsOptions = require('../config/corsOptions')
+DescRouter.use(cors(corsOptions))
+
+
 DescRouter.get('/my-desc', verifyToken , async (req,res) => {
     
 

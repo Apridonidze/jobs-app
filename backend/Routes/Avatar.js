@@ -9,12 +9,9 @@ const db = require('../db/db')
 const AvatarRouter = express.Router()
 
 
-const corsOption = {
-    origin: 'http://localhost:5173', 
-    methods : ["GET", 'POST'] ,
-    credentials : true
-}
-AvatarRouter.use(cors(corsOption))
+const corsOptions = require('../config/corsOptions')
+AvatarRouter.use(cors(corsOptions))
+
 
 AvatarRouter.get('/', verifyToken, async (req,res) => {
 
