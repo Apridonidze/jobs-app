@@ -1,12 +1,15 @@
+const cors = require('cors')
 const express = require('express');
 const app = express();
 
-const cors = require('cors');
-const bodyParser = require('body-parser');
+const corsOptions = require('./config/corsOptions')
 
-app.use(cors());
-app.use(bodyParser.json());
+
 require('dotenv').config();
+
+app.use(cors(corsOptions))
+
+
 
 const SignRouter = require('../backend/Routes/Sign')
 const LoginRouter = require('../backend/Routes/Login');

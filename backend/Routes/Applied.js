@@ -1,15 +1,9 @@
 const express = require('express')
 const AppliedRouter = express.Router()
 
+
 const db = require('../db/db')
 const verifyToken = require('../config/verifyToken')
-
-const cors = require('cors');
-
-AppliedRouter.use(cors({
-    origin : 'http://localhost:5173/',
-    credentials: true,
-}))
 
 
 AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {

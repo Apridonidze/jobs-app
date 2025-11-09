@@ -8,4 +8,4 @@ const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 };
 
-module.exports = cors(corsOptions);
+module.exports = corsOptions;
