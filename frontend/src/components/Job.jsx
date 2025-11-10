@@ -69,6 +69,8 @@ const Job = ({ job, user, setToggleSeeMore,savedJobs, appliedJobs  }) => {
             </div>
 
             <div className="buttons row d-flex flex-column gap-2">
+                {user.role !== 'Recruiter' && 
+                
                 <div className="job-buttons d-flex w-100 justify-content-between gap-2">
                     {isApplied
                         ? <button className="btn btn-success opacity-50 w-50">Applied</button>
@@ -78,7 +80,7 @@ const Job = ({ job, user, setToggleSeeMore,savedJobs, appliedJobs  }) => {
                         ? <button className="btn opacity-75 border w-50 position-relative">Saved</button>
                         : <button className="btn border w-50" onClick={handleSave}>Save</button>
                     }
-                </div>
+                </div>}
 
                 <div className="buttons-footer col">
                     <button className="btn btn-primary w-100" onClick={() => setToggleSeeMore({ status: true, job_id: job.job_id })}>
