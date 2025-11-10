@@ -5,7 +5,6 @@ import { useCookies } from "react-cookie"
 const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobsMessage,SubmitBtnRef } ) => {
 
 
-    //TODO(recruiter side) :prevent user from spam button clicking
 
     const [cookies,setCookies,removeCookies] = useCookies(['token'])
     
@@ -64,7 +63,7 @@ const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobs
     }
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
 
         e.preventDefault();
 
@@ -98,10 +97,9 @@ const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobs
         else {isValid = true ; setLanguagesErr('') ; languageRef.current.classList.remove('is-invalid'); ;languageRef.current.classList.add('is-valid'); data = {...data, languages: languages}}
 
         if(isValid){
-           
             try{
             axios
-            .post(NEW_JOBS_URL, data , {headers : {Authorization : `Bearer ${cookies.token}`}})
+            .post(NEW_JOBS_URL, {data}  , {headers : {Authorization : `Bearer ${cookies.token}`}})
             .then(resp => {
                 setJobsMessage(resp.data.message)
                 setIsJobsSuccessful(true)

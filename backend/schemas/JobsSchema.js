@@ -9,7 +9,7 @@ const jobsSchema = z.object({
 })
 
 function JobsSchema (data) {
-    return jobsSchema.safeParse(data)
+    return jobsSchema.safeParse(data.data)
 }
 
 

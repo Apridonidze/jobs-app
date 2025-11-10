@@ -4,7 +4,7 @@ const JobsRouter =  express.Router()
 const db = require('../db/db')
 const verifyToken = require('../config/verifyToken')
 const rateLimiter  = require('../config/rateLimiter')
-
+const JobsSchema = require('../schemas/JobsSchema')
 
 JobsRouter.get('/job-listing', verifyToken ,async (req,res) => {
 
