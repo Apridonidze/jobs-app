@@ -27,14 +27,6 @@ AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
 
 })
 
-AppliedRouter.get('/check-applied/:jobId' , verifyToken, async(req ,res) => {
-    
-
-
-    const [job_status] = await db.query('select * from accepteddeclined where applicant_id  = ?' , [req.user.userId])
-
-})
-
 
 AppliedRouter.get('/my-applicants' , verifyToken , async(req,res) => {
     try{
@@ -78,7 +70,7 @@ AppliedRouter.post("/:jobId", verifyToken, async (req, res) => {
         
         if(isAlreadyApplied.length > 0) return res.status(200).json('You Have Applied For This Job')
             
-        await db.query('insert into saved_jobs (job_id,user_id) values (?,?) ' , [req.params.jobId, req.user.userId])
+        await db.query('insert into applied_jobs (job_id,applicant_id) values (?,?) ' , [req.params.jobId, req.user.userId])
         return res.status(200).json('Successfully Applied For Job')
         
     }catch(err){

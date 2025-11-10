@@ -51,8 +51,9 @@ const Job = ({ job, user, setToggleSeeMore,savedJobs, appliedJobs  }) => {
         } 
 
         filterSavedJob()
+        filterAppliedJob()
 
-     },[savedJobs])
+     },[savedJobs,appliedJobs])
 
 
 

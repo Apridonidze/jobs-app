@@ -2,7 +2,6 @@ import Job from "./Job"
 
 const JobListings = ( { jobs, user , setToggleSeeMore, savedJobs, appliedJobs } ) => {
 
-
     return (
         <div className="job-listing-container container gap-3">
           
