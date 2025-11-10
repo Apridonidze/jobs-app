@@ -116,7 +116,7 @@ const Main = () => {
            
             {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} jobs={jobs}/>}
             {toggleCreateJobs && <CreateJobs />}
-            {toggleJobsListings ? <JobListings jobs={jobs} user={user} toggleSeeMore={toggleSeeMore}  setToggleSeeMore={setToggleSeeMore}  /> : <></>}
+            {toggleJobsListings && <JobListings jobs={jobs} user={user} toggleSeeMore={toggleSeeMore}  setToggleSeeMore={setToggleSeeMore}  savedJobs={savedJobs}/> }
             {toggleSaved && <Saved user={user} jobs={savedJobs} handleSave={handleSave} handleApply={handleApply}/>}
             {toggleApplied && <Applied user={user} jobs={appliedJobs} handleSave={handleSave} handleApply={handleApply}/>}
             {togglePending && <Pendings />}

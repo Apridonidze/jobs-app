@@ -2,14 +2,12 @@ import { useCallback, useEffect, useState } from "react"
 import { Cookies, useCookies } from "react-cookie"
 import axios from "axios"
 
-const Job = ({ job, user, setToggleSeeMore,  }) => {
+const Job = ({ job, user, setToggleSeeMore,savedJobs  }) => {
 
     const [cookies] = useCookies(['token'])
     const [isApplied, setIsApplied] = useState(null)
     const [isSaved, setIsSaved] = useState(null)
 
-    const IS_SAVED_URL = 'http://localhost:8080/saved/check-job'
-    const IS_APPLIED_URL = 'http://localhost:8080/applied/check-applied'
     
     const SAVE_URL = 'http://localhost:8080/saved'
     const APPLY_URL = 'http://localhost:8080/applied'
@@ -18,6 +16,7 @@ const Job = ({ job, user, setToggleSeeMore,  }) => {
     const handleSave = async() => {
         const res = await axios.post(`${SAVE_URL}/${job.job_id}` , {} , {headers: {Authorization : `Bearer ${cookies.token}`}})
         console.log(res)
+        setIsSaved(true)
     }
 
     
@@ -26,6 +25,24 @@ const Job = ({ job, user, setToggleSeeMore,  }) => {
         const res = await axios.post(`${APPLY_URL}/${job.job_id}` , {} , {headers: {Authorization : `Bearer ${cookies.token}`}})
         console.log(res)
     }
+
+
+    console.log()
+
+     useEffect(() => {
+        
+        const filterSavedJob = async() =>{
+            const savedJobList = await savedJobs.filter(savedJob => savedJob.job_id == job.job_id)
+        if(savedJobList.length > 0){
+
+            if(savedJobList[0].job_id === job.job_id) setIsSaved(true)
+        }
+        return 
+        } 
+
+        filterSavedJob()
+
+     },[savedJobs])
 
 
 

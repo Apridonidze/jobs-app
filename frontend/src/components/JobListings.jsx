@@ -1,7 +1,7 @@
-import { useCookies } from "react-cookie"
 import Job from "./Job"
-import axios from "axios"
-const JobListings = ( { jobs, user , setToggleSeeMore } ) => {
+
+const JobListings = ( { jobs, user , setToggleSeeMore, savedJobs } ) => {
+
 
     return (
         <div className="job-listing-container container gap-3">
@@ -12,7 +12,7 @@ const JobListings = ( { jobs, user , setToggleSeeMore } ) => {
              <div className="job-listing container py-3 row gap-3 justify-content-start">
                 
                 {jobs.slice().reverse().map((job) => (
-                    <Job job={job} user={user} setToggleSeeMore={setToggleSeeMore} />
+                    <Job job={job} user={user} setToggleSeeMore={setToggleSeeMore} savedJobs={savedJobs}/>
                 ))}
 
             </div>
