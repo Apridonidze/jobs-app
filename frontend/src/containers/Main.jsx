@@ -32,8 +32,6 @@ const Main = () => {
     const IS_SAVED_URL = 'http://localhost:8080/saved/my-saved-jobs';
     const IS_APPLIED_URL = 'http://localhost:8080/applied/my-applied-jobs'
 
-    const APPLY_URL = 'http://localhost:8080/applied/post-apply/' 
-    const SAVE_URL = 'http://localhost:8080/saved/post-save/'
     
 
     const [toggleSeeMore , setToggleSeeMore] = useState({status: null , job_id : null})
@@ -116,7 +114,7 @@ const Main = () => {
            
             {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} jobs={jobs}/>}
             {toggleCreateJobs && <CreateJobs />}
-            {toggleJobsListings && <JobListings jobs={jobs} user={user} toggleSeeMore={toggleSeeMore}  setToggleSeeMore={setToggleSeeMore}  savedJobs={savedJobs}/> }
+            {toggleJobsListings && <JobListings jobs={jobs} user={user} toggleSeeMore={toggleSeeMore}  setToggleSeeMore={setToggleSeeMore}  savedJobs={savedJobs} appliedJobs={appliedJobs}/> }
             {toggleSaved && <Saved user={user} jobs={savedJobs} handleSave={handleSave} handleApply={handleApply}/>}
             {toggleApplied && <Applied user={user} jobs={appliedJobs} handleSave={handleSave} handleApply={handleApply}/>}
             {togglePending && <Pendings />}

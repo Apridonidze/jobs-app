@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react"
 import { Cookies, useCookies } from "react-cookie"
 import axios from "axios"
 
-const Job = ({ job, user, setToggleSeeMore,savedJobs  }) => {
+const Job = ({ job, user, setToggleSeeMore,savedJobs, appliedJobs  }) => {
 
     const [cookies] = useCookies(['token'])
     const [isApplied, setIsApplied] = useState(null)
@@ -39,6 +39,15 @@ const Job = ({ job, user, setToggleSeeMore,savedJobs  }) => {
             if(savedJobList[0].job_id === job.job_id) setIsSaved(true)
         }
         return 
+        }
+
+        const filterAppliedJob = async() =>{
+            const appliedJobList = await appliedJobs.filter(appliedJob => appliedJob.job_id == job.job_id)
+        if(appliedJobList.length > 0){
+
+            if(appliedJobList[0].job_id === job.job_id) setIsApplied(true)
+                else return
+        }
         } 
 
         filterSavedJob()
