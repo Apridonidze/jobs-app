@@ -28,7 +28,6 @@ const Job = ({ job, user, setToggleSeeMore,savedJobs, appliedJobs  }) => {
     }
 
 
-    console.log()
 
      useEffect(() => {
         

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useCookies } from "react-cookie"
 
 
-const JobHolder = ( {user, job , handleSave , handleApply} ) => {
+const JobHolder = ( {user, job , savedJobs ,appliedJobs } ) => {
 
     const [cookies] = useCookies(['token'])
     
@@ -16,27 +16,50 @@ const JobHolder = ( {user, job , handleSave , handleApply} ) => {
     const [isApplied , setIsApplied]  = useState(false)
     const [isSaved , setIsSaved]  = useState(false)
 
-   
-   
     
+    const SAVE_URL = 'http://localhost:8080/saved'
+    const APPLY_URL = 'http://localhost:8080/applied'
+
+
+    const handleSave = async() => {
+        const res = await axios.post(`${SAVE_URL}/${job.job_id}` , {} , {headers: {Authorization : `Bearer ${cookies.token}`}})
+        console.log(res)
+        setIsSaved(true)
+    }
+
     
-    useEffect(() => {
+    const handleApply = async() => {
+        
+        const res = await axios.post(`${APPLY_URL}/${job.job_id}` , {} , {headers: {Authorization : `Bearer ${cookies.token}`}})
+        console.log(res)
+        setIsApplied(true)
+    }
 
-        const fetchJobStatus = async() => {
-            try{
-                await Promise.all([
-                axios.get(`${IS_SAVED_URL}/${job.job_id}` , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {setIsSaved(resp.data) ;console.log(resp.data)}),
-                axios.get(`${IS_APPLIED_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {setIsApplied(resp.data) ; console.log(resp.data)}),
-                ])
+   
+      useEffect(() => {
+        
+        const filterSavedJob = async() =>{
+            const savedJobList = await savedJobs.filter(savedJob => savedJob.job_id == job.job_id)
+        if(savedJobList.length > 0){
 
-            }catch(err){
-                console.log(err)
-            }
+            if(savedJobList[0].job_id === job.job_id) setIsSaved(true)
+        }
+        return 
         }
 
-        fetchJobStatus()
+        const filterAppliedJob = async() =>{
+            const appliedJobList = await appliedJobs.filter(appliedJob => appliedJob.job_id == job.job_id)
+        if(appliedJobList.length > 0){
 
-    },[ ])
+            if(appliedJobList[0].job_id === job.job_id) setIsApplied(true)
+                else return
+        }
+        } 
+
+        filterSavedJob()
+        filterAppliedJob()
+
+     },[savedJobs,appliedJobs])
 
 
     return(
