@@ -24,6 +24,7 @@ const Job = ({ job, user, setToggleSeeMore,savedJobs  }) => {
         
         const res = await axios.post(`${APPLY_URL}/${job.job_id}` , {} , {headers: {Authorization : `Bearer ${cookies.token}`}})
         console.log(res)
+        setIsApplied(true)
     }
 
 
