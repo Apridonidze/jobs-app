@@ -17,7 +17,8 @@ const JobHolder = ( {user, job , handleSave , handleApply} ) => {
     const [isSaved , setIsSaved]  = useState(false)
 
    
-
+   
+    
     
     useEffect(() => {
 

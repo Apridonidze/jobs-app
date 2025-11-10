@@ -27,6 +27,8 @@ const Job = ({ job, user, setToggleSeeMore,  }) => {
         console.log(res)
     }
 
+
+
     return (
         <div className="job-container col-5 border border-1 d-flex flex-column justify-content-between min-vh-50 py-2" key={job.job_id}>
             <div className="job-header">
