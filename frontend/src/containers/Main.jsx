@@ -1,5 +1,5 @@
 import { useCookies } from "react-cookie"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import axios from "axios"
 import NavBar from "../navbar/NavBar"
 
@@ -14,8 +14,11 @@ import Pendings from "../components/Pendings"
 import SeeMore from "../components/SeeMore"
 
 
+
+
 const Main = () => {
 
+    const [cookies] = useCookies(['token'])
     const [toggleFindJobs, setFindJobs] = useState(null)
     const [toggleCreateJobs, setCreateJobs] = useState(null)
     const [toggleJobsListings, setToggleJobsListings] = useState(null)
@@ -29,43 +32,13 @@ const Main = () => {
     const IS_SAVED_URL = 'http://localhost:8080/saved/my-saved-jobs';
     const IS_APPLIED_URL = 'http://localhost:8080/applied/my-applied-jobs'
 
-    const APPLY_URL = 'http://localhost:8080/applied/post-apply' 
-    const SAVE_URL = 'http://localhost:8080/saved/post-save'
- const handleApply = async (jobId) => {
-
-        
-        try{
-
-            
-            //create get axios request in same route as axios post to ensure that backend is up , when we check that then execute axios post request
-            console.log(jobId)
-            const res = await axios.post(`${APPLY_URL}/${jobId}`, {}, { headers: { Authorization: `Bearer ${cookies.token}` } });
-            console.log(res)
-
-            
-        }catch(err){
-            console.log(err)
-        }
-       
-    };
-
-    const handleSave = async (jobId) => {
-        try{
-            console.log(jobId)
-            //create get axios request in same route as axios post to ensure that backend is up , when we check that then execute axios post request
-            const res = await axios.post(`${SAVE_URL}/${jobId}` , {}, {headers : {Authorization : `Bearer ${cookies.token}`}})
-            console.log(res)
-
-        }catch(err){
-            console.log(err)
-        }
-
-    };
+    const APPLY_URL = 'http://localhost:8080/applied/post-apply/' 
+    const SAVE_URL = 'http://localhost:8080/saved/post-save/'
+    
 
     const [toggleSeeMore , setToggleSeeMore] = useState({status: null , job_id : null})
     const [job,setJob] = useState(null)
 
-    const [cookies] = useCookies(['token'])
 
     const [user,setUser] = useState(null)
     const [jobs,setJobs] = useState([])
@@ -143,7 +116,7 @@ const Main = () => {
            
             {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} jobs={jobs}/>}
             {toggleCreateJobs && <CreateJobs />}
-            {toggleJobsListings && <JobListings jobs={jobs} user={user} toggleSeeMore={toggleSeeMore}  setToggleSeeMore={setToggleSeeMore}  handleSave={handleSave} handleApply={handleApply}/>}
+            {toggleJobsListings ? <JobListings jobs={jobs} user={user} toggleSeeMore={toggleSeeMore}  setToggleSeeMore={setToggleSeeMore}  /> : <></>}
             {toggleSaved && <Saved user={user} jobs={savedJobs} handleSave={handleSave} handleApply={handleApply}/>}
             {toggleApplied && <Applied user={user} jobs={appliedJobs} handleSave={handleSave} handleApply={handleApply}/>}
             {togglePending && <Pendings />}

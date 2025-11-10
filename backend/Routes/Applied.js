@@ -5,6 +5,7 @@ const db = require('../db/db')
 const verifyToken = require('../config/verifyToken')
 
 
+
 AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
 
     try {
@@ -69,31 +70,10 @@ AppliedRouter.get('/my-applicants' , verifyToken , async(req,res) => {
 })
 
 
-AppliedRouter.post('/post-apply/:jobId'  , verifyToken, async (req,res) => {
-
-    try{
-
-        const [ isAlreadyApplied ] = await db.query('select * from applied_jobs where job_id = ? and applicant_id = ?', [req.params.jobId , req.user.userId])
-
-        if(isAlreadyApplied.length > 0){return res.status(200).json('You Have Already Applied For This Job')}
-
-
-        const [jobCreatorId] = await db.query('select user_id from jobs where job_id = ?' , [req.params.jobId])
-        
-        if(jobCreatorId.length < 1) return res.status(404).json('No Job Found')
-
-        await db.query('insert into applied_jobs (job_id, user_id, applicant_id) values (?,?,?)' , [req.params.jobId, jobCreatorId[0].user_id ,req.user.userId] )
-
-        return res.status(200).json('Successfully Applied')
-
-    }catch(err){
-        return res.status(500).json('Database Error')
-    }
-
-        
- 
-})
+AppliedRouter.post("/:jobId", verifyToken, (req, res) => {
+    console.log(req.params.jobId)
+});
 
 
 
-module.exports = AppliedRouter 
+module.exports = AppliedRouter
