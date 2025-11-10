@@ -1,4 +1,4 @@
-const MyJob = ( { key ,jobId ,job ,setToggleSeeMore} ) => {
+const MyJob = ( { job ,setToggleSeeMore} ) => {
 
     return(
         <div className="my-job-container" key={job.job_id}>

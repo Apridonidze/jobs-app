@@ -28,9 +28,10 @@ JobsRouter.get('/user-jobs' ,verifyToken, async (req,res) => {
 
         const [ rows ] = await db.query('select * from jobs where user_id = ?' , [req.user.userId])
 
-        if(rows.length < 1) return res.status(400).json({error : 'no jobs found'})
+        if(rows.length < 1) return res.status(200).json('No Jobs Found')
 
         return res.status(200).json({message : 'your jobs fetched successfully' , jobs : rows})
+
 
 
     }catch(err){
@@ -52,7 +53,7 @@ JobsRouter.post('/new-jobs', rateLimiter,verifyToken, async (req,res) => {
         return res.status(400).json({err : 'Invalid Input'})
     }
 
-    const {title,desc,employeeList,technologies, languages } = req.body 
+    const {title,desc,employeeList,technologies, languages } = req.body.data
     const {userId} = req.user
 
     try{

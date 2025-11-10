@@ -5,48 +5,21 @@ import MyJob from "./MyJob"
 import SeeMore from "./SeeMore"
 import Delete from "./Delete"
 
-const MyJobs = () => {
+const MyJobs = ( { yourJobs , setToggleSeeMore } ) => {
 
-    const JOBS_URL = 'http://localhost:8080/jobs/user-jobs'
-
-    const [cookies] = useCookies(['token'])
-
-    const [yourJobs,setYourJobs] = useState([])
-    const [noJobsFound,setNoJobsFound] = useState('')
-
-    const [toggleSeeMore, setToggleSeeMore] = useState({status : null , job_id : null})
-    const [toggleDelete, setToggleDelete] = useState(null)
-
-    useEffect(() => {
-
-        try{
-             axios.get(JOBS_URL, {headers: {Authorization : `Bearer ${cookies.token}`}})
-            .then(resp => {setYourJobs(resp.data.jobs)})
-
-        }catch(err){
-            setNoJobsFound(err.response.data.error)
-        }
-
-    },[])//make promise in try block 
+    console.log(yourJobs)
+    
 
     return (
         <div className="my-jobs-container d-flex flex-column">
 
-            {toggleSeeMore.status && <>
-            <div className="my-jobs-container-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleSeeMore({status:false, job_id : null})}></div>
-            <SeeMore toggleSeeMore={toggleSeeMore} setToggleDelete={setToggleDelete}/>
-            {toggleDelete && <> <div className="delete-background position-fixed w-100 h-100 top-0 start-0 opacity-50 bg-dark" onClick={() => setToggleDelete(false)}></div> <Delete setToggleDelete={setToggleDelete} toggleSeeMore={toggleSeeMore}/> </>}
-            </>
-            }
+            
 
 
             <h1>Jobs Created By You: </h1>
-            {yourJobs.reverse().map(job => (
-                <MyJob job={job} setToggleSeeMore={setToggleSeeMore}/>
-            ))}
-            {noJobsFound}
+            {yourJobs ? yourJobs.reverse().map(job => <MyJob job={job} setToggleSeeMore={setToggleSeeMore}/>) :  <h1>asdasd</h1> }
+                       
         </div>
-    )// toggle loading when yourjobs === null ,toggle nojobs found componet if yourjobs.length < 1
-}
+)}
 
 export default MyJobs
