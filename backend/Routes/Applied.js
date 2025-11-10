@@ -70,8 +70,21 @@ AppliedRouter.get('/my-applicants' , verifyToken , async(req,res) => {
 })
 
 
-AppliedRouter.post("/:jobId", verifyToken, (req, res) => {
-    console.log(req.params.jobId)
+AppliedRouter.post("/:jobId", verifyToken, async (req, res) => {
+    
+    try{
+
+        const [isAlreadyApplied] = await db.query('select * from applied_jobs where job_id = ? and user_id = ?', [req.params.jobId, req.user.userId])
+        
+        if(isAlreadyApplied.length > 0) return res.status(200).json('You Have Already Saved This Job')
+            
+        await db.query('insert into saved_jobs (job_id,user_id) values (?,?) ' , [req.params.jobId, req.user.userId])
+        return res.status(200).json('Successfully Saved Job')
+        
+    }catch(err){
+        return res.status(500).json('Database Error')
+    }
+
 });
 
 

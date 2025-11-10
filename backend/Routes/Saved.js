@@ -8,8 +8,7 @@ SavedRouter.post('/:jobId', verifyToken , async (req,res) => {
 
     
     try{
-        console.log(req.params.jobId)
-        
+
         const [isAlreadySaved] = await db.query('select * from saved_jobs where job_id = ? and user_id = ?', [req.params.jobId, req.user.userId])
         
         if(isAlreadySaved.length > 0) return res.status(200).json('You Have Already Saved This Job')
@@ -22,10 +21,6 @@ SavedRouter.post('/:jobId', verifyToken , async (req,res) => {
     }
 
 })
-SavedRouter.get('/:jobId' , async(req,res) => {
-    console.log(req.params.jobId)
-})
-
 SavedRouter.get('/my-saved-jobs', verifyToken, async(req,res) => {
 
     try{

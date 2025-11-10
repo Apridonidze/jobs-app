@@ -21,8 +21,10 @@ const Job = ({ job, user, setToggleSeeMore,  }) => {
     }
 
     
-    const handleApply = () => {
-        console.log(job.job_id)
+    const handleApply = async() => {
+        
+        const res = await axios.post(`${APPLY_URL}/${job.job_id}` , {} , {headers: {Authorization : `Bearer ${cookies.token}`}})
+        console.log(res)
     }
 
     return (
