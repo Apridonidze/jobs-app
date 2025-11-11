@@ -7,9 +7,6 @@ import Delete from "./Delete"
 
 const MyJobs = ( { yourJobs , setToggleSeeMore } ) => {
 
-    console.log(yourJobs)
-    
-
     return (
         <div className="my-jobs-container d-flex flex-column">
 

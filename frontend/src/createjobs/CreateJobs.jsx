@@ -6,9 +6,11 @@ import MyJobs from "./MyJobs"
 import { useCookies } from "react-cookie"
 import axios from "axios"
 
-const CreateJobs = ( {setToggleSeeMore} ) => {
+const CreateJobs = ( { setToggleSeeMore } ) => {
 
     const SubmitBtnRef = useRef(null)
+
+
     
     const [toggleCreateJobsInput,setToggleCreateJobsInput] = useState(null)
     const [toggleJobsMessage,setToggleJobsMessage] = useState(null)
@@ -20,8 +22,6 @@ const CreateJobs = ( {setToggleSeeMore} ) => {
     const [cookies] = useCookies(['token'])
 
     const [yourJobs,setYourJobs] = useState([])
-
-    const [toggleDelete, setToggleDelete] = useState(null)
 
     useEffect(() => {
 
@@ -35,8 +35,11 @@ const CreateJobs = ( {setToggleSeeMore} ) => {
 
     },[])//make promise in try block 
 
+
     return(
         <div className="create-jobs-container">
+
+
             <span>Create Job Opportunity</span> <button onClick={() => setToggleCreateJobsInput(!toggleCreateJobsInput)}>Add</button>
 
             {toggleCreateJobsInput && <> <div className="create-jobs-input-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleCreateJobsInput(false)}></div> <CreateJobsInput SubmitBtnRef={SubmitBtnRef} setIsJobsSuccessful={setIsJobsSuccessful} setToggleJobsMessage={setToggleJobsMessage} setJobsMessage={setJobsMessage}/> {toggleJobsMessage && <NewJobsMessage  isJobsSuccessful={isJobsSuccessful} jobsMessage={jobsMessage} setToggleJobsMessage={setToggleJobsMessage} setToggleCreateJobsInput={setToggleCreateJobsInput} SubmitBtnRef={SubmitBtnRef}/>} </> }

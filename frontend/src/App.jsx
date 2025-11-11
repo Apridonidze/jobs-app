@@ -11,7 +11,7 @@ import OtherUser from './containers/OtherUser';
 
 const App = () => {
   
-  const [cookies, setCookies , removeCookies] = useCookies(['token'])
+  const [ cookies ] = useCookies(['token'])
 
   
   const router = createBrowserRouter([

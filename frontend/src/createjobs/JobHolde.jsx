@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 
 const JobHolder = ( { job, applicants,setToggleDelete } ) => {
 
-    console.log(applicants)
 
     return(
         <div className="job-holder-container position-fixed bg-white" key={job.job_id}>
