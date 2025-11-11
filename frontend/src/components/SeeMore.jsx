@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 
 
-const SeeMore = ({ user, job ,handleApply, handleSave  }) => { 
+const SeeMore = ({ user, job , savedJobs , appliedJobs  }) => { 
 
     const [cookies] = useCookies(['token'])
     const [isApplied, setIsApplied] = useState(null)
@@ -57,7 +57,7 @@ const SeeMore = ({ user, job ,handleApply, handleSave  }) => {
 
 
     return (
-        <div className="job-container col-5 border border-1 d-flex flex-column justify-content-between min-vh-50 py-2" key={job.job_id}>
+        <div className="job-container col-5 border border-1 d-flex flex-column justify-content-between min-vh-50 py-2 position-fixed bg-white" key={job.job_id}>
             <div className="job-header">
                 <h4 className="text-break">{job.job_title}</h4>
                 <h6 className="text-break">{job.job_desc}</h6>
@@ -80,11 +80,6 @@ const SeeMore = ({ user, job ,handleApply, handleSave  }) => {
                     }
                 </div>}
 
-                <div className="buttons-footer col">
-                    <button className="btn btn-primary w-100" onClick={() => setToggleSeeMore({ status: true, job_id: job.job_id })}>
-                        See More...
-                    </button>
-                </div>
             </div>
         </div>
     )
