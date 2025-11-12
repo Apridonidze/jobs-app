@@ -5,6 +5,7 @@ const AcceptDeclineSchema = require('../schemas/AcceptDeclineSchema')
 
 const rateLimiter = require('../config/rateLimiter')
 const db = require('../db/db')
+const { boolean } = require('zod')
 
 
 
@@ -21,8 +22,18 @@ AcceptDeclineRouter.get('/my-applicants/:job_id' , verifyToken , async(req,res) 
     const applicantIds = Applicants.map(applicant => applicant.applicant_id)
     const applicantQueries = applicantIds.map(applicantId => db.query('select user_id ,user_name ,user_surname from users where user_id = ? ' , [applicantId]))
     const applicantResults = await Promise.all(applicantQueries)
-    const filteredUsers = applicantResults.map(AR => AR.filter(A => A !== undefined))
+    const filteredUsers = applicantResults.filter(Boolean)
     const applicantLists = filteredUsers.map(filteredUser => filteredUser[0][0])
+
+    const technologiesQueries = applicantIds.map(applicantId => db.query('select * from user_technologies where user_id = ?',[applicantId]))
+    const technologiesResults = await Promise.all(technologiesQueries)
+    const filteredTechnologies = technologiesResults.map(([AT]) => AT[0]?.user_technologies ?? []  )
+    console.log(filteredTechnologies)
+    
+
+    console.log(applicantLists)
+
+    let data = {}
 
 
 
