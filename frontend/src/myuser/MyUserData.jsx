@@ -16,7 +16,7 @@ const MyUserData = ( { user, descValue , setToggleUploadDesc } ) => {
                 <div className="desc-header d d-flex">
                         
                     <h1>Description :</h1>
-                    <h1 onClick={() => setToggleUploadDesc(true)}>Edit...</h1>
+                    <h1 onClick={() => setToggleUploadDesc(true)}>{descValue ? 'Edit...' : 'Add Description...'}</h1>
                 
                 </div>
                 

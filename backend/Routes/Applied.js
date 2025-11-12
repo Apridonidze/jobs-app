@@ -18,6 +18,7 @@ AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
         const jobResults = await Promise.all(jobQueries);
         const jobList = jobResults.map(([rows]) => rows[0]);
 
+
         return res.status(200).json(jobList);
 
 

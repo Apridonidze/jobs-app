@@ -16,16 +16,17 @@ AcceptDeclineRouter.get('/my-applicants/:job_id' , verifyToken , async(req,res) 
 
     const [ Applicants ] = await db.query('select * from applied_jobs where job_id = ?', [req.params.job_id])
 
-    if(Applicants.length < 1) return res.status('No Applicants Yet.')
+    if(Applicants.length < 1) return res.status(204)
 
     const applicantIds = Applicants.map(applicant => applicant.applicant_id)
-    const applicantQueris = applicantIds.map(applicantId => db.query('select user_id ,user_name ,user_surname from users where user_id = ? ' , [applicantId]))
-    const applicantResults = await Promise.all(applicantQueris)
+    const applicantQueries = applicantIds.map(applicantId => db.query('select user_id ,user_name ,user_surname from users where user_id = ? ' , [applicantId]))
+    const applicantResults = await Promise.all(applicantQueries)
     const filteredUsers = applicantResults.map(AR => AR.filter(A => A !== undefined))
     const applicantLists = filteredUsers.map(filteredUser => filteredUser[0][0])
 
-    return res.status(200).json(applicantLists)
 
+
+    return res.status(200).json(applicantLists)
 })
 
 AcceptDeclineRouter.get('/:applicant_id/:job_id', verifyToken , async (req, res) => {
