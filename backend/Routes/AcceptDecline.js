@@ -10,33 +10,23 @@ const db = require('../db/db')
 
 AcceptDeclineRouter.get('/my-applicants/:job_id' , verifyToken , async(req,res) => {
 
+    const [ checkJob ] = await db.query('select * from jobs where job_id = ? and user_id = ? ' , [req.params.job_id , req.user.userId])
     
-    try{
+    if(checkJob.length < 1) return res.status(404)
 
-        const [ rows ]= await db.query('select * from jobs where job_id = ?' , [req.params.job_id])
+    const [ Applicants ] = await db.query('select * from applied_jobs where job_id = ?', [req.params.job_id])
 
-        if(rows.length < 1){
-            
-            return res.status(200).json({message : 'No Applicants Yet', data : rows[0] , applicant: applicant[0]})
+    if(Applicants.length < 1) return res.status('No Applicants Yet.')
 
-        }
+    const applicantIds = Applicants.map(applicant => applicant.applicant_id)
+    const applicantQueris = applicantIds.map(applicantId => db.query('select user_id ,user_name ,user_surname from users where user_id = ? ' , [applicantId]))
+    const applicantResults = await Promise.all(applicantQueris)
+    const filteredUsers = applicantResults.map(AR => AR.filter(A => A !== undefined))
+    const applicantLists = filteredUsers.map(filteredUser => filteredUser[0][0])
 
-    const [ applicant ] = await db.query('select * from users where user_id = ?' , [rows[0].applicant_id])
+    console.log(applicantLists)
+    return res.status(200).json(applicantLists)
 
-    if(applicant.length > 0){
-        if(rows.status === 'true')return res.status(200).json({message : 'You Have Already Accepted This Employee', data : rows[0] , applicant: applicant[0]})
-    return res.status(200).json({message : 'You Have Already Accepted This Employee', data : rows[0], applicant : applicant})
-    
-    }
-
-    return res.status(200).json({message : 'No Applicants Found For This Job Yet', data : null , applicant : null})
-    
-
-    }catch(err){
-        return res.status(500).json('Database Error')
-    }
-    
-    
 })
 
 AcceptDeclineRouter.get('/:applicant_id/:job_id', verifyToken , async (req, res) => {

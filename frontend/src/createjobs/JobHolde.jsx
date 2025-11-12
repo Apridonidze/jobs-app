@@ -5,7 +5,7 @@ import axios from "axios"
 const JobHolder = ( { job  } ) => {
 
     const [cookies] = useCookies(['token'])
-    const [applicants,setApplicants] = useState(null)
+    const [applicants,setApplicants] = useState([])
     const [toggleDelete, setToggleDelete] = useState(null)
 
         const APPLICANT_URL = 'http://localhost:8080/accept-decline/my-applicants'
@@ -14,11 +14,14 @@ const JobHolder = ( { job  } ) => {
         const fetchApplicants = async() => {
             const res = await axios.get(`${APPLICANT_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}})
             console.log(res)
+            if(res.status === 204) {setApplicants([])}
+            else {setApplicants(res.data)}
         }
 
         fetchApplicants()
     },[])
 
+    console.log(applicants)
 
     return(
         <div className="job-holder-container position-fixed bg-white" key={job.job_id}>
@@ -34,8 +37,7 @@ const JobHolder = ( { job  } ) => {
             </div>
 
             <div className="job-applicants">
-                <h3>Applicants For This Job : </h3>
-                <span></span>
+                {applicants !== null && applicants.length < 1 ? <h3>no appplicants</h3> : <h3>Applicants For This Job : {applicants.map(user => user.user_id)}</h3>} 
             </div>
 
             <div className="job-buttons">

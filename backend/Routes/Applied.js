@@ -9,12 +9,12 @@ const verifyToken = require('../config/verifyToken')
 AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
 
     try {
-        const [applied_jobs] = await db.query('SELECT * FROM applied_jobs WHERE applicant_id = ?',[req.user.userId]);
+        const [applied_jobs] = await db.query('select * from applied_jobs where applicant_id = ?',[req.user.userId]);
 
         if (applied_jobs.length === 0) return res.sendStatus(204);
 
         const jobIds = applied_jobs.map(job => job.job_id);
-        const jobQueries = jobIds.map(jobId => db.query('SELECT * FROM jobs WHERE job_id = ?', [jobId]));
+        const jobQueries = jobIds.map(jobId => db.query('select * from jobs where job_id = ?', [jobId]));
         const jobResults = await Promise.all(jobQueries);
         const jobList = jobResults.map(([rows]) => rows[0]);
 
