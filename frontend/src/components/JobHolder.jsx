@@ -75,7 +75,7 @@ const JobHolder = ( {user, job , savedJobs ,appliedJobs } ) => {
  
             
             <div className="job-status">
-                <h4>Job Status : {user.role !== 'Recruiter' ? '' : 'nmot '}</h4>
+                <h4>Job Status : {user.role !== 'Recruiter' ? 'employee' : 'nmot '}</h4>
             </div>
 
             <div className="buttons-header d d-flex gap-2 col">

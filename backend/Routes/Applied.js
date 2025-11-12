@@ -27,37 +27,21 @@ AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
 
 })
 
-
-AppliedRouter.get('/my-applicants' , verifyToken , async(req,res) => {
+AppliedRouter.get('/applicants/:jobId' , verifyToken , async (req , res) => {
+    
     try{
+        
+        const [ Applicants ] = await db.query('select * from applied_jobs where job_id = ?' , [req.params.jobId])
 
-        const [ Jobs ] = await db.query('select * from applied_jobs where user_id = ?', [req.user.userId])
+        if(Applicants.length < 1) return res.status(204)
 
-        if( Jobs ){
+        const applicant = Applicants.map(applicant => applicant)
 
-            
-            for(let i = 0 ; i < Jobs.length ; i++){
-
-                const [ Applicants ] = await db.query('select * from users where user_id =? ', [Jobs[i].applicant_id])
-
-                if(Applicants.length){
-                    
-                return res.status(200).json(Applicants)
-                }
-
-                return res.status(204)
-
-            }
-
-            
-        }
-
-        return res.status(204)
+        console.log(applicant)
 
     }catch(err){
-        console.log(err)
+        return res.status(500).json('Database Error')
     }
-    
 })
 
 

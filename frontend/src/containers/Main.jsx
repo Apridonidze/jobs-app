@@ -32,7 +32,6 @@ const Main = () => {
     const JOBS_URL = 'http://localhost:8080/jobs/job-listing' ////move to .env
     const IS_SAVED_URL = 'http://localhost:8080/saved/my-saved-jobs';
     const IS_APPLIED_URL = 'http://localhost:8080/applied/my-applied-jobs'
-    const APPLICANT_URL = 'http://localhost:8080/applied/my-applicants'
 
     const [toggleSeeMore , setToggleSeeMore] = useState({status: null , job_id : null})
     const [job,setJob] = useState(null)
@@ -58,7 +57,6 @@ const Main = () => {
                     axios.get(JOBS_URL, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => setJobs(resp.data.jobs) ),
                     axios.get(IS_SAVED_URL , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {if(resp.status === 204) setSavedJobs([]) ;else setSavedJobs(resp.data)}),
                     axios.get(IS_APPLIED_URL, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {if(resp.status === 204) setAppliedJobs([]) ; else setAppliedJobs(resp.data)}),
-                    axios.get(APPLICANT_URL, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => {if(resp.status === 204) setAppliedJobs([]) ; else console.log(resp.data)}),
                 ])
        
             }catch(err){
@@ -72,9 +70,7 @@ const Main = () => {
         
     },[cookies.token])
 
-    const [toggleDelete, setToggleDelete] = useState(null)
 
-    console.log(appliedJobs)
 
    
     useEffect(() => {
@@ -92,7 +88,6 @@ const Main = () => {
     },[toggleSeeMore])
 
    
-
 
 
    
@@ -113,7 +108,7 @@ const Main = () => {
             
             {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
 
-            {toggleSeeMore.status && user && job && <> <div className="see-more-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => {setToggleSeeMore({status: null , job_id : null}) }}></div> {user.role === 'Recruiter' && user.id === job.user_id ? <JobHolder job={job} applicants={applicants} setToggleDelete={setToggleDelete}/> : <SeeMore user={user} toggleSeeMore={toggleSeeMore} job={job} savedJobs={savedJobs} appliedJobs={appliedJobs}/>}</>}
+            {toggleSeeMore.status && user && job  && <> <div className="see-more-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => {setToggleSeeMore({status: null , job_id : null}) }}></div> {user.role === 'Recruiter' && user.id === job.user_id ? <JobHolder job={job} /> : <SeeMore user={user} toggleSeeMore={toggleSeeMore} job={job} savedJobs={savedJobs} appliedJobs={appliedJobs}/>}</>}
            
            
             {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} jobs={jobs}/>}

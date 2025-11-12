@@ -54,7 +54,7 @@ JobsRouter.post('/new-jobs', rateLimiter,verifyToken, async (req,res) => {
     }
 
     const {title,desc,employeeList,technologies, languages } = req.body.data
-    const {userId} = req.user
+    const {userId} = req.user.userId
 
     try{
         
