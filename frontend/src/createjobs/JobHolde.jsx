@@ -37,11 +37,16 @@ const JobHolder = ( { job  } ) => {
             </div>
 
             <div className="job-applicants">
-                {applicants !== null && applicants.length < 1 ? <h3>no appplicants</h3> : <h3>Applicants For This Job : {applicants.map(user => (<>
+                {applicants !== null && applicants.length < 1 ? <h3>no appplicants</h3> : <><h3>Applicants For This Job : </h3> <div className="applicants-container d d-flex flex-column">
+                    
+                    {applicants.map(user => (<>
                     <Link to={`/user-account/${user.user_id}`}>{`${user.user_name } ${user.user_surname}`}</Link>
+                    {/* add applicats data here to see locally */}
                     <button>Accept</button>
                     <button>Decline</button>
-                </>))}</h3>} 
+                </>))}
+                    
+                    </div></>} 
             </div>
 
             <div className="job-buttons">
