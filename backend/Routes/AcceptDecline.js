@@ -24,7 +24,6 @@ AcceptDeclineRouter.get('/my-applicants/:job_id' , verifyToken , async(req,res) 
     const filteredUsers = applicantResults.map(AR => AR.filter(A => A !== undefined))
     const applicantLists = filteredUsers.map(filteredUser => filteredUser[0][0])
 
-    console.log(applicantLists)
     return res.status(200).json(applicantLists)
 
 })

@@ -37,7 +37,7 @@ const JobHolder = ( { job  } ) => {
             </div>
 
             <div className="job-applicants">
-                {applicants !== null && applicants.length < 1 ? <h3>no appplicants</h3> : <h3>Applicants For This Job : {applicants.map(user => user.user_id)}</h3>} 
+                {applicants !== null && applicants.length < 1 ? <h3>no appplicants</h3> : <h3>Applicants For This Job : {applicants.map(user => <Link to={`/user-account/${user.user_id}`}>{`${user.user_name } ${user.user_surname}`}</Link>)}</h3>} 
             </div>
 
             <div className="job-buttons">
