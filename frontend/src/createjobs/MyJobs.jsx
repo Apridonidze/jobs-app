@@ -1,9 +1,4 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
-import { useCookies } from "react-cookie"
 import MyJob from "./MyJob"
-import SeeMore from "./SeeMore"
-import Delete from "./Delete"
 
 const MyJobs = ( { yourJobs , setToggleSeeMore } ) => {
 
@@ -14,7 +9,7 @@ const MyJobs = ( { yourJobs , setToggleSeeMore } ) => {
 
 
             <h1>Jobs Created By You: </h1>
-            {yourJobs ? yourJobs.reverse().map(job => <MyJob job={job} setToggleSeeMore={setToggleSeeMore}/>) :  <h1>asdasd</h1> }
+            {yourJobs ? yourJobs.reverse().map(job => <MyJob job={job} setToggleSeeMore={setToggleSeeMore}/>) :  <h1>No Jobs Yet.</h1> }
                        
         </div>
 )}

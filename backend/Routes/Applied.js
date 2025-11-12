@@ -27,30 +27,22 @@ AppliedRouter.get('/my-applied-jobs', verifyToken , async (req,res) => {
 
 })
 
-AppliedRouter.get('/applicants/:jobId' , verifyToken , async (req , res) => {
-    
-    try{
-        
-        const [ Applicants ] = await db.query('select * from applied_jobs where job_id = ? and user_id = ?' , [req.params.jobId , req.user.userId])
-
-        console.log(Applicants)
-
-    }catch(err){
-        return res.status(500).json('Database Error')
-    }
-})
 
 
 AppliedRouter.post("/:jobId", verifyToken, async (req, res) => {
     
     try{
 
-        const [isAlreadyApplied] = await db.query('select * from applied_jobs where job_id = ? and user_id = ?', [req.params.jobId, req.user.userId])
+        const [isAlreadyApplied] = await db.query('select * from applied_jobs where job_id = ? and applicant_id = ?', [req.params.jobId, req.user.userId])
         
-        if(isAlreadyApplied.length > 0) return res.status(200).json('You Have Applied For This Job')
+        if(isAlreadyApplied.length < 1){
+            await db.query('insert into applied_jobs (job_id, applicant_id) values (? , ?) ' , [req.params.jobId, req.user.userId])
+        return res.status(200).json('Successfully Applied For Job') 
+        }
+
+        return res.status(200).json('You Have Applied For This Job')
             
-        await db.query('insert into applied_jobs (job_id,applicant_id) values (?,?) ' , [req.params.jobId, req.user.userId])
-        return res.status(200).json('Successfully Applied For Job')
+        
         
     }catch(err){
         return res.status(500).json('Database Error')

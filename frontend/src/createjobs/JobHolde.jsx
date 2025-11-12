@@ -2,11 +2,13 @@ import { useCookies } from "react-cookie"
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import axios from "axios"
-const JobHolder = ( { job ,setToggleDelete } ) => {
+const JobHolder = ( { job  } ) => {
 
     const [cookies] = useCookies(['token'])
     const [applicants,setApplicants] = useState(null)
-        const APPLICANT_URL = 'http://localhost:8080/applied/applicants'
+    const [toggleDelete, setToggleDelete] = useState(null)
+
+        const APPLICANT_URL = 'http://localhost:8080/accept-decline/my-applicants'
 
     useEffect(() => {
         const fetchApplicants = async() => {
