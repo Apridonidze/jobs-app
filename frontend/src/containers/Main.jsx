@@ -13,7 +13,7 @@ import Applied from "../components/Applied"
 import Pendings from "../components/Pendings"
 import SeeMore from "../components/SeeMore"
 import JobHolder from "../createjobs/JobHolde"
-
+import Delete from "../createjobs/Delete"
 
 
 
@@ -45,6 +45,7 @@ const Main = () => {
 
     const [isProfileFinished , setIsProfileFinished] = useState(false)
 
+    const [toggleDelete, setToggleDelete] = useState(null)
 
     useEffect(() => {
 
@@ -107,8 +108,9 @@ const Main = () => {
             <NavBar user={user} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs} toggleJobsListings={toggleJobsListings} setToggleJobsListings={setToggleJobsListings} setToggleSaved={setToggleSaved} setToggleApplied={setToggleApplied} setTogglePending={setTogglePending}/>
             
             {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
-
-            {toggleSeeMore.status && user && job  && <> <div className="see-more-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => {setToggleSeeMore({status: null , job_id : null}) }}></div> {user.role === 'Recruiter' && user.id === job.user_id ? <JobHolder job={job} /> : <SeeMore user={user} toggleSeeMore={toggleSeeMore} job={job} savedJobs={savedJobs} appliedJobs={appliedJobs}/>}</>}
+          
+            {toggleSeeMore.status && user && job  && <> <div className="see-more-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0"  onClick={() => {setToggleSeeMore({status: null , job_id : null}) }}></div> {user.role === 'Recruiter' && user.id === job.user_id ? <JobHolder job={job} setToggleDelete={setToggleDelete}/> : <SeeMore user={user} toggleSeeMore={toggleSeeMore} job={job} savedJobs={savedJobs} appliedJobs={appliedJobs}/>}</>}
+            {toggleDelete?.status && <><div className="delete-background bg-dark position-fixed d-flex flex-column w-100 h-100 top-0 start-0 opacity-75" onClick={() => setToggleDelete({status:false , job_id : false})}></div><Delete toggleDelete={toggleDelete} setToggleDelete={setToggleDelete}/> </>}
            
            
             {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} jobs={jobs}/>}

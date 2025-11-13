@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useCookies } from "react-cookie"
 
-const Delete = ( { toggleDelete } ) => {
+const Delete = ( { toggleDelete , setToggleDelete } ) => {
 
     const [cookies] = useCookies(['token'])
     const DELETE_JOB_URL = 'http://localhost:8080/jobs/delete-job';
@@ -21,11 +21,11 @@ const Delete = ( { toggleDelete } ) => {
     }
 
     return (
-        <div className="delete-container position-fixed bg-white" >
+        <div className="delete-container position-fixed bg-white " >
             <h1>Are You Sure</h1>
             <div className="buttons">
                 <button onClick={() => handleDeleteJob()}>Yes</button>
-                <button onClick={() => setToggleDelete(false)}>No</button>
+                <button onClick={() => setToggleDelete({status: false , job_id : false})}>No</button>
             </div>
         </div>
     )

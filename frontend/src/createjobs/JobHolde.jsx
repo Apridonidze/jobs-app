@@ -3,11 +3,10 @@ import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import axios from "axios"
 import Delete from './Delete'
-const JobHolder = ( { job  } ) => {
+const JobHolder = ( { job , setToggleDelete } ) => {
 
     const [cookies] = useCookies(['token'])
     const [applicants,setApplicants] = useState(null)
-    const [toggleDelete, setToggleDelete] = useState(null)
 
     const APPLICANT_URL = 'http://localhost:8080/accept-decline/my-applicants'
 
@@ -22,7 +21,6 @@ const JobHolder = ( { job  } ) => {
 
     return(
         <div className="job-holder-container position-fixed bg-white" key={job.job_id}>
-            {toggleDelete?.status && <><div className="delete-background bg-dark position-fixed d-flex flex-column w-100 h-100 top-0 start-0 opacity-75"><Delete toggleDelete={toggleDelete}/> </div></>}
             <div className="job-info">
                     
                 <h1>{job.job_title}</h1>
