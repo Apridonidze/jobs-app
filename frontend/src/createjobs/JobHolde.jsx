@@ -49,7 +49,7 @@ const JobHolder = ( { job , setToggleDelete } ) => {
                     <h4>user technologies: {user.technologies.length < 1 ? <span>No Technologies</span> : user.technologies[0].user_technologies.map(tech => tech)}</h4>
                     <h4>user role: {user.roles.length < 1 ? <span>No Technologies</span> : user.roles[0].user_roles.map(role => role)}</h4>
                     
-                    <h4>status : {user.status.length < 1 ? <h1>false</h1> : <h1>true</h1>}</h4>
+                    <h4>status : {user.status.length > 0 ? user.status[0].status == 'true' ? <button>accepted</button>  : <button>declined</button>: <><button>AcceptOrDecline</button></>}</h4>
 
                 </>))}
 
