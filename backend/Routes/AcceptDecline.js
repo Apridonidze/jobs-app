@@ -32,25 +32,28 @@ AcceptDeclineRouter.get('/my-applicants/:job_id' , verifyToken , async(req,res) 
     const rolesResults = await Promise.all(rolesQueries)
     const filteredRoles = rolesResults.map(([R]) => R[0] ?? []  )
 
+    const statusQueris = applicantIds.map(applicantId => db.query('select * from accepteddeclined where applicant_id = ? and job_id = ?' , [applicantId , req.params.job_id]))
+    const statusResults = await Promise.all(statusQueris)
+    const filteredStatus = statusResults.map(([S]) => S[0] ?? [])
 
-    const data = (applicantLists.map(applicant => ({applicant : applicant , technologies : filteredTechnologies.filter(technologies => technologies.user_id === applicant.user_id ?? []) , roles : filteredRoles.filter(roles => roles.user_id === applicant.user_id ?? [])})))
+    const data = (applicantLists.map(applicant => ({applicant : applicant , technologies : filteredTechnologies.filter(technologies => technologies.user_id === applicant.user_id ?? []) , roles : filteredRoles.filter(roles => roles.user_id === applicant.user_id ?? []) , status : filteredStatus.filter(status => status.applicant_id === applicant.user_id ?? [])})))
 
+    console.log(data)
 
     return res.status(200).json(data)
 })
 
-AcceptDeclineRouter.get('/:applicant_id/:job_id', verifyToken , async (req, res) => {
+AcceptDeclineRouter.get('/:jobId', verifyToken , async (req, res) => {
     
-    const { applicant_id, job_id } = req.params;
 
-    const [ rows ]= await db.query('select * from AcceptedDeclined where applicant_id = ? and job_id = ?' , [applicant_id, job_id])
-
-    if(rows.length < 1){
-        return res.status(200).json({message : 'You Have Not Responded To This Employee Yet', status : null})
+    try{
+        const [ applicantsStatus ] = await db.query('select * from accepteddeclined where job_id = ?' , [req.params.jobId])
+        return res.status(200).json(applicantsStatus)
+    }catch(err){
+        return res.status(500).json('Database Error')
     }
 
-    if(rows.status === 'true')return res.status(200).json({message : 'You Have Already Accepted This Employee', status : true})
-    return res.status(200).json({message : 'You Have Declined This Employee', status : false})
+   
 
 })
 
@@ -82,8 +85,8 @@ AcceptDeclineRouter.post('/accept-decline-employee/:jobId/:applicantId/:status',
 
         await db.query('insert into AcceptedDeclined (job_id, applicant_id , status, recruiter_id) values (? , ? , ? , ?)' , [req.params.jobId, req.params.applicantId, req.params.status, req.user.userId])
 
-        if(req.body.status === 'false') return res.status(200).json({message : `You Have Successfully Declined Employee` , status : req.body.status})
-        return res.status(200).json({message : `You Have Successfully Accepted Employee` , status : req.body.status})
+        if(req.body.status === 'false') return res.status(200).json({message : `You Have Successfully Declined Employee` , status : req.params.status})
+        return res.status(200).json({message : `You Have Successfully Accepted Employee` , status : req.params.status})
         
 
     }catch(err){
