@@ -2,6 +2,7 @@ import { useCookies } from "react-cookie"
 import { Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import axios from "axios"
+import Delete from './Delete'
 const JobHolder = ( { job  } ) => {
 
     const [cookies] = useCookies(['token'])
@@ -19,10 +20,9 @@ const JobHolder = ( { job  } ) => {
         fetchApplicants()
     },[])
 
-
     return(
         <div className="job-holder-container position-fixed bg-white" key={job.job_id}>
-
+            {toggleDelete?.status && <><div className="delete-background bg-dark position-fixed d-flex flex-column w-100 h-100 top-0 start-0 opacity-75"><Delete toggleDelete={toggleDelete}/> </div></>}
             <div className="job-info">
                     
                 <h1>{job.job_title}</h1>
@@ -34,7 +34,7 @@ const JobHolder = ( { job  } ) => {
             </div>
 
             <div className="job-applicants">
-                {!applicants ? <h1>Loading...</h1> : applicants.length < 1 ? <h1>No Applicants</h1> : <><h3>Applicants For This Job : </h3> <div className="applicants-container d d-flex flex-column">
+                {!applicants ? <h1>Loading...</h1> : applicants.length < 1 ? <h1>No Applicants Yet.</h1> : <><h3>Applicants For This Job : </h3> <div className="applicants-container d d-flex flex-column">
                     
                     {applicants.map(user => (<>
                     <Link to={`/user-account/${user.applicant.user_id}`}>{`${user.applicant.user_name } ${user.applicant.user_surname}`}</Link>
