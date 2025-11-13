@@ -98,7 +98,6 @@ const Main = () => {
 
 
 
-    //TO FIX : debug code in JobHolder.jsx and Job.jsx
 
     
     return(

@@ -6,7 +6,7 @@ import { useCookies } from "react-cookie"
 const JobHolder = ( {user, job , savedJobs ,appliedJobs } ) => {
 
     const [cookies] = useCookies(['token'])
-    
+    const [jobStatus, setJobStatus] = useState([])
 
     const IS_SAVED_URL = 'http://localhost:8080/saved/check-job'
     const IS_APPLIED_URL = 'http://localhost:8080/applied/check-applied'
@@ -19,7 +19,7 @@ const JobHolder = ( {user, job , savedJobs ,appliedJobs } ) => {
     
     const SAVE_URL = 'http://localhost:8080/saved'
     const APPLY_URL = 'http://localhost:8080/applied'
-
+    const JOB_STATUS_URL = 'http://localhost:8080/accept-decline'
 
     const handleSave = async() => {
         const res = await axios.post(`${SAVE_URL}/${job.job_id}` , {} , {headers: {Authorization : `Bearer ${cookies.token}`}})
@@ -56,10 +56,16 @@ const JobHolder = ( {user, job , savedJobs ,appliedJobs } ) => {
         }
         } 
 
+        const fetchJobStatus = async () => {
+            await axios.get(`${JOB_STATUS_URL}/${job.job_id}` , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(res => {console.log(res.data) ; setJobStatus(res.data)})
+            
+        }
+
         filterSavedJob()
         filterAppliedJob()
-
+        fetchJobStatus()
      },[savedJobs,appliedJobs])
+
 
 
     return(
@@ -75,7 +81,7 @@ const JobHolder = ( {user, job , savedJobs ,appliedJobs } ) => {
  
             
             <div className="job-status">
-                <h4>Job Status : {user.role !== 'Recruiter' ? 'employee' : 'nmot '}</h4> {/* change text with job status from recruiter */}
+                <h4>Job Status : {jobStatus.length !== '' ? jobStatus.status == 'true' ? <span>accepted</span>  : <span>delcined</span> : <span>no response yet</span>}</h4> 
             </div>
 
             <div className="buttons-header d d-flex gap-2 col">
