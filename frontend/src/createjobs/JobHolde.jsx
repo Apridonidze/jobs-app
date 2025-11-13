@@ -14,6 +14,7 @@ const JobHolder = ( { job , setToggleDelete } ) => {
         const fetchApplicants = async() => {
             await axios.get(`${APPLICANT_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(res => setApplicants(res.data))
             
+
         }
 
         fetchApplicants()
