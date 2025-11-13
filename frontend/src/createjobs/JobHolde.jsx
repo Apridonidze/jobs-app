@@ -9,11 +9,15 @@ const JobHolder = ( { job , setToggleDelete } ) => {
     const [applicants,setApplicants] = useState(null)
 
     const APPLICANT_URL = 'http://localhost:8080/accept-decline/my-applicants'
+    const ACCEPT_DECLINE_URL = 'http://localhost:8080/accept-decline/accept-decline-employee'
+    const CHECK_STATUS_URL = 'http://localhost:8080/accept-decline'
 
     useEffect(() => {
         const fetchApplicants = async() => {
-            await axios.get(`${APPLICANT_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(res => setApplicants(res.data))
-            
+            await Promise.all([
+                axios.get(`${APPLICANT_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(res => setApplicants(res.data)),
+                axios.get(`${CHECK_STATUS_URL}/:${applicants && applicants.map(applicant => applicant.user_id)}/${job.job_id}` , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(res => console.log(res.data))
+            ])
 
         }
 
@@ -38,6 +42,7 @@ const JobHolder = ( { job , setToggleDelete } ) => {
                     {applicants.map(user => (<>
                     <Link to={`/user-account/${user.applicant.user_id}`}>{`${user.applicant.user_name } ${user.applicant.user_surname}`}</Link>
                     <h4>user technologies: {user.technologies.length < 1 ? <span>No Technologies</span> : user.technologies[0].user_technologies.map(tech => tech)}</h4>
+                    <h4>user role: {user.roles.length < 1 ? <span>No Technologies</span> : user.roles[0].user_roles.map(role => role)}</h4>
                     <button>Accept</button>
                     <button>Decline</button>
                 </>))}
