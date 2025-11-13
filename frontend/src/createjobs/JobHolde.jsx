@@ -28,7 +28,6 @@ const JobHolder = ( { job , setToggleDelete } ) => {
         await axios.post(`${ACCEPT_DECLINE_URL}/${job.job_id}/${e.userId}/${e.status}` , {} , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => { console.log(resp);if(e.status === true )setStatus(true); else setStatus(false)})
     }
     
-    console.log(applicants && applicants[0].status[0].status)
     return(
         <div className="job-holder-container position-fixed bg-white w-75 mx-5" key={job.job_id}>
             <div className="job-info">
@@ -49,7 +48,7 @@ const JobHolder = ( { job , setToggleDelete } ) => {
                     <h4>user technologies: {user.technologies.length < 1 ? <span>No Technologies</span> : user.technologies[0].user_technologies.map(tech => tech)}</h4>
                     <h4>user role: {user.roles.length < 1 ? <span>No Technologies</span> : user.roles[0].user_roles.map(role => role)}</h4>
                     
-                    <h4>status : {user.status.length > 0 ? user.status[0].status == 'true' ? <button>accepted</button>  : <button>declined</button>: <><button>AcceptOrDecline</button></>}</h4>
+                    <h4>status : {user.status.length > 0 ? user.status[0].status == 'true' ? <><button className="btn btn-success">Accepted</button><button className="btn btn-danger opacity-50">Decline</button></>  : <><button className="btn btn-success opacity-50">Accept</button><button className="btn btn-danger">Declined</button></>: <><><button className="btn btn-success" onClick={() => sendStatus({userId : user.applicant.user_id , status : true})}>Accept</button><button className="btn btn-danger"  onClick={() => sendStatus({userId : user.applicant.user_id , status : false})}>Decline</button></></>}</h4>
 
                 </>))}
 
