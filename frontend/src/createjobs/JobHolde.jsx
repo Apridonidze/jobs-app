@@ -5,17 +5,15 @@ import axios from "axios"
 const JobHolder = ( { job  } ) => {
 
     const [cookies] = useCookies(['token'])
-    const [applicants,setApplicants] = useState([])
+    const [applicants,setApplicants] = useState(null)
     const [toggleDelete, setToggleDelete] = useState(null)
 
-        const APPLICANT_URL = 'http://localhost:8080/accept-decline/my-applicants'
+    const APPLICANT_URL = 'http://localhost:8080/accept-decline/my-applicants'
 
     useEffect(() => {
         const fetchApplicants = async() => {
-            const res = await axios.get(`${APPLICANT_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}})
-            console.log(res)
-            if(res.status === 204) {setApplicants([])}
-            else {setApplicants(res.data)}
+            await axios.get(`${APPLICANT_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(res => setApplicants(res.data))
+            
         }
 
         fetchApplicants()
@@ -36,11 +34,11 @@ const JobHolder = ( { job  } ) => {
             </div>
 
             <div className="job-applicants">
-                {applicants !== null && applicants.length < 1 ? <h3>No Applicants Yet</h3> : <><h3>Applicants For This Job : </h3> <div className="applicants-container d d-flex flex-column">
+                {!applicants ? <h1>Loading...</h1> : applicants.length < 1 ? <h1>No Applicants</h1> : <><h3>Applicants For This Job : </h3> <div className="applicants-container d d-flex flex-column">
                     
                     {applicants.map(user => (<>
-                    <Link to={`/user-account/${user.user_id}`}>{`${user.user_name } ${user.user_surname}`}</Link>
-                    {/* add applicats data here to see locally */}
+                    <Link to={`/user-account/${user.applicant.user_id}`}>{`${user.applicant.user_name } ${user.applicant.user_surname}`}</Link>
+                    <h4>user technologies: {user.technologies.length < 1 ? <span>No Technologies</span> : user.technologies[0].user_technologies.map(tech => tech)}</h4>
                     <button>Accept</button>
                     <button>Decline</button>
                 </>))}

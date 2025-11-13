@@ -17,7 +17,7 @@ AcceptDeclineRouter.get('/my-applicants/:job_id' , verifyToken , async(req,res) 
 
     const [ Applicants ] = await db.query('select * from applied_jobs where job_id = ?', [req.params.job_id])
 
-    if(Applicants.length < 1) return res.status(204)
+    if(Applicants.length < 1) return res.status(200).json([])
 
     const applicantIds = Applicants.map(applicant => applicant.applicant_id)
     const applicantQueries = applicantIds.map(applicantId => db.query('select user_id ,user_name ,user_surname from users where user_id = ? ' , [applicantId]))
@@ -36,8 +36,6 @@ AcceptDeclineRouter.get('/my-applicants/:job_id' , verifyToken , async(req,res) 
 
     const data = (applicantLists.map(applicant => ({applicant : applicant , technologies : filteredTechnologies.filter(technologies => technologies.user_id === applicant.user_id ?? []) , roles : filteredRoles.filter(roles => roles.user_id === applicant.user_id ?? [])})))
 
-
-    console.log(data)
 
     return res.status(200).json(data)
 })
