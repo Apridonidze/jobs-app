@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import { useRef,useState  } from "react"
-import { Link , Navigate, useNavigate} from 'react-router-dom'
+import { useRef,useState  } from "react"; //
+
+import { Link } from 'react-router-dom'
+
 import CountryCode from "../components/CountryCode"
 import SignMessage from '../alerts/SignMessage';
 import AuthNavBar from '../navbar/AuthNavBar';
@@ -10,10 +12,8 @@ import Footer from '../components/Foooter';
 
 const Sign = () => {
 
-    const [seconds, setSeconds] = useState(3)
-       
-
-    const SIGN_PORT = 'http://localhost:8080/sign/create-account' // move to .env file
+    const [seconds, setSeconds] = useState(3) ; //seconds for 
+    const SIGN_PORT = 'http://localhost:8080/sign/create-account' //api url to create account
     
     const [cookies, setCookies , removeCookies] = useCookies(['token'])
 
@@ -201,13 +201,13 @@ const Sign = () => {
                     
                     <div className="form mb-4">
 
-                        <select className='form-control form-control-lg' ref={roleRef} onChange={(e) => setRole(e.target.value)}>
+                        <select className='form-control form-control-lg ' ref={roleRef} onChange={(e) => setRole(e.target.value)}>
                             <option value="blank">I Am a...</option>
                             <option value="recruiter">Recruiter</option>
                             <option value="employee">Employee</option>
                         </select>
 
-                        <span>{roleErr}</span>
+                        <span className='text-danger'>{roleErr}</span>
 
                     </div>
 
@@ -218,7 +218,7 @@ const Sign = () => {
 
                         <input type="text" className="form-control  form-control-lg" id="nameID" onChange={(e) => setName(e.target.value)} value={name} ref={nameRef} placeholder="Your Name..."/>
                         <label htmlFor="nameID">Your Name...</label>
-                        <span>{nameErr}</span>
+                        <span className='text-danger'>{nameErr}</span>
 
                         </div>
 
@@ -300,7 +300,7 @@ const Sign = () => {
                     </div>
 
                
-                    <div className="row row-cols-sm-2 mb-4 ">
+                    <div className="d-flex flex-column flex-sm-row my-4 gap-2">
                         <div className="col"><input type="submit" className="btn btn-success w-100" value='Create New Account'/></div>
                         <div className="col"><button className="btn btn-danger w-100" onClick={handleReset} >Reset Form</button></div>
                     </div>

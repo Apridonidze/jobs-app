@@ -17,8 +17,8 @@ const Footer = () => {
                 <div className="quick-links border-end px-3 pt-3 text-start col">
                     <h5>Quick Links : </h5>
                     <div className="quick-links-footer d-flex flex-column gap-3">
-                        <Link to='' className="fs-5">Sign</Link>
-                        <Link to='' className="fs-5">Login</Link>
+                        <Link to='/sign' className="fs-5">Sign</Link>
+                        <Link to='/login' className="fs-5">Login</Link>
                     </div>
                 </div>
 
