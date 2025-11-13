@@ -4,6 +4,8 @@ import { useRef,useState  } from "react"
 import { Link , Navigate, useNavigate} from 'react-router-dom'
 import CountryCode from "../components/CountryCode"
 import SignMessage from '../alerts/SignMessage';
+import AuthNavBar from '../navbar/AuthNavBar';
+import Footer from '../components/Foooter';
 
 
 const Sign = () => {
@@ -182,120 +184,136 @@ const Sign = () => {
     }
 
     return(
-        <div className="sign-container container text-center">
-            
-            <h1>Sign-Up Page</h1>
-            
+        <div className="sign-container container d-flex flex-column justify-content-between min-vh-100 align-items-center  gap-3">
+            <AuthNavBar />
+
             {toggleSigMessage && <SignMessage setToggleSigMessage={setToggleSigMessage} isSuccessful={isSuccessful} signMessage={signMessage} setSeconds={setSeconds} seconds={seconds}/> }
 
-            <form onSubmit={SubmitSign}>
+            <div className="sign-header container d-flex flex-column gap-3 w-75 text-center">
                 
-                <div className="form mb-4">
+                <h1>Create your account</h1>
+                <h4>Join Jobs App today and start hiring or applying in minutes. Recruiters can post job offers — applicants can find opportunities fast.</h4>
+            
+            </div>
 
-                    <select className='form-control' ref={roleRef} onChange={(e) => setRole(e.target.value)}>
-                        <option value="blank">I Am a...</option>
-                        <option value="recruiter">Recruiter</option>
-                        <option value="employee">Employee</option>
-                    </select>
-                    <span>{roleErr}</span>
-
-                </div>
-
-
-                <div className="form-floating mb-4">
-
-                    <input type="text" className="form-control" id="nameID" onChange={(e) => setName(e.target.value)} value={name} ref={nameRef} placeholder="Your Name..."/>
-                    <label htmlFor="nameID">Your Name...</label>
-                    <span>{nameErr}</span>
-
-                </div>
-
-                <div className="form-floating mb-4">
+            <div className="sign-body container w-auto align-items-center">
+                <form onSubmit={SubmitSign}>
                     
-                    <input type="text" className="form-control" id="surnameID" onChange={(e) => setSurname(e.target.value)} value={surname} ref={surnameRef} placeholder="Your Surname..."/>
-                    <label htmlFor="surnameID">Your Surname...</label>
-                    <span className="text-danger">{surnameErr}</span>
-                    
-                </div>
+                    <div className="form mb-4">
 
-                <div className="form mb-4">
-                    
-                    <div className="input-group form-floating">
-                    
-                        <input type={passwordType} className="form-control" onChange={(e) => setPassword(e.target.value)} value={password} ref={passwordRef} placeholder="Your Password..."/>
-                        <button type="button" onClick={() => {setShowPassword(!showPassword); setPasswordType(passwordType => {if(showPassword == false){return 'text'} else return 'password'})}}>{showPassword ? <i class="fa-regular fa-eye-slash"></i> : <i class="fa-regular fa-eye"></i>}</button>
-                        <label htmlFor="passwordID">Your Password...</label>
+                        <select className='form-control form-control-lg' ref={roleRef} onChange={(e) => setRole(e.target.value)}>
+                            <option value="blank">I Am a...</option>
+                            <option value="recruiter">Recruiter</option>
+                            <option value="employee">Employee</option>
+                        </select>
+
+                        <span>{roleErr}</span>
 
                     </div>
-                    
-                    <span className="text-danger">{passwordErr}</span>
-
-                </div>
-
-                <div className="form-floating mb-4">
-                    
-                    <input type="text" className="form-control" id="emailID" onChange={(e) => setEmail(e.target.value)} value={email} ref={emailRef} placeholder="Your Email..."/>
-                    <label htmlFor="emailID">Your Email...</label>
-                    <span className="text-danger">{emailErr}</span>
-                    
-                </div>
-
-                <div className="form mb-4">
 
 
-                    <div className="input-group">
+                    <div className="form-fileds d-flex gap-3">
                         
-                        <CountryCode setCountryCode={setCountryCode} countryCodeRef={countryCodeRef}/>
-                        <input type="text" className="form-control w-75"  onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} ref={phoneNumberRef} placeholder="Your Phone Nubmer..."/>
+                        <div className="form-floating  w-50 mb-4">
+
+                        <input type="text" className="form-control  form-control-lg" id="nameID" onChange={(e) => setName(e.target.value)} value={name} ref={nameRef} placeholder="Your Name..."/>
+                        <label htmlFor="nameID">Your Name...</label>
+                        <span>{nameErr}</span>
+
+                        </div>
+
+                        <div className="form-floating w-50 mb-4">
+                            
+                            <input type="text" className="form-control form-control-lg" id="surnameID" onChange={(e) => setSurname(e.target.value)} value={surname} ref={surnameRef} placeholder="Your Surname..."/>
+                            <label htmlFor="surnameID">Your Surname...</label>
+                            <span className="text-danger">{surnameErr}</span>
+                            
+                        </div>
 
                     </div>
 
-                    <span className="text-danger">{phoneErr}</span>
-                    <span className="text-danger">{countryCodeErr}</span>
-
-                </div>
-
-                <div className="form-floating mb-4">
-                    
-                    <input type="date"  className="form-control" onChange={(e) => setBirthDate(e.target.value)} value={birthDate} ref={birthDateRef} placeholder="Your Phone Nubmer..."/>
-                    <label htmlFor="phoneID">Your Birth Date...</label>
-                    <span className="text-danger">{birthDateErr}</span>
-                    
-                </div>
-
-                <div className="form d-flex border mb-4" ref={genderRef}>
-
-                    <label htmlFor="GenderID">I Am : </label>
-
-                    <div className="radio-forms">
+                    <div className="form mb-4">
                         
-                        <input type="radio" className="form-check-input" id="genderID" name="gender" onChange={(e) => setGender(e.target.value)} value='male' />
-                        <label htmlFor="genderID" >Male</label>
-                    
+                        <div className="input-group form-floating">
+                        
+                            <input type={passwordType} className="form-control form-control-lg" onChange={(e) => setPassword(e.target.value)} value={password} ref={passwordRef} placeholder="Your Password..."/>
+                            <label htmlFor="passwordID">Your Password...</label>
+                            <button type="button" className='input-group-text' onClick={() => {setShowPassword(!showPassword); setPasswordType(passwordType => {if(showPassword == false){return 'text'} else return 'password'})}}>{showPassword ? <i class="fa-regular fa-eye-slash"></i> : <i class="fa-regular fa-eye"></i>}</button>
+
+                        </div>
+                        
+                        <span className="text-danger">{passwordErr}</span>
+
                     </div>
 
-                    <div className="radio-forms">
-                    
-                        <input type="radio" className="form-check-input" id="genderID" name="gender" onChange={(e) => setGender(e.target.value)}  value='female' />
-                        <label htmlFor="genderID">Female</label>
-                    
+                    <div className="form-floating mb-4">
+                        
+                        <input type="text" className="form-control form-control-lg" id="emailID" onChange={(e) => setEmail(e.target.value)} value={email} ref={emailRef} placeholder="Your Email..."/>
+                        <label htmlFor="emailID">Your Email...</label>
+                        <span className="text-danger">{emailErr}</span>
+                        
                     </div>
 
-                    <span className="text-danger">{genderErr}</span>
+                    <div className="form mb-4">
 
-                </div>
+
+                        <div className="input-group">
+                            
+                            <CountryCode setCountryCode={setCountryCode} countryCodeRef={countryCodeRef}/>
+                            <input type="text" className="form-control w-75 form-control-lg"  onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} ref={phoneNumberRef} placeholder="Your Phone Nubmer..."/>
+
+                        </div>
+
+                        <span className="text-danger pt-2">{phoneErr}</span>
+                        <span className="text-danger pt-2">{countryCodeErr}</span>
+
+                    </div>
+
+                    <div className="form-floating mb-4">
+                        
+                        <input type="date"  className="form-control form-control-lg" onChange={(e) => setBirthDate(e.target.value)} value={birthDate} ref={birthDateRef} placeholder="Your Phone Nubmer..."/>
+                        <label htmlFor="phoneID">Your Birth Date...</label>
+                        <span className="text-danger">{birthDateErr}</span>
+                        
+                    </div>
+
+                    <div className="form d-flex mb-4 align-items-center gap-3" ref={genderRef}>
+
+                        <label htmlFor="GenderID"className='fs-5'>I Am : </label>
+
+                        <div className="radio-forms d d-flex align-items-center ">
+                            
+                            <input type="radio" className="form-check-input" id="genderID" name="gender" onChange={(e) => setGender(e.target.value)} value='male' />
+                            <label htmlFor="genderID" className='fs-5' >Male</label>
+                        
+                        </div>
+
+                        <div className="radio-forms d d-flex align-items-center ">
+                        
+                            <input type="radio" className="form-check-input " id="genderID" name="gender" onChange={(e) => setGender(e.target.value)}  value='female' />
+                            <label htmlFor="genderID" className='fs-5'>Female</label>
+                        
+                        </div>
+
+                        <span className="text-danger">{genderErr}</span>
+
+                    </div>
 
                
-                <div className="row row-cols-sm-2 mb-4">
-                    <div className="col"><input type="submit" className="btn btn-success" value='Create New Account'/></div>
-                    <div className="col"><button className="btn btn-danger" onClick={handleReset} >Reset Form</button></div>
-                </div>
+                    <div className="row row-cols-sm-2 mb-4 ">
+                        <div className="col"><input type="submit" className="btn btn-success w-100" value='Create New Account'/></div>
+                        <div className="col"><button className="btn btn-danger w-100" onClick={handleReset} >Reset Form</button></div>
+                    </div>
 
-            </form>
+                </form>
+            </div>
 
             <div className="login container text-center my-5">
-                <Link to='/login'>Already Have An Account?</Link >
+                <Link to='/login' className='fs-5'>Already Have An Account?</Link >
             </div>
+
+
+            <Footer />
 
         </div>
     )
