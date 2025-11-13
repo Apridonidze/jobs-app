@@ -8,7 +8,7 @@ import CountryCode from "../components/CountryCode" //react components
 import SignMessage from '../alerts/SignMessage';
 import AuthNavBar from '../navbar/AuthNavBar';
 import Footer from '../components/Foooter';
-
+import Error from '../alerts/Error';
 
 const Sign = () => {
 
@@ -20,7 +20,7 @@ const Sign = () => {
     const [isSuccessful ,setIsSuccessful] = useState(false); //props for sign message component
     const [toggleSigMessage,setToggleSigMessage]= useState(false);
 
-    const [toggleError,setToggleError] = useState(false)
+    const [toggleError,setToggleError] = useState(false);
     
     const [showPassword, setShowPassword] = useState(false); //shows password when button clicked
     const [passwordType,setPasswordType] = useState('password');
@@ -120,11 +120,15 @@ const Sign = () => {
                     setSignMessage(res.data.message);
                     setCookies('token' , res.data.token , {path : '/' ,maxAge: 2592000});
                     setToggleSigMessage(true);
-
+                    setToggleError(false)
+                
                 })])
                 
             }catch(err){
+
                 console.log(err)
+                setToggleError(true) 
+
             }
         }
 
@@ -185,14 +189,15 @@ const Sign = () => {
 
     }
 
+    console.log(toggleError)
     return(
         <div className="sign-container container d-flex flex-column justify-content-between min-vh-100 align-items-center  gap-3">
             <AuthNavBar />
 
             {toggleSigMessage && <SignMessage setToggleSigMessage={setToggleSigMessage} isSuccessful={isSuccessful} signMessage={signMessage} setSeconds={setSeconds} seconds={seconds}/> }
-            {toggleError && <h1>asdasdas</h1>}
-
             
+            {!toggleError && <Error setToggleError={setToggleError} />}
+
             <div className="sign-header container d-flex flex-column gap-3 w-75 text-center">
                 
                 <h1>Create your account</h1>
