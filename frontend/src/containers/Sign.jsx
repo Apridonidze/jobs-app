@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import { useRef,useState  } from "react"; //
+import { useRef,useState  } from "react"; //react hooks and libraries
 
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom' //component for navigation
 
-import CountryCode from "../components/CountryCode"
+import CountryCode from "../components/CountryCode" //react components
 import SignMessage from '../alerts/SignMessage';
 import AuthNavBar from '../navbar/AuthNavBar';
 import Footer from '../components/Foooter';
@@ -12,60 +12,62 @@ import Footer from '../components/Foooter';
 
 const Sign = () => {
 
-    const [seconds, setSeconds] = useState(3) ; //seconds for 
-    const SIGN_PORT = 'http://localhost:8080/sign/create-account' //api url to create account
+    const [seconds, setSeconds] = useState(3) ; //seconds for sign message component
+    const SIGN_PORT = 'http://localhost:8080/sign/create-account'; //api url to create account
     
-    const [cookies, setCookies , removeCookies] = useCookies(['token'])
+    const [setCookies] = useCookies(['token']); //sets cookies after users validates forms
 
-    const [isSuccessful ,setIsSuccessful] = useState(false)
-    const [toggleSigMessage,setToggleSigMessage]= useState(false)
+    const [isSuccessful ,setIsSuccessful] = useState(false); //props for sign message component
+    const [toggleSigMessage,setToggleSigMessage]= useState(false);
+
+    const [toggleError,setToggleError] = useState(false)
     
-    const [showPassword, setShowPassword] = useState(false)
-    const [passwordType,setPasswordType] = useState('password')
+    const [showPassword, setShowPassword] = useState(false); //shows password when button clicked
+    const [passwordType,setPasswordType] = useState('password');
 
-    const [role,setRole] = useState('')
-    const [name,setName] = useState('')
-    const [surname,setSurname] = useState('')
-    const [password,setPassword] = useState('')
-    const [email,setEmail] = useState('')
-    const [countryCode,setCountryCode] = useState('')
-    const [phoneNumber,setPhoneNumber] = useState('')
-    const [birthDate, setBirthDate] = useState('')
-    const [gender,setGender] = useState('')
+    const [role,setRole] = useState(''); //states for inputs
+    const [name,setName] = useState('');
+    const [surname,setSurname] = useState('');
+    const [password,setPassword] = useState('');
+    const [email,setEmail] = useState('');
+    const [countryCode,setCountryCode] = useState('');
+    const [phoneNumber,setPhoneNumber] = useState('');
+    const [birthDate, setBirthDate] = useState('');
+    const [gender,setGender] = useState('');
 
-    const [roleErr, setRoleErr] = useState('')
-    const [nameErr, setNameErr] = useState('')
-    const [surnameErr, setSurnameErr] = useState('')
-    const [passwordErr, setPasswordErr] = useState('')
-    const [emailErr, setEmailErr] = useState('')
-    const [countryCodeErr, setCountryCodeErr] = useState('')
-    const [phoneErr, setPhoneErr] = useState('')
-    const [birthDateErr,setBirthDateErr] = useState('')
-    const [genderErr, setGenderErr] = useState('')
-    const [signMessage, setSignMessage] = useState('')
+    const [roleErr, setRoleErr] = useState(''); //states for input error
+    const [nameErr, setNameErr] = useState('');
+    const [surnameErr, setSurnameErr] = useState('');
+    const [passwordErr, setPasswordErr] = useState('');
+    const [emailErr, setEmailErr] = useState('');
+    const [countryCodeErr, setCountryCodeErr] = useState('');
+    const [phoneErr, setPhoneErr] = useState('');
+    const [birthDateErr,setBirthDateErr] = useState('');
+    const [genderErr, setGenderErr] = useState('');
+    const [signMessage, setSignMessage] = useState('');
 
-    const roleRef = useRef(null)
-    const nameRef = useRef(null)
-    const surnameRef = useRef(null)
-    const passwordRef = useRef(null)
-    const emailRef = useRef(null)
-    const countryCodeRef = useRef(null)
-    const phoneNumberRef = useRef(null)
-    const birthDateRef = useRef(null)
-    const genderRef = useRef(null)
+    const roleRef = useRef(null); //refs to style incorrect fields
+    const nameRef = useRef(null);
+    const surnameRef = useRef(null);
+    const passwordRef = useRef(null);
+    const emailRef = useRef(null);
+    const countryCodeRef = useRef(null);
+    const phoneNumberRef = useRef(null);
+    const birthDateRef = useRef(null);
+    const genderRef = useRef(null);
 
 
     const  SubmitSign = async (e) => {
 
-        e.preventDefault()
+        e.preventDefault();
 
-        let isValid
-        let data = {} 
+        let isValid;
+        let data = {} ;
 
-        const currentDate = new Date()
+        const currentDate = new Date();
         
-        const NumberRegex = /\d/
-        const regexContainsSpecial = /[^\w\s]/
+        const NumberRegex = /\d/;
+        const regexContainsSpecial = /[^\w\s]/;
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if(role === 'blank' || role === ''){isValid = false; setRoleErr(`This Field Can't Be Empty`); roleRef.current.classList.add('is-invalid');roleRef.current.classList.remove('is-valid') }
@@ -106,18 +108,18 @@ const Sign = () => {
         if(gender.trim() == '' || gender == null || gender.trim() == undefined){isValid = false ; genderRef.current.classList.add('border-danger') ; genderRef.current.classList.remove('border-success')}
         else { isValid = true ; genderRef.current.classList.add('border-success') ; genderRef.current.classList.remove('border-danger'); data = {...data, gender : gender}}
 
-        
-        
+    
 
         if(isValid) {
             try{
 
                 await Promise.all([
                 axios.post(SIGN_PORT , data ).then(res => {
-                setIsSuccessful(true)
-                setSignMessage(res.data.message)
-                setCookies('token' , res.data.token , {path : '/' ,maxAge: 2592000})
-                setToggleSigMessage(true)
+                    
+                    setIsSuccessful(true);
+                    setSignMessage(res.data.message);
+                    setCookies('token' , res.data.token , {path : '/' ,maxAge: 2592000});
+                    setToggleSigMessage(true);
 
                 })])
                 
@@ -188,7 +190,9 @@ const Sign = () => {
             <AuthNavBar />
 
             {toggleSigMessage && <SignMessage setToggleSigMessage={setToggleSigMessage} isSuccessful={isSuccessful} signMessage={signMessage} setSeconds={setSeconds} seconds={seconds}/> }
+            {toggleError && <h1>asdasdas</h1>}
 
+            
             <div className="sign-header container d-flex flex-column gap-3 w-75 text-center">
                 
                 <h1>Create your account</h1>
@@ -301,8 +305,8 @@ const Sign = () => {
 
                
                     <div className="d-flex flex-column flex-sm-row my-4 gap-2">
-                        <div className="col"><input type="submit" className="btn btn-success w-100" value='Create New Account'/></div>
-                        <div className="col"><button className="btn btn-danger w-100" onClick={handleReset} >Reset Form</button></div>
+                        <div className="col"><input type="submit" className="btn  btn-success w-100 fs-6" style={{height:'45px'}} value='Create New Account'/></div>
+                        <div className="col"><button className="btn btn-md btn-danger w-100 fs-6" style={{height : '45px'}} onClick={handleReset} >Reset Form</button></div>
                     </div>
 
                 </form>

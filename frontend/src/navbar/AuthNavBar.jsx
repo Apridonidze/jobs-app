@@ -12,7 +12,7 @@ const AuthNavBar = () => {
                 
             <div className="header-end d-flex gap-4">
                     
-                <Link to='/sign' className=" btn border rounded-2 py-2 px-4">Sign</Link>
+                <Link to='/sign' className="btn border rounded-2 py-2 px-4">Sign</Link>
                 <Link to='/login' className="btn border rounded-2 py-2 px-4">Login</Link>
                 
             </div>
