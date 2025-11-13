@@ -46,7 +46,7 @@ AcceptDeclineRouter.get('/:applicant_id/:job_id', verifyToken , async (req, res)
     const [ rows ]= await db.query('select * from AcceptedDeclined where applicant_id = ? and job_id = ?' , [applicant_id, job_id])
 
     if(rows.length < 1){
-        return res.status(200).json({message : 'You Have Not Responded To This Employee Yet', status : false})
+        return res.status(200).json({message : 'You Have Not Responded To This Employee Yet', status : null})
     }
 
     if(rows.status === 'true')return res.status(200).json({message : 'You Have Already Accepted This Employee', status : true})
