@@ -33,7 +33,7 @@ const CreateJobs = ( { setToggleSeeMore } ) => {
             console.log(err)
         }
 
-    },[])//make promise in try block 
+    },[])
 
 
     return(

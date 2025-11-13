@@ -26,7 +26,7 @@ const NewJobsMessage = ( { isJobsSuccessful ,jobsMessage ,setToggleJobsMessage, 
             if(seconds == 0){
                 if(isJobsSuccessful){setToggleCreateJobsInput(false), setToggleJobsMessage(false)}
 
-                else setToggleCreateJobsInput(true) ; setToggleJobsMessage(false);SubmitBtnRef.current.disabled = false
+                else setToggleCreateJobsInput(true) ; setToggleJobsMessage(false);SubmitBtnRef.current.disabled = false ; window.location.reload()
             }
             
             
