@@ -23,7 +23,13 @@ const JobHolder = ( { job , setToggleDelete } ) => {
 
         fetchApplicants()
     },[])
-    console.log(status)
+    
+//:jobId/:applicantId/:status
+
+    const sendStatus =  async(e) => {
+        await axios.post(`${ACCEPT_DECLINE_URL}/${job.job_id}/${e.userId}/${e.status}` , {} , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => console.log(resp))
+    }
+
     return(
         <div className="job-holder-container position-fixed bg-white" key={job.job_id}>
             <div className="job-info">
@@ -43,10 +49,8 @@ const JobHolder = ( { job , setToggleDelete } ) => {
                     <Link to={`/user-account/${user.applicant.user_id}`}>{`${user.applicant.user_name } ${user.applicant.user_surname}`}</Link>
                     <h4>user technologies: {user.technologies.length < 1 ? <span>No Technologies</span> : user.technologies[0].user_technologies.map(tech => tech)}</h4>
                     <h4>user role: {user.roles.length < 1 ? <span>No Technologies</span> : user.roles[0].user_roles.map(role => role)}</h4>
-                    
-                </>))}
 
-                {status ? <>
+                    {status ? <>
                         {status === false}{<>
                         <button>Accept</button>
                         <button>Declined</button></>}
@@ -55,8 +59,12 @@ const JobHolder = ( { job , setToggleDelete } ) => {
                         <button>Accepted</button>
                         <button>Decline</button></>}
                     </> 
-                    : <> <button>Accept</button> <button>Decline</button></>}
+                    : <> <button onClick={() => sendStatus({userId : user.applicant.user_id , status : true})}>Accept</button> <button onClick={() => sendStatus({userId : user.applicant.user_id, status : false})}>Decline</button></>}
                     
+                    
+                </>))}
+
+                
                     </div></>} 
             </div>
 

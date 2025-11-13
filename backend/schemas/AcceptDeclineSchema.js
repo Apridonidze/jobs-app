@@ -3,7 +3,7 @@ const z = require('zod')
 const AcceptDeclineSchema = z.object({
     applicant_id : z.number(),
     job_id : z.number(),
-    status : z.enum(['true','false'])
+    status : z.enum([true,false])
 })
 
 

@@ -54,9 +54,15 @@ AcceptDeclineRouter.get('/:applicant_id/:job_id', verifyToken , async (req, res)
 
 })
 
-AcceptDeclineRouter.post('/accept-decline-employee', rateLimiter , verifyToken , async(req,res) => {
+AcceptDeclineRouter.post('/accept-decline-employee/:jobId/:applicantId/:status', rateLimiter , verifyToken , async(req,res) => {
 
-    const AcceptDeclineResep = AcceptDeclineSchema(req.body)
+    
+    const data = {applicant_id : Number(req.params.applicantId),
+        job_id : Number(req.params.jobId),
+        status : Boolean(req.params.status)}
+
+
+    const AcceptDeclineResep = AcceptDeclineSchema(data)
 
         if(!AcceptDeclineResep.success){
             return res.status(400).json('Invalid Input')
@@ -65,7 +71,7 @@ AcceptDeclineRouter.post('/accept-decline-employee', rateLimiter , verifyToken ,
 
     try{
 
-        const [ rows ] = await db.query('select * from AcceptedDeclined where applicant_id = ? and job_id = ?' , [req.body.applicant_id , req.body.job_id])
+        const [ rows ] = await db.query('select * from AcceptedDeclined where applicant_id = ? and job_id = ?' , [req.params.applicantId, req.params.jobId])
         
 
         if(rows.length > 1){
@@ -74,7 +80,7 @@ AcceptDeclineRouter.post('/accept-decline-employee', rateLimiter , verifyToken ,
 
         }
 
-        await db.query('insert into AcceptedDeclined (job_id, applicant_id , status, recruiter_id) values (? , ? , ? , ?)' , [req.body.job_id, req.body.applicant_id , req.body.status , req.user.userId])
+        await db.query('insert into AcceptedDeclined (job_id, applicant_id , status, recruiter_id) values (? , ? , ? , ?)' , [req.params.jobId, req.params.applicantId, req.params.status, req.user.userId])
 
         if(req.body.status === 'false') return res.status(200).json({message : `You Have Successfully Declined Employee` , status : req.body.status})
         return res.status(200).json({message : `You Have Successfully Accepted Employee` , status : req.body.status})
