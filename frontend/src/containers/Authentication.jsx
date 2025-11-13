@@ -1,24 +1,12 @@
-import { Link } from "react-router-dom"; //component for navigation
-
-import Footer from '../components/Foooter'; //jsx component 
+import Footer from '../components/Foooter'; 
+import AuthNavBar from "../navbar/AuthNavBar"; //importing jsx components
 
 
 const Authentication = () => {
     return (
         <div className="authentication-container container text-center d-flex flex-column justify-content-between min-vh-100 gap-5">
             
-            <div className="authentication-header container-fluid d-flex align-items-center py-4 border-bottom justify-content-between ">
-                <div className="header-start">
-                    <Link to='/' className="alert-link fs-4">JOBS APP</Link>
-                </div>
-                
-                <div className="header-end d-flex gap-4">
-                    
-                    <Link to='/sign' className=" btn border rounded-2 py-2 px-4">Sign</Link>
-                    <Link to='/login' className="btn border rounded-2 py-2 px-4">Login</Link>
-                
-                </div>
-            </div>
+            <AuthNavBar />
             
             <div className="authentication-body d-flex flex-column gap-5 pt-5">
                 <h1>Jobs App</h1>
