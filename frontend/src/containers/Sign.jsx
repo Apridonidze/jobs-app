@@ -19,8 +19,8 @@ const Sign = () => {
 
     const [isSuccessful ,setIsSuccessful] = useState(false); //props for sign message component
     const [toggleSigMessage,setToggleSigMessage]= useState(false);
+    const [toggleError,setToggleError] = useState(false);//state to toggle Error.jsx component
 
-    const [toggleError,setToggleError] = useState(false);
     
     const [showPassword, setShowPassword] = useState(false); //shows password when button clicked
     const [passwordType,setPasswordType] = useState('password');
@@ -57,18 +57,18 @@ const Sign = () => {
     const genderRef = useRef(null);
 
 
-    const  SubmitSign = async (e) => {
+    const  SubmitSign = async (e) => {//function trigger when crete new account button is clicked
 
-        e.preventDefault();
+        e.preventDefault(); //prevent page reload when function mounts
 
-        let isValid;
-        let data = {} ;
+        let isValid; //checks if every input is valid
+        let data = {} ; //data that will be sent do database
 
-        const currentDate = new Date();
+        const currentDate = new Date();//gets current date to trach when user's joined
         
-        const NumberRegex = /\d/;
+        const NumberRegex = /\d/;//regex for inputs
         const regexContainsSpecial = /[^\w\s]/;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
 
         if(role === 'blank' || role === ''){isValid = false; setRoleErr(`This Field Can't Be Empty`); roleRef.current.classList.add('is-invalid');roleRef.current.classList.remove('is-valid') }
         else{isValid = true; setRoleErr(``); roleRef.current.classList.add('is-valid');roleRef.current.classList.remove('is-invalid'); data = {...data, role: role} }
@@ -110,7 +110,7 @@ const Sign = () => {
 
     
 
-        if(isValid) {
+        if(isValid) { //checks if all of the inputs are correct and then executes try/catch block
             try{
 
                 await Promise.all([
@@ -120,83 +120,81 @@ const Sign = () => {
                     setSignMessage(res.data.message);
                     setCookies('token' , res.data.token , {path : '/' ,maxAge: 2592000});
                     setToggleSigMessage(true);
-                    setToggleError(false)
+                    setToggleError(false);
                 
-                })])
+                })]);
                 
             }catch(err){
 
-                console.log(err)
-                setToggleError(true) 
+                console.log(err);
+                setToggleError(true) ;
 
-            }
-        }
+            };
+        };
 
 
-    }
+    };
 
-    const handleReset = () => {
+    const handleReset = () => {//function triggers when reset button is clicked
 
-    setRole('')
-    setName('')
-    setSurname('')
-    setPassword('')
-    setEmail('')
-    setCountryCode('')
-    setPhoneNumber('')
-    setBirthDate('')
-    setGender('')
-    setResumeFile('')
+    setRole('');
+    setName('');
+    setSurname('');
+    setPassword('');
+    setEmail('');
+    setCountryCode('');
+    setPhoneNumber('');
+    setBirthDate('');
+    setGender('');//clears inputs
 
-    setRoleErr('')
-    setNameErr('')
+    setRoleErr('');
+    setNameErr('');
     setSurnameErr('')
-    setPasswordErr('')
-    setEmailErr('')
-    setCountryCodeErr('')
-    setPhoneErr('')
-    setBirthDateErr('')
-    setGenderErr('')
-    setResumeErr('')
-    setResumeInfo('')
+    setPasswordErr('');
+    setEmailErr('');
+    setCountryCodeErr('');
+    setPhoneErr('');
+    setBirthDateErr('');
+    setGenderErr('');
+    setResumeErr('');
+    setResumeInfo('');//clears input errors
 
-    roleRef.current.classList.remove('is-invalid')
-    roleRef.current.classList.remove('is-valid')
+    roleRef.current.classList.remove('is-invalid');
+    roleRef.current.classList.remove('is-valid');
     
-    nameRef.current.classList.remove('is-invalid')
-    nameRef.current.classList.remove('is-valid')
+    nameRef.current.classList.remove('is-invalid');
+    nameRef.current.classList.remove('is-valid');
     
-    surnameRef.current.classList.remove('is-invalid')
-    surnameRef.current.classList.remove('is-valid')
+    surnameRef.current.classList.remove('is-invalid');
+    surnameRef.current.classList.remove('is-valid');
     
-    passwordRef.current.classList.remove('is-invalid')
-    passwordRef.current.classList.remove('is-valid')
+    passwordRef.current.classList.remove('is-invalid');
+    passwordRef.current.classList.remove('is-valid');
     
-    emailRef.current.classList.remove('is-invalid')
-    emailRef.current.classList.remove('is-valid')
+    emailRef.current.classList.remove('is-invalid');
+    emailRef.current.classList.remove('is-valid');
     
-    countryCodeRef.current.classList.remove('is-invalid')
-    countryCodeRef.current.classList.remove('is-valid')
+    countryCodeRef.current.classList.remove('is-invalid');
+    countryCodeRef.current.classList.remove('is-valid');
     
-    phoneNumberRef.current.classList.remove('is-invalid')
-    phoneNumberRef.current.classList.remove('is-valid')
+    phoneNumberRef.current.classList.remove('is-invalid');
+    phoneNumberRef.current.classList.remove('is-valid');
     
-    birthDateRef.current.classList.remove('is-invalid')
-    birthDateRef.current.classList.remove('is-valid')
+    birthDateRef.current.classList.remove('is-invalid');
+    birthDateRef.current.classList.remove('is-valid');
     
-    genderRef.current.classList.remove('is-invalid')
-    genderRef.current.classList.remove('is-valid')
+    genderRef.current.classList.remove('is-invalid');
+    genderRef.current.classList.remove('is-valid');//clears input forms styling
 
-    }
+    };
 
-    console.log(toggleError)
     return(
         <div className="sign-container container d-flex flex-column justify-content-between min-vh-100 align-items-center  gap-3">
             <AuthNavBar />
 
             {toggleSigMessage && <SignMessage setToggleSigMessage={setToggleSigMessage} isSuccessful={isSuccessful} signMessage={signMessage} setSeconds={setSeconds} seconds={seconds}/> }
             
-            {!toggleError && <Error setToggleError={setToggleError} />}
+            {toggleError && <Error setToggleError={setToggleError} />}
 
             <div className="sign-header container d-flex flex-column gap-3 w-75 text-center">
                 

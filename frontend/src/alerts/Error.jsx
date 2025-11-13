@@ -10,7 +10,7 @@ const Error = ( { setToggleError } ) => {
                         
                 setSeconds(seconds => {
                             
-                    if(seconds < 1){clearInterval(handleTimer) ;setToggleError(true) ;return 0}
+                    if(seconds < 1){clearInterval(handleTimer) ;setToggleError(false) ;return 0}
                     return seconds - 1
     
                 }) 
@@ -28,7 +28,7 @@ const Error = ( { setToggleError } ) => {
         <div className="error-message-container position-fixed bg-white border rounded-2 top-50 end-0 p-2">
             <h4>Internal Error!</h4>
             <h5>Try Later.</h5>
-            <h6>Closes In {seconds} second</h6>
+            <h6>Window Closes In {seconds} Second</h6>
         </div>
     )
 };
