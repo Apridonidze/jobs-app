@@ -57,8 +57,8 @@ const Login = () => {
                 
                 await Promise.all([
                     axios
-            .post(LOGIN_API_URL, data)
-            .then(resp => {
+                        .post(LOGIN_API_URL, data)
+                        .then(resp => {
 
                 console.log(resp.data) //remove in future
                 setCookies('token', resp.data.token, { path: '/',maxAge : 60 * 60 * 24 * 30,secure : true,sameSite : 'strict'})
@@ -95,32 +95,37 @@ const Login = () => {
 
     return(
         <div className="login-container container">
-            Login.jsx
-            {toggleLoginMessage && <LoginMessage loginMessage={loginMessage} isSuccesful={isSuccesful} setToggleLoginMessage={setToggleLoginMessage} />}
             
+            {toggleLoginMessage && <LoginMessage loginMessage={loginMessage} isSuccesful={isSuccesful} setToggleLoginMessage={setToggleLoginMessage} />}
+
+            <div className="login-header">
+                <h1>Welcome Back!</h1>
+                <h4>Log in to your account and continue where you left off.</h4>
+            </div>
+
             <form onSubmit={handleLogin}>
 
-                <div className="form-floating">
+                <div className="form-floating w-50 pb-4">
                     <input className="form-control" type="email" name="email" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Enter Your Login Email" ref={emailRef}/>
                     <label htmlFor="email">Enter Your Login Email</label>
-                    <span>{emailError}</span>
+                    <span className="text-danger">{emailError}</span>
                 </div>
 
-                <div className="form">
+                <div className="form w-50">
 
-                    <div className="input-group form-floating">
+                    <div className="input-group form-floating pb-4">
                         
                         <input className="form-control" type={passwordType} name="password" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Enter Your Password" ref={passwordRef}/>
-                        <button type="button" onClick={() => {setShowPassword(!showPassword); setPasswordType(passwordType => {if(showPassword == false){return 'text'} else return 'password'})}}>{showPassword ? <i class="fa-regular fa-eye-slash"></i> : <i class="fa-regular fa-eye"></i>}</button>
                         <label htmlFor="password">Enter Your Password</label>
+                        <button type="button" className="input-group-text" onClick={() => {setShowPassword(!showPassword); setPasswordType(passwordType => {if(showPassword == false){return 'text'} else return 'password'})}}>{showPassword ? <i class="fa-regular fa-eye-slash"></i> : <i class="fa-regular fa-eye"></i>}</button>
                     
                     </div>
 
-                    <span>{passwordError}</span>
+                    <span className="text-danger">{passwordError}</span>
 
                 </div>
 
-                <input type="submit" className="btn btn-success" value="Login" />
+                <input type="submit" className="btn btn-md w-50 btn-success " value="Login" />
 
             </form>
 
