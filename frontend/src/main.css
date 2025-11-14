@@ -19,3 +19,26 @@
         align-items: center;
     }
 }
+
+
+.error-message-container{
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    width: 25%;
+    display: block;
+    align-items: center;
+}
+
+@media (max-width : 576px){
+    .error-message-container{
+        position: absolute;
+        top: 20px;
+        width: 90%;
+        left: 0px;
+        right: 0px;
+        margin: 0px 20px;
+        display: block;
+        align-items: center;
+    }
+}
