@@ -10,18 +10,17 @@ const Error = ( { setToggleError } ) => {
                         
                 setSeconds(seconds => {
                             
-                    if(seconds < 1){clearInterval(handleTimer) ;setToggleError(false) ;return 0}
-                    return seconds - 1
+                    if(seconds < 1){clearInterval(handleTimer) ;setToggleError(false) ;return 0};
+                    return seconds - 1;
     
-                }) 
-
+                }); //seconds go down from 3 to zero and if seconds === 0 then it untoggles Error component
             
             }, 1000);
                     
             
-                return () =>  {clearInterval(handleTimer)}
+            return () =>  {clearInterval(handleTimer)}; //cleanup function
                 
-        },[seconds])
+        },[seconds]);//interval triggers on seconds change
 
 
     return(
@@ -30,8 +29,8 @@ const Error = ( { setToggleError } ) => {
             <h5>Try Later.</h5>
             <h6>Window Closes In <b>{seconds}</b> Seconds.</h6>
         </div>
-    )
+    );
 };
 
 
-export default Error
+export default Error; //exporting component
