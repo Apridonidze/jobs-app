@@ -4,6 +4,8 @@ import {  Link  } from "react-router-dom"
 import { useCookies } from "react-cookie"
 
 import LoginMessage from "../alerts/LoginMessage"
+import AuthNavBar from "../navbar/AuthNavBar"
+import Footer from "../components/Foooter"
 
 const Login = () => {
 
@@ -94,43 +96,52 @@ const Login = () => {
 
 
     return(
-        <div className="login-container container">
+        <div className="login-container container d-flex flex-column justify-content-between min-vh-100 gap-5">
             
             {toggleLoginMessage && <LoginMessage loginMessage={loginMessage} isSuccesful={isSuccesful} setToggleLoginMessage={setToggleLoginMessage} />}
 
-            <div className="login-header">
+            <AuthNavBar />
+
+            <div className="login-header text-center d-flex flex-column gap-3">
                 <h1>Welcome Back!</h1>
                 <h4>Log in to your account and continue where you left off.</h4>
             </div>
 
-            <form onSubmit={handleLogin}>
+            <div className="login-body d-flex flex-column justify-content-center align-items-center gap-4 ">
 
-                <div className="form-floating w-50 pb-4">
-                    <input className="form-control" type="email" name="email" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Enter Your Login Email" ref={emailRef}/>
-                    <label htmlFor="email">Enter Your Login Email</label>
-                    <span className="text-danger">{emailError}</span>
-                </div>
+                <form onSubmit={handleLogin} className="d-flex flex-column col-12 col-md-6 ">
 
-                <div className="form w-50">
-
-                    <div className="input-group form-floating pb-4">
-                        
-                        <input className="form-control" type={passwordType} name="password" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Enter Your Password" ref={passwordRef}/>
-                        <label htmlFor="password">Enter Your Password</label>
-                        <button type="button" className="input-group-text" onClick={() => {setShowPassword(!showPassword); setPasswordType(passwordType => {if(showPassword == false){return 'text'} else return 'password'})}}>{showPassword ? <i class="fa-regular fa-eye-slash"></i> : <i class="fa-regular fa-eye"></i>}</button>
-                    
+                    <div className="form-floating pb-4 ">
+                        <input className="form-control form-control-lg" type="email" name="email" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="Enter Your Login Email" ref={emailRef}/>
+                        <label htmlFor="email">Enter Your Login Email</label>
+                        <span className="text-danger">{emailError}</span>
                     </div>
 
-                    <span className="text-danger">{passwordError}</span>
+                    <div className="form-floating pb-4">
 
-                </div>
+                        <div className="input-group form-floating pb-4">
+                            
+                            <input className="form-control form-control-lg" type={passwordType} name="password" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Enter Your Password" ref={passwordRef}/>
+                            <label htmlFor="password">Enter Your Password</label>
+                            <button type="button" className="input-group-text" onClick={() => {setShowPassword(!showPassword); setPasswordType(passwordType => {if(showPassword == false){return 'text'} else return 'password'})}}>{showPassword ? <i class="fa-regular fa-eye-slash"></i> : <i class="fa-regular fa-eye"></i>}</button>
+                        
+                        </div>
 
-                <input type="submit" className="btn btn-md w-50 btn-success " value="Login" />
+                        <span className="text-danger">{passwordError}</span>
 
-            </form>
+                    </div>
+
+                    <input type="submit" className="btn btn-lg w-100 btn-success " value="Login" />
+
+                </form>
 
 
-            <Link to='/sign'>Don't Have An Account?</Link>
+                <Link to='/sign'>Don't Have An Account?</Link>
+
+            </div>
+
+
+            <Footer />
 
         </div>
     )
