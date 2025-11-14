@@ -84,7 +84,7 @@ const Login = () => {
     return(
         <div className="login-container container d-flex flex-column justify-content-between min-vh-100 gap-5">
             
-            {toggleLoginMessage && <LoginMessage loginMessage={loginMessage} isSuccesful={isSuccesful} setToggleLoginMessage={setToggleLoginMessage} />}
+            {!toggleLoginMessage && <LoginMessage loginMessage={loginMessage} isSuccesful={isSuccesful} setToggleLoginMessage={setToggleLoginMessage} />}
 
             <AuthNavBar />
 
