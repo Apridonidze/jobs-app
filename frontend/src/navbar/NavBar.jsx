@@ -1,5 +1,5 @@
-import NavBarFooter from "../navbar/NavBarFooter"
-import NavBarHeader from "../navbar/NavBarHeader"
+import NavBarFooter from "../navbar/NavBarFooter";
+import NavBarHeader from "../navbar/NavBarHeader";//importing react component
 
 const NavBar = ({ setTogglePosts , setFindJobs ,setCreateJobs, toggleJobsListings, setToggleJobsListings, user , setToggleSaved, setToggleApplied, setTogglePending }) => {
 
@@ -9,8 +9,8 @@ const NavBar = ({ setTogglePosts , setFindJobs ,setCreateJobs, toggleJobsListing
         </div>
 
       
-    )
-}
+    );
+};//toggles components when user is fetched and not null 
 
 
-export default NavBar
+export default NavBar;//exporting component
