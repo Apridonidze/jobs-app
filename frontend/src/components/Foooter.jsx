@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";//importing react library for navigation
 
 const Footer = () => {
 
@@ -49,4 +49,4 @@ const Footer = () => {
     );
 };
 
-export default Footer;
+export default Footer;//exporting component
