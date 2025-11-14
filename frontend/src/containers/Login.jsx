@@ -1,59 +1,59 @@
-import axios from "axios"
-import { useEffect, useRef, useState } from "react"
-import {  Link  } from "react-router-dom"
-import { useCookies } from "react-cookie"
+import axios from "axios";
+import { useEffect, useRef, useState } from "react";
+import {  Link  } from "react-router-dom";
+import { useCookies } from "react-cookie"; //importing react libraries
 
-import LoginMessage from "../alerts/LoginMessage"
-import AuthNavBar from "../navbar/AuthNavBar"
-import Footer from "../components/Foooter"
+import LoginMessage from "../alerts/LoginMessage";
+import AuthNavBar from "../navbar/AuthNavBar";
+import Footer from "../components/Foooter"; //importing react compoinents
 
 const Login = () => {
 
-    const LOGIN_API_URL = 'http://localhost:8080/login' //move to .env file
-    const [cookies, setCookies,removeCookies] = useCookies(['token'])
+    const LOGIN_API_URL = 'http://localhost:8080/login';//api url for login
+    const [cookies , setCookies] = useCookies(['token']);//user cookies
     
 
-    const [toggleLoginMessage , setToggleLoginMessage] = useState(false)
-    const [isSuccesful, setIsSuccesfull] = useState(null)
-    const [loginMessage, setLoginMessage] = useState('')
+    const [toggleLoginMessage , setToggleLoginMessage] = useState(false);
+    const [isSuccesful, setIsSuccesfull] = useState(null);
+    const [loginMessage, setLoginMessage] = useState(''); //states to toggle LoginMessage component
 
-    const [email,setEmail] = useState('')
-    const [password,setPassword] = useState('')
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');//state for inputs
     
-    const emailRef = useRef(null)
-    const passwordRef = useRef(null)
+    const emailRef = useRef(null);
+    const passwordRef = useRef(null);//refs for input styling
 
-    const [emailError,setEmailError] = useState('')
-    const [passwordError,setPasswordError] = useState('')
+    const [emailError,setEmailError] = useState('');
+    const [passwordError,setPasswordError] = useState('');//input error text
 
-    const [showPassword,setShowPassword] = useState(false)
-    const [passwordType,setPasswordType] = useState('password')
+    const [showPassword,setShowPassword] = useState(false);
+    const [passwordType,setPasswordType] = useState('password');//toggles visibility of password
 
 
-      const handleLogin = async (e) => {
+    const handleLogin = async (e) => {//triggers on Login button click
     
-        e.preventDefault()
+        e.preventDefault();//prevents refresh on function mount
 
-        let data = {}
-        let isValid
+        let data = {};
+        let isValid;//variables for inputs
         
-        const NumberRegex = /\d/
-        const regexContainsSpecial = /[^\w\s]/
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const NumberRegex = /\d/;
+        const regexContainsSpecial = /[^\w\s]/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; //regex for inputs
 
 
         if(email.trim() == '' || email.trim() == undefined || email.trim() == null){isValid = false; setEmailError(`This Field Can't Be Empty`) ; emailRef.current.classList.add('is-invalid'); emailRef.current.classList.remove('is-valid')}
         else if(emailRegex.test(email) === false){isValid = false ; emailRef.current.classList.add('is-invalid') ; emailRef.current.classList.remove('is-valid'); setEmailError('Insert Valid Email!')}
-        else {isValid = true ; setEmailError(''); data = {...data, email : email}}
+        else {isValid = true ; setEmailError(''); data = {...data, email : email}} //validates email and sets email in data variable if valid
 
 
         if(password.trim() == '' || password.trim() == null || password.trim() == undefined){isValid = false; setPasswordError(`This Field Can't Be Empty`) ; passwordRef.current.classList.add('is-invalid'); passwordRef.current.classList.remove('is-valid')}
         else if (password.trim().length <= 8 ){isValid == false ; setPasswordError('Invalid Password Input'); passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
         else if (NumberRegex.test(password) === false ) {isValid = false ; setPasswordError('Invalid Password Input');passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
         else if (regexContainsSpecial.test(password) === false ){isValid = false; setPasswordError('Invalid Password Input');passwordRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid')}
-        else {isValid = true; setPasswordError('') ; data = {...data, password : password}}
+        else {isValid = true; setPasswordError('') ; data = {...data, password : password}}//validates password and sets password in data variable if valid
 
-        if(isValid){
+        if(isValid){//mounts when all inputs are valid
             
             try{
                 
@@ -61,38 +61,30 @@ const Login = () => {
                     axios
                         .post(LOGIN_API_URL, data)
                         .then(resp => { 
-                setCookies('token', resp.data.token, { path: '/',maxAge : 60 * 60 * 24 * 30,secure : true,sameSite : 'strict'})
-                setLoginMessage(resp.data.message)
-                setIsSuccesfull(true)
-                setToggleLoginMessage(true)
-            })
-                ])
+                            setCookies('token', resp.data.token, { path: '/',maxAge : 60 * 60 * 24 * 30,secure : true,sameSite : 'strict'});//sets cookies with 30d duration
+                            setLoginMessage(resp.data.message); //sets login message
+                            setIsSuccesfull(true);
+                            setToggleLoginMessage(true);//toggles LoginMessage component
+                        })
+                ]);
             
             }catch(err){
 
-                setLoginMessage(err.response.data.error)
-                setIsSuccesfull(false)
-                setToggleLoginMessage(true)
+                setLoginMessage(err.response.data.error); //sets internal error as login message
+                setIsSuccesfull(false);//passes response to login
+                setToggleLoginMessage(true);//toggles LoginMessge component
 
-               
-            }
-        }
+            };
 
-  
+        };
+    };
 
-    }
-
-
-    
-    useEffect(() => {handleLogin},[])
-
-  
-
+    useEffect(() => {handleLogin},[]); //cleanup 
 
     return(
         <div className="login-container container d-flex flex-column justify-content-between min-vh-100 gap-5">
             
-            {!toggleLoginMessage && <LoginMessage loginMessage={loginMessage} isSuccesful={isSuccesful} setToggleLoginMessage={setToggleLoginMessage} />}
+            {toggleLoginMessage && <LoginMessage loginMessage={loginMessage} isSuccesful={isSuccesful} setToggleLoginMessage={setToggleLoginMessage} />}
 
             <AuthNavBar />
 
@@ -138,9 +130,9 @@ const Login = () => {
             <Footer />
 
         </div>
-    )
-}
+    );
+};
 
+document.title = 'Jobs App - Login'; //sets title for page
 
-//add titles to this page
-export default Login
+export default Login; //exporting component

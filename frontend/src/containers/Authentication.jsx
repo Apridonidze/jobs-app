@@ -15,9 +15,9 @@ const Authentication = () => {
 
             <Footer />
         </div>
-    )
-}
+    );
+};
 
-document.title = 'JOBS-APP'; //adds title to page 
+document.title = 'Jobs App'; //adds title to page 
 
 export default Authentication; //exporting component

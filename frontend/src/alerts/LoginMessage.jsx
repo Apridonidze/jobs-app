@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import '../main.css'
+import '../main.css';
+
 const LoginMessage = ( { loginMessage , isSuccesful , setToggleLoginMessage } ) => {
     
     const navigator = useNavigate()

@@ -11,10 +11,11 @@
     .login-message-container{
         position: absolute;
         top: 20px;
-        width: 95%;
+        width: 90%;
+        left: 0px;
+        right: 0px;
+        margin: 0px 20px;
         display: block;
         align-items: center;
     }
 }
-
-
