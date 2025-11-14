@@ -6,7 +6,7 @@ const NavBarHeader = ( { user } ) => {
             
             <div className="header-start">
 
-                <Link to='/authentication' className="alert-link fs-4">JOBS APP</Link>
+                <Link to='/' className="alert-link fs-4">JOBS APP</Link>
 
             </div>
 
