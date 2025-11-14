@@ -1,0 +1,20 @@
+.login-message-container{
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    width: 25%;
+    display: block;
+    align-items: center;
+}
+
+@media (max-width : 576px){
+    .login-message-container{
+        position: absolute;
+        top: 20px;
+        width: 95%;
+        display: block;
+        align-items: center;
+    }
+}
+
+

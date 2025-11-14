@@ -60,9 +60,7 @@ const Login = () => {
                 await Promise.all([
                     axios
                         .post(LOGIN_API_URL, data)
-                        .then(resp => {
-
-                console.log(resp.data) //remove in future
+                        .then(resp => { 
                 setCookies('token', resp.data.token, { path: '/',maxAge : 60 * 60 * 24 * 30,secure : true,sameSite : 'strict'})
                 setLoginMessage(resp.data.message)
                 setIsSuccesfull(true)
@@ -72,15 +70,11 @@ const Login = () => {
             
             }catch(err){
 
-              
-                console.log(err.response.data) //remove in future
                 setLoginMessage(err.response.data.error)
                 setIsSuccesfull(false)
                 setToggleLoginMessage(true)
 
-                if(loginMessage === 'Invalid Password'){passwordRef.current.classList.remove('is-valid'); passwordRef.current.classList.add('is-invalid')}
-                if(loginMessage === 'User Not Found'){emailRef.current.classList.remove('is-valid'); emailRef.current.classList.add('is-invalid');passwordRef.current.classList.remove('is-valid'); passwordRef.current.classList.add('is-invalid')}
-                
+               
             }
         }
 
@@ -98,7 +92,7 @@ const Login = () => {
     return(
         <div className="login-container container d-flex flex-column justify-content-between min-vh-100 gap-5">
             
-            {toggleLoginMessage && <LoginMessage loginMessage={loginMessage} isSuccesful={isSuccesful} setToggleLoginMessage={setToggleLoginMessage} />}
+            {!toggleLoginMessage && <LoginMessage loginMessage={loginMessage} isSuccesful={isSuccesful} setToggleLoginMessage={setToggleLoginMessage} />}
 
             <AuthNavBar />
 
