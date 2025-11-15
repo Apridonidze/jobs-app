@@ -1,9 +1,6 @@
-import JobHolder from './JobHolder'
-
+import JobHolder from './JobHolder'; //importing react component
 
 const Saved = ( { user , jobs, savedJobs, appliedJobs } ) => {
-
-    
 
     return (
         <div className="saved-container">
@@ -13,8 +10,8 @@ const Saved = ( { user , jobs, savedJobs, appliedJobs } ) => {
                 <JobHolder job={job} user={user} savedJobs={savedJobs} appliedJobs={appliedJobs}/>
             ) : <h1>No Jobs Applied Yet</h1>}
         </div>
-    )
-}
+    );
+}; //component checks if jobs are fetched from server and then displayes saved jobs if employee has any else it returns no jobs applied
 
 
-export default Saved
+export default Saved; //exporting component
