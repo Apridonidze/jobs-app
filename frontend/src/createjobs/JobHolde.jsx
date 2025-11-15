@@ -1,15 +1,18 @@
-import { useCookies } from "react-cookie"
-import { Link } from "react-router-dom"
-import { useState, useEffect } from "react"
-import axios from "axios"
-import Delete from './Delete'
+import axios from "axios";
+import { useCookies } from "react-cookie";
+import { Link } from "react-router-dom"; //importing react libraries
+
+import { useState, useEffect } from "react"; //importing react hooks
+
+
 const JobHolder = ( { job , setToggleDelete } ) => {
 
-    const [cookies] = useCookies(['token'])
-    const [applicants,setApplicants] = useState(null)
-    const [status, setStatus] = useState(null)
-    const APPLICANT_URL = 'http://localhost:8080/accept-decline/my-applicants'
-    const ACCEPT_DECLINE_URL = 'http://localhost:8080/accept-decline/accept-decline-employee'
+    const [cookies] = useCookies(['token']);//cookies
+    const [applicants,setApplicants] = useState(null); //state for applicant lists
+    const [status, setStatus] = useState(null); //state for applicants job statis(accepted || declined)
+
+    const APPLICANT_URL = 'http://localhost:8080/accept-decline/my-applicants'; //api url to fetech applicant list
+    const ACCEPT_DECLINE_URL = 'http://localhost:8080/accept-decline/accept-decline-employee'; //api url to fetch applicants status
 
     useEffect(() => {
         const fetchApplicants = async() => {
@@ -22,7 +25,6 @@ const JobHolder = ( { job , setToggleDelete } ) => {
         fetchApplicants()
     },[])
     
-//:jobId/:applicantId/:status
 
     const sendStatus =  async(e) => {
         await axios.post(`${ACCEPT_DECLINE_URL}/${job.job_id}/${e.userId}/${e.status}` , {} , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => { console.log(resp);if(e.status === true )setStatus(true); else setStatus(false)})
@@ -30,37 +32,52 @@ const JobHolder = ( { job , setToggleDelete } ) => {
 
     
     return(
-        <div className="job-holder-container position-fixed bg-white w-75 mx-5" key={job.job_id}>
-            <div className="job-info">
+        <div className="job-holder-container container py-2 px-3 position-fixed bg-white  d-flex flex-column gap-3 rounded-2 overflow-y-auto d-flex flex-column "  key={job.job_id}>
+            <div className="job-info ">
                     
-                <h1>{job.job_title}</h1>
-                <h2>{job.job_desc}</h2>
-                <h3>{job.job_employeeList}</h3>
-                <h3>{job.job_technologies}</h3>
-                <h3>{job.job_languages}</h3>
+                <h1 className="text-break">{job.job_title}</h1>
+                <h2 className="text-break">{job.job_desc}</h2>
+                <h3 className="text-break">Employee Roles :{job.job_employeeList}</h3>
+                <h3 className="text-break">Employee Technologies :{job.job_technologies}</h3>
+                <h3 className="text-break">Employee Speaking Language : {job.job_languages}</h3>
 
             </div>
 
-            <div className="job-applicants" >
-                {!applicants ? <h1>Loading...</h1> : applicants.length < 1 ? <h1>No Applicants Yet.</h1> : <><h3>Applicants For This Job : </h3> <div className="applicants-container d d-flex flex-column overflow-auto" style={{maxHeight: '400px'}}>
-                    
-                    {applicants.map(user => (<>
-                    <Link to={`/user-account/${user.applicant.user_id}`}>{`${user.applicant.user_name } ${user.applicant.user_surname}`}</Link>
-                    <h4>user technologies: {user.technologies.length < 1 ? <span>No Technologies</span> : user.technologies[0].user_technologies.map(tech => tech)}</h4>
-                    <h4>user role: {user.roles.length < 1 ? <span>No Roles</span> : user.roles[0].user_roles.map(role => role)}</h4>
-                    
-                    <h4>status : {user.status.length > 0 ? user.status[0].status == 'true' ? <><button className="btn btn-success">Accepted</button><button className="btn btn-danger opacity-50">Decline</button></>  : <><button className="btn btn-success opacity-50">Accept</button><button className="btn btn-danger">Declined</button></>: <><><button className="btn btn-success" onClick={() => sendStatus({userId : user.applicant.user_id , status : true})}>Accept</button><button className="btn btn-danger"  onClick={() => sendStatus({userId : user.applicant.user_id , status : false})}>Decline</button></></>}</h4>
-
-                </>))}
-
+            <div className="job-applicants " style={{height : '25vh'}} >
+                {!applicants ? <h1>Loading...</h1> : applicants.length < 1 ? <h1>No Applicants Yet.</h1> : 
                 
+                <><h3 className="">Applicants For This Job : </h3> <div className="applicants-container row row-cols-1 row-cols-sm-2 overflow-y-auto g-3 mt-1" style={{maxHeight: '300px'}} >
+                    
+                    {applicants.map(user => (
+                        <div className="applicant-container w-50 border col rounded-2 ">
+
+                            
+                            <Link className="fs-5" to={`/user-account/${user.applicant.user_id}`}>{`${user.applicant.user_name } ${user.applicant.user_surname}`}</Link>
+                            <h4>user technologies: {user.technologies.length < 1 ? <span>No Technologies</span> : user.technologies[0].user_technologies.map(tech => tech)}</h4>
+                            <h4>user role: {user.roles.length < 1 ? <span>No Roles</span> : user.roles[0].user_roles.map(role => role)}</h4>
+                            
+                            
+                            <div className="applicant-status row">
+                                <h4>status : {user.status.length > 0 ? user.status[0].status == 'true' ? 
+                            
+                                <div><button className="btn btn-success">Accepted</button><button className="btn btn-danger opacity-50">Decline</button></div>  
+                                
+                                : <div><button className="btn btn-success opacity-50">Accept</button><button className="btn btn-danger">Declined</button></div>
+                                
+                                : <><><button className="btn btn-success" onClick={() => sendStatus({userId : user.applicant.user_id , status : true})}>Accept</button><button className="btn btn-danger"  onClick={() => sendStatus({userId : user.applicant.user_id , status : false})}>Decline</button></></>}</h4>
+
+                            </div>
+                        </div>
+                    ))}
+                    
+
                     </div></>} 
-            </div>
 
-            <div className="job-buttons">
-                <button onClick={() => setToggleDelete({status: true, job_id : job.job_id})}>Delete Job Offer</button>
-            </div>
+                    <div className="job-buttons " style={{height: '60px'}} >
+                        <button className="btn btn-danger w-100 my-4" onClick={() => setToggleDelete({status: true, job_id : job.job_id})}>Delete Job Offer</button>
+                    </div>
 
+            </div>
 
         </div>
     )

@@ -71,3 +71,24 @@
         left: 20vw;
     }
 }
+
+
+.job-holder-container{
+    top: 5vh;
+    left: 20vh;
+    width: 70vw;
+}
+
+.applicants-container {
+    overflow-x: hidden;
+}
+
+@media (max-width : 576px){
+    .job-holder-container{
+        position: fixed;  
+        width: 100vw;      
+        top: 0;
+        left: 0;
+        margin-top: 15vw;
+    }
+}
