@@ -1,5 +1,5 @@
 .login-message-container{
-    position: absolute;
+    position: fixed;
     top: 50%;
     right: 0%;
     width: 25%;
@@ -9,7 +9,7 @@
 
 @media (max-width : 576px){
     .login-message-container{
-        position: absolute;
+        position: fixed;
         top: 20px;
         width: 90%;
         left: 0px;
@@ -22,7 +22,7 @@
 
 
 .error-message-container{
-    position: absolute;
+    position: fixed;
     top: 50%;
     right: 0%;
     width: 25%;
@@ -32,7 +32,7 @@
 
 @media (max-width : 576px){
     .error-message-container{
-        position: absolute;
+        position: fixed;
         top: 20px;
         width: 90%;
         left: 0px;
@@ -46,7 +46,7 @@
 
 
 .is-profile-finished-container{
-    position: absolute;
+    position: fixed;
     top: 50%;
     right: 0%;
     width: 25%;

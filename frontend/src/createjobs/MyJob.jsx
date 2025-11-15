@@ -24,7 +24,7 @@ const MyJob = ( { job ,setToggleSeeMore} ) => {
     },[])
 
     return(
-        <div className="my-job-container" key={job.job_id}>
+        <div className="my-job-container container py-2" key={job.job_id}>
             <h3>{job.job_title}</h3>
             <h4>{job.job_desc}</h4>
             <h4>applicants : {count}</h4>
