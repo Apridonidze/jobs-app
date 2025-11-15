@@ -92,3 +92,15 @@
         margin-top: 15vw;
     }
 }
+.delete-container {
+    top: 40vh;
+    left: 40vw;
+}
+
+@media (max-width : 576px){
+    .delete-container{
+        top: 40vh;
+        left: 15vw;
+        width: 70vw;
+    }
+}
