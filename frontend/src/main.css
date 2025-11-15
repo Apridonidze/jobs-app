@@ -59,3 +59,15 @@
         display: none;
     }
 }
+
+
+.create-jobs-input-container{
+    left: 25%;
+}
+
+
+@media (max-width : 576px){
+    .create-jobs-input-container{
+        left: 20vw;
+    }
+}

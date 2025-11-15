@@ -2,6 +2,8 @@ import axios from "axios"
 import { useEffect, useRef, useState } from "react"
 import { useCookies } from "react-cookie"
 
+import '../main.css';
+
 const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobsMessage,SubmitBtnRef } ) => {
 
 
@@ -122,9 +124,11 @@ const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobs
 
 
     return (
-        <div className="create-jobs-input-container container position-relative bg-white" style={{bottom: '5vh'}}>
+        <div className="create-jobs-input-container container position-fixed bg-white d-flex flex-column top-25 w-50 d-sm-w-50 p-4 rounded-2" >
+
+            <h1>Create Job Offer</h1>
             
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="d-flex flex-column gap-4">
                 
                 <div className="form-floating">
                     <input className="form-control text-start" type="text" name="title" onChange={e => setTitle(e.target.value)} value={title} placeholder="Create Job Title (For Example : Building Market Startup)" ref={titleRef}/>
@@ -155,9 +159,9 @@ const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobs
                         <option value="Automation Tester">Automat Tester</option>
                     </select>
 
-                    <div className="choosed-roles">
+                    <div className="choosed-roles d d-flex mt-2">
                         {employeeList.map((e,i) => (
-                            <span key={i} onClick={() => setEmployeeList(employeeList.filter(emp => emp !== e))}>{e}</span>
+                            <span className="border border-1 py-1 px-2 rounded-3 bg-success text-white" key={i} onClick={() => setEmployeeList(employeeList.filter(emp => emp !== e))}>{e}</span>
                         ))}
                     </div>
 
@@ -196,9 +200,9 @@ const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobs
                         <option value="Postgres">Postgres</option>
                     </select>
                         
-                    <div className="choosed-techonologies">
+                    <div className="choosed-techonologies d-flex mt-2">
                         {technologies.map((e,i) => (
-                            <span key={i} onClick={() => setTechnologies(technologies.filter(tech => tech !== e))}>{e}</span>
+                            <span className="border border-1 py-1 px-2 rounded-3 bg-success text-white"  key={i} onClick={() => setTechnologies(technologies.filter(tech => tech !== e))}>{e}</span>
                         ))}
                     </div>
                     
@@ -215,9 +219,9 @@ const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobs
                         <option value="Georgian">🇬🇪 Georgian</option>
                     </select>
                         
-                    <div className="choosed-languages">
+                    <div className="choosed-languages d-flex mt-2">
                         {languages.map((e,i) => (
-                            <span key={i} onClick={() => setLanguages(languages.filter(lang => lang !== e))}>{e}</span>
+                            <span className="border border-1 py-1 px-2 rounded-3 bg-success text-white"  key={i} onClick={() => setLanguages(languages.filter(lang => lang !== e))}>{e}</span>
                         ))}
                     </div>
 

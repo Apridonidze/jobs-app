@@ -50,11 +50,13 @@ const CreateJobs = ( { setToggleSeeMore } ) => {
                 <span className="fs-5">Create Job Opportunity</span> <button className="btn btn-primary" onClick={() => setToggleCreateJobsInput(!toggleCreateJobsInput)}>Add</button>
             
             </div>
+            
                 
             <MyJobs yourJobs={yourJobs} setToggleSeeMore={setToggleSeeMore}/>
-
+            
             {toggleCreateJobsInput && <> <div className="create-jobs-input-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleCreateJobsInput(false)}></div> <CreateJobsInput SubmitBtnRef={SubmitBtnRef} setIsJobsSuccessful={setIsJobsSuccessful} setToggleJobsMessage={setToggleJobsMessage} setJobsMessage={setJobsMessage}/> {toggleJobsMessage && <NewJobsMessage  isJobsSuccessful={isJobsSuccessful} jobsMessage={jobsMessage} setToggleJobsMessage={setToggleJobsMessage} setToggleCreateJobsInput={setToggleCreateJobsInput} SubmitBtnRef={SubmitBtnRef}/>} </> }
             {toggleError && <Error setToggleError={setToggleError}/>}
+
         </div>
     );
 };
