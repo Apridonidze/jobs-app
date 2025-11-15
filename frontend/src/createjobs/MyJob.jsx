@@ -1,28 +1,29 @@
 import axios from "axios";
-import { useCookies } from "react-cookie"; 
+import { useCookies } from "react-cookie"; //importing react libraries
 
-import { useState,useEffect } from "react";
+import { useState,useEffect } from "react"; //importing react hooks
 
-const MyJob = ( { job ,setToggleSeeMore} ) => {
+const MyJob = ( { job ,setToggleSeeMore , setToggleError} ) => {
 
-    const [count,setCount] = useState(0);
-    const [cookies] = useCookies(['token']);
-    const APPLICANT_URL = 'http://localhost:8080/accept-decline/my-applicants';
+    const [count,setCount] = useState(0); //state for applicants count
+    const [cookies] = useCookies(['token']); //cookies
+    const APPLICANT_URL = 'http://localhost:8080/accept-decline/my-applicants'; //api url that fetches applicants count
 
     useEffect(() => {
         const fetchUserCount = async() => {
             try{
 
-                await axios.get(`${APPLICANT_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(res => setCount(res.data.length));
+                await axios.get(`${APPLICANT_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(res => {setCount(res.data.length) ; setToggleError(false)}); //awaits response from server about applicants and disables error component
 
             }catch(err){
-                console.log(err);
-                setCount(0);
-            }
-        }
+                console.log(err); //consoles error message
+                setToggleError(true) ; //toggles error message component
+                setCount(0);//sets count to 0 if error occurs
+            };
+        };
 
-        fetchUserCount();
-    },[]);
+        fetchUserCount(); //calls function
+    },[]);//function triggers when MyJob component is mounted
 
     return(
         <div className="my-job-container container py-2 px-3 border border-2 rounded-2 col d-flex flex-column w-50" key={job.job_id}>
@@ -36,4 +37,4 @@ const MyJob = ( { job ,setToggleSeeMore} ) => {
 };
 
 
-export default MyJob;
+export default MyJob; //exporting component

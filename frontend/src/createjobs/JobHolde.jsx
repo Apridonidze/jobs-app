@@ -28,7 +28,6 @@ const JobHolder = ( { job , setToggleDelete } ) => {
         await axios.post(`${ACCEPT_DECLINE_URL}/${job.job_id}/${e.userId}/${e.status}` , {} , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => { console.log(resp);if(e.status === true )setStatus(true); else setStatus(false)})
     }
 
-    console.log(applicants)
     
     return(
         <div className="job-holder-container position-fixed bg-white w-75 mx-5" key={job.job_id}>
