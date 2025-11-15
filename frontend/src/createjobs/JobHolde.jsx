@@ -16,19 +16,34 @@ const JobHolder = ( { job , setToggleDelete } ) => {
 
     useEffect(() => {
         const fetchApplicants = async() => {
-                await Promise.all([
-                    axios.get(`${APPLICANT_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(res => {console.log(res);setApplicants(res.data)}),
-                ])
+               try{
+                    axios.get(`${APPLICANT_URL}/${job.job_id}`, {headers : {Authorization : `Bearer ${cookies.token}`}}).then(res => {console.log(res);setApplicants(res.data)})//fetch applicants based on jobid
+                
+               }catch(err){
 
-        }
+                    console.log(err) //console.logs error
 
-        fetchApplicants()
-    },[])
+               };
+        };
+
+        fetchApplicants(); //decalres function
+
+    },[]);//function toggles when component is rendered
     
 
     const sendStatus =  async(e) => {
-        await axios.post(`${ACCEPT_DECLINE_URL}/${job.job_id}/${e.userId}/${e.status}` , {} , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => { console.log(resp);if(e.status === true )setStatus(true); else setStatus(false)})
-    }
+        
+        try{
+
+            await axios.post(`${ACCEPT_DECLINE_URL}/${job.job_id}/${e.userId}/${e.status}` , {} , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(resp => { console.log(resp);if(e.status === true )setStatus(true); else setStatus(false)}) //sends status based on button recruiter clicked
+        
+        }catch(err){
+
+            console.log(err) //consoes error in console
+
+        }
+    
+    }; //toggles when accept or decline button is pressed by recruiter
 
     
     return(
@@ -60,7 +75,7 @@ const JobHolder = ( { job , setToggleDelete } ) => {
                             <div className="applicant-status row">
                                 <h4>status : {user.status.length > 0 ? user.status[0].status == 'true' ? 
                             
-                                <div><button className="btn btn-success">Accepted</button><button className="btn btn-danger opacity-50">Decline</button></div>  
+                                <div ><button className="btn btn-success">Accepted</button><button className="btn btn-danger opacity-50">Decline</button></div>  
                                 
                                 : <div><button className="btn btn-success opacity-50">Accept</button><button className="btn btn-danger">Declined</button></div>
                                 
