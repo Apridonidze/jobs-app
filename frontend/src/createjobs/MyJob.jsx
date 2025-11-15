@@ -26,12 +26,14 @@ const MyJob = ( { job ,setToggleSeeMore , setToggleError} ) => {
     },[]);//function triggers when MyJob component is mounted
 
     return(
-        <div className="my-job-container container py-2 px-3 border border-2 rounded-2 col d-flex flex-column w-50" key={job.job_id}>
+        <div className="my-job-container py-2 px-3 border border-2 rounded-2" key={job.job_id}>
+
             <h3 className="text-break">{job.job_title}</h3>
             <h4 className="text-break">{job.job_desc.length > 120 ? `${job.job_desc.slice(0,120)}...` : job.job_desc}</h4>
             <h4>applicants : {count}</h4>
 
             <button className="btn btn-primary" onClick={() => setToggleSeeMore({status:true , job_id : job.job_id})}>See More</button>
+
         </div>
     );
 };

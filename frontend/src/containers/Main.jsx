@@ -93,7 +93,7 @@ const Main = () => {
 
     
     return(
-        <div className="main-container container d-flex flex-column  justify-content-between min-vh-100 py-2">
+        <div className="main-container container-fluid d-flex flex-column justify-content-between min-vh-100 py-2">
 
 
             <NavBar user={user} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs} toggleJobsListings={toggleJobsListings} setToggleJobsListings={setToggleJobsListings} setToggleSaved={setToggleSaved} setToggleApplied={setToggleApplied} setTogglePending={setTogglePending}/>

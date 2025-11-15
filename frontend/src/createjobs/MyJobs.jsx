@@ -3,11 +3,23 @@ import MyJob from "./MyJob"; //importing react component
 const MyJobs = ( { yourJobs , setToggleSeeMore } ) => {
 
     return (
-        <div className="my-jobs-container d-flex flex-column">
+        <div className="my-jobs-container container-fluid d-flex flex-column justify-content-start">
 
-            <h1>Jobs Created By You: </h1>
+            <div className="my-jobs-header">
+                
+                <h1>Jobs Created By You: </h1>
+            
+            </div>
 
-            {yourJobs ? yourJobs.reverse().map(job => <MyJob job={job} setToggleSeeMore={setToggleSeeMore}/>) :  <h1>No Jobs Yet.</h1> }
+            <div className="my-jobs-body container-fluid ">
+
+                <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+
+                    {yourJobs ? yourJobs.reverse().map(job => <MyJob job={job} setToggleSeeMore={setToggleSeeMore}/>) :  <h1>No Jobs Yet.</h1> }
+                   
+                </div>
+
+            </div>
                        
         </div>
     );
