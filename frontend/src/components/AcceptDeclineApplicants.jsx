@@ -14,35 +14,35 @@ const AcceptDeclineApplicants = ( { applicant, toggleAcceptDecline } ) => {
 
         const AcceptDeclineApplicants = async(e) => {
 
-
             try{
-                await Promise.all([
-                    axios.post(ACCEPT_DECLINE_APPLICANTS_URL , {applicant_id : applicant.user_id , job_id : toggleAcceptDecline.job_id, status: e.target.value } , {headers : {Authorization : `Bearer ${cookies.token}`}})
-                    .then(resp => {setStatusMessage(resp.data.message) , setStatus(resp.data.status) , console.log(resp.data)}),
-                ])
+             
+                await axios.post(ACCEPT_DECLINE_APPLICANTS_URL , {applicant_id : applicant.user_id , job_id : toggleAcceptDecline.job_id, status: e.target.value } , {headers : {Authorization : `Bearer ${cookies.token}`}})
+                .then(resp => {setStatusMessage(resp.data.message) , setStatus(resp.data.status)}); //sends post request to server about user to job status and then returns status message
+                
                 
             }catch(err){
-                console.log(err)
-            }
-
-        }
+                
+                console.log(err); //consoles error
+            
+            };
+        };
 
         useEffect(() => {
             const FetchUserStatus = async () => {
                 try{
 
-                    await Promise.all([
-                        axios.get(`http://localhost:8080/accept-decline/${applicant.user_id}/${toggleAcceptDecline.job_id}` ,{headers: {Authorization : `Bearer ${cookies.token}`}})
-                    .then(resp => {setStatusMessage(resp.data.message) , setStatus(resp.data.status) })
-                    ])
+                    axios.get(`http://localhost:8080/accept-decline/${applicant.user_id}/${toggleAcceptDecline.job_id}` ,{headers: {Authorization : `Bearer ${cookies.token}`}})
+                    .then(resp => {setStatusMessage(resp.data.message) , setStatus(resp.data.status) }); //fetches your job status when component is mounted
 
                 }catch(err){
-                    console.log(err)
-                }
-            }
 
-            FetchUserStatus()
-        },[])
+                    console.log(err); //consoles error
+
+                };
+            };
+
+            FetchUserStatus(); //declearing function
+        },[]);
 
     return(
         <div className="accept-decline-applicants-container">
@@ -65,8 +65,8 @@ const AcceptDeclineApplicants = ( { applicant, toggleAcceptDecline } ) => {
             </div> 
            
         </div>
-    )
-}
+    );
+};
 
 
-export default AcceptDeclineApplicants
+export default AcceptDeclineApplicants; //exporting component
