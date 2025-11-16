@@ -1,59 +1,76 @@
-import { useCookies } from "react-cookie"
-import { useState, useEffect } from "react"
-import axios from "axios"
+import axios from "axios";
+import { useCookies } from "react-cookie"; //importing react libraries
 
-import '../main.css'
+import { useState, useEffect } from "react"; //importing react hooks
+
+import '../main.css';//importing css file
 
 const SeeMore = ({ user, job , savedJobs , appliedJobs  }) => { 
 
-    const [cookies] = useCookies(['token'])
-    const [isApplied, setIsApplied] = useState(null)
-    const [isSaved, setIsSaved] = useState(null)
+    const [cookies] = useCookies(['token']); //cookies
+    const [isApplied, setIsApplied] = useState(null); //state for applied jobs
+    const [isSaved, setIsSaved] = useState(null); //state for saved jobs
 
-    
-    const SAVE_URL = 'http://localhost:8080/saved'
-    const APPLY_URL = 'http://localhost:8080/applied'
+    const SAVE_URL = 'http://localhost:8080/saved'; //api url to save job in db
+    const APPLY_URL = 'http://localhost:8080/applied'; //api url to apply for job in db
   
     const handleSave = async() => {
-        const res = await axios.post(`${SAVE_URL}/${job.job_id}` , {} , {headers: {Authorization : `Bearer ${cookies.token}`}})
-        console.log(res)
-        setIsSaved(true)
-    }
+        
+        try{
+            await axios.post(`${SAVE_URL}/${job.job_id}` , {} , {headers: {Authorization : `Bearer ${cookies.token}`}}).then(setIsSaved(true)); //posts saved job to server
+        }catch(err){
+            console.log(err); //consoles error 
+        };
+        
+    };
 
     
     const handleApply = async() => {
         
-        const res = await axios.post(`${APPLY_URL}/${job.job_id}` , {} , {headers: {Authorization : `Bearer ${cookies.token}`}})
-        console.log(res)
-        setIsApplied(true)
-    }
+        try{
+
+            await axios.post(`${APPLY_URL}/${job.job_id}` , {} , {headers: {Authorization : `Bearer ${cookies.token}`}}).then(setIsApplied(true)); //post apply job to server
+
+        }catch(err){
+            console.log(err); //consoles error
+        };
+    };
 
 
 
      useEffect(() => {
         
         const filterSavedJob = async() =>{
-            const savedJobList = await savedJobs.filter(savedJob => savedJob.job_id == job.job_id)
-        if(savedJobList.length > 0){
 
-            if(savedJobList[0].job_id === job.job_id) setIsSaved(true)
-        }
-        return 
-        }
+            const savedJobList = await savedJobs.filter(savedJob => savedJob.job_id == job.job_id); //filters savedjob list based on jobid
+
+            if(savedJobList.length > 0){ //if we get savedjob then if statement executes
+
+                if(savedJobList[0].job_id === job.job_id) setIsSaved(true); //if savedjob.job_id === job.job then state is change dto true
+            };
+
+            return ; //else function return nothing 
+            
+        };
 
         const filterAppliedJob = async() =>{
-            const appliedJobList = await appliedJobs.filter(appliedJob => appliedJob.job_id == job.job_id)
-        if(appliedJobList.length > 0){
 
-            if(appliedJobList[0].job_id === job.job_id) setIsApplied(true)
-                else return
-        }
-        } 
+            const appliedJobList = await appliedJobs.filter(appliedJob => appliedJob.job_id == job.job_id);//filters applied list based on jobid
+            
+            if(appliedJobList.length > 0){ //if we get applyjob thne if statement executes
 
-        filterSavedJob()
-        filterAppliedJob()
+                if(appliedJobList[0].job_id === job.job_id) setIsApplied(true); //if applyjob.job_iod === job.job_id then state is changed to true
+                    
+            };
 
-     },[savedJobs,appliedJobs])
+            return ;//else functio returns nothing
+
+        };
+
+        filterSavedJob();
+        filterAppliedJob(); //declareing functions
+
+     },[savedJobs,appliedJobs]); //functions run once these states are changed
 
 
 
@@ -83,8 +100,8 @@ const SeeMore = ({ user, job , savedJobs , appliedJobs  }) => {
 
             </div>
         </div>
-    )
-}// add layout and design for it
+    );
+};
 
 
-export default SeeMore;
+export default SeeMore; //exporting component
