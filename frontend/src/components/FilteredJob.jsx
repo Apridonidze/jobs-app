@@ -79,7 +79,7 @@ const FilteredJob = ( { filteredJob , filteredJobId , key , setToggleSeeMore , s
             <div className="filtered-job-header">
             
                 <h4 className="text-break">{filteredJob.job_title}</h4>
-                <h6 className="text-break">{filteredJob.job_desc}</h6>
+                <h6 className="text-break">{filteredJob.job_desc.length > 160 ? `${filteredJob.job_desc.slice(0,160)}...` : filteredJob.job_desc}</h6>
             
             </div>
             
@@ -102,7 +102,7 @@ const FilteredJob = ( { filteredJob , filteredJobId , key , setToggleSeeMore , s
                     }
                 </div>
                 <div className="buttons-footer col">
-                    <button className="btn btn-primary w-100" onClick={() => setToggleSeeMore({jobId : filteredJob.job_id , status : true})}>See More...</button>
+                    <button className="btn btn-primary w-100" onClick={() => setToggleSeeMore({status: true, job_id : filteredJob.job_id})}>See More...</button>
                 </div>
            </div>
         </div>
