@@ -173,7 +173,7 @@ const MyUserSidebar = ( { user } ) => {
             <div className="my-user-sidebar-header" >
                 <div className="user-image-container container d-flex flex-column gap-3 py-2 ">
                     
-                    <img src={avatarImg || DefaultImage} className="border w-100 mx-auto" style={{borderRadius : '100%' , maxWidth : "400px", maxHeight  :'400px'}}/>
+                    <img src={avatarImg || DefaultImage} className="border  mx-auto" style={{borderRadius : '100%' , width : "30vh", height:'30vh'}}/>
                     <button className="btn btn-primary text-white w-100 text-break" onClick={() => setToggleUploadAvatar(true)}>Upload Your Profile Picture</button>
 
                 </div>

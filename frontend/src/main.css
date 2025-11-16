@@ -135,4 +135,9 @@
         justify-content: center;
     }
 
+    .my-user-data{
+
+        margin: 2vh auto;
+    }
+
 }
