@@ -57,7 +57,7 @@ const MyUser = () => {
     },[])
 
     return (
-        <div className="myuser-container  container d-flex flex-column justify-content-between min-vh-100">
+        <div className="myuser-container container d-flex flex-column justify-content-between  min-vh-100">
             <NavBarHeader user={user} />
            
             {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
@@ -73,14 +73,14 @@ const MyUser = () => {
 
             }
             
-            <div className="user-body row row-cols-1 row-cols-md-2">
+            <div className="user-body row border-bottom">
                 <MyUserSidebar user={user}/>
 
                 {user && <MyUserData user={user} setToggleUploadDesc={setToggleUploadDesc} descValue={descValue}/>}
                 
             </div> 
 
-            <div className="user-footer d-flex">
+            <div className="user-footer d-flex align-items-center" style={{height :'80px'}}>
                 
                 <button className="btn btn-danger" onClick={() => {removeCookies('token'), navigator('/authentication' , {replace : true})}}>Log Out</button>
             

@@ -129,3 +129,10 @@
     }
 
 }
+@media (max-width : 991px){
+    .my-user-sidebar-container{
+        display: flex; 
+        justify-content: center;
+    }
+
+}

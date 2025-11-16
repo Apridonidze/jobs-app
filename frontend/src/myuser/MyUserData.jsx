@@ -1,6 +1,6 @@
 const MyUserData = ( { user, descValue , setToggleUploadDesc } ) => {
     return(
-        <div className="my-user-data col ">
+        <div className="my-user-data col-12 col-sm-9 border-start ">
 
             <div className="user-data">
             

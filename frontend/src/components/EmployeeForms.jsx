@@ -1,7 +1,9 @@
+import '../main.css'
+
 const EmployeeForms = ( { setToggleUploadTechnologies , technologies,  roles ,setToggleUploadRole  } ) => {
     return(
 
-        <div className="employee-forms-container d-flex flex-column gap-3 w-50">
+        <div className="employee-forms-container d-flex flex-column gap-2 my-2 ">
 
             <div className="role-container">
 
@@ -26,7 +28,7 @@ const EmployeeForms = ( { setToggleUploadTechnologies , technologies,  roles ,se
             
                 <div className="d-flex flex-wrap justify-content-start align-items-center">
                     {technologies && technologies.map((technology , technologyId) => (
-                    <span className="bg-success text-white m-1  p-2 rounded-2 " style={{height : '4vh'}} key={technologyId}>{technology}</span>
+                    <span className="bg-success text-white m-1  p-2 rounded-2 "  key={technologyId}>{technology}</span>
                 ))}
             
                 <span className="bg-primary text-white rounded-2 p-1 fs-6 m-1" onClick={() => setToggleUploadTechnologies(true)}>{technologies && technologies.length === 0 ? 'Add Technologies...' : 'Edit...'}</span>

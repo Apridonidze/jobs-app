@@ -134,7 +134,7 @@ const MyUserSidebar = ( { user } ) => {
 
     
     return (
-        <div className="my-user-sidebar-container col">
+        <div className="my-user-sidebar-container col-12 col-sm-12 col-lg-3">
            
            {toggleUploadAvatar && 
                 <> 
@@ -170,17 +170,21 @@ const MyUserSidebar = ( { user } ) => {
                 </>
             }
 
-            <div className="my-user-sidebar-header d-flex flex-column gap-3">
-                <div className="user-image-container d-flex flex-column align-items-center gap-3 w-50">
+            <div className="my-user-sidebar-header" >
+                <div className="user-image-container container d-flex flex-column gap-3 py-2 ">
                     
-                    <img src={avatarImg || DefaultImage} className="border border-rounded" style={{borderRadius : '100%', width: '300px' , height:'300px'}}/>
-                    <button className="btn btn-primary text-white w-100" onClick={() => setToggleUploadAvatar(true)}>Upload Your Profile Picture</button>
+                    <img src={avatarImg || DefaultImage} className="border w-100 mx-auto" style={{borderRadius : '100%' , maxWidth : "400px", maxHeight  :'400px'}}/>
+                    <button className="btn btn-primary text-white w-100 text-break" onClick={() => setToggleUploadAvatar(true)}>Upload Your Profile Picture</button>
 
                 </div>
+                
+                <div className="user-sidebar-body">
+                    
+                    {user && user.role === 'Recruiter' && <RecruiterForms setToggleUploadTags={setToggleUploadTags} tags={tags}/>}
+                    {user && user.role === 'Employee' && <EmployeeForms setToggleUploadTechnologies={setToggleUploadTechnologies} roles={roles} setToggleUploadRole={setToggleUploadRole} technologies={technologies}/>}
 
-                {user && user.role === 'Recruiter' && <RecruiterForms setToggleUploadTags={setToggleUploadTags} tags={tags}/>}
-                {user && user.role === 'Employee' && <EmployeeForms setToggleUploadTechnologies={setToggleUploadTechnologies} roles={roles} setToggleUploadRole={setToggleUploadRole} technologies={technologies}/>}
-
+                </div>
+                
             </div>
             
         </div>
