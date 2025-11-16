@@ -1,78 +1,86 @@
-import { useCookies } from "react-cookie"
-import axios from "axios"
-import { useState,useEffect } from "react"
+import axios from "axios";
+import { useCookies } from "react-cookie"; //importing react libraries
 
-const FilteredJob = ( { filteredJob , filteredJobId , key , setToggleSeeMore , savedJobs ,appliedJobs } ) => {
-    
-    const [cookies] = useCookies(['token'])
-    
-    const SAVE_URL = 'http://localhost:8080/saved'
-    const APPLY_URL = 'http://localhost:8080/applied'
-  
+import { useState,useEffect } from "react"; //importing react hooks
 
-    const [isApplied , setIsApplied] = useState()
-    const [isSaved , setIsSaved] = useState()
+const FilteredJob = ( { filteredJob , filteredJobId , key , setToggleSeeMore , savedJobs ,appliedJobs, setToggleError } ) => {
+    
+    const [cookies] = useCookies(['token']);//cookies
+    
+    const SAVE_URL = 'http://localhost:8080/saved'; //api url to save job
+    const APPLY_URL = 'http://localhost:8080/applied'; //api url to apply for job
+
+    const [isApplied , setIsApplied] = useState(); 
+    const [isSaved , setIsSaved] = useState();//states to toggle buttons based on if employee has applied /saved job
 
     const handleApply = async(e) => {
 
         
-        e.preventDefault()
+        e.preventDefault();//preventing realoading when function triggers
 
          try{
 
-            await Promise.all([
-                axios.post(`${APPLY_URL}/${filteredJob.job_id}`, {}  , {headers:  {Authorization : `Bearer ${cookies.token}`}})
-                .then(setIsApplied(true))
-            ])
+            await axios.post(`${APPLY_URL}/${filteredJob.job_id}`, {}  , {headers:  {Authorization : `Bearer ${cookies.token}`}})
+            .then(setIsApplied(true) , setToggleError(false)); //posting job to server to save this job as an applied job in db
 
         }catch(err){
-            console.log(err)
-        }
+            console.log(err); //consoles error
+            setToggleError(true) //toggles error component when error occurs
+        };
 
-    }
+    };
 
     const handleSave = async(e) => {
 
         
-        e.preventDefault()
+        e.preventDefault(); //prevents reload when function triggers
 
          try{
 
-            await Promise.all([
-                axios.post(`${SAVE_URL}/${filteredJob.job_id}`, {} , {headers:  {Authorization : `Bearer ${cookies.token}`}})
-                .then(setIsSaved(true))
-            ])
+            await axios.post(`${SAVE_URL}/${filteredJob.job_id}`, {} , {headers:  {Authorization : `Bearer ${cookies.token}`}})
+            .then(setIsSaved(true) , setToggleError(false)); //posting job to server to save this jos as a saved job in db
+        
 
         }catch(err){
-            console.log(err)
-        }
+            console.log(err); //consoles error
+            setToggleError(true); //toggles error component when error occurs
+        };
 
-    }
+    };
 
      useEffect(() => {
             
-            const filterSavedJob = async() =>{
-                const savedJobList = await savedJobs.filter(savedJob => savedJob.job_id == filteredJob.job_id)
-            if(savedJobList.length > 0){
+        const filterSavedJob = async() => {
+                
+            const savedJobList = await savedJobs.filter(savedJob => savedJob.job_id == filteredJob.job_id); //gets saved jobs from main component and filters it based on jobid
+                
+            if(savedJobList.length > 0){//if we get saved job then it executes if statemnet
+        
+                if(savedJobList[0].job_id === filteredJob.job_id) setIsSaved(true); //checks if savedjob job.id === current.job_id and then set state to true to let employee know they saved this job already
+                
+                };
+            return ; //else if we get no saved job function does nothing
+
+            };
     
-                if(savedJobList[0].job_id === filteredJob.job_id) setIsSaved(true)
-            }
-            return 
-            }
+        const filterAppliedJob = async() =>{
+            
+            const appliedJobList = await appliedJobs.filter(appliedJob => appliedJob.job_id == filteredJob.job_id);//gets applied jobs from main component and filters it based on jobid
+            
+            if(appliedJobList.length > 0){//if we get applied job then function executes if satetement
     
-            const filterAppliedJob = async() =>{
-                const appliedJobList = await appliedJobs.filter(appliedJob => appliedJob.job_id == filteredJob.job_id)
-            if(appliedJobList.length > 0){
+                if(appliedJobList[0].job_id === filteredJob.job_id) setIsApplied(true); //checks if appliedJob.job.id === current.job_id and then set state to true to let employee know they already applied this job already
+                
+            };
+
+            return ; //else if we get no applied job function does nothing 
+            } ;
     
-                if(appliedJobList[0].job_id === filteredJob.job_id) setIsApplied(true)
-                    else return
-            }
-            } 
+        filterSavedJob();
+        filterAppliedJob(); //declearing functions
     
-            filterSavedJob()
-            filterAppliedJob()
-    
-        },[savedJobs,appliedJobs])
+        },[savedJobs,appliedJobs]);//this function mounts when savedJobs and AppliedJobs values are changed
+
 
     return (
         <div className="filtered-job-container col-5 border border-1 d-flex flex-column  justify-content-between py-2"  key={filteredJobId}>
@@ -106,6 +114,7 @@ const FilteredJob = ( { filteredJob , filteredJobId , key , setToggleSeeMore , s
                 </div>
            </div>
         </div>
-    )
-}
-export default FilteredJob
+    );
+};
+
+export default FilteredJob; //exporting component
