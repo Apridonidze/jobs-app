@@ -75,7 +75,7 @@ const SeeMore = ({ user, job , savedJobs , appliedJobs  }) => {
 
 
     return (
-        <div className="job-container col-5 border border-1 d-flex flex-column justify-content-between p-3 rounded-2 position-fixed bg-white"  key={job.job_id}>
+        <div className="job-container col-5 border border-1 d-flex flex-column justify-content-between p-3 rounded-2 position-fixed bg-white" style={{zIndex:2000}}  key={job.job_id}>
             <div className="job-header overflow-y-auto">
                 <h4 className="text-break">{job.job_title}</h4>
                 <h6 className="text-break">{job.job_desc}</h6>

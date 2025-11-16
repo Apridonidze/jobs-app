@@ -98,7 +98,7 @@ const Main = () => {
             
             {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
           
-            {toggleSeeMore.status && user && job  && <> <div className="see-more-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0"  onClick={() => {setToggleSeeMore({status: null , job_id : null}) }}></div> {user.role === 'Recruiter' && user.id === job.user_id ? <JobHolder job={job} setToggleDelete={setToggleDelete}/> : <SeeMore user={user} toggleSeeMore={toggleSeeMore} job={job} savedJobs={savedJobs} appliedJobs={appliedJobs}/>}</>}
+            {toggleSeeMore.status && user && job  && <> <div className="see-more-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" style={{zIndex: 1998}}  onClick={() => {setToggleSeeMore({status: null , job_id : null}) }}></div> {user.role === 'Recruiter' && user.id === job.user_id ? <JobHolder job={job} setToggleDelete={setToggleDelete}/> : <SeeMore user={user} toggleSeeMore={toggleSeeMore} job={job} savedJobs={savedJobs} appliedJobs={appliedJobs}/>}</>}
             {toggleDelete?.status && <><div className="delete-background bg-dark position-fixed d-flex flex-column w-100 h-100 top-0 start-0 opacity-75" onClick={() => setToggleDelete({status:false , job_id : false})}></div><Delete toggleDelete={toggleDelete} setToggleDelete={setToggleDelete}/> </>}
             {toggleError && <Error setToggleError={setToggleError}/>}
            
@@ -113,6 +113,5 @@ const Main = () => {
         </div>
     )
 }
-
 //add titles to this page
 export default Main
