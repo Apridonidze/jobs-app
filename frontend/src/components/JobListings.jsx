@@ -7,7 +7,7 @@ const JobListings = ( { jobs, user , setToggleSeeMore, savedJobs, appliedJobs } 
     const [toggleError,setToggleError] = useState(false)
 
     return (
-        <div className="job-listing-container container my-3 d-flex flex-column gap-2">
+        <div className="job-listing-container container my-3 d-flex flex-column gap-2" style={{minHeight : '60vh'}}>
           
 
             <div className="job-listing-header">

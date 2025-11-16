@@ -3,7 +3,7 @@ import JobHolder from './JobHolder'; //importing react component
 const Saved = ( { user , jobs, savedJobs, appliedJobs } ) => {
 
     return (
-        <div className="saved-container container d-flex flex-column mt-5 min-vh-100">
+        <div className="saved-container container d-flex flex-column mt-5 " style={{minHeight : '60vh'}}>
             <div className="saved-header mb-3">
             
                 <h1>Your Saved Jobs:</h1>
