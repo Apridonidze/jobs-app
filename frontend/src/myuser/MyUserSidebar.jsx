@@ -32,14 +32,8 @@ const MyUserSidebar = ( { user } ) => {
     const [isDescSuccessfull, setIsDescSuccessfull] = useState(null)
 
     const [tags,setTags] = useState([])
-    const [tagsMessage,setTagsMessage] = useState('')
-    const [toggleTagsMessage,setToggleTagsMessage] = useState(false)
-    const [isTagsSuccessfull, setIsTagsSuccessfull] = useState(null)
 
     const [technologies, setTechnologies] = useState([])
-    const [technologiesMessage, setTechnologiesMessage] = useState('')
-    const [toggleTechnologiesMessage, setToggleTechnologiesMessage] = useState(false)
-    const [isTechnologiesSuccessfull, setIsTechnologiesSuccessfull] = useState(null)
 
     const [roles,setRoles] = useState(Array)
     
@@ -171,9 +165,9 @@ const MyUserSidebar = ( { user } ) => {
             }
 
             <div className="my-user-sidebar-header" >
-                <div className="user-image-container container d-flex flex-column gap-3 py-2 ">
+                <div className="user-image-container container d-flex flex-column gap-4 py-2 ">
                     
-                    <img src={avatarImg || DefaultImage} className="border  mx-auto" style={{borderRadius : '100%' , width : "30vh", height:'30vh'}}/>
+                    <img src={avatarImg || DefaultImage} className="border  mx-auto" style={{borderRadius : '100%' , width : "30vh", height:'30vh' , maxWidth: '300px' , maxHeight: '300px'}}/>
                     <button className="btn btn-primary text-white w-100 text-break" onClick={() => setToggleUploadAvatar(true)}>Upload Your Profile Picture</button>
 
                 </div>
