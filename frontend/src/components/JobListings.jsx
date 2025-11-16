@@ -14,6 +14,7 @@ const JobListings = ( { jobs, user , setToggleSeeMore, savedJobs, appliedJobs } 
                     <Job job={job} user={user} setToggleSeeMore={setToggleSeeMore} savedJobs={savedJobs} appliedJobs={appliedJobs}/>
                 ))}
 
+
             </div>
         </div>
     )
