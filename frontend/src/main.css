@@ -104,3 +104,28 @@
         width: 70vw;
     }
 }
+
+
+.job-container{
+    z-index: 1055;
+    left: 30vw;
+    top: 30vh;
+}
+@media (max-width : 576px){
+    .job-container{
+        top: 20vh;
+        left: 5vw;
+        width: 90vw;
+        height: 50vh;
+    }
+
+}
+@media (max-width : 800px){
+    .job-container{
+        top: 20vh;
+        left: 5vw;
+        width: 90vw;
+        height:40vh;
+    }
+
+}

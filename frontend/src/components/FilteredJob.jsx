@@ -83,7 +83,7 @@ const FilteredJob = ( { filteredJob , filteredJobId , key , setToggleSeeMore , s
 
 
     return (
-        <div className="filtered-job-container border border-1 rounded-2 p-3 col d-flex flex-column justify-content-between "  key={filteredJobId}>
+        <div className="filtered-job-container border border-1 rounded-2 p-3 col d-flex flex-column justify-content-between"  key={filteredJobId}>
             <div className="filtered-job-header">
             
                 <h4 className="text-break">{filteredJob.job_title}</h4>
