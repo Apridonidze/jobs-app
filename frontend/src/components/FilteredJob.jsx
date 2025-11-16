@@ -1,13 +1,17 @@
 import { useCookies } from "react-cookie"
 import axios from "axios"
+import { useState,useEffect } from "react"
 
-const FilteredJob = ( { filteredJob , filteredJobId , key , setToggleSeeMore } ) => {
+const FilteredJob = ( { filteredJob , filteredJobId , key , setToggleSeeMore , savedJobs ,appliedJobs } ) => {
     
     const [cookies] = useCookies(['token'])
     
-    const APPLY_URL = 'http://localhost:8080/applied/post-my-applied-jobs' 
-    const SAVE_URL = 'http://localhost:8080/saved/post-my-saved-jobs'
+    const SAVE_URL = 'http://localhost:8080/saved'
+    const APPLY_URL = 'http://localhost:8080/applied'
+  
 
+    const [isApplied , setIsApplied] = useState()
+    const [isSaved , setIsSaved] = useState()
 
     const handleApply = async(e) => {
 
@@ -17,8 +21,8 @@ const FilteredJob = ( { filteredJob , filteredJobId , key , setToggleSeeMore } )
          try{
 
             await Promise.all([
-                axios.post(APPLY_URL, {job_id : filteredJob.job_id , user_id : filteredJob.user_id} , {headers:  {Authorization : `Bearer ${cookies.token}`}})
-                .then(resp => console.log(resp))
+                axios.post(`${APPLY_URL}/${filteredJob.job_id}`, {}  , {headers:  {Authorization : `Bearer ${cookies.token}`}})
+                .then(setIsApplied(true))
             ])
 
         }catch(err){
@@ -35,8 +39,8 @@ const FilteredJob = ( { filteredJob , filteredJobId , key , setToggleSeeMore } )
          try{
 
             await Promise.all([
-                axios.post(SAVE_URL, {job_id : filteredJob.job_id , user_id : filteredJob.user_id} , {headers:  {Authorization : `Bearer ${cookies.token}`}})
-                .then(resp => console.log(resp))
+                axios.post(`${SAVE_URL}/${filteredJob.job_id}`, {} , {headers:  {Authorization : `Bearer ${cookies.token}`}})
+                .then(setIsSaved(true))
             ])
 
         }catch(err){
@@ -44,6 +48,31 @@ const FilteredJob = ( { filteredJob , filteredJobId , key , setToggleSeeMore } )
         }
 
     }
+
+     useEffect(() => {
+            
+            const filterSavedJob = async() =>{
+                const savedJobList = await savedJobs.filter(savedJob => savedJob.job_id == filteredJob.job_id)
+            if(savedJobList.length > 0){
+    
+                if(savedJobList[0].job_id === filteredJob.job_id) setIsSaved(true)
+            }
+            return 
+            }
+    
+            const filterAppliedJob = async() =>{
+                const appliedJobList = await appliedJobs.filter(appliedJob => appliedJob.job_id == filteredJob.job_id)
+            if(appliedJobList.length > 0){
+    
+                if(appliedJobList[0].job_id === filteredJob.job_id) setIsApplied(true)
+                    else return
+            }
+            } 
+    
+            filterSavedJob()
+            filterAppliedJob()
+    
+        },[savedJobs,appliedJobs])
 
     return (
         <div className="filtered-job-container col-5 border border-1 d-flex flex-column  justify-content-between py-2"  key={filteredJobId}>
@@ -63,8 +92,14 @@ const FilteredJob = ( { filteredJob , filteredJobId , key , setToggleSeeMore } )
 
            <div className="buttons row d d-flex flex-column gap-2">
                 <div className="buttons-header d d-flex gap-2 col">
-                    <button className="btn btn-success w-50" onClick={(e) => handleApply(e)}>Apply</button>
-                    <button className="btn border border-2 border-success w-50" onClick={(e) => handleSave(e)}>Save</button>
+                    {isApplied
+                        ? <button className="btn btn-success opacity-50 w-50">Applied</button>
+                        : <button className="btn btn-success w-50" onClick={handleApply}>Apply</button>
+                    }
+                    {isSaved
+                        ? <button className="btn opacity-75 border w-50 position-relative">Saved</button>
+                        : <button className="btn border w-50" onClick={handleSave}>Save</button>
+                    }
                 </div>
                 <div className="buttons-footer col">
                     <button className="btn btn-primary w-100" onClick={() => setToggleSeeMore({jobId : filteredJob.job_id , status : true})}>See More...</button>

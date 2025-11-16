@@ -102,7 +102,7 @@ const Main = () => {
             {toggleDelete?.status && <><div className="delete-background bg-dark position-fixed d-flex flex-column w-100 h-100 top-0 start-0 opacity-75" onClick={() => setToggleDelete({status:false , job_id : false})}></div><Delete toggleDelete={toggleDelete} setToggleDelete={setToggleDelete}/> </>}
             {toggleError && <Error setToggleError={setToggleError}/>}
            
-            {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} setToggleSeeMore={setToggleSeeMore} jobs={jobs}/>}
+            {toggleFindJobs && <FindJobs isProfileFinished={isProfileFinished} setToggleSeeMore={setToggleSeeMore} jobs={jobs} savedJobs={savedJobs} appliedJobs={appliedJobs}/>}
             {toggleCreateJobs && <CreateJobs setToggleSeeMore={setToggleSeeMore}/>}
             {toggleJobsListings && <JobListings jobs={jobs} user={user} toggleSeeMore={toggleSeeMore}  setToggleSeeMore={setToggleSeeMore}  savedJobs={savedJobs} appliedJobs={appliedJobs}/> }
             {toggleSaved && <Saved user={user} jobs={savedJobs} savedJobs={savedJobs} appliedJobs={appliedJobs}/>}

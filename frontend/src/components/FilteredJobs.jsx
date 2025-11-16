@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie";
 import NoJobFound from "./NoJobFound";
 import FilteredJob from "./FilteredJob";
 
-const FilteredJobs = ({ jobs  , setToggleSeeMore}) => {
+const FilteredJobs = ({ jobs ,savedJobs,appliedJobs , setToggleSeeMore}) => {
 
   const [cookies] = useCookies(["token"]);
   const [filteredJobs, setFilteredJobs] = useState([]);
@@ -54,7 +54,7 @@ const FilteredJobs = ({ jobs  , setToggleSeeMore}) => {
     <div className="filtered-jobs-container container py-3 row gap-3 justify-content-start">
       <h1>Jobs For You:</h1>
 
-      {filteredJobs.length < 1  ? <NoJobFound /> : filteredJobs.map((filteredJob,filteredJobId) => (<FilteredJob filteredJob={filteredJob} key={filteredJobId} setToggleSeeMore={setToggleSeeMore}/>))}
+      {filteredJobs.length < 1  ? <NoJobFound /> : filteredJobs.map((filteredJob,filteredJobId) => (<FilteredJob filteredJob={filteredJob} key={filteredJobId} setToggleSeeMore={setToggleSeeMore} appliedJobs={appliedJobs} savedJobs={savedJobs}/>))}
 
     </div>
   );

@@ -1,11 +1,11 @@
 import FindJobsMessage from "../alerts/FindJobsMessage";
 import FilteredJobs from "./FilteredJobs"; //importing components
 
-const FindJobs = ( { isProfileFinished , setToggleSeeMore , jobs } ) => {
+const FindJobs = ( { isProfileFinished , setToggleSeeMore , jobs ,savedJobs,appliedJobs} ) => {
         
     return(
         <div className="create-jobs-container container my-3" style={{minHeight : '60vh'}}>
-            {isProfileFinished && !isProfileFinished ? <FindJobsMessage /> : <FilteredJobs jobs={jobs} setToggleSeeMore={setToggleSeeMore} />} 
+            {isProfileFinished && !isProfileFinished ? <FindJobsMessage /> : <FilteredJobs jobs={jobs} setToggleSeeMore={setToggleSeeMore} savedJobs={savedJobs} appliedJobs={appliedJobs}/>} 
 
         </div>
     );
