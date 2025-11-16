@@ -1,144 +1,140 @@
-import axios from "axios"
-import { useState,useEffect } from "react"
-import { useCookies } from "react-cookie"
+import axios from "axios";
+import { useCookies } from "react-cookie"; //importing react libraries
 
-import UploadAvatar from "../components/UploadAvatar"
-import UploadDesc from "../components/UploadDesc"
-import RecruiterForms from "../components/RecruiterForms"
-import EmployeeForms from "../components/EmployeeForms"
-import UploadTechnologies from '../components/UploadTechnologies'
+import { useState,useEffect } from "react"; //importing react hooks
 
-import DescMessage from '../alerts/DescMessage'
+import Error from "../alerts/Error";
+import UploadAvatar from "../components/UploadAvatar";
+import RecruiterForms from "../components/RecruiterForms";
+import EmployeeForms from "../components/EmployeeForms";
+import UploadTechnologies from '../components/UploadTechnologies';
+import UploadTags from "../components/UploadTags";
+import UploadRole from "../components/UploadRole"; //importing react components
 
-import DefaultImage from '../../assets/default-profile-picture.webp'
-import UploadTags from "../components/UploadTags"
-import UploadRole from "../components/UploadRole"
+import DefaultImage from '../../assets/default-profile-picture.webp'; //importing dafault image for profile picture
+
 
 
 
 const MyUserSidebar = ( { user } ) => {
 
-    const [toggleUploadAvatar,setToggleUploadAvatar] = useState(false)
-    const [toggleUploadDesc,setToggleUploadDesc] = useState(false)
-    const [toggleUploadTags,setToggleUploadTags] = useState(false)
-    const [toggleUploadRole,setToggleUploadRole] = useState(false)
-    const [toggleUploadTechnologies,setToggleUploadTechnologies] = useState(false)
-    const [toggleUploadLanguages,setToggleUploadLanguages] = useState(false)
+    const [cookies] = useCookies(['token']) ;//cookies
 
+    const AVATAR_URL = 'http://localhost:8080/avatar'; //api url to get my user profile picture
+    const USER_TAGS_URL = 'http://localhost:8080/tags/my-tags' //api url to get my user tags
+    const USER_TECHNOLOGIES_URL = 'http://localhost:8080/technologies/user-technologies'; //api url to get my user technologies
+    const USER_ROLES_URL = 'http://localhost:8080/roles/my-roles';//api url to get my user roles (for recruiters)
     
-    const [descValue,setDescValue] = useState('')
-    const [toggleUploadDescMessage, setToggleUploadDescMessage] = useState(false)
-    const [UploadMessage,setUploadMessage] = useState('')
-    const [isDescSuccessfull, setIsDescSuccessfull] = useState(null)
+    const [toggleUploadAvatar,setToggleUploadAvatar] = useState(false);//toggles UploadAvatar component
+    const [toggleUploadTags,setToggleUploadTags] = useState(false); //toggles UploadTags component
+    const [toggleUploadRole,setToggleUploadRole] = useState(false); //toggles UploadRoles component
+    const [toggleUploadTechnologies,setToggleUploadTechnologies] = useState(false); //toggles Uploadtechnologies component
+    const [toggleError, setToggleError] = useState(false); //toggles Error component 
 
-    const [tags,setTags] = useState([])
-
-    const [technologies, setTechnologies] = useState([])
-
-    const [roles,setRoles] = useState(Array)
-    
-
-
-    const [avatarImg,setAvatarImg] = useState('')
-
-    const AVATAR_URL = 'http://localhost:8080/avatar' //move to .env
-    const USER_TAGS_URL = 'http://localhost:8080/tags/my-tags' //move to .env
-    const USER_TECHNOLOGIES_URL = 'http://localhost:8080/technologies/user-technologies' //move to .env
-    const USER_ROLES_URL = 'http://localhost:8080/roles/my-roles' //move to .env
-    
-
-    const [cookies] = useCookies(['token']) 
+    const [tags,setTags] = useState([]); //sstate for tags
+    const [technologies, setTechnologies] = useState([]); //state for technologies
+    const [roles,setRoles] = useState(Array); //state for roles
+    const [avatarImg,setAvatarImg] = useState(''); //state for avatar image path
+    const [profilePicture, setProfilePicture] = useState(null); //state for avatar image
 
 
-    const [profilePicture, setProfilePicture] = useState(null)
 
     const handleProfileSend = (e) => {
 
-        e.preventDefault()
+        e.preventDefault(); //prevents page reaload when function triggers
 
-        if (e.target.files && e.target.files[0]) {
-            const filePath = e.target.files[0]
-            setProfilePicture(filePath)
-        }
-    }
+        if (e.target.files && e.target.files[0]) { //checks if input is not employ
+
+            const filePath = e.target.files[0]; //gets input first file 
+            setProfilePicture(filePath); //sets choosed file to state that is later send to server 
+
+        };
+    }; //triggers when profile input is targeted and changed
 
 
 
-        useEffect(() => {
+    useEffect(() => {
 
-            const fetchUserData = async () => {
-                try{
+        const fetchUserData = async () => {
+
+            //function gets all of the data about user from server, all requests are in promise block 
+
+            try{
                     
-                    await Promise.all([
-                    axios.get(AVATAR_URL, {headers: {Authorization : `Bearer ${cookies.token}`}})
+                await Promise.all([
+                
+                    axios.get(AVATAR_URL, {headers: {Authorization : `Bearer ${cookies.token}`}}) //fetches data from server about user avatar image
                     .then(resp => {
 
-                        if(resp.status === 204)setAvatarImg(DefaultImage)
-                        else setAvatarImg(resp.data)
+                        if(resp.status === 204)setAvatarImg(DefaultImage) , setToggleError(false); //if user does not hhave avatar iamge default iamge is shown
+                        else setAvatarImg(resp.data) , setToggleError(false); //else functiuon sets response to setAvatar state
 
                     }),
 
-                    axios.get(USER_TAGS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})
+                    axios.get(USER_TAGS_URL , {headers : {Authorization : `Bearer ${cookies.token}`}}) //fetches data about user tags
                     .then(resp => {
-                        if(resp.status === 204) setTags([])        
-                        else setTags([...resp.data])
+                        if(resp.status === 204) setTags([]) , setToggleError(false); // if user does not have tags , it sets setTags state to empty array
+                        else setTags([...resp.data]) , setToggleError(false); //else tags are stored in state
                     
                     }), 
 
-                    axios.get(USER_ROLES_URL, {headers : {Authorization : `Bearer ${cookies.token}`}})
+                    axios.get(USER_ROLES_URL, {headers : {Authorization : `Bearer ${cookies.token}`}}) //fetches data about user roles
                     .then(resp => {
-                        if(resp.status === 204) setRoles([])
-                        else setRoles([resp.data[0].user_roles])
+
+                        if(resp.status === 204) setRoles([]) , setToggleError(false); //if user does not have roles , it sets setRoles to empty array
+                        else setRoles([resp.data[0].user_roles]) , setToggleError(false); //else roels are stored in state
+
                     }), 
                     
-                    axios.get(USER_TECHNOLOGIES_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})])
+                    axios.get(USER_TECHNOLOGIES_URL , {headers : {Authorization : `Bearer ${cookies.token}`}})]) //fetches data about user technologies
                     .then(resp => {
-                        if(resp.status === 204) setTechnologies([])
-                        else setTechnologies(resp.filter(res => res != undefined)[0].data)
-                    }
-                    )
 
-                    
+                        if(resp.status === 204) setTechnologies([]) , setToggleError(false); //if user does not have any technologies it sets state to empty array
+                        else setTechnologies(resp.filter(res => res != undefined)[0].data) , setToggleError(false); //else it sets technologies to stae
+
+                        }
+                    );
 
                 }catch(err){
-                    console.log(err) //add alert messsage fro database error
-                }
-            }
+                    console.log(err); //add alert messsage fro database error
+                    setToggleError(true); // toggles Error component if error occurs
+                };
+            };
 
-            fetchUserData()
+            fetchUserData();//declearing function
         
 
-        },[])
+        },[]);//fetchUserData function triggers once this component is rendered
 
 
-        useEffect(() => {
+    useEffect(() => {
             
-            if(profilePicture){
+        if(profilePicture){
                 
-                const formData = new FormData();
-                formData.append("profile-picutre", profilePicture);
+            const formData = new FormData(); //object for picture content
+            formData.append("profile-picutre", profilePicture); //appens profilePicture state value into object
 
-                axios.post(AVATAR_URL , formData , {headers : {Authorization : `Bearer ${cookies.token}`}})
-                .then(resp => console.log(resp)) //addd alerts message here
-                .catch(err => console.log(err)) //add alert message here
+            axios.post(AVATAR_URL , formData , {headers : {Authorization : `Bearer ${cookies.token}`}}) //posts avatar image content to server
+            .then(resp => {console.log(resp.data); window.location.reload()}) //consoles response and realoads page to display new image of user as sson as possible
+            .catch(err => {console.log(err) ; setToggleError(true)}) //add alert message here
 
-            }
+        };
 
-        }, [profilePicture])
+    }, [profilePicture]); //function triggers once profilePicture variable is changed
 
     
     return (
+
         <div className="my-user-sidebar-container col-12 col-sm-12 col-lg-3">
            
-           {toggleUploadAvatar && 
-                <> 
-                    <div className="upload-avatar-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadAvatar(false)}></div> 
-                    <UploadAvatar handleProfileSend={handleProfileSend} avatarImg={avatarImg} DefaultImage={DefaultImage}/> 
-                </> 
+            {toggleError && <Error setToggleError={setToggleError}/>}
+
+            {toggleUploadAvatar && 
+                    <> 
+                        <div className="upload-avatar-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadAvatar(false)}></div> 
+                        <UploadAvatar handleProfileSend={handleProfileSend} avatarImg={avatarImg} DefaultImage={DefaultImage}/> 
+                    </> 
             }
-           
-           
-           
 
             {toggleUploadTags &&
                 
@@ -165,6 +161,7 @@ const MyUserSidebar = ( { user } ) => {
             }
 
             <div className="my-user-sidebar-header" >
+
                 <div className="user-image-container container d-flex flex-column gap-4 py-2 ">
                     
                     <img src={avatarImg || DefaultImage} className="border  mx-auto" style={{borderRadius : '100%' , width : "30vh", height:'30vh' , maxWidth: '300px' , maxHeight: '300px'}}/>
@@ -182,9 +179,9 @@ const MyUserSidebar = ( { user } ) => {
             </div>
             
         </div>
-    )
-}
+    );
+};
 
 
 
-export default MyUserSidebar
+export default MyUserSidebar; //exporting component
