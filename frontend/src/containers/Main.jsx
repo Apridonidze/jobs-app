@@ -11,7 +11,6 @@ import JobListings from "../components/JobListings"
 import ProfileMessage from "../alerts/ProfileMessage"
 import Saved from "../components/Saved"
 import Applied from "../components/Applied"
-import Pendings from "../components/Pendings"
 import SeeMore from "../components/SeeMore"
 import JobHolder from "../createjobs/JobHolde"
 import Delete from "../createjobs/Delete"
@@ -26,7 +25,6 @@ const Main = () => {
     const [toggleJobsListings, setToggleJobsListings] = useState(null)
     const [toggleSaved,setToggleSaved] = useState(null)
     const [toggleApplied,setToggleApplied] = useState(null)
-    const [togglePending,setTogglePending] = useState(null)
     const [toggleError , setToggleError] = useState(false)
 
 
@@ -96,7 +94,7 @@ const Main = () => {
         <div className="main-container container-fluid d-flex flex-column justify-content-between min-vh-100 py-2">
 
 
-            <NavBar user={user} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs} toggleJobsListings={toggleJobsListings} setToggleJobsListings={setToggleJobsListings} setToggleSaved={setToggleSaved} setToggleApplied={setToggleApplied} setTogglePending={setTogglePending}/>
+            <NavBar user={user} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs} toggleJobsListings={toggleJobsListings} setToggleJobsListings={setToggleJobsListings} setToggleSaved={setToggleSaved} setToggleApplied={setToggleApplied} />
             
             {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
           
@@ -109,7 +107,7 @@ const Main = () => {
             {toggleJobsListings && <JobListings jobs={jobs} user={user} toggleSeeMore={toggleSeeMore}  setToggleSeeMore={setToggleSeeMore}  savedJobs={savedJobs} appliedJobs={appliedJobs}/> }
             {toggleSaved && <Saved user={user} jobs={savedJobs} savedJobs={savedJobs} appliedJobs={appliedJobs}/>}
             {toggleApplied && <Applied user={user} jobs={appliedJobs} savedJobs={savedJobs} appliedJobs={appliedJobs}/>}
-            {togglePending && <Pendings />}
+            
 
             <Footer />
         </div>
