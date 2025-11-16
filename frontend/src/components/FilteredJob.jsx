@@ -51,7 +51,7 @@ const FilteredJob = ( { filteredJob , filteredJobId , key } ) => {
     }
 
     return (
-        <div className="filtered-job-container col-5 border border-1 d-flex flex-column  justify-content-between min-vh-50 py-2" key={filteredJobId}>
+        <div className="filtered-job-container col-5 border border-1 d-flex flex-column  justify-content-between py-2" style={{minHeight : '60vh'}} key={filteredJobId}>
             <div className="filtered-job-header">
             
                 <h4 className="text-break">{filteredJob.job_title}</h4>

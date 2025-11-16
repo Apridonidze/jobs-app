@@ -95,8 +95,8 @@ const JobHolder = ( { job , setToggleDelete } ) => {
             </div>
 
         </div>
-    )
-}
+    );
+};
 
 
-export default JobHolder
+export default JobHolder; //exporting component

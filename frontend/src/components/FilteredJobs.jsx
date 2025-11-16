@@ -5,6 +5,7 @@ import NoJobFound from "./NoJobFound";
 import FilteredJob from "./FilteredJob";
 
 const FilteredJobs = ({ jobs }) => {
+  console.log(jobs)
   const [cookies] = useCookies(["token"]);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [userTechnologies, setUserTechnologies] = useState([]);
@@ -38,13 +39,16 @@ const FilteredJobs = ({ jobs }) => {
 
   useEffect(() => {
     if (userTechnologies.length > 0 && userRoles.length > 0 && jobs.length > 0) {
-      const filtered = jobs.filter(job =>
-          job.job_technologies.some(tech => userTechnologies.includes(tech)) &&
-          job.job_employeeList.some(role => userRoles.includes(role))
+      const filtered = jobs.filter(job => 
+        job.job_technologies.some(tech => tech.includes(tech))
+         &&
+          job.job_employeeList.some(role => role.includes(role))
       );
+      console.log(filtered)
       setFilteredJobs(filtered);
     }
   }, [userTechnologies, userRoles, jobs]);
+
 
   return (
     <div className="filtered-jobs-container container py-3 row gap-3 justify-content-start">
