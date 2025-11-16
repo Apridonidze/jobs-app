@@ -180,8 +180,8 @@ const MyUserSidebar = ( { user } ) => {
                 
                 <div className="user-sidebar-body">
                     
-                    {user && user.role !== 'Recruiter' && <RecruiterForms setToggleUploadTags={setToggleUploadTags} tags={tags}/>}
-                    {user && user.role !== 'Employee' && <EmployeeForms setToggleUploadTechnologies={setToggleUploadTechnologies} roles={roles} setToggleUploadRole={setToggleUploadRole} technologies={technologies}/>}
+                    {user && user.role === 'Recruiter' && <RecruiterForms setToggleUploadTags={setToggleUploadTags} tags={tags}/>}
+                    {user && user.role === 'Employee' && <EmployeeForms setToggleUploadTechnologies={setToggleUploadTechnologies} roles={roles} setToggleUploadRole={setToggleUploadRole} technologies={technologies}/>}
 
                 </div>
                 

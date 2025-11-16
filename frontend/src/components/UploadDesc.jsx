@@ -30,10 +30,9 @@ const UploadDesc = ( { setToggleUploadDescMessage,setIsDescSuccessfull, setUploa
 
         if(isValid){
             try{
-                await Promise.all([
-                    axios.post(ADD_USER_DESC_URL, data , {headers:{authorization: `Bearer ${cookies.token}`}})
+                await axios.post(ADD_USER_DESC_URL, {data} , {headers:{authorization: `Bearer ${cookies.token}`}})
                     .then(resp => {setUploadMessage(resp.data.message) ; setToggleUploadDescMessage(true);setIsDescSuccessfull(true)})
-                ])
+            
             
             }catch(err){
                 console.log(err)
