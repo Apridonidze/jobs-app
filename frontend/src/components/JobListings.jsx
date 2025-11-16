@@ -3,7 +3,7 @@ import Job from "./Job";//importing react component
 const JobListings = ( { jobs, user , setToggleSeeMore, savedJobs, appliedJobs } ) => {
 
     return (
-        <div className="job-listing-container d-flex flex-column my-3 container gap-3 min-vh-100">
+        <div className="job-listing-container container my-3 ">
           
 
             <div className="job-listing-header">
@@ -12,7 +12,7 @@ const JobListings = ( { jobs, user , setToggleSeeMore, savedJobs, appliedJobs } 
 
             </div>
 
-             <div className="job-listing-body py-3 row gap-3 justify-content-start">
+             <div className="job-listing-body row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
                 
                 {jobs.length < 1 ? <h1>No Jobs Posted Yet.</h1> : jobs.slice().reverse().map((job) => (
                     <Job job={job} user={user} setToggleSeeMore={setToggleSeeMore} savedJobs={savedJobs} appliedJobs={appliedJobs}/>
