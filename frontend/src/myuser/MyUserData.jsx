@@ -1,4 +1,5 @@
-import '../main.css'
+import '../main.css'; //importing css file
+
 const MyUserData = ( { user, descValue , setToggleUploadDesc } ) => {
     return(
         <div className="my-user-data col-12 col-sm-9 border-start ">
@@ -30,8 +31,8 @@ const MyUserData = ( { user, descValue , setToggleUploadDesc } ) => {
             </div>
 
         </div>
-    )
-}
+    );
+};
 
 
-export default MyUserData
+export default MyUserData; //exporting component
