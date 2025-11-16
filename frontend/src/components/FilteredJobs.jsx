@@ -51,10 +51,19 @@ const FilteredJobs = ({ jobs ,savedJobs,appliedJobs , setToggleSeeMore}) => {
 
 
   return (
-    <div className="filtered-jobs-container container py-3 row gap-3 justify-content-start">
-      <h1>Jobs For You:</h1>
+    <div className="filtered-jobs-container">
+      
+      <div className="filtered-jobs-header">
+        
+        <h1>Jobs For You:</h1>
+
+      </div>
+
+      <div className="filtered-jobs-body row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
       {filteredJobs.length < 1  ? <NoJobFound /> : filteredJobs.map((filteredJob,filteredJobId) => (<FilteredJob filteredJob={filteredJob} key={filteredJobId} setToggleSeeMore={setToggleSeeMore} appliedJobs={appliedJobs} savedJobs={savedJobs}/>))}
+
+      </div>
 
     </div>
   );
