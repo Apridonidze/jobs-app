@@ -5,9 +5,10 @@ import { useState,useEffect } from "react"; //importing react hooks
 
 const MyJob = ( { job ,setToggleSeeMore , setToggleError} ) => {
 
-    const [count,setCount] = useState(0); //state for applicants count
     const [cookies] = useCookies(['token']); //cookies
+    const [count,setCount] = useState(0); //state for applicants count
     const APPLICANT_URL = 'http://localhost:8080/accept-decline/my-applicants'; //api url that fetches applicants count
+
 
     useEffect(() => {
         const fetchUserCount = async() => {
@@ -26,7 +27,7 @@ const MyJob = ( { job ,setToggleSeeMore , setToggleError} ) => {
     },[]);//function triggers when MyJob component is mounted
 
     return(
-        <div className="my-job-container py-2 px-3 border border-2 rounded-2" key={job.job_id}>
+        <div className="my-job-container py-2 px-3 border border-2 rounded-2 " key={job.job_id}>
 
             <h3 className="text-break">{job.job_title}</h3>
             <h4 className="text-break">{job.job_desc.length > 120 ? `${job.job_desc.slice(0,120)}...` : job.job_desc}</h4>

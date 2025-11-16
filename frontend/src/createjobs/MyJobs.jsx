@@ -1,6 +1,6 @@
 import MyJob from "./MyJob"; //importing react component
 
-const MyJobs = ( { yourJobs , setToggleSeeMore } ) => {
+const MyJobs = ( { yourJobs , setToggleSeeMore , setToggleError} ) => {
 
     return (
         <div className="my-jobs-container container-fluid d-flex flex-column justify-content-start">
@@ -15,7 +15,7 @@ const MyJobs = ( { yourJobs , setToggleSeeMore } ) => {
 
                 <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
 
-                    {yourJobs ? yourJobs.reverse().map(job => <MyJob job={job} setToggleSeeMore={setToggleSeeMore}/>) :  <h1>No Jobs Yet.</h1> }
+                    {yourJobs ? yourJobs.reverse().map(job => <MyJob job={job} setToggleSeeMore={setToggleSeeMore} setToggleError={setToggleError}/>) :  <h1>No Jobs Yet.</h1> }
                    
                 </div>
 

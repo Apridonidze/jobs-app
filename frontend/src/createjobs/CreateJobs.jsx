@@ -52,7 +52,7 @@ const CreateJobs = ( { setToggleSeeMore } ) => {
             </div>
             
                 
-            <MyJobs yourJobs={yourJobs} setToggleSeeMore={setToggleSeeMore} />
+            <MyJobs yourJobs={yourJobs} setToggleSeeMore={setToggleSeeMore} setToggleError={setToggleError}/>
             
             {toggleCreateJobsInput && <> <div className="create-jobs-input-background bg-dark opacity-50 position-fixed w-100 h-100 top-0 start-0" onClick={() => setToggleCreateJobsInput(false)}></div> <CreateJobsInput SubmitBtnRef={SubmitBtnRef} setIsJobsSuccessful={setIsJobsSuccessful} setToggleJobsMessage={setToggleJobsMessage} setJobsMessage={setJobsMessage} setToggleError={setToggleError}/> {toggleJobsMessage && <NewJobsMessage  isJobsSuccessful={isJobsSuccessful} jobsMessage={jobsMessage} setToggleJobsMessage={setToggleJobsMessage} setToggleCreateJobsInput={setToggleCreateJobsInput} SubmitBtnRef={SubmitBtnRef}/>} {toggleError && <Error setToggleError={setToggleError}/>} </> }
             {toggleError && <Error setToggleError={setToggleError}/>}
