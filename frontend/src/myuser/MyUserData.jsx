@@ -1,6 +1,6 @@
 const MyUserData = ( { user, descValue , setToggleUploadDesc } ) => {
     return(
-        <div className="my-user-data">
+        <div className="my-user-data col ">
 
             <div className="user-data">
             
@@ -22,7 +22,7 @@ const MyUserData = ( { user, descValue , setToggleUploadDesc } ) => {
                 
                 <div className="desc-main">
 
-                    <h4>{descValue ? descValue : 'No Description Yet'}</h4>
+                    <h4 className="text-break">{descValue ? descValue : 'No Description Yet'}</h4>
                 
                 </div>
                 

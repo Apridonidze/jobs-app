@@ -134,7 +134,7 @@ const MyUserSidebar = ( { user } ) => {
 
     
     return (
-        <div className="my-user-sidebar-container d-flex flex-column justify-content-between ">
+        <div className="my-user-sidebar-container col">
            
            {toggleUploadAvatar && 
                 <> 
@@ -170,10 +170,13 @@ const MyUserSidebar = ( { user } ) => {
                 </>
             }
 
-            <div className="my-user-sidebar-header">
-                <img src={avatarImg || DefaultImage} className="border border-rounded" style={{borderRadius : '100%', width: '350px' , height:'350px'}}/>
-        
-                <button className="btn btn-primary text-white" onClick={() => setToggleUploadAvatar(true)}>Upload Your Profile Picture</button>
+            <div className="my-user-sidebar-header d-flex flex-column gap-3">
+                <div className="user-image-container d-flex flex-column align-items-center gap-3 w-50">
+                    
+                    <img src={avatarImg || DefaultImage} className="border border-rounded" style={{borderRadius : '100%', width: '300px' , height:'300px'}}/>
+                    <button className="btn btn-primary text-white w-100" onClick={() => setToggleUploadAvatar(true)}>Upload Your Profile Picture</button>
+
+                </div>
 
                 {user && user.role === 'Recruiter' && <RecruiterForms setToggleUploadTags={setToggleUploadTags} tags={tags}/>}
                 {user && user.role === 'Employee' && <EmployeeForms setToggleUploadTechnologies={setToggleUploadTechnologies} roles={roles} setToggleUploadRole={setToggleUploadRole} technologies={technologies}/>}

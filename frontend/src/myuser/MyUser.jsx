@@ -57,10 +57,11 @@ const MyUser = () => {
     },[])
 
     return (
-        <div className="myuser-container container d-flex flex-column justify-content-between min-vh-100">
+        <div className="myuser-container  container d-flex flex-column justify-content-between min-vh-100">
             <NavBarHeader user={user} />
            
             {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
+
             {toggleUploadDesc && 
 
                 <> 
@@ -72,7 +73,7 @@ const MyUser = () => {
 
             }
             
-            <div className="user-body d-flex">
+            <div className="user-body row row-cols-1 row-cols-md-2">
                 <MyUserSidebar user={user}/>
 
                 {user && <MyUserData user={user} setToggleUploadDesc={setToggleUploadDesc} descValue={descValue}/>}
