@@ -1,7 +1,7 @@
 import { useCookies } from "react-cookie"
 import axios from "axios"
 
-const FilteredJob = ( { filteredJob , filteredJobId , key } ) => {
+const FilteredJob = ( { filteredJob , filteredJobId , key , setToggleSeeMore } ) => {
     
     const [cookies] = useCookies(['token'])
     
@@ -45,13 +45,8 @@ const FilteredJob = ( { filteredJob , filteredJobId , key } ) => {
 
     }
 
-    const handleSeeMore = (e) => {
-
-        e.preventDefault()
-    }
-
     return (
-        <div className="filtered-job-container col-5 border border-1 d-flex flex-column  justify-content-between py-2" style={{minHeight : '60vh'}} key={filteredJobId}>
+        <div className="filtered-job-container col-5 border border-1 d-flex flex-column  justify-content-between py-2"  key={filteredJobId}>
             <div className="filtered-job-header">
             
                 <h4 className="text-break">{filteredJob.job_title}</h4>
@@ -72,7 +67,7 @@ const FilteredJob = ( { filteredJob , filteredJobId , key } ) => {
                     <button className="btn border border-2 border-success w-50" onClick={(e) => handleSave(e)}>Save</button>
                 </div>
                 <div className="buttons-footer col">
-                    <button className="btn btn-primary w-100" onClick={(e) => handleSeeMore(e)}>See More...</button>
+                    <button className="btn btn-primary w-100" onClick={() => setToggleSeeMore({jobId : filteredJob.job_id , status : true})}>See More...</button>
                 </div>
            </div>
         </div>

@@ -4,13 +4,13 @@ import { useCookies } from "react-cookie";
 import NoJobFound from "./NoJobFound";
 import FilteredJob from "./FilteredJob";
 
-const FilteredJobs = ({ jobs }) => {
-  console.log(jobs)
+const FilteredJobs = ({ jobs  , setToggleSeeMore}) => {
+
   const [cookies] = useCookies(["token"]);
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [userTechnologies, setUserTechnologies] = useState([]);
   const [userRoles, setUserRoles] = useState([]);
-
+  
   useEffect(() => {
     const fetchUserData = async () => {
       const MY_USER_ROLE_URL = "http://localhost:8080/roles/my-roles";
@@ -54,7 +54,7 @@ const FilteredJobs = ({ jobs }) => {
     <div className="filtered-jobs-container container py-3 row gap-3 justify-content-start">
       <h1>Jobs For You:</h1>
 
-      {filteredJobs.length < 1  ? <NoJobFound /> : filteredJobs.map((filteredJob,filteredJobId) => (<FilteredJob filteredJob={filteredJob} key={filteredJobId} />))}
+      {filteredJobs.length < 1  ? <NoJobFound /> : filteredJobs.map((filteredJob,filteredJobId) => (<FilteredJob filteredJob={filteredJob} key={filteredJobId} setToggleSeeMore={setToggleSeeMore}/>))}
 
     </div>
   );
