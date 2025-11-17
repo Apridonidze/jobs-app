@@ -1,70 +1,93 @@
-import axios from "axios"
-import { useEffect, useState } from "react"
-import { useCookies } from "react-cookie"
+import axios from "axios";
+import { useCookies } from "react-cookie"; //importing react libraries
 
+import { useEffect, useState } from "react"; //importing react hooks
 
-const JobHolder = ( {user, job , savedJobs ,appliedJobs } ) => {
+const JobHolder = ( { job , savedJobs ,appliedJobs } ) => {
 
-    const [cookies] = useCookies(['token'])
-    const [jobStatus, setJobStatus] = useState([])
+    const [cookies] = useCookies(['token']); //coookies
 
-    const IS_SAVED_URL = 'http://localhost:8080/saved/check-job'
-    const IS_APPLIED_URL = 'http://localhost:8080/applied/check-applied'
+    const [jobStatus, setJobStatus] = useState([]);//state for job status (as a recruiter : if employee is already accepted/declined , as a employee : if i haver already have been accepted/declined)
+    const [isApplied , setIsApplied]  = useState(false); //checking if i (as an  employee) have already applied for job
+    const [isSaved , setIsSaved]  = useState(false);//checking if i (as an  employee) have already saved job
 
-    
+    const SAVE_URL = 'http://localhost:8080/saved'; //api url to post saved job
+    const APPLY_URL = 'http://localhost:8080/applied'; // api url to post applied job
+    const JOB_STATUS_URL = 'http://localhost:8080/accept-decline'; //api url to get job status 
 
-    const [isApplied , setIsApplied]  = useState(false)
-    const [isSaved , setIsSaved]  = useState(false)
-
-    
-    const SAVE_URL = 'http://localhost:8080/saved'
-    const APPLY_URL = 'http://localhost:8080/applied'
-    const JOB_STATUS_URL = 'http://localhost:8080/accept-decline'
 
     const handleSave = async() => {
-        const res = await axios.post(`${SAVE_URL}/${job.job_id}` , {} , {headers: {Authorization : `Bearer ${cookies.token}`}})
-        console.log(res)
-        setIsSaved(true)
-    }
+        
+        try{
+
+            await axios.post(`${SAVE_URL}/${job.job_id}` , {} , {headers: {Authorization : `Bearer ${cookies.token}`}}).then(setIsSaved(true)); //sends post request to server to save job as saved job
+
+        }catch(err){
+
+            console.log(err); //consoles error
+            
+        };
+
+    }; //function triggers  on save button
 
     
     const handleApply = async() => {
         
-        const res = await axios.post(`${APPLY_URL}/${job.job_id}` , {} , {headers: {Authorization : `Bearer ${cookies.token}`}})
-        console.log(res)
-        setIsApplied(true)
-    }
+        try{
+            
+            await axios.post(`${APPLY_URL}/${job.job_id}` , {} , {headers: {Authorization : `Bearer ${cookies.token}`}}).then(setIsApplied(true)) //sends posts requests to server to save job as applied job
+            
+        }catch(err){
+
+            console.log(err); //consoles error
+
+        };
+    };  //function tirggers on apply button
 
    
-      useEffect(() => {
+    useEffect(() => {
         
         const filterSavedJob = async() =>{
-            const savedJobList = await savedJobs.filter(savedJob => savedJob.job_id == job.job_id)
-        if(savedJobList.length > 0){
 
-            if(savedJobList[0].job_id === job.job_id) setIsSaved(true)
-        }
-        return 
-        }
+            const savedJobList = await savedJobs.filter(savedJob => savedJob.job_id == job.job_id); //gets savedjobs
+        
+            if(savedJobList.length > 0){//if savedjobs.length > 0 then if statemnent executes
+
+                if(savedJobList[0].job_id === job.job_id) setIsSaved(true); //checks savedjob id === job.job_id . if its true then it sets state to true
+            };
+            
+            return ;
+        }; //filteeres all job lists based on current.job_id and checks if it  is saved
 
         const filterAppliedJob = async() =>{
-            const appliedJobList = await appliedJobs.filter(appliedJob => appliedJob.job_id == job.job_id)
-        if(appliedJobList.length > 0){
+            
+            const appliedJobList = await appliedJobs.filter(appliedJob => appliedJob.job_id == job.job_id); //gets applied jobs
+            
+            if(appliedJobList.length > 0){//if applied jobs.length > 0 then if statemnent executes
 
-            if(appliedJobList[0].job_id === job.job_id) setIsApplied(true)
-                else return
-        }
-        } 
+                if(appliedJobList[0].job_id === job.job_id) setIsApplied(true); //checks appliedjob.id === job.job_id , if its true then it sets to tstate true
+            };
+            
+            return;
+        } ;//filteeres all job lists based on current.job_id and checks if it  is applied
 
         const fetchJobStatus = async () => {
-            await axios.get(`${JOB_STATUS_URL}/${job.job_id}` , {headers : {Authorization : `Bearer ${cookies.token}`}}).then(res => {console.log(res.data) ; setJobStatus(res.data)})
+           
+            try{
+                await axios.get(`${JOB_STATUS_URL}/${job.job_id}` , {headers : {Authorization : `Bearer ${cookies.token}`}})
+                .then(res => {console.log(res) ; setJobStatus(res.data)}); //sends get request to get job status
             
-        }
+            }catch(err){
+                console.log(err); //consoles.error
+            };
+           
+        }; //fetches job status from server to checks if user has already applied or saved job
 
-        filterSavedJob()
-        filterAppliedJob()
-        fetchJobStatus()
-     },[savedJobs,appliedJobs])
+        filterSavedJob();
+        filterAppliedJob();
+        fetchJobStatus(); //declearing functions
+
+     },[savedJobs,appliedJobs]); //functions executes once savedJobs and AppliedJobs are changed or mounted
 
 
 
@@ -97,8 +120,7 @@ const JobHolder = ( {user, job , savedJobs ,appliedJobs } ) => {
 
             
         </div>
-    )
-}// add layout and design for it
+    );
+};
 
-
-export default JobHolder
+export default JobHolder;//exporting component
