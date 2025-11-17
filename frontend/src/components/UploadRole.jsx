@@ -1,5 +1,7 @@
-import axios from "axios"
-import { useCookies } from "react-cookie"
+import axios from "axios";
+import { useCookies } from "react-cookie"; //importing react libraries
+
+import '../main.css' ; //importing css file
 
 const UploadRole = ( { setToggleError , setRoles, roles } ) => {
 
@@ -30,11 +32,11 @@ const UploadRole = ( { setToggleError , setRoles, roles } ) => {
 
 
     return(
-        <div className="upload-role-container position-fixed bg-white">
+        <div className="upload-role-container position-fixed bg-white p-3 rounded-2 fs-5 d-flex flex-column h-auto">
             
-            <form onSubmit={handleUploadRole}>
-                
-                <select onChange={(e) => {setRoles(roles => [...roles, e.target.value]) ;if(e.target.value === 'blank') return setRoles(roles) ; if(roles.includes(e.target.value)) return setRoles(roles) ; }}>        
+            <form className="my-2" onSubmit={handleUploadRole}>
+
+                <select className="form-control" onChange={(e) => {setRoles(roles => [...roles, e.target.value]) ;if(e.target.value === 'blank') return setRoles(roles) ; if(roles.includes(e.target.value)) return setRoles(roles) ; }}>        
                     <option value="blank">I Am A:</option>
                     <option value="Figma Designer">Figma Designer</option>
                     <option value="Frontend Developer">Frontend Developer</option>
@@ -48,13 +50,15 @@ const UploadRole = ( { setToggleError , setRoles, roles } ) => {
                     <option value="Automation Tester">Automat Tester</option>
                 </select>
 
-                <div className="role-list">
-                    {roles.map((role,roleId) => (
-                        <span key={roleId} onClick={() => setRoles(roles.filter(r => r !== role))}>{role}</span>
+                <div className="role-list d-flex flex-wrap gap-2 my-2 p-2 border rounded-3">
+                    {roles.map((role, roleId) => (
+                        <span key={roleId} className="bg-success text-white px-3 py-2 rounded-3 flex-grow-1 text-center shadow-sm" style={{ cursor: 'pointer', minWidth: "120px" }}onClick={() => setRoles(roles.filter(r => r !== role))}>
+                            {role}
+                        </span>
                     ))}
                 </div>
 
-                <input type="submit" value="Upload Your Role" />
+                <input type="submit " className="btn btn-success w-100 my-2" value="Upload Your Role" />
 
             </form>
 
