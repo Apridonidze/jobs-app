@@ -1,4 +1,4 @@
-import '../main.css'
+import '../main.css'; //importing css file
 
 const EmployeeForms = ( { setToggleUploadTechnologies , technologies,  roles ,setToggleUploadRole  } ) => {
     return(
@@ -39,7 +39,7 @@ const EmployeeForms = ( { setToggleUploadTechnologies , technologies,  roles ,se
 
         </div>
     );
-};
+}; //component handles roles and technologies change 
 
 
 export default EmployeeForms; //exporting component

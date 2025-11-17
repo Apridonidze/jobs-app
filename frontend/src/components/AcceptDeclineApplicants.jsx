@@ -42,7 +42,8 @@ const AcceptDeclineApplicants = ( { applicant, toggleAcceptDecline } ) => {
             };
 
             FetchUserStatus(); //declearing function
-        },[]);
+            
+        },[]); //function triggers once component is rendered
 
     return(
         <div className="accept-decline-applicants-container">
