@@ -32,7 +32,7 @@ const UploadRole = ( { setToggleError , setRoles, roles } ) => {
 
 
     return(
-        <div className="upload-role-container position-fixed bg-white p-3 rounded-2 fs-5 d-flex flex-column h-auto">
+        <div className="upload-role-container position-fixed bg-white p-3 rounded-2 fs-5 d-flex flex-column ">
             
             <form className="my-2" onSubmit={handleUploadRole}>
 
@@ -52,7 +52,7 @@ const UploadRole = ( { setToggleError , setRoles, roles } ) => {
 
                 <div className="role-list d-flex flex-wrap gap-2 my-2 p-2 border rounded-3">
                     {roles.map((role, roleId) => (
-                        <span key={roleId} className="bg-success text-white px-3 py-2 rounded-3 flex-grow-1 text-center shadow-sm" style={{ cursor: 'pointer', minWidth: "120px" }}onClick={() => setRoles(roles.filter(r => r !== role))}>
+                        <span key={roleId} className="bg-primary text-white px-3 py-2 rounded-3 flex-grow-1 text-center shadow-sm" style={{ cursor: 'pointer', minWidth: "120px" }}onClick={() => setRoles(roles.filter(r => r !== role))}>
                             {role}
                         </span>
                     ))}

@@ -1,6 +1,7 @@
 import axios from "axios"
-import { useEffect } from "react"
 import { useCookies } from "react-cookie"
+
+import '../main.css'
 
 const UploadTechnologies = ( { technologies ,setTechnologies } ) => {
 
@@ -33,9 +34,9 @@ const UploadTechnologies = ( { technologies ,setTechnologies } ) => {
 
 
     return(
-        <div className="upload-technologies-container bg-white position-fixed">
+        <div className="upload-technologies-container position-fixed bg-white p-3 rounded-2 fs-5 d-flex flex-column ">
 
-            <form onSubmit={handleUploadTech}>
+            <form className="my-2" onSubmit={handleUploadTech}>
 
                 <select className="form-control" onChange={(e) => {setTechnologies(technologies => [...technologies, e.target.value]) ;if(e.target.value === 'blank') setTechnologies(technologies) ; if(technologies.includes(e.target.value)) setTechnologies(technologies) ; return}}>
                     <option value="blank">What Technologies Are You Searching In Employee</option>
@@ -67,13 +68,13 @@ const UploadTechnologies = ( { technologies ,setTechnologies } ) => {
                     <option value="Postgres">Postgres</option>
                 </select>
 
-                <div className="technologies-list">
+                <div className="technologies-list d-flex flex-wrap gap-2 my-2 p-2 border rounded-3">
                     {technologies && technologies.map((tech, techId) => (
-                        <span key={techId} onClick={() => setTechnologies(technologies.filter(t => t !== tech))}>{tech}</span>
+                        <span className="bg-primary text-white px-3 py-2 rounded-3 flex-grow-1 text-center shadow-sm" key={techId} onClick={() => setTechnologies(technologies.filter(t => t !== tech))}>{tech}</span>
                     ))}
                 </div>
 
-                <input type="submit" value="Upload Your Technologies List" />
+                <input className="btn btn-success w-100" type="submit" value="Upload Your Technologies List" />
         
         </form>
 
