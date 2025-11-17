@@ -238,3 +238,26 @@ body{
         width: 95vw;
     }
 }
+
+.upload-tags-container {
+    margin: 0px auto;
+    width: 45vh;
+    top: 25vh;
+    left: 50vh;
+}
+
+@media  (max-width : 800px){
+    
+    .upload-tags-container {
+        left: 2vw;
+        width: 95vw;
+    }
+}
+
+
+@media  (max-width : 576px){
+    
+    .upload-tags-container {
+        width: 95vw;
+    }
+}

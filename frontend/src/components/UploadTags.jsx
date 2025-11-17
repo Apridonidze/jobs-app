@@ -1,6 +1,8 @@
 import axios from "axios"
 import { useCookies } from "react-cookie"
 
+import '../main.css'
+
 const UploadTags = ( { tags , setTags } ) => {
     
     const [ cookies ]  = useCookies(['token'])
@@ -29,8 +31,8 @@ const UploadTags = ( { tags , setTags } ) => {
     }
 
     return (
-        <div className="upload-tags-container bg-white position-fixed">
-            <form onSubmit={handleTags}>
+        <div className="upload-tags-container position-fixed bg-white p-3 rounded-2 fs-5 d-flex flex-column">
+            <form className="my-2" onSubmit={handleTags}>
                
                 <select onChange={(e) => {setTags(tags => [...tags,e.target.value]) ; if(e.target.value === 'blank') setTags(tags) ; if(tags.includes(e.target.value)) setTags(tags) ; return}} className="form-control">
                     <option value="blank">Add Tags To Attract Employees In Same Scope</option>
@@ -42,13 +44,13 @@ const UploadTags = ( { tags , setTags } ) => {
                     <option value="Mobile App Engineering">Mobile App Engineering</option>
                 </select>
 
-                <div className="slected-tags">
+                <div className="slected-tags d-flex flex-wrap gap-2 my-2 p-2 border rounded-3">
                     {tags.map((tag, tagId) => (
-                        <span key={tagId} onClick={() => {setTags(tags.filter(t => t !== tag))}}>{tag}</span>
+                        <span className="bg-primary text-white px-3 py-2 rounded-3 flex-grow-1 text-center shadow-sm" key={tagId} onClick={() => {setTags(tags.filter(t => t !== tag))}}>{tag}</span>
                     ))}
                 </div>
 
-                <input type="submit" className="btn btn-success" value="Upload Tags" />
+                <input  type="submit" className="btn btn-success w-100" value="Upload Tags" />
 
             </form>
         </div>
