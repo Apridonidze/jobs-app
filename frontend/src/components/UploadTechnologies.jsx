@@ -1,36 +1,33 @@
-import axios from "axios"
-import { useCookies } from "react-cookie"
+import axios from "axios";
+import { useCookies } from "react-cookie"; //importing react libraries
 
-import '../main.css'
+import '../main.css'; //importing css file
 
-const UploadTechnologies = ( { technologies ,setTechnologies } ) => {
+const UploadTechnologies = ( { technologies ,setTechnologies ,setToggleError } ) => {
 
-    const [cookies] = useCookies(['token'])
+    const [cookies] = useCookies(['token']) ; //cookies
 
-    const UPLOAD_TECH_URL = 'http://localhost:8080/technologies/new-technologies'
+    const UPLOAD_TECH_URL = 'http://localhost:8080/technologies/new-technologies' ; //api to upload new technologies
 
     const handleUploadTech = async(e) => {
 
-        e.preventDefault()
+        e.preventDefault();
 
-        if(technologies.length < 1)return
+        if(technologies.length < 1)return;
 
         try{
 
-            await Promise.all([
-                axios
-                .post(UPLOAD_TECH_URL , {technologies : technologies} , {headers : {Authorization : `Bearer ${cookies.token}`}})
-                .then(resp => console.log(resp))
-            ])
-
-            ///add success message toggle 
+            await axios.post(UPLOAD_TECH_URL , {technologies : technologies} , {headers : {Authorization : `Bearer ${cookies.token}`}})
+            .then(resp => {console.log(resp) ; setToggleError(false)}) ; //post technologies to server and consoles response
 
         }catch(err){
-            console.log(err)
-            //addd error message toggle herer
-        }
 
-    }
+            console.log(err); //consoles erorr
+            setToggleError(true); // toggles Error component if error occurs
+        
+        };
+
+    }; //function toggles when upload button is clicked
 
 
     return(
@@ -79,8 +76,8 @@ const UploadTechnologies = ( { technologies ,setTechnologies } ) => {
         </form>
 
         </div>
-    )
-}
+    );
+};
 
 
-export default UploadTechnologies
+export default UploadTechnologies; //exporting component
