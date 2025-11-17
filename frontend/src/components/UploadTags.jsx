@@ -1,34 +1,35 @@
-import axios from "axios"
-import { useCookies } from "react-cookie"
+import axios from "axios";
+import { useCookies } from "react-cookie"; //importing react libraries
 
-import '../main.css'
+import '../main.css'; //importing css file
 
-const UploadTags = ( { tags , setTags } ) => {
+const UploadTags = ( { tags , setTags , setToggleError } ) => {
     
-    const [ cookies ]  = useCookies(['token'])
+    const [ cookies ]  = useCookies(['token']); //cookies
 
-    const UPLOAD_TAGS_URL = 'http://localhost:8080/tags/upload-tags'
+    const UPLOAD_TAGS_URL = 'http://localhost:8080/tags/upload-tags'; //api to uplaod tags
 
     const handleTags = async(e) => {
-        e.preventDefault()
 
-        if(tags.length < 1){
-        return    //return error here
-        }
+        e.preventDefault(); //prevents page refresh when function triggers
+
+        if(tags.length < 1)return;  //if tags legth === 0 function does nothing
+        
 
         
         try{
             
-            await Promise.all([
-                axios.post(UPLOAD_TAGS_URL , {tags : tags}, {headers: {Authorization : `Bearer ${cookies.token}`}})
-            .then(resp => console.log(resp)) //add success message toggle here
-            ])
+            await axios.post(UPLOAD_TAGS_URL , {tags : tags}, {headers: {Authorization : `Bearer ${cookies.token}`}})
+            .then(resp => {console.log(resp) ; setToggleError(false)}) //sends tags to server and consoles response
+            
             
         }catch(err){
-            console.log(err) //add error message toggle here 
-        }
 
-    }
+            console.log(err); //consoles error
+            setToggleError(true) ; //toggles error component if error occurs
+        };
+
+    }; //function triggers when ypload button is clicked
 
     return (
         <div className="upload-tags-container position-fixed bg-white p-3 rounded-2 fs-5 d-flex flex-column">
@@ -54,8 +55,8 @@ const UploadTags = ( { tags , setTags } ) => {
 
             </form>
         </div>
-    )
-}
+    );
+};
 
 
-export default UploadTags
+export default UploadTags; //exporting component
