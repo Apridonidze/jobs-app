@@ -1,3 +1,7 @@
+body{
+    overflow-x: hidden;
+}
+
 .login-message-container{
     position: fixed;
     top: 50%;
@@ -142,4 +146,24 @@
 
 }
 
+
+.upload-avatar-container{
+    left: 25vw;
+}
+
+@media (max-width : 991px){
+    .upload-avatar-container{
+        top: 20vh;
+        height: auto;
+    }
+}
+
+@media (max-width : 576px){
+    .upload-avatar-container{
+        top: 15vh;
+        left: 2vw;
+        width: 95vw;
+        height: auto;
+    }
+}
 
