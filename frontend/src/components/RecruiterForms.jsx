@@ -17,7 +17,7 @@ const RecruiterForms = ( { setToggleUploadTags, tags } ) => {
             </div>
 
         </div>
-    )
-}
+    );
+};//component displays recruiters tags on personal user page 
 
-export default RecruiterForms
+export default RecruiterForms;//exporting component
