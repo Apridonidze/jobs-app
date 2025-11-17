@@ -53,7 +53,6 @@ const FilteredJobs = ({ jobs ,savedJobs,appliedJobs , setToggleSeeMore}) => {
 
   }, [cookies.token]); //function triggers based on cookies.token (user cookies )
 
-  console.log(userTechnologies , userRoles)
 
   useEffect(() => {
     
@@ -65,12 +64,12 @@ const FilteredJobs = ({ jobs ,savedJobs,appliedJobs , setToggleSeeMore}) => {
         &&
         job.job_employeeList.some(role => role.includes(userRoles))
 
-      ); //variable filetrs job (returns job that only have some parameters) . based on 
+      ); //variable filetrs job (returns job that only have some parameters) . based on job requirements (role , technologies)
       
-      setFilteredJobs(filtered);
+      setFilteredJobs(filtered); //sets filtered job in state that is later mapped
     }
 
-  }, [userTechnologies, userRoles, jobs]);
+  }, [userTechnologies, userRoles, jobs]); //function mounts once this variables change
 
 
   return (
@@ -92,6 +91,6 @@ const FilteredJobs = ({ jobs ,savedJobs,appliedJobs , setToggleSeeMore}) => {
 
     </div>
   );
-};
+};//component returns No Job found if user tech and role does not match any of the job requirements else if user matches some job requirements it returns FilteredJob.jsx component
 
-export default FilteredJobs;
+export default FilteredJobs; //exporting component
