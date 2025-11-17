@@ -326,6 +326,6 @@ const Sign = () => {
     )
 }
 
-//add titles to this page
+document.title = 'Jobs App - Sign In'
 
-export default Sign
+export default Sign ; //exporting component

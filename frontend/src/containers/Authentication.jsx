@@ -18,6 +18,6 @@ const Authentication = () => {
     );
 };
 
-document.title = 'Jobs App'; //adds title to page 
+document.title = 'Jobs App - Welcome'; //adds title to page 
 
 export default Authentication; //exporting component

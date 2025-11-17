@@ -6,7 +6,6 @@ const TechnologiesSchema = z.object({
 
 
 function validateTechSchema (data) {
-
     return TechnologiesSchema.safeParse(data)
 
 }

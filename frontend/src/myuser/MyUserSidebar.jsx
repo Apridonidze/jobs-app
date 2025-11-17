@@ -33,7 +33,7 @@ const MyUserSidebar = ( { user } ) => {
 
     const [tags,setTags] = useState([]); //sstate for tags
     const [technologies, setTechnologies] = useState([]); //state for technologies
-    const [roles,setRoles] = useState(Array); //state for roles
+    const [roles,setRoles] = useState([]); //state for roles
     const [avatarImg,setAvatarImg] = useState(''); //state for avatar image path
     const [profilePicture, setProfilePicture] = useState(null); //state for avatar image
 

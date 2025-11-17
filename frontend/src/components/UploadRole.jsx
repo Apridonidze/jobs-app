@@ -1,5 +1,4 @@
 import axios from "axios"
-import { useEffect } from "react"
 import { useCookies } from "react-cookie"
 
 const UploadRole = ( { setRoles, roles} ) => {
@@ -20,12 +19,11 @@ const UploadRole = ( { setRoles, roles} ) => {
                 axios.post(UPLOAD_ROLE_URL , {roles : roles}, {headers : {Authorization : `Bearer ${cookies.token}`}})
                 .then(resp => console.log(resp))
             ])
-            //add message toggle variables here and countdown to toggle down windows when data is posted successfully
 
         }catch(err){
+
             console.log(err)
             
-            //add error message toggle variables here when data is not posted 
         }
 
     }

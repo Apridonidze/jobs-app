@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie"
 
 const UploadTags = ( { tags , setTags } ) => {
     
-    const [cookies,setCookies,removeCookies]  = useCookies(['token'])
+    const [ cookies ]  = useCookies(['token'])
 
     const UPLOAD_TAGS_URL = 'http://localhost:8080/tags/upload-tags'
 

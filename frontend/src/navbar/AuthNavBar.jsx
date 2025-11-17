@@ -21,4 +21,4 @@ const AuthNavBar = () => {
 }
 
 
-export default AuthNavBar;
+export default AuthNavBar;//exporting component

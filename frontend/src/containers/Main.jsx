@@ -113,5 +113,8 @@ const Main = () => {
         </div>
     )
 }
-//add titles to this page
+
+
+document.title = 'Jobs App - Main'
+
 export default Main
