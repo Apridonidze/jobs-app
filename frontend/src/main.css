@@ -167,3 +167,26 @@ body{
     }
 }
 
+
+.upload-desc-container{
+    left: 25vw;
+    top: 5vh;
+}
+
+
+@media (max-width : 991px){
+    .upload-desc-container{
+        top: 5vh;
+        height: auto;
+    }
+}
+
+@media (max-width : 576px){
+    .upload-desc-container{
+        top: 5vh;
+        left: 2vw;
+        width: 95vw;
+        height: auto;
+    }
+}
+
