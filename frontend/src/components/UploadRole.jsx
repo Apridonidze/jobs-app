@@ -1,38 +1,39 @@
 import axios from "axios"
 import { useCookies } from "react-cookie"
 
-const UploadRole = ( { setRoles, roles} ) => {
+const UploadRole = ( { setToggleError , setRoles, roles } ) => {
 
-    const UPLOAD_ROLE_URL = 'http://localhost:8080/roles/upload-roles'
+    const [cookies] = useCookies(['token']); //cookies
 
-    const [cookies] = useCookies(['token'])
+    const UPLOAD_ROLE_URL = 'http://localhost:8080/roles/upload-roles'; //api url to upload roles
 
-    const handleUploadRole = async(e) => {
+    const handleUploadRole = async(e) => { //function triggers on Upload button
 
-        e.preventDefault()
+        e.preventDefault(); //prevent page reload when function triggers
 
-        if(roles.length < 1) return
+        if(roles.length < 1) return; //does nothing if roles length is 0
 
         try{
             
-            await Promise.all([
-                axios.post(UPLOAD_ROLE_URL , {roles : roles}, {headers : {Authorization : `Bearer ${cookies.token}`}})
-                .then(resp => console.log(resp))
-            ])
-
+            await axios.post(UPLOAD_ROLE_URL , {roles : roles}, {headers : {Authorization : `Bearer ${cookies.token}`}})
+            .then(resp => {console.log(resp) ; setToggleError(false)}); //sends post request to server and consoles response
+        
         }catch(err){
 
-            console.log(err)
+            setToggleError(true) ; //toggles Error.jsx component
+            console.log(err); //consoles error
             
-        }
+        };
 
-    }
+    };
 
 
 
     return(
         <div className="upload-role-container position-fixed bg-white">
+            
             <form onSubmit={handleUploadRole}>
+                
                 <select onChange={(e) => {setRoles(roles => [...roles, e.target.value]) ;if(e.target.value === 'blank') return setRoles(roles) ; if(roles.includes(e.target.value)) return setRoles(roles) ; }}>        
                     <option value="blank">I Am A:</option>
                     <option value="Figma Designer">Figma Designer</option>
@@ -58,8 +59,8 @@ const UploadRole = ( { setRoles, roles} ) => {
             </form>
 
         </div>
-    )
-}
+    );
+};
 
 
-export default UploadRole
+export default UploadRole; //exporting component

@@ -140,7 +140,7 @@ const MyUserSidebar = ( { user } ) => {
                 
                 <>
                     <div className="upload-tags-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadTags(false)}></div>
-                    <UploadTags tags={tags} setTags={setTags} />
+                    <UploadTags tags={tags} setTags={setTags} setToggleError={setToggleError}/>
                 </>
 
             }
@@ -148,7 +148,7 @@ const MyUserSidebar = ( { user } ) => {
             {toggleUploadTechnologies &&
                 <>
                     <div className="upload-technologies-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadTechnologies(false)}></div>
-                    <UploadTechnologies technologies={technologies} setTechnologies={setTechnologies}/>
+                    <UploadTechnologies technologies={technologies} setTechnologies={setTechnologies} setToggleError={setToggleError}/>
                     
                 </>
             }
@@ -156,7 +156,7 @@ const MyUserSidebar = ( { user } ) => {
             {toggleUploadRole &&
                 <>
                     <div className="upload-roles-background position-fixed bg-dark opacity-75 w-100 h-100 top-0 start-0" onClick={() => setToggleUploadRole(false)}></div>
-                    <UploadRole setRoles={setRoles} roles={roles}/>
+                    <UploadRole setRoles={setRoles} roles={roles} setToggleError={setToggleError}/>
                 </>
             }
 

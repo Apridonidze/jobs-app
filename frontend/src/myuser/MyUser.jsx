@@ -65,6 +65,8 @@ const MyUser = () => {
             <NavBarHeader user={user} />
            
             {isProfileFinished != null && !isProfileFinished && <ProfileMessage />}
+            
+            {toggleError && <Error setToggleError={setToggleError}/>}
 
             {toggleUploadDesc && 
 
@@ -80,8 +82,6 @@ const MyUser = () => {
 
             }
 
-            {toggleError && <Error setToggleError={setToggleError}/>}
-            
             <div className="user-body row border-bottom">
                 <MyUserSidebar user={user}/>
 
