@@ -35,11 +35,11 @@ const DescMessage = ({ setToggleUploadDesc , setToggleUploadDescMessage, isDescS
 
 
     return(
-        <div className="desc-message-container position-fixed top-0 end-0 bg-white">
+        <div className="desc-message-container position-fixed top-50 end-0 bg-white p-3 border rounded-2 d-flex flex-column">
             
-            {isDescSuccessfull ? <i className="fa-regular fa-circle-check"></i> : <i className="fa-regular fa-circle-xmark"></i>}
-            <span>{UploadMessage}</span>
-            <span>{isDescSuccessfull ? <span>Redirecting In...</span> : <span>Window Closes In :</span> }{seconds}</span>   
+            {isDescSuccessfull ? <span className="fs-5 text-success"><i className="fa-regular fa-circle-check "></i> {UploadMessage}</span> :  <span className="fs-5 text-danger"><i className="fa-regular fa-circle-xmark"></i> {UploadMessage}</span>}
+            
+            <span className="ms-2">{isDescSuccessfull ? <span className="text-success">Redirecting In... {seconds} Seconds.</span> : <span className="text-danger">Window Closes In : {seconds} Seconds.</span> }</span>   
 
         </div>
     )
