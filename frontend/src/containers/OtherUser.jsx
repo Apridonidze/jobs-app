@@ -11,9 +11,9 @@ const OtherUser = () => {
 
     const [ cookies ] = useCookies(['token']); //cookies
 
+    const { userId } = useParams(); //hook that gets url parameter when visitin user page via user_id
     const USER_URL = 'http://localhost:8080/user/user'; //api url to fetch user data
     
-    const { userId } = useParams(); //hook that gets url parameter when visitin user page via user_id
     const [userData ,setUserData] = useState(null); //state to store user data from api
     const navigator = useNavigate(); //navigator to navigate user via pages
 
@@ -67,5 +67,6 @@ const OtherUser = () => {
         </div>
     );
 };
+
 
 export default OtherUser; //exporting component

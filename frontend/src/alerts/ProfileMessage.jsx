@@ -1,4 +1,4 @@
-import '../main.css'; 
+import '../main.css'; //importing css file
 
 const ProfileMessage = () => {
     return (
@@ -10,4 +10,4 @@ const ProfileMessage = () => {
 };
 
 
-export default ProfileMessage;
+export default ProfileMessage; //exporting component

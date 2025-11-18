@@ -49,4 +49,6 @@ const OtherUserData = ( { userData } ) => {
     );
 };
 
+document.title = `Jobs App `; //title for page
+
 export default OtherUserData; //exporting component
