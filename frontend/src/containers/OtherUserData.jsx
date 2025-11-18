@@ -1,15 +1,14 @@
-import DefaultImage from '../../assets/default-profile-picture.webp'
-import Footer from '../components/Foooter'
-import NavBarHeader from '../navbar/NavBarHeader'
+import DefaultImage from '../../assets/default-profile-picture.webp';//importig default avatar image
 
-import '../main.css'
+import Footer from '../components/Foooter';
+import NavBarHeader from '../navbar/NavBarHeader'; //importing components
+
+import '../main.css'; //importing css file
 
 const OtherUserData = ( { userData } ) => {
-    
-    console.log(userData)
 
     return (
-        <div className="other-user-data container d-flex flex-column justify-content-between min-vh-100 border" >
+        <div className="other-user-data container d-flex flex-column justify-content-between min-vh-100 " >
             
             <NavBarHeader />
 
@@ -47,8 +46,7 @@ const OtherUserData = ( { userData } ) => {
             <Footer />
             
         </div>
-    )
-}
+    );
+};
 
-
-export default OtherUserData
+export default OtherUserData; //exporting component
