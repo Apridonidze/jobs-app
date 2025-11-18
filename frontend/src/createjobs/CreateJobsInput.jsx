@@ -121,12 +121,12 @@ const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobs
 
 
     return (
-        <div className="create-jobs-input-container container position-fixed bg-white d-flex flex-column top-25  p-4 rounded-2" >
+        <div className="create-jobs-input-container container position-fixed bg-white d-flex flex-column top-25  p-4 rounded-2" style={{zIndex : 5000}} >
 
 
             <h1>Create Job Offer</h1>
             
-            <form onSubmit={handleSubmit} className="d-flex flex-column gap-4">
+            <form onSubmit={handleSubmit}  className="d-flex flex-column gap-4">
                 
                 <div className="form-floating">
                     <input className="form-control text-start" type="text" name="title" onChange={e => setTitle(e.target.value)} value={title} placeholder="Create Job Title (For Example : Building Market Startup)" ref={titleRef}/>

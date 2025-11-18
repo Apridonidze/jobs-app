@@ -24,7 +24,7 @@ const Error = ( { setToggleError } ) => {
 
 
     return(
-        <div className="error-message-container d-flex flex-column position-absolute bg-white p-2 rounded-2 text-danger" style={{border : '1px solid #dc3545' , zIndex : 1055}}>
+        <div className="error-message-container d-flex flex-column position-absolute bg-white p-2 rounded-2 text-danger" style={{border : '1px solid #dc3545' , zIndex : 5000}}>
             <h4>Internal Error!</h4>
             <h5>Try Later.</h5>
             <h6>Window Closes In <b>{seconds}</b> Seconds.</h6>

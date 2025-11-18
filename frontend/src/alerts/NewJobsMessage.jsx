@@ -37,7 +37,7 @@ const NewJobsMessage = ( { isJobsSuccessful ,jobsMessage ,setToggleJobsMessage, 
     },[seconds])
 
     return (
-        <div className="new-jobs-message-container container position-fixed bg-white p-3 rounded-2">
+        <div className="new-jobs-message-container container position-fixed bg-white p-3 rounded-2" style={{zIndex : 5000}}>
             
             <div className="message-header">
                 {isJobsSuccessful ? <span className="d-flex align-items-top d-sm-flex-column"><i className="fa-regular fa-circle-check text-success fs-4" ></i> Job Opportunify Created! </span> : <span className="d-flex flex-row align-items-center d-sm-flex-column"><i className="fa-regular fa-circle-xmark text-danger fs-4 " ></i> <h4 className="text-danger">Job Opportunity Was Not Creted!</h4></span>}
