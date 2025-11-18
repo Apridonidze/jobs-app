@@ -11,7 +11,8 @@ const rateLimiter = require('../config/rateLimiter')
 
 
 SignRouter.post('/create-account', rateLimiter ,async (req, res) => {
- const validationResp = validateUser(req.body);
+
+    const validationResp = validateUser(req.body.data);
 
     if (!validationResp.success) {
         return res.status(400).json('invalid input');
@@ -20,11 +21,11 @@ SignRouter.post('/create-account', rateLimiter ,async (req, res) => {
     
     try {
         
-        const { role, name, surname, password, email, phoneNumber, birthDate, gender } = req.body;
+        const { role, name, surname, password, email, phoneNumber, birthDate, gender } = req.body.data;
+
         
-        
-        const [rows] = await db.query('select * from users where user_email = ?' , [email])
-        const [phoneRows] = await db.query('select * from users where user_phoneNumber = ?' , [phoneNumber])
+        const [ rows ] = await db.query('select * from users where user_email = ?' , [ email ])
+        const [ phoneRows ] = await db.query('select * from users where user_phoneNumber = ?' , [ phoneNumber ])
         const hasshedPassword = await bcrypt.hash(password, 10); 
 
         if(rows.length > 0){
@@ -35,12 +36,14 @@ SignRouter.post('/create-account', rateLimiter ,async (req, res) => {
             return res.status(400).json('Account With This Phone Number Already Exists')
         }
 
+
         const [userInsertion] = await db.query(
             `INSERT INTO users 
             (user_role, user_name, user_surname, user_password, user_email, user_phoneNumber, user_birthDate, user_gender) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
             [role, name, surname, hasshedPassword, email, phoneNumber, birthDate, gender]
         );
+
 
         const payload = {userId: userInsertion.insertId , userRole : role};
 

@@ -15,7 +15,7 @@ const Sign = () => {
     const [seconds, setSeconds] = useState(3) ; //seconds for sign message component
     const SIGN_PORT = 'http://localhost:8080/sign/create-account'; //api url to create account
     
-    const [setCookies] = useCookies(['token']); //sets cookies after users validates forms
+    const [cookies ,setCookies] = useCookies(['token']); //sets cookies after users validates forms
 
     const [isSuccessful ,setIsSuccessful] = useState(false); //props for sign message component
     const [toggleSigMessage,setToggleSigMessage]= useState(false);
@@ -113,16 +113,15 @@ const Sign = () => {
         if(isValid) { //checks if all of the inputs are correct and then executes try/catch block
             try{
 
-                await Promise.all([
-                axios.post(SIGN_PORT , data ).then(res => {
+                await axios.post(SIGN_PORT , {data} ).then(res => {
                     
                     setIsSuccessful(true);
                     setSignMessage(res.data.message);
-                    setCookies('token' , res.data.token , {path : '/' ,maxAge: 2592000});
+                    setCookies('token' , res.data.token , {path : '/' , maxAge: 2592000});
                     setToggleSigMessage(true);
                     setToggleError(false);
                 
-                })]);
+                })
                 
             }catch(err){
 
