@@ -91,36 +91,45 @@ const JobHolder = ( { job , savedJobs ,appliedJobs } ) => {
 
 
 
-    return(
-        <div className="job-holder-container" key={job.job_id}>
+    return (
+    <div className="card h-100 d-flex flex-column" >
+
+        <div className="card-body flex-grow-1">
+
             <div className="job-info">
-                    
-                <h1>{job.job_title}</h1>
-                <h2>{job.job_desc}</h2>
-                <h3>{job.job_employeeList}</h3>
-                <h3>{job.job_technologies}</h3>
-                <h3>{job.job_languages}</h3>
-            </div>
- 
-            
-            <div className="job-status">
-                <h4>Job Status : {jobStatus.length !== '' ? jobStatus.status == 'true' ? <span>accepted</span>  : <span>delcined</span> : <span>no response yet</span>}</h4> 
+                <h1 className="text-break">{job.job_title.length > 15 ? `${job.job_title.slice(0,15)}...` : job.job_title}</h1>
+                <h2 className="text-break">{job.job_desc.length > 15 ? `${job.job_desc.slice(0,15)}...` : job.job_desc}</h2>
+                <h3 className="text-break">Looking For : {job.job_employeeList}</h3>
+                <h3 className="text-break">Technologies : {job.job_technologies}</h3>
+                <h3 className="text-break">Speaking Language : {job.job_languages}</h3>
             </div>
 
-            <div className="buttons-header d d-flex gap-2 col">
-
-                    
-                    <div className="job-buttons d-flex w-100 justify-content-between gap-2">
-                        {isApplied ? <button className="btn btn-success opacity-50 w-50">Applied</button> : <button className="btn btn-success w-50" onClick={() => handleApply(job.job_id)}>Apply</button>}
-                        {isSaved ? <button className="btn opacity-75 border w-50 position-relative">Saved</button> : <button className="btn border w-50" onClick={() =>handleSave(job.job_id)}>Saved</button>}
-                    </div>
-                
-
+            <div className="job-status mt-3">
+                <h4>Job Status : {jobStatus.status === 'true' ? 'Accepted' : 'Declined'}</h4> 
             </div>
 
-            
         </div>
-    );
+
+        <div className="p-2 mt-auto">
+            <div className="job-buttons d-flex w-100 justify-content-between gap-2">
+                {isApplied ? (
+                    <button className="btn btn-success opacity-50 w-50">Applied</button>
+                ) : (
+                    <button className="btn btn-success w-50" onClick={handleApply}>Apply</button>
+                )}
+
+                {isSaved ? (
+                    <button className="btn opacity-75 border w-50">Saved</button>
+                ) : (
+                    <button className="btn border w-50" onClick={handleSave}>Saved</button>
+                )}
+            </div>
+        </div>
+
+    </div>
+);
+
+
 };
 
 export default JobHolder;//exporting component

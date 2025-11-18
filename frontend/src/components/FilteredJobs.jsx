@@ -81,7 +81,7 @@ const FilteredJobs = ({ jobs ,savedJobs,appliedJobs , setToggleSeeMore}) => {
 
       </div>
 
-      <div className="filtered-jobs-body  row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3  ">
+      <div className="filtered-jobs-body row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
         {toggleError && <Error setToggleError={setToggleError}/>}
 

@@ -11,9 +11,9 @@ const UploadTechnologies = ( { technologies ,setTechnologies ,setToggleError } )
 
     const handleUploadTech = async(e) => {
 
-        e.preventDefault();
+        e.preventDefault(); //prevents page reshresh when function triggers
 
-        if(technologies.length < 1)return;
+        if(technologies.length < 1)return; //if technologies length === 0 then fucntion does nothing 
 
         try{
 
