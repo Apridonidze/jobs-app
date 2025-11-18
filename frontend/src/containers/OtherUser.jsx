@@ -68,5 +68,6 @@ const OtherUser = () => {
     );
 };
 
+document.title = `Jobs App `; //title for page
 
 export default OtherUser; //exporting component
