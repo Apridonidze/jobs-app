@@ -4,7 +4,7 @@ import AuthNavBar from "../navbar/AuthNavBar"; //importing jsx components
 
 const Authentication = () => {
     return (
-        <div className="authentication-container container text-center d-flex flex-column justify-content-between min-vh-100 gap-5">
+        <div className="authentication-container container text-center d-flex flex-column justify-content-between min-vh-100 gap-5 ">
             
             <AuthNavBar />
             
