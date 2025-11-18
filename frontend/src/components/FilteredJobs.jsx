@@ -36,7 +36,7 @@ const FilteredJobs = ({ jobs ,savedJobs,appliedJobs , setToggleSeeMore}) => {
 
           axios.get(MY_USER_ROLE_URL, { headers: { Authorization: `Bearer ${cookies.token}` } }).then(resp => { //fetches user role from server
             if(resp.status === 204) setUserRoles([]) , setToggleError(false); //if user does not have role choosed it sets state to empty array
-            else setUserRoles([resp.data[0].user_roles]) , setToggleError(false) ; //else if user has technologies it sets in state
+            else setUserRoles(resp.data.user_roles) , setToggleError(false) ; //else if user has technologies it sets in state
           })
 
         ]);
@@ -60,9 +60,9 @@ const FilteredJobs = ({ jobs ,savedJobs,appliedJobs , setToggleSeeMore}) => {
 
       const filtered = jobs.filter(job => 
 
-        job.job_technologies.some(tech => tech.includes(userTechnologies))
+        job.job_technologies.some(tech => tech.includes(...userTechnologies))
         &&
-        job.job_employeeList.some(role => role.includes(userRoles))
+        job.job_employeeList.some(role => role.includes(...userRoles))
 
       ); //variable filetrs job (returns job that only have some parameters) . based on job requirements (role , technologies)
       
@@ -71,7 +71,7 @@ const FilteredJobs = ({ jobs ,savedJobs,appliedJobs , setToggleSeeMore}) => {
 
   }, [userTechnologies, userRoles, jobs]); //function mounts once this variables change
 
-
+  console.log(...userTechnologies , ...userRoles)
   return (
     <div className="filtered-jobs-container">
       

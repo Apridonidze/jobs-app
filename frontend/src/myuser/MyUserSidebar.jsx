@@ -82,7 +82,7 @@ const MyUserSidebar = ( { user } ) => {
                     .then(resp => {
 
                         if(resp.status === 204) setRoles([]) , setToggleError(false); //if user does not have roles , it sets setRoles to empty array
-                        else setRoles([resp.data[0].user_roles]) , setToggleError(false); //else roels are stored in state
+                        else setRoles([...resp.data.user_roles]) , setToggleError(false); //else roels are stored in state
 
                     }), 
                     
@@ -105,7 +105,6 @@ const MyUserSidebar = ( { user } ) => {
         
 
         },[]);//fetchUserData function triggers once this component is rendered
-
 
     useEffect(() => {
             

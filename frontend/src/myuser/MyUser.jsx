@@ -55,6 +55,7 @@ const MyUser = () => {
             };
         } ;
 
+
         FetchMyUser();//declearing function
 
     },[]); //function triggers when component is mounted

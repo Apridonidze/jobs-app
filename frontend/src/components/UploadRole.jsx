@@ -15,6 +15,8 @@ const UploadRole = ( { setToggleError , setRoles, roles } ) => {
 
         if(roles.length < 1) return; //does nothing if roles length is 0
 
+        console.log('asdas')
+
         try{
             
             await axios.post(UPLOAD_ROLE_URL , {roles : roles}, {headers : {Authorization : `Bearer ${cookies.token}`}})
@@ -36,7 +38,7 @@ const UploadRole = ( { setToggleError , setRoles, roles } ) => {
             
             <form className="my-2" onSubmit={handleUploadRole}>
 
-                <select className="form-control" onChange={(e) => {setRoles(roles => [...roles, e.target.value]) ;if(e.target.value === 'blank') return setRoles(roles) ; if(roles.includes(e.target.value)) return setRoles(roles) ; }}>        
+                <select className="form-control" onChange={(e) => {setRoles(roles => [...roles ,  e.target.value]) ;if(e.target.value === 'blank') return setRoles(roles) ; if(roles.includes(e.target.value)) return setRoles(roles) ; }}>        
                     <option value="blank">I Am A:</option>
                     <option value="Figma Designer">Figma Designer</option>
                     <option value="Frontend Developer">Frontend Developer</option>
@@ -58,7 +60,7 @@ const UploadRole = ( { setToggleError , setRoles, roles } ) => {
                     ))}
                 </div>
 
-                <input type="submit " className="btn btn-success w-100 my-2" value="Upload Your Role" />
+                <input type="submit" className="btn btn-success w-100 my-2" value="Upload Your Roles" />
 
             </form>
 

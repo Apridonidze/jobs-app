@@ -19,7 +19,7 @@ RoleRouter.get('/my-roles' , verifyToken ,  async(req, res) => {
             return res.status(204).json("No Roles Yet")
         }
 
-        return res.status(200).json(rows)
+        return res.status(200).json(rows[0])
 
     }catch(err){
         return res.status(500).json('Database Error')
@@ -31,6 +31,8 @@ RoleRouter.get('/my-roles' , verifyToken ,  async(req, res) => {
 RoleRouter.post('/upload-roles' , verifyToken  , rateLimiter , async(req,res) => {
 
     const RoleResp = RoleSchema(req.body)
+
+    console.log(req.body)
 
     if(!RoleResp.success){
         return res.status(400).json('invalid input')
