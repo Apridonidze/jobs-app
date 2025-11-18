@@ -1,11 +1,14 @@
-import { useEffect } from "react"
-import { useCookies } from "react-cookie";
-import { useNavigate } from "react-router-dom";
-import '../main.css' 
-const SignMessage = ( {setToggleSigMessage, isSuccessful , signMessage, setSeconds, seconds } ) => {
+import { useEffect } from "react"; //importing react hooks
 
-    const navigate = useNavigate()
-    const [cookies] = useCookies(['token'])
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom"; //importing react libraries
+
+import '../main.css' ; //importing css file
+
+const SignMessage = ( {setToggleSigMessage, isSuccessful , setSeconds, seconds } ) => {
+
+    const navigate = useNavigate(); //navigator to navigate user through pages
+    const [ cookies ] = useCookies(['token']); //cookies
 
 
         useEffect(() => {
@@ -14,28 +17,26 @@ const SignMessage = ( {setToggleSigMessage, isSuccessful , signMessage, setSecon
             
             setSeconds(seconds => {
                 
-                if(seconds <= 0){clearInterval(handleTimer) ;setToggleSigMessage(false) ;return 0}
-                return seconds - 1
+                if(seconds <= 0){clearInterval(handleTimer) ;setToggleSigMessage(false) ;return 0}; //statement checks if second are === 0 , if so it clears interval and untoggles this component
+                return seconds - 1; //else triggers seconds countdown
             
             }) 
 
               
             if (seconds === 0  && cookies.token) {
 
-                navigate("/", { replace: true }); // redirect immediately after token is set
+                navigate("/", { replace: true }); // redirects user to main page immediately after token is set
             }
 
-        }, 1000);
+        }, 1000); //internval triggers in 1000 miliseconds
         
 
         
 
-        return () =>  {clearInterval(handleTimer)}
+        return () =>  {clearInterval(handleTimer)} ; //clears interval
 
     
-},[seconds, isSuccessful , navigate, cookies])
-
-
+    },[seconds, isSuccessful , navigate, cookies]); //function triggers based on this variables change
 
     return(
         <div className="sign-message-container d-flex flex-column position-absolute bg-bright bg-white rounded-2 p-2 " style={isSuccessful ? {border : '1px solid #198754'} : {border : '1px solid #dc3545' , zIndex : 1055}}>
@@ -54,4 +55,4 @@ const SignMessage = ( {setToggleSigMessage, isSuccessful , signMessage, setSecon
 };
 
 
-export default SignMessage;
+export default SignMessage; //exporting component
