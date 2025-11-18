@@ -22,7 +22,6 @@ async function verifyToken (req,res,next) {
         return res.status(401).json({error: 'Invalid Token'}); //returns 401 status error code if cookies are not provided
 
     };
-
-};
+}; //middleware is used to avoid non-authenticated users from sending request to our server who might be potential attackers. also to secure our backend side from request inejction from untrusted sources
 
 module.exports = verifyToken; //exporting middleware

@@ -52,8 +52,7 @@ AcceptDeclineRouter.get('/:jobId', verifyToken , async (req, res) => {
     }catch(err){
         return res.status(500).json('Database Error'); //returns database error if internal error occurs
     };
-
-})
+}); //api is used to get job status basedd on jobid
 
 AcceptDeclineRouter.post('/accept-decline-employee/:jobId/:applicantId/:status' , verifyToken , async(req,res) => {
 
@@ -96,8 +95,6 @@ AcceptDeclineRouter.post('/accept-decline-employee/:jobId/:applicantId/:status' 
         return res.status(500).json(`Database Error`); //returns 500 status code if internal error occurs
     };
 
-});
-
-
+});//api is used to sends applicant status as a recruiter if i accept their offer or decline
 
 module.exports = AcceptDeclineRouter; //exporting route

@@ -38,6 +38,6 @@ isProfileFinishedRouter.get('/', verifyToken , async (req,res) => {
         return res.status(500).json(`Database Error`); //returns 500 statsu code if internal error occurs
         
     };
-});
+}); //api is used to check is user has finished their profile , logic checks what data is needed to be filled based on users role (recruiter , employee)
 
 module.exports = isProfileFinishedRouter; //exporting route
