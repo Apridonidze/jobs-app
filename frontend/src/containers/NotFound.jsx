@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; //importing react library
+
 import Footer from "../components/Foooter";
-import AuthNavBar from "../navbar/AuthNavBar";
+import AuthNavBar from "../navbar/AuthNavBar";//importing react components
 
 const NotFound = () => {
     return (
@@ -19,6 +20,6 @@ const NotFound = () => {
     );
 };
 
-document.title = 'Jobs App - Page Not Found'
+document.title = 'Jobs App - Page Not Found'; //title for page
 
-export default NotFound;
+export default NotFound;//exporting component
