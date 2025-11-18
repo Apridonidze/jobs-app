@@ -47,7 +47,7 @@ const JobHolder = ( { job , setToggleDelete } ) => {
 
     
     return(
-        <div className="job-holder-container container py-2 px-3 position-fixed bg-white  d-flex flex-column gap-3 rounded-2 overflow-y-auto d-flex flex-column "  key={job.job_id}>
+        <div className="job-holder-container container py-2 px-3 position-fixed bg-white  d-flex flex-column gap-3 rounded-2 overflow-y-auto d-flex flex-column " style={{zIndex : 5000}}  key={job.job_id}>
             <div className="job-info ">
                     
                 <h1 className="text-break">{job.job_title}</h1>
