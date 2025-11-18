@@ -97,18 +97,19 @@ const JobHolder = ( { job , savedJobs ,appliedJobs } ) => {
         <div className="card-body flex-grow-1">
 
             <div className="job-info">
-                <h1 className="text-break">{job.job_title.length > 15 ? `${job.job_title.slice(0,15)}...` : job.job_title}</h1>
-                <h2 className="text-break">{job.job_desc.length > 15 ? `${job.job_desc.slice(0,15)}...` : job.job_desc}</h2>
-                <h3 className="text-break">Looking For : {job.job_employeeList}</h3>
-                <h3 className="text-break">Technologies : {job.job_technologies}</h3>
-                <h3 className="text-break">Speaking Language : {job.job_languages}</h3>
+                <h1 className="text-break fs-2">{job.job_title.length > 15 ? `${job.job_title.slice(0,15)}...` : job.job_title}</h1>
+                <h2 className="text-break fs-4">{job.job_desc.length > 15 ? `${job.job_desc.slice(0,15)}...` : job.job_desc}</h2>
+                <h3 className="text-break fs-4">Looking For : {job.job_employeeList}</h3>
+                <h3 className="text-break fs-4">Technologies : {job.job_technologies}</h3>
+                <h3 className="text-break fs-4">Speaking Language : {job.job_languages}</h3>
             </div>
 
-            <div className="job-status mt-3">
-                <h4>Job Status : {jobStatus.status === 'true' ? 'Accepted' : 'Declined'}</h4> 
-            </div>
 
         </div>
+
+        <div className="job-status px-3 my-2">
+                <h4>Job Status : {jobStatus.status === 'true' ? <b className="text-success">Accepted</b> : <b className="text-danger">Declined</b> }</h4> 
+            </div>
 
         <div className="p-2 mt-auto">
             <div className="job-buttons d-flex w-100 justify-content-between gap-2">
