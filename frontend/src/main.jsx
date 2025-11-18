@@ -1,7 +1,8 @@
-import App from './App.jsx'
+import App from './App.jsx'; //importing root component
 
-import { createRoot } from 'react-dom/client'
-import { CookiesProvider } from "react-cookie";
+import { createRoot } from 'react-dom/client'; //importing react root
+
+import { CookiesProvider } from "react-cookie";//importing react library
 
 createRoot(document.getElementById('root')).render(
   <CookiesProvider>
@@ -9,4 +10,4 @@ createRoot(document.getElementById('root')).render(
     <App />
   
   </CookiesProvider>
-)
+); //wrapping main component with cookies provider to provide cookies to all components
