@@ -5,7 +5,13 @@ const NavBar = ({ setTogglePosts , setFindJobs ,setCreateJobs, toggleJobsListing
 
     return (
         <div className="nav-bar-container container">
-            {user && (<><NavBarHeader user={user} />  <NavBarFooter user={user} setTogglePosts={setTogglePosts} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs} toggleJobsListings={toggleJobsListings} setToggleJobsListings={setToggleJobsListings} setToggleSaved={setToggleSaved} setToggleApplied={setToggleApplied}/></>)}
+            {user && 
+            (<>
+            
+                <NavBarHeader user={user} />  
+                <NavBarFooter user={user} setTogglePosts={setTogglePosts} setFindJobs={setFindJobs} setCreateJobs={setCreateJobs} toggleJobsListings={toggleJobsListings} setToggleJobsListings={setToggleJobsListings} setToggleSaved={setToggleSaved} setToggleApplied={setToggleApplied}/>
+            
+            </>)}
         </div>
 
       

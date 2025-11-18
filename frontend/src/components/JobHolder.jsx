@@ -109,10 +109,12 @@ const JobHolder = ( { job , savedJobs ,appliedJobs } ) => {
 
         <div className="job-status px-3 my-2">
                 <h4 className="fs-6">Job Status : {jobStatus.status === 'true' ? <b className="text-success">Accepted</b> : <b className="text-danger">Declined</b> }</h4> 
-            </div>
+        </div>
 
         <div className="p-2 mt-auto">
+
             <div className="job-buttons d-flex w-100 justify-content-between gap-2">
+
                 {isApplied ? (
                     <button className="btn btn-success opacity-50 w-50">Applied</button>
                 ) : (
@@ -124,13 +126,13 @@ const JobHolder = ( { job , savedJobs ,appliedJobs } ) => {
                 ) : (
                     <button className="btn border w-50" onClick={handleSave}>Saved</button>
                 )}
+                
             </div>
+
         </div>
 
     </div>
-);
-
-
+    );
 };
 
 export default JobHolder;//exporting component
