@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; //importing react hooks
+
 
 const DescMessage = ({ setToggleUploadDesc , setToggleUploadDescMessage, isDescSuccessfull,UploadMessage }) => {
 
-    const [seconds,setSeconds] = useState(3)
+    const [seconds,setSeconds] = useState(3); //state for seconds utill alert message dissapears
 
     useEffect(() => {
         
@@ -10,28 +11,28 @@ const DescMessage = ({ setToggleUploadDesc , setToggleUploadDescMessage, isDescS
                     
             setSeconds(seconds => {
                         
-                if(seconds <= 0){clearInterval(handleTimer) ;settogg(false) ;return 0}
+                if(seconds <= 0){clearInterval(handleTimer) ;settogg(false) ;return 0};  //if seconds are less than zero it untoggles component
 
-                return seconds - 1
+                return seconds - 1; //else triggers countdown from 3 to 0
                     
-            }) 
+            }) ;
         
-        }, 1000);
+        }, 1000); //countdown happens once in 1000ms (1 sec)
                 
         
             if(seconds == 0){
                     
-                if(isDescSuccessfull){setToggleUploadDesc(false), setToggleUploadDescMessage(false)}
+                if(isDescSuccessfull){setToggleUploadDesc(false), setToggleUploadDescMessage(false)} //if description upload is successfull it closes window
     
-                else setToggleUploadDesc(true) ; setToggleUploadDescMessage(false)
+                else setToggleUploadDesc(true) ; setToggleUploadDescMessage(false); //if description upload failed it does not closes window and lets user know about error
             
-            }
+            }; //if seconds are 0 if statement triggers
                 
                 
         
-            return () =>  {clearInterval(handleTimer)}
+            return () =>  {clearInterval(handleTimer)}; //clearing interval
             
-        },[seconds,isDescSuccessfull])
+        },[seconds,isDescSuccessfull]); //function mounts based on this variables
 
 
     return(
@@ -42,7 +43,7 @@ const DescMessage = ({ setToggleUploadDesc , setToggleUploadDescMessage, isDescS
             <span className="ms-2">{isDescSuccessfull ? <span className="text-success">Redirecting In... {seconds} Seconds.</span> : <span className="text-danger">Window Closes In : {seconds} Seconds.</span> }</span>   
 
         </div>
-    )
-}
+    );
+};
 
-export default DescMessage 
+export default DescMessage ; //exporting component
