@@ -91,12 +91,27 @@ body{
 
 .create-jobs-input-container{
     left: 25%;
+    width: 50vw;
+}
+
+.new-jobs-message-container {
+    width: 50vw;
+    left: 25%;
+    top: 5vh;
 }
 
 
 @media (max-width : 576px){
+    .new-jobs-message-container{
+        left: 2vw;
+        width: 95vw;
+    }
+}
+
+@media (max-width : 576px){
     .create-jobs-input-container{
-        left: 20vw;
+        left: 2vw;
+        width: 95vw;
     }
 }
 
