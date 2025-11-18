@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; //importing react hooks
 
 const Error = ( { setToggleError } ) => {
 
-    const [seconds,setSeconds] = useState(3)
+    const [seconds,setSeconds] = useState(3); //sttate for seconds
     
         useEffect(() => {
             

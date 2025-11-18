@@ -47,6 +47,30 @@ body{
     }
 }
 
+.desc-message-container{
+    position: fixed;
+    top: 50%;
+    right: 0%;
+    width: 25%;
+    display: block;
+    align-items: center;
+}
+
+@media (max-width : 576px){
+    
+    .desc-message-container{
+        position: fixed;
+        top: 0px;
+        width: 90%;
+        left: 0px;
+        right: 0px;
+        margin: 0px 20px;
+        display: block;
+        align-items: center;
+    }
+}
+
+
 
 
 .is-profile-finished-container{

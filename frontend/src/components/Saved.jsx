@@ -10,7 +10,7 @@ const Saved = ( { user , jobs, savedJobs, appliedJobs } ) => {
             
             </div>
             
-            <div className="saved-body row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 align-items-stretch">
+            <div className="saved-body row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3 align-items-stretch my-2">
                 
                 {jobs && user && jobs.length > 0 ? jobs.map(job => (
                     <div className="col" key={job.job_id}>

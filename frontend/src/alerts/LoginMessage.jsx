@@ -1,11 +1,13 @@
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import '../main.css';
+import { useNavigate } from "react-router-dom";//importing react libraries
 
-const LoginMessage = ( { loginMessage , isSuccesful , setToggleLoginMessage } ) => {
+import { useEffect, useState } from "react"; //importing react hooks
+
+import '../main.css'; //importing css file
+
+const LoginMessage = ( { isSuccesful , setToggleLoginMessage } ) => {
     
-    const navigator = useNavigate()
-    const [seconds,setSeconds ] = useState(3)
+    const navigator = useNavigate(); //navigator to navigate user through pages
+    const [seconds,setSeconds ] = useState(3); //state for login message toggle in seconds
 
     useEffect(() => {
        
@@ -13,22 +15,23 @@ const LoginMessage = ( { loginMessage , isSuccesful , setToggleLoginMessage } ) 
         const timer = setInterval(() => {
         
             setSeconds(seconds => {
-                if(seconds <= 0){clearInterval(timer) ;setToggleLoginMessage(false) ;return 0}
-                return seconds - 1
-        })
+                if(seconds <= 0){clearInterval(timer) ;setToggleLoginMessage(false) ;return 0}; //checks if seconds === 0 and clears interval
+                return seconds - 1; //else executes seconds countdwon
+        });
         
-        }, 1000);
+        }, 1000);//interval execcutes once in 1000 miliseconds
 
        
-        if(seconds == 0){
+        if(seconds == 0){//if seconds === 0 this logic executes
             
-            if(!isSuccesful){return } //add eerror event here 
+            if(!isSuccesful) return ; //if login is not successfull function does nothing
             
-            navigator('/', {replace: true})
+            navigator('/', {replace: true}); //else if login is susccessfull function navigates user to main page
         }
-        return () => {clearInterval(timer)}
+
+        return () => {clearInterval(timer)}; //clears interval
         
-    },[seconds,navigator])
+    },[seconds,navigator]); //function mounts basedon this variables change
 
 
     return(
@@ -46,8 +49,7 @@ const LoginMessage = ( { loginMessage , isSuccesful , setToggleLoginMessage } ) 
 
 
         </div>
-    )
-}
+    );
+};
 
-
-export default LoginMessage
+export default LoginMessage;//exporting component
