@@ -4,14 +4,14 @@ Jobs App is a web application where users can browse and apply for jobs, save th
 
 ## Screenshots
 
-![Alt text](./design/Screenshot%202025-11-19%20112855.png)
-![Alt text](./design/Screenshot%202025-11-19%20112931.png)
-![Alt text](./design/Screenshot%202025-11-19%20112949.png)
-![Alt text](./design/Screenshot%202025-11-19%20113012.png)
-![Alt text](./design/Screenshot%202025-11-19%20115809.png)
-![Alt text](./design/Screenshot%202025-11-19%20115829.png)
-![Alt text](./design/Screenshot%202025-11-19%20120022.png)
-![Alt text](./design/Screenshot%202025-11-19%20120036.png)
+![Alt text](/frontend/design/Screenshot%202025-11-19%20112855.png)
+![Alt text](/frontend/design/Screenshot%202025-11-19%20112931.png)
+![Alt text](/frontend/design/Screenshot%202025-11-19%20112949.png)
+![Alt text](/frontend/design/Screenshot%202025-11-19%20113012.png)
+![Alt text](/frontend/design/Screenshot%202025-11-19%20115809.png)
+![Alt text](/frontend/design/Screenshot%202025-11-19%20115829.png)
+![Alt text](/frontend/design/Screenshot%202025-11-19%20120022.png)
+![Alt text](/frontend/design/Screenshot%202025-11-19%20120036.png)
 
 ## Features
 
