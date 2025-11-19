@@ -2,6 +2,17 @@
 
 Jobs App is a web application where users can browse and apply for jobs, save their favorite jobs, and manage their profiles. Recruiters can post jobs and accept or decline applicants. The app is well-secured against JavaScript, XSS, and SQL injections. All inputs have filters and validations on the frontend, and the backend uses additional security measures including Zod validation, token verification, rate limiting, CORS, and file handling with FS and Multer.
 
+## Screenshots
+
+![Alt text](./design/Screenshot%202025-11-19%20112855.png)
+![Alt text](./design/Screenshot%202025-11-19%20112931.png)
+![Alt text](./design/Screenshot%202025-11-19%20112949.png)
+![Alt text](./design/Screenshot%202025-11-19%20113012.png)
+![Alt text](./design/Screenshot%202025-11-19%20115809.png)
+![Alt text](./design/Screenshot%202025-11-19%20115829.png)
+![Alt text](./design/Screenshot%202025-11-19%20120022.png)
+![Alt text](./design/Screenshot%202025-11-19%20120036.png)
+
 ## Features
 
 - Users can create a new account and choose their role (Recruiter or Employee), or log in to an existing account.  
