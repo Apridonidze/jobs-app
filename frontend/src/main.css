@@ -1,6 +1,6 @@
 body{
     overflow-x: hidden;
-}; /*body hiddes overflow on sides*/
+} /*body hiddes overflow on sides*/
 
 .login-message-container{
     position: fixed;
@@ -9,9 +9,109 @@ body{
     width: 25%;
     display: block;
     align-items: center;
-}; /*positions and resizes component for large devices*/
+} /*positions and resizes component for large devices*/
+
+.sign-message-container{
+    position: fixed;
+    top: 50%;
+    right: 0%;
+    width: 25%;
+    display: block;
+    align-items: center;
+} /*positions and resizes component for large devices*/
+
+.error-message-container{
+    position: fixed;
+    top: 50%;
+    right: 0%;
+    width: 25%;
+    display: block;
+    align-items: center;
+} /*positions and resizes component for large devices*/
+
+.desc-message-container{
+    position: fixed;
+    top: 50%;
+    right: 0%;
+    width: 25%;
+    display: block;
+    align-items: center;
+} /*positions and resizes component for large devices*/
+
+.is-profile-finished-container{
+    position: fixed;
+    top: 50%;
+    right: 0%;
+    width: 25%;
+    display: block;
+    align-items: center;
+} /*positions and resizes component for large devices*/
+
+.create-jobs-input-container{
+    left: 25%;
+    width: 50vw;
+} /*positions and resizes component for large devices*/
+
+.new-jobs-message-container {
+    width: 50vw;
+    left: 25%;
+    top: 5vh;
+} /*positions and resizes component for large devices*/
+
+.job-holder-container{
+    top: 5vh;
+    left: 20vh;
+    width: 70vw;
+} /*positions and resizes component for large devices*/
+
+.applicants-container {
+    overflow-x: hidden;
+} /*positions and resizes component for large devices*/
+
+.delete-container {
+    top: 40vh;
+    left: 40vw;
+} /*positions and resizes component for large devices*/
+
+.job-container{
+    z-index: 1055;
+    left: 30vw;
+    top: 30vh;
+} /*positions and resizes component for large devices*/
+
+.upload-avatar-container{
+    left: 25vw;
+} /*positions component for large devices*/
+
+.upload-desc-container{
+    left: 25vw;
+    top: 5vh;
+} /*resizes component for large devices*/
+
+.upload-role-container{
+    margin: 0px auto;
+    width: 45vh;
+    top: 25vh;
+    left: 50vh;
+} /*positions and resizes component for large devices*/
+
+.upload-technologies-container{
+    margin: 0px auto;
+    width: 45vh;
+    top: 25vh;
+    left: 50vh;
+} /*positions and resizes component for large devices*/
+
+.upload-tags-container {
+    margin: 0px auto;
+    width: 45vh;
+    top: 25vh;
+    left: 50vh;
+} /*positions and resizes component for large devices*/
+
 
 @media (max-width : 576px){
+
     .login-message-container{
         position: fixed;
         top: 20px;
@@ -21,19 +121,8 @@ body{
         margin: 0px 20px;
         display: block;
         align-items: center;
-    };
-};/*positions and resizes component for large mobile*/
+    }
 
-.sign-message-container{
-    position: fixed;
-    top: 50%;
-    right: 0%;
-    width: 25%;
-    display: block;
-    align-items: center;
-}; /*positions and resizes component for large devices*/
-
-@media (max-width : 576px){
     .sign-message-container{
         position: fixed;
         top: 20px;
@@ -43,19 +132,8 @@ body{
         margin: 0px 20px;
         display: block;
         align-items: center;
-    };
-};/*positions and resizes component for mobile devices*/
+    }
 
-.error-message-container{
-    position: fixed;
-    top: 50%;
-    right: 0%;
-    width: 25%;
-    display: block;
-    align-items: center;
-};/*positions and resizes component for large devices*/
-
-@media (max-width : 576px){
     .error-message-container{
         position: fixed;
         top: 20px;
@@ -65,20 +143,8 @@ body{
         margin: 0px 20px;
         display: block;
         align-items: center;
-    };
-};/*positions and resizes component for smal devices*/
+    }
 
-.desc-message-container{
-    position: fixed;
-    top: 50%;
-    right: 0%;
-    width: 25%;
-    display: block;
-    align-items: center;
-};/*positions and resizes component for large devices*/
-
-@media (max-width : 576px){
-    
     .desc-message-container{
         position: fixed;
         top: 0px;
@@ -88,100 +154,71 @@ body{
         margin: 0px 20px;
         display: block;
         align-items: center;
-    };
-};/*positions and resizes component for small devices*/
+    }
 
-.is-profile-finished-container{
-    position: fixed;
-    top: 50%;
-    right: 0%;
-    width: 25%;
-    display: block;
-    align-items: center;
-}; /*positions and resizes component for large devices*/
-
-@media (max-width : 576px){
     .is-profile-finished-container{
         display: none;
-    };
-};/*untoggles component on small devices since it does not fit in design for small devices*/
+    }
 
-
-.create-jobs-input-container{
-    left: 25%;
-    width: 50vw;
-}; /*positions and resizes component for large devices*/
-
-.new-jobs-message-container {
-    width: 50vw;
-    left: 25%;
-    top: 5vh;
-};/*positions and resizes component for large devices*/
-
-
-@media (max-width : 576px){
     .new-jobs-message-container{
         left: 2vw;
         width: 95vw;
-    };
-};/*positions and resizes component for small devices*/
+    }
 
-@media (max-width : 576px){
     .create-jobs-input-container{
         left: 2vw;
         width: 95vw;
-    };
-};/*positions and resizes component for small devices*/
+    }
 
-
-.job-holder-container{
-    top: 5vh;
-    left: 20vh;
-    width: 70vw;
-};/*positions and resizes component for large devices*/
-
-.applicants-container {
-    overflow-x: hidden;
-};/*positions and resizes component for large devices*/
-
-@media (max-width : 576px){
     .job-holder-container{
-        position: fixed;  
-        width: 100vw;      
+        position: fixed;
+        width: 100vw;
         top: 0;
         left: 0;
         margin-top: 15vw;
-    };
-};/*positions and resizes component for small devices*/
+    }
 
-.delete-container {
-    top: 40vh;
-    left: 40vw;
-}; /*positions and resizes component for large devices*/
-
-@media (max-width : 576px){
     .delete-container{
         top: 40vh;
         left: 15vw;
         width: 70vw;
-    };
-};/*positions and resizes component for small devices*/
+    }
 
-
-.job-container{
-    z-index: 1055;
-    left: 30vw;
-    top: 30vh;
-};/*positions and resizes component for large devices*/
-
-@media (max-width : 576px){
     .job-container{
         top: 20vh;
         left: 5vw;
         width: 90vw;
         height: 50vh;
-    };
-};/*positions and resizes component for small devices*/
+    }
+
+    .upload-avatar-container{
+        top: 15vh;
+        left: 2vw;
+        width: 95vw;
+        height: auto;
+    }
+
+    .upload-desc-container{
+        top: 5vh;
+        left: 2vw;
+        width: 95vw;
+        height: auto;
+    }
+
+    .upload-role-container{
+        width: 95vw;
+    }
+
+    .upload-technologies-container{
+        width: 95vw;
+    }
+
+    .upload-tags-container{
+        width: 95vw;
+    }
+}
+
+
 
 @media (max-width : 800px){
     .job-container{
@@ -189,126 +226,45 @@ body{
         left: 5vw;
         width: 90vw;
         height:40vh;
-    };
-};/*positions and resizes component for tablet devices*/
+    }
+
+    .upload-role-container {
+        left: 2vw;
+        width: 95vw;
+    }
+
+    .upload-technologies-container {
+        left: 2vw;
+        width: 95vw;
+    }
+
+    .upload-tags-container {
+        left: 2vw;
+        width: 95vw;
+    }
+} /*positions and resizes component for tablet devices*/
 
 @media (max-width : 991px){
     .my-user-sidebar-container{
-        display: flex; 
+        display: flex;
         justify-content: center;
-    };
+    }
 
     .my-user-data{
         margin: 2vh auto;
-    };
-};/*positions and resizes component for larger tablet devices*/
-
-
-.upload-avatar-container{
-    left: 25vw;
-}; /*positions component for large devices*/
+    }
+} /*positions and resizes component for larger tablet devices*/
 
 @media (max-width : 991px){
     .upload-avatar-container{
         top: 20vh;
         height: auto;
-    };
-};/*positions and resizes component for large tablet devices*/
-
-@media (max-width : 576px){
-    .upload-avatar-container{
-        top: 15vh;
-        left: 2vw;
-        width: 95vw;
-        height: auto;
-    };
-};/*positions and resizes component for small devices*/
-
-.upload-desc-container{
-    left: 25vw;
-    top: 5vh;
-}; /*resizes component for large devices*/
+    }
+} /*positions and resizes component for large tablet devices*/
 
 @media (max-width : 991px){
     .upload-desc-container{
         top: 5vh;
         height: auto;
-    };
-};/*positions and resizes component for larger tablet devices*/
-
-@media (max-width : 576px){
-    .upload-desc-container{
-        top: 5vh;
-        left: 2vw;
-        width: 95vw;
-        height: auto;
-    };
-};/*positions and resizes component for mobile devices*/
-
-.upload-role-container{
-    margin: 0px auto;
-    width: 45vh;
-    top: 25vh;
-    left: 50vh;
-}; /*positions and resizes component for large devices*/
-
-@media  (max-width : 800px){
-    
-    .upload-role-container {
-        left: 2vw;
-        width: 95vw;
-    };
-};/*positions and resizes component for tablet devices*/
-
-@media  (max-width : 576px){
-    
-    .upload-role-container {
-        width: 95vw;
-    };
-};/*resizes component for mobile devices*/
-
-.upload-technologies-container{
-    margin: 0px auto;
-    width: 45vh;
-    top: 25vh;
-    left: 50vh;
-}; /*positions and resizes component for large devices*/
-
-@media  (max-width : 800px){
-    
-    .upload-technologies-container {
-        left: 2vw;
-        width: 95vw;
-    };
-};/*positions and resizes component for tablet devices*/
-
-
-@media  (max-width : 576px){
-    
-    .upload-technologies-container {
-        width: 95vw;
-    };
-};/*resizes component for mobile devices*/
-
-.upload-tags-container {
-    margin: 0px auto;
-    width: 45vh;
-    top: 25vh;
-    left: 50vh;
-}; /*positions and resizes component for large devices*/
-
-@media  (max-width : 800px){
-    
-    .upload-tags-container {
-        left: 2vw;
-        width: 95vw;
-    };
-};/*positions and resizes component for tablet devices*/
-
-
-@media  (max-width : 576px){
-    
-    .upload-tags-container {
-        width: 95vw;
-    };
-};/*resizes component for mobile devices*/
+    }
+} /*positions and resizes component for larger tablet devices*/

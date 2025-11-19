@@ -121,7 +121,7 @@ const CreateJobsInput = ( {  setIsJobsSuccessful ,setToggleJobsMessage , setJobs
 
 
     return (
-        <div className="create-jobs-input-container container position-fixed bg-white d-flex flex-column top-25  p-4 rounded-2" style={{zIndex : 5000}} >
+        <div className="create-jobs-input-container container position-fixed bg-white d-flex flex-column p-4 rounded-2"  style={{zIndex: 5000}}>
 
 
             <h1>Create Job Offer</h1>

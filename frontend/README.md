@@ -1,19 +1,56 @@
-# React + Vite
+# Jobs App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Jobs App is a web application where users can browse and apply for jobs, save their favorite jobs, and manage their profiles. Recruiters can post jobs and accept or decline applicants. The app is well-secured against JavaScript, XSS, and SQL injections. All inputs have filters and validations on the frontend, and the backend uses additional security measures including Zod validation, token verification, rate limiting, CORS, and file handling with FS and Multer.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Users can create a new account and choose their role (Recruiter or Employee), or log in to an existing account.  
+- Employees can browse jobs filtered based on their roles and technologies, apply to jobs, or save them for later.  
+- Recruiters can create job opportunities.  
+- Recruiters can accept or decline applicants and manage applications through their account page.  
+- Users can manage profile information and upload profile pictures.  
 
-## React Compiler
+## Technologies
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React + Vite  
+- Express.js  
+- MySQL  
+- Git  
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. Clone Repository -
 
+    git clone https://github.com/Apridonidze/jobs-app.git
+    cd jobs-app
 
+2. Install Dependencies -
 
+    cd frontned npm install
+    cd backend npm install
+
+3. Database Setup -
+
+    CREATE DATABASE jobs_app;
+    Import database/schema.sql content into Database
+
+4. Environment Variables -
+
+    Create .env file in /backend and add followings :
+
+        SERVER_PORT = 8080
+        FRONTEND_URL = http://localhost:5173
+
+        JWT_SECRET_KEY = your_secret_key
+
+        DB_HOST  = localhost
+        DB_USER = root
+        DB_PASSWORD = your_password
+        DB_DATABASE = jobs_db
+
+5. Running the App :
+    cd frontned
+    npm run dev
+
+    cd backend 
+    nodemon server.js
