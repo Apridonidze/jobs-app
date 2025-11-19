@@ -12,7 +12,9 @@ Jobs App is a web application where users can browse and apply for jobs, save th
 
 ## Technologies
 
-- React + Vite  
+- React + Vite
+- Boostrap
+- CSS
 - Express.js  
 - MySQL  
 - Git  
