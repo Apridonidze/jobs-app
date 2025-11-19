@@ -37,7 +37,7 @@ AcceptDeclineRouter.get('/my-applicants/:job_id' , verifyToken , async(req,res) 
     const filteredStatus = statusResults.map(([S]) => S[0] ?? []); //sets response data to filteredStatus , if we cant get response then server returns empty array
 
     const data = (applicantLists.map(applicant => ({applicant : applicant , technologies : filteredTechnologies.filter(technologies => technologies.user_id === applicant.user_id ?? []) , roles : filteredRoles.filter(roles => roles.user_id === applicant.user_id ?? []) , status : filteredStatus.filter(status => status.applicant_id === applicant.user_id ?? [])}))); //wraps all data into one variable to send to frontned
-
+    console.log(data)
     return res.status(200).json(data);//returns response to frontned
 
 }); //api is used for recruiter to fetch applicant for specifitc job and see data about them and also status if he already accepted or declined applicant

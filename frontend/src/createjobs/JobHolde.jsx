@@ -47,7 +47,7 @@ const JobHolder = ( { job , setToggleDelete } ) => {
 
     
     return(
-        <div className="job-holder-container container py-2 px-3 position-fixed bg-white  d-flex flex-column gap-3 rounded-2 overflow-y-auto d-flex flex-column " style={{zIndex : 5000}}  key={job.job_id}>
+        <div className="job-holder-container container py-2 px-3 position-fixed bg-white  d-flex flex-column justify-content-between gap-3 rounded-2 overflow-y-auto" style={{zIndex : 5000}}  key={job.job_id}>
             <div className="job-info ">
                     
                 <h1 className="text-break">{job.job_title}</h1>
@@ -64,12 +64,12 @@ const JobHolder = ( { job , setToggleDelete } ) => {
                 <><h3 className="">Applicants For This Job : </h3> <div className="applicants-container row row-cols-1 row-cols-sm-2 overflow-y-auto g-3 mt-1" style={{maxHeight: '300px'}} >
                     
                     {applicants.map(user => (
-                        <div className="applicant-container w-50 border col rounded-2 ">
+                        <div className="applicant-container w-50 border col rounded-2 my-1">
 
                             
                             <Link className="fs-5" to={`/user-account/${user.applicant.user_id}`}>{`${user.applicant.user_name } ${user.applicant.user_surname}`}</Link>
-                            <h4>user technologies: {user.technologies.length < 1 ? <span>No Technologies</span> : user.technologies[0].user_technologies.map(tech => tech)}</h4>
-                            <h4>user role: {user.roles.length < 1 ? <span>No Roles</span> : user.roles[0].user_roles.map(role => role)}</h4>
+                            <h4 className="d-flex flex-wrap g-3">User Technologies: {user.technologies.length < 1 ? <span className="border p-2 rounded-2 bg-danger text-white fs-6">No Technologies</span> : user.technologies[0].user_technologies.map((tech , techId) => <span key={techId} className="border p-2 rounded-2 bg-success text-white fs-6" >{tech}</span>)}</h4>
+                            <h4 className="d-flex flex-wrap g-3">User Roles: {user.roles.length < 1 ? <span className="border p-2 rounded-2 bg-danger text-white fs-6">No Roles</span> : user.roles[0].user_roles.map((role, roleId) =>  <span key={roleId} className="border p-2 rounded-2 bg-success text-white fs-6" >{role}</span>)}</h4>
                             
                             
                             <div className="applicant-status row">
@@ -93,6 +93,8 @@ const JobHolder = ( { job , setToggleDelete } ) => {
                     </div>
 
             </div>
+
+             
 
         </div>
     );
