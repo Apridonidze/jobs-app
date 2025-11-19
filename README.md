@@ -2,18 +2,6 @@
 
 Jobs App is a web application where users can browse and apply for jobs, save their favorite jobs, and manage their profiles. Recruiters can post jobs and accept or decline applicants. The app is well-secured against JavaScript, XSS, and SQL injections. All inputs have filters and validations on the frontend, and the backend uses additional security measures including Zod validation, token verification, rate limiting, CORS, and file handling with FS and Multer.
 
-<<<<<<< HEAD
-## Screenshots
-
-![Alt text](./design/Screenshot%202025-11-19%20112855.png)
-![Alt text](./design/Screenshot%202025-11-19%20112931.png)
-![Alt text](./design/Screenshot%202025-11-19%20112949.png)
-![Alt text](./design/Screenshot%202025-11-19%20113012.png)
-![Alt text](./design/Screenshot%202025-11-19%20115809.png)
-![Alt text](./design/Screenshot%202025-11-19%20115829.png)
-![Alt text](./design/Screenshot%202025-11-19%20120022.png)
-![Alt text](./design/Screenshot%202025-11-19%20120036.png)
-
 ## Features
 
 - Users can create a new account and choose their role (Recruiter or Employee), or log in to an existing account.  
@@ -24,7 +12,9 @@ Jobs App is a web application where users can browse and apply for jobs, save th
 
 ## Technologies
 
-- React + Vite  
+- React + Vite
+- Boostrap
+- CSS
 - Express.js  
 - MySQL  
 - Git  
@@ -38,32 +28,6 @@ Jobs App is a web application where users can browse and apply for jobs, save th
 
 2. Install Dependencies -
 
-=======
-## Features
-
-- Users can create a new account and choose their role (Recruiter or Employee), or log in to an existing account.  
-- Employees can browse jobs filtered based on their roles and technologies, apply to jobs, or save them for later.  
-- Recruiters can create job opportunities.  
-- Recruiters can accept or decline applicants and manage applications through their account page.  
-- Users can manage profile information and upload profile pictures.  
-
-## Technologies
-
-- React + Vite  
-- Express.js  
-- MySQL  
-- Git  
-
-## Installation
-
-1. Clone Repository -
-
-    git clone https://github.com/Apridonidze/jobs-app.git
-    cd jobs-app
-
-2. Install Dependencies -
-
->>>>>>> d3f845539eccd7fa9bcb15365531997435c04a60
     cd frontned npm install
     cd backend npm install
 
