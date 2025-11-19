@@ -1,4 +1,4 @@
-const z = require('zod')
+const z = require('zod'); //importing zod
 
 const userSchema = z.object({
     role: z.enum(['recruiter','employee']),
@@ -9,12 +9,12 @@ const userSchema = z.object({
     phoneNumber : z.string().min(8),
     birthDate : z.string().length(10 , {message : 'invalid birth input'}),
     gender : z.enum(['male','female'])
-})
+});//creating zod object to validate data in this pattern
 
 function validateUser (data) {
 
-    return userSchema.safeParse(data)
+    return userSchema.safeParse(data); //validating input and returnign response
     
-}
+};
 
-module.exports = validateUser
+module.exports = validateUser;//exporting schema

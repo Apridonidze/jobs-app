@@ -1,14 +1,13 @@
-const z = require('zod')
+const z = require('zod');//importing zod
 
 const postSchema = z.object({
     postInput : z.string()
-})
+});//creating zod object to validate data in this pattern
 
 function validatePost (data) {
     
-    return postSchema.safeParse(data)
+    return postSchema.safeParse(data);//validating input and returnig response 
 
-} 
+} ;
 
-
-module.exports = validatePost
+module.exports = validatePost;//exporting schema
