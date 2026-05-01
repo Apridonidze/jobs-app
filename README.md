@@ -39,7 +39,7 @@ Jobs App is a web application where users can browse and apply for jobs, save th
 
 3. Database Setup -
 
-    ```bash CREATE DATABASE jobs_app; ```
+    ```bash CREATE DATABASE jobs_app; ```<br/>
     Import database/schema.sql content into Database
 
 4. Environment Variables -
@@ -56,6 +56,6 @@ Jobs App is a web application where users can browse and apply for jobs, save th
         DB_PASSWORD = your_password
         DB_DATABASE = jobs_db
 
-5. Running the App :
-    ```bash cd frontned npm run dev ```
+5. Running the App : <br/>
+    ```bash cd frontned npm run dev ```<br/>
     ```bash cd backend nodemon server.js ```
